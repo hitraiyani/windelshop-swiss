@@ -81,6 +81,7 @@ export default function App() {
         <Layout
           layout={data.layout}
           key={`${locale.language}-${locale.country}`}
+          locale={locale}
         >
           <Outlet />
         </Layout>

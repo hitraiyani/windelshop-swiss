@@ -1,7 +1,7 @@
 import {useParams, Form, Await, useMatches} from '@remix-run/react';
 import {useWindowScroll} from 'react-use';
 import {Disclosure} from '@headlessui/react';
-import {Suspense, useEffect, useMemo} from 'react';
+import {Suspense, useEffect, useMemo, useState} from 'react';
 
 import {
   Drawer,
@@ -20,14 +20,49 @@ import {
   Cart,
   CartLoading,
   Link,
+  ShopifyCookie
 } from '~/components';
 import {useIsHomePath} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
+import {Helmet} from 'react-helmet';
+import {COOKIEBOT_KEY} from '~/lib/const';
 
-export function Layout({children, layout}) {
+export function Layout({children, layout, locale}) {
+
+  const [isCookieAccepted, setisCookieAccepted] = useState(false);
+
+  useEffect(() => {
+    function handleCookiebotAccept(e) {
+      if (Cookiebot.consent.marketing) {
+        //Execute code that sets marketing cookies
+        setisCookieAccepted(true);
+      }
+    }
+    window.addEventListener('CookiebotOnAccept', handleCookiebotAccept, false);
+
+    return () => {
+      window.removeEventListener(
+        'CookiebotOnAccept',
+        handleCookiebotAccept,
+        false,
+      );
+    };
+  }, []);
+
+
   return (
     <>
+      {isCookieAccepted ? <ShopifyCookie locale={locale} /> : ''}
+      <Helmet>
+        <script
+          id="Cookiebot"
+          src="https://consent.cookiebot.com/uc.js"
+          data-cbid={COOKIEBOT_KEY}
+          data-blockingmode="auto"
+          type="text/javascript"
+        />
+      </Helmet>
       <div className="flex flex-col min-h-screen">
         <div className="">
           <a href="#mainContent" className="sr-only">
