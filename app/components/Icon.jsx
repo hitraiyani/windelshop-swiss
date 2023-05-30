@@ -254,3 +254,14 @@ export function IconFilters(props) {
     </Icon>
   );
 }
+export function ChevronDownIcon(props) {
+  return (
+    <svg {...props} width={10} height={7} viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M8.61548 1.62962L4.80778 5.29629L1.00008 1.62962" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /> </svg>
+  );
+}
+export function IconSearch2(props) {
+  return (
+    <svg {...props}  width={33} height={34} viewBox="0 0 33 34" fill="none" xmlns="http://www.w3.org/2000/svg" > <circle cx="14.2276" cy="14.9399" r="9.43169" transform="rotate(-45 14.2276 14.9399)" stroke="black" strokeWidth="1.25756" /> <line x1="21.3416" y1="22.0538" x2="25.7877" y2="26.4999" stroke="black" strokeWidth="1.25756" /> </svg>
+
+  );
+}

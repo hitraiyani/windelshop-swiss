@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+/* font-family: 'Quicksand', sans-serif; */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -180,3 +183,85 @@ shop-pay-button {
     }
   }
 }
+
+/* // ------------------------
+// site css */
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 500;
+  overflow-x: hidden;
+}
+strong {
+  font-weight: 700;
+}
+.container {
+  max-width: 1728px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 60px;
+  padding-right: 60px;
+  @media (max-width: 1280px) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  @media (max-width: 1024px) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  @media (max-width: 767px) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+/* Mega menu css */
+.mega-menu {
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100%;
+  width: 100vw;
+  display: none;
+}
+.main-navbar > .menu-item:hover > .mega-menu {
+  display: block;
+}
+.main-navbar > .menu-item:hover > a {
+  background-color: #ccddf1;
+  color: #000000;
+}
+.mega-menu-list ul {
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}
+.mega-menu-list a {
+  background-image: url("data:image/svg+xml,%3Csvg width='7' height='12' viewBox='0 0 7 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L1 11' stroke='%231C5F7B' stroke-width='1.25' stroke-linecap='round'/%3E%3C/svg%3E%0A");
+  background-size: 8px;
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding-left: 13px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  color: #000000;
+  transition: all 0.5s;
+}
+
+.mega-menu-list a:hover {
+  opacity: 0.7;
+}
+.mega-menu-list .brands-logos a {
+  background-image: none;
+  padding: 0;
+}
+.mega-menu-list .brands-logos img{
+  width: 70px;
+  height: auto;
+}
+/* End Mega menu css */
