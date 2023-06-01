@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
-/* font-family: 'Quicksand', sans-serif; */
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Quicksand:wght@300;400;500;600;700&display=swap');
+/* font-family: 'Open Sans', sans-serif;
+font-family: 'Quicksand', sans-serif; */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -190,9 +190,10 @@ shop-pay-button {
 body {
   font-family: 'Quicksand', sans-serif;
   font-size: 14px;
-  line-height: 1.2;
+  line-height: 1.1;
   font-weight: 500;
   overflow-x: hidden;
+  background-color: #fff;
 }
 strong {
   font-weight: 700;
@@ -227,41 +228,100 @@ strong {
   width: 100vw;
   display: none;
 }
-.main-navbar > .menu-item:hover > .mega-menu {
-  display: block;
+.main-navbar {
+  > .menu-item {
+    &:hover {
+      > .mega-menu {
+        display: block;
+      }
+      > a {
+        background-color: #ccddf1;
+        color: #000000;
+      }
+    }
+  }
 }
-.main-navbar > .menu-item:hover > a {
-  background-color: #ccddf1;
-  color: #000000;
-}
-.mega-menu-list ul {
-  display: flex;
-  flex-flow: column;
-  gap: 10px;
-}
-.mega-menu-list a {
-  background-image: url("data:image/svg+xml,%3Csvg width='7' height='12' viewBox='0 0 7 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L1 11' stroke='%231C5F7B' stroke-width='1.25' stroke-linecap='round'/%3E%3C/svg%3E%0A");
-  background-size: 8px;
-  background-repeat: no-repeat;
-  background-position: left center;
-  padding-left: 13px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 18px;
-  color: #000000;
-  transition: all 0.5s;
+.mega-menu-list {
+  ul {
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+  }
+  a {
+    background-image: url("data:image/svg+xml,%3Csvg width='7' height='12' viewBox='0 0 7 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L1 11' stroke='%231C5F7B' stroke-width='1.25' stroke-linecap='round'/%3E%3C/svg%3E%0A");
+    background-size: 8px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 13px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18px;
+    color: #000000;
+    transition: all 0.5s;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  .brands-logos {
+    a {
+      background-image: none;
+      padding: 0;
+    }
+    img {
+      width: 70px;
+      height: auto;
+    }
+  }
 }
 
-.mega-menu-list a:hover {
-  opacity: 0.7;
-}
-.mega-menu-list .brands-logos a {
-  background-image: none;
-  padding: 0;
-}
-.mega-menu-list .brands-logos img{
-  width: 70px;
-  height: auto;
-}
 /* End Mega menu css */
+
+/* Hero slider section  */
+.heroslider-section {
+  .swiper-wrapper {
+    .swiper-slide {
+      height: auto;
+    }
+  }
+}
+/* End Hero slider section  */
+
+/* bestseller-categories-section  */
+.bestseller-categories-section {
+  .bestseller-item {
+    a {
+      &:hover {
+        img {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+}
+/* End bestseller-categories-section  */
+
+/* NewInTheShop  */
+.product-card {
+  .img-link {
+    &:hover {
+      img {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+.new-in-Shop-slider {
+  .swiper-button-disabled {
+    display: none !important;
+  }
+}
+/* End NewInTheShop  */
+
+/*  popularproduct-sec  */
+.popularproduct-sec {
+  .swiper-button-disabled {
+    opacity: 0.3;
+  }
+}
+/* End  popularproduct-sec  */

@@ -24,6 +24,11 @@ import styles from './styles/app.css';
 import {DEFAULT_LOCALE, parseMenu, getCartId} from './lib/utils';
 import {useAnalytics} from './hooks/useAnalytics';
 
+import swiper from 'swiper/css';
+import swiper_navigation from 'swiper/css/navigation';
+import swiper_pagination from 'swiper/css/pagination';
+import swiper_scrollbar from 'swiper/css/scrollbar';
+
 export const links = () => {
   return [
     {rel: 'stylesheet', href: styles},
@@ -36,6 +41,10 @@ export const links = () => {
       href: 'https://shop.app',
     },
     {rel: 'icon', type: 'image/svg+xml', href: favicon},
+    {rel: 'stylesheet', href: swiper},
+    {rel: 'stylesheet', href: swiper_navigation},
+    {rel: 'stylesheet', href: swiper_pagination},
+    {rel: 'stylesheet', href: swiper_scrollbar},
   ];
 };
 

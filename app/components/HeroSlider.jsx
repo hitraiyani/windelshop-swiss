@@ -1,40 +1,227 @@
-import clsx from 'clsx';
 import {Autoplay, Navigation, Pagination, Scrollbar, A11y} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
+import {IconArrowRight,IconChevronRight} from '~/components';
 /**
  * Hero component that renders metafields attached to collection resources
  **/
 export function HeroSlider() {
   return (
-    <section
-      className={clsx(
-        'hero-section bg-[#EFF9FF] relative',
-        top && '',
-        height === 'full'
-          ? ''
-          : 'aspect-[4/5] sm:aspect-square md:aspect-[5/4] lg:aspect-[3/2] xl:aspect-[2/1]',
-      )}
-    >
-      <Swiper
-        modules={[Autoplay, Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={10}
-        slidesPerView={1}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        // breakpoints={{
-        //   0: {
-        //     autoHeight:'false'
-        //   },
-        //   768: {
-        //     autoHeight:'false'
-        //   },
-        // }}
-      >
-        <SwiperSlide>1</SwiperSlide>
-        <SwiperSlide>2</SwiperSlide>
-      </Swiper>
+    <section className="heroslider-section pt-[30px] pb-[50px]">
+      <div className="container">
+        <div className="heroslider-wrap relative">
+          <Swiper
+            modules={[Autoplay, Navigation, Pagination, Scrollbar, A11y]}
+            spaceBetween={10}
+            slidesPerView={1}
+            navigation={{
+              nextEl: '#swiper-button-next-heroslider',
+              prevEl: '#swiper-button-prev-heroslider',
+            }}
+            loop={true}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            className='myswiper1'
+          >
+            <SwiperSlide>
+              <div className="slide-item h-full">
+                <div className="slide-item-inner flex flex-row overflow-hidden rounded-[30px] h-full">
+                  <div className="content-left w-[40%]">
+                    <div className="col-inner bg-[#E7EFFF] pt-[50px] pb-[66px] px-[80px] flex flex-col h-full">
+                      <div className="brand-logo max-w-[232px]">
+                        <img
+                          className="w-full h-auto block"
+                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/pampers.svg?v=1685605760"
+                          alt=""
+                        />
+                      </div>
+                      <h2 className="title mt-[20px] text-[#00A49B] text-[77.5px] leading-[1] font-semibold">
+                        Die sichere <br />
+                        Windel
+                      </h2>
+                      <div className="subtitle mt-[10px] mb-[50px] text-[#00A49B] leading-[1.2] text-[35px]">
+                        lange trocken
+                      </div>
+                      <div className="btn-wrap flex mt-auto">
+                        <a
+                          href="#"
+                          className='bg-[#00A49B] rounded-[100px] py-[15px] px-[30px] leading-none w-fit flex items-center justify-center text-center gap-[10px] text-white font-["Open_Sans"] uppercase font-bold text-[15px] hover:opacity-70 transition-all duration-500 min-h-[52px]'
+                        >
+                          <span className="name">MEHR ERFAREN</span>
+                          <span className="icon">
+                            <IconArrowRight className={'w-[22px] h-[12px]'} />
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="img-col w-[60%]">
+                    <div className="col-inner h-full">
+                      <div className="img-wrap h-full relative overflow-hidden">
+                        <img
+                          className="absolute w-full inset-0 h-full object-cover"
+                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/mother-and-baby-happy_1_a6c71db4-9a10-4430-b206-923a164999ac.png?v=1685605795"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="slide-item h-full">
+                <div className="slide-item-inner flex flex-row overflow-hidden rounded-[30px] h-full">
+                  <div className="content-left w-[40%]">
+                    <div className="col-inner bg-[#DAEACB] pt-[50px] pb-[66px] px-[80px] flex flex-col h-full">
+                      <div className="brand-logo max-w-[196px]">
+                        <img
+                          className="w-full h-auto block"
+                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/swilet.svg?v=1685605760"
+                          alt=""
+                        />
+                      </div>
+                      <h2 className="title mt-[50px] text-[#1F5406] text-[77.5px] leading-[1] font-semibold">
+                        Die <br />
+                        nachhaltige <br />
+                        Windel
+                      </h2>
+                      <div className="subtitle mt-[10px] mb-[50px] text-[#1F5406] leading-[1.2] text-[35px]">
+                        besonders hautfreundlich
+                      </div>
+                      <div className="btn-wrap flex mt-auto">
+                        <a
+                          href="#"
+                          className='bg-[#1F5406] rounded-[100px] py-[15px] px-[30px] leading-none w-fit flex items-center justify-center text-center gap-[10px] text-white font-["Open_Sans"] uppercase font-bold text-[15px] hover:opacity-70 transition-all duration-500 min-h-[52px]'
+                        >
+                          <span className="name">MEHR ERFAREN</span>
+                          <span className="icon">
+                            <IconArrowRight className={'w-[22px] h-[12px]'} />
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="img-col w-[60%]">
+                    <div className="col-inner h-full">
+                      <div className="img-wrap h-full relative overflow-hidden">
+                        <img
+                          className="absolute w-full inset-0 h-full object-cover"
+                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/mother-and-baby-happy_1_1_774c1555-b98c-4998-8076-9cacb9d9b103.png?v=1685605795"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="slide-item h-full">
+                <div className="slide-item-inner flex flex-row overflow-hidden rounded-[30px] h-full">
+                  <div className="content-left w-[40%]">
+                    <div className="col-inner bg-[#DAEACB] pt-[50px] pb-[66px] px-[80px] flex flex-col h-full">
+                      <div className="brand-logo max-w-[196px]">
+                        <img
+                          className="w-full h-auto block"
+                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/swilet.svg?v=1685605760"
+                          alt=""
+                        />
+                      </div>
+                      <h2 className="title mt-[50px] text-[#1F5406] text-[77.5px] leading-[1] font-semibold">
+                        Die <br />
+                        nachhaltige <br />
+                        Windel
+                      </h2>
+                      <div className="subtitle mt-[10px] mb-[50px] text-[#1F5406] leading-[1.2] text-[35px]">
+                        besonders hautfreundlich
+                      </div>
+                      <div className="btn-wrap flex mt-auto">
+                        <a
+                          href="#"
+                          className='bg-[#1F5406] rounded-[100px] py-[15px] px-[30px] leading-none w-fit flex items-center justify-center text-center gap-[10px] text-white font-["Open_Sans"] uppercase font-bold text-[15px] hover:opacity-70 transition-all duration-500 min-h-[52px]'
+                        >
+                          <span className="name">MEHR ERFAREN1</span>
+                          <span className="icon">
+                            <IconArrowRight className={'w-[22px] h-[12px]'} />
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="img-col w-[60%]">
+                    <div className="col-inner h-full">
+                      <div className="img-wrap h-full relative overflow-hidden">
+                        <img
+                          className="absolute w-full inset-0 h-full object-cover"
+                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/mother-and-baby-happy_1_1_774c1555-b98c-4998-8076-9cacb9d9b103.png?v=1685605795"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="slide-item h-full">
+                <div className="slide-item-inner flex flex-row overflow-hidden rounded-[30px] h-full">
+                  <div className="content-left w-[40%]">
+                    <div className="col-inner bg-[#DAEACB] pt-[50px] pb-[66px] px-[80px] flex flex-col h-full">
+                      <div className="brand-logo max-w-[196px]">
+                        <img
+                          className="w-full h-auto block"
+                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/swilet.svg?v=1685605760"
+                          alt=""
+                        />
+                      </div>
+                      <h2 className="title mt-[50px] text-[#1F5406] text-[77.5px] leading-[1] font-semibold">
+                        Die <br />
+                        nachhaltige <br />
+                        Windel
+                      </h2>
+                      <div className="subtitle mt-[10px] mb-[50px] text-[#1F5406] leading-[1.2] text-[35px]">
+                        besonders hautfreundlich
+                      </div>
+                      <div className="btn-wrap flex mt-auto">
+                        <a
+                          href="#"
+                          className='bg-[#1F5406] rounded-[100px] py-[15px] px-[30px] leading-none w-fit flex items-center justify-center text-center gap-[10px] text-white font-["Open_Sans"] uppercase font-bold text-[15px] hover:opacity-70 transition-all duration-500 min-h-[52px]'
+                        >
+                          <span className="name">MEHR ERFAREN2</span>
+                          <span className="icon">
+                            <IconArrowRight className={'w-[22px] h-[12px]'} />
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="img-col w-[60%]">
+                    <div className="col-inner h-full">
+                      <div className="img-wrap h-full relative overflow-hidden">
+                        <img
+                          className="absolute w-full inset-0 h-full object-cover"
+                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/mother-and-baby-happy_1_1_774c1555-b98c-4998-8076-9cacb9d9b103.png?v=1685605795"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          </Swiper>
+          <div
+            id="swiper-button-prev-heroslider"
+            className="absolute left-[-36px] top-1/2 -translate-y-1/2 w-[73px] h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+          ><IconChevronRight className={'w-[14px] h-[27px] rotate-[180deg] relative left-[-1px]'} /></div>
+          <div
+            id="swiper-button-next-heroslider"
+            className="absolute right-[-36px] top-1/2 -translate-y-1/2 w-[73px] h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+          ><IconChevronRight className={'w-[14px] h-[27px] relative left-[3px]'} /></div>
+        </div>
+      </div>
     </section>
   );
 }

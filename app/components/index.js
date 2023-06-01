@@ -23,5 +23,10 @@ export {Grid} from './Grid';
 export {FeaturedProducts} from './FeaturedProducts';
 export {AddToCartButton} from './AddToCartButton';
 export {ShopifyCookie} from './ShopifyCookie';
+export {HeroSlider} from './HeroSlider';
+export {BestsellerCategories} from './BestsellerCategories';
+export {NewInTheShop} from './NewInTheShop';
+export {CtaBanner} from './CtaBanner';
+export {Popularproducts} from './Popularproducts';
 // Sue me
 export * from './Icon';
