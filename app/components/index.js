@@ -28,5 +28,11 @@ export {BestsellerCategories} from './BestsellerCategories';
 export {NewInTheShop} from './NewInTheShop';
 export {CtaBanner} from './CtaBanner';
 export {Popularproducts} from './Popularproducts';
+export {CustomerSatisfaction} from './CustomerSatisfaction';
+export {Bestseller} from './Bestseller';
+export {ShoppingByBrands} from './ShoppingByBrands';
+export {Popularproducts2} from './Popularproducts2';
+export {SeasonalSets} from './SeasonalSets';
+export {QuickRequest} from './QuickRequest';
 // Sue me
 export * from './Icon';

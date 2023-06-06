@@ -3,17 +3,21 @@ import {Autoplay, Navigation, Pagination, Scrollbar, A11y} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {IconChevronRight, IconStar} from '~/components';
 
-export function Popularproducts({className}) {
+export function Popularproducts2({className}) {
   return (
     <section className={`${className} popularproduct-sec py-[50px]`}>
       <div className="container">
         <div className="flex gap-[30px]">
           <div className="col relative w-[50%]">
-            <div className="col-inner px-[40px] py-[30px] bg-[#E7EFFF] rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
+            <div className="col-inner px-[40px] py-[30px] bg-white rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
               <div className="title-wrap mb-[35px] flex flex-wrap gap-[20px] justify-between items-center">
-                <h2 className="text-[#1C5F7B] text-[28px] font-bold text-left">
-                  Aktuelle Aktionen
-                </h2>
+                <div className="w-[140px]">
+                  <img
+                    className="max-w-full"
+                    src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/pampers.svg?v=1685605760"
+                    alt=""
+                  />
+                </div>
                 <div className="slider-nav flex gap-[20px] items-center">
                   <div
                     id="swiper-button-prev-aktuelle"
@@ -62,7 +66,7 @@ export function Popularproducts({className}) {
                                 src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/0-81782904-DE-EPI-360x360_webp.png?v=1685613193"
                                 alt=""
                               />
-                              <div className='lable flex absolute top-[10px] left-[10px] bg-[#CC3F13] text-white uppercase w-fit px-[10px] py-[7px] rounded-[89px] leading-none items-center justify-center text-center min-h-[40px]'>
+                              <div className="lable flex absolute top-[10px] left-[10px] bg-[#CC3F13] text-white uppercase w-fit px-[10px] py-[7px] rounded-[89px] leading-none items-center justify-center text-center min-h-[40px]">
                                 <span>SALE -6%</span>
                               </div>
                             </div>
@@ -80,8 +84,12 @@ export function Popularproducts({className}) {
                             <IconStar className={'w-[17px] h-[15px]'} />
                           </div>
                           <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                            <span className='off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white'>-6%</span>
-                            <span className='text-[#777777] font-normal line-through'>CHF 15.90</span>
+                            <span className="off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white">
+                              -6%
+                            </span>
+                            <span className="text-[#777777] font-normal line-through">
+                              CHF 15.90
+                            </span>
                             <span>CHF 15.90</span>
                           </div>
                           <div className="buy-now-btn flex mt-[14px]">
@@ -107,7 +115,7 @@ export function Popularproducts({className}) {
                                 src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/0-81782904-DE-EPI-360x360.webp_2.png?v=1685613193"
                                 alt=""
                               />
-                              <div className='lable flex absolute top-[10px] left-[10px] bg-[#CC3F13] text-white uppercase w-fit px-[10px] py-[7px] rounded-[89px] leading-none items-center justify-center text-center min-h-[40px]'>
+                              <div className="lable flex absolute top-[10px] left-[10px] bg-[#CC3F13] text-white uppercase w-fit px-[10px] py-[7px] rounded-[89px] leading-none items-center justify-center text-center min-h-[40px]">
                                 <span>SALE -6%</span>
                               </div>
                             </div>
@@ -126,8 +134,12 @@ export function Popularproducts({className}) {
                             <IconStar className={'w-[17px] h-[15px]'} />
                           </div>
                           <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                            <span className='off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white'>-6%</span>
-                            <span className='text-[#777777] font-normal line-through'>CHF 32.90</span>
+                            <span className="off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white">
+                              -6%
+                            </span>
+                            <span className="text-[#777777] font-normal line-through">
+                              CHF 32.90
+                            </span>
                             <span>CHF 32.90</span>
                           </div>
                           <div className="buy-now-btn flex mt-[14px]">
@@ -169,8 +181,12 @@ export function Popularproducts({className}) {
                             <IconStar className={'w-[17px] h-[15px]'} />
                           </div>
                           <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                            <span className='off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white'>-6%</span>
-                            <span className='text-[#777777] font-normal line-through'>CHF 16.90</span>
+                            <span className="off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white">
+                              -6%
+                            </span>
+                            <span className="text-[#777777] font-normal line-through">
+                              CHF 16.90
+                            </span>
                             <span>CHF 16.90</span>
                           </div>
                           <div className="buy-now-btn flex mt-[14px]">
@@ -212,8 +228,12 @@ export function Popularproducts({className}) {
                             <IconStar className={'w-[17px] h-[15px]'} />
                           </div>
                           <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                            <span className='off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white'>-6%</span>
-                            <span className='text-[#777777] font-normal line-through'>CHF 58.90</span>
+                            <span className="off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white">
+                              -6%
+                            </span>
+                            <span className="text-[#777777] font-normal line-through">
+                              CHF 58.90
+                            </span>
                             <span>CHF 58.90</span>
                           </div>
                           <div className="buy-now-btn flex mt-[14px]">
@@ -255,8 +275,12 @@ export function Popularproducts({className}) {
                             <IconStar className={'w-[17px] h-[15px]'} />
                           </div>
                           <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                            <span className='off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white'>-6%</span>
-                            <span className='text-[#777777] font-normal line-through'>CHF 15.90</span>
+                            <span className="off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white">
+                              -6%
+                            </span>
+                            <span className="text-[#777777] font-normal line-through">
+                              CHF 15.90
+                            </span>
                             <span>CHF 15.90</span>
                           </div>
                           <div className="buy-now-btn flex mt-[14px]">
@@ -298,8 +322,12 @@ export function Popularproducts({className}) {
                             <IconStar className={'w-[17px] h-[15px]'} />
                           </div>
                           <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                            <span className='off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white'>-6%</span>
-                            <span className='text-[#777777] font-normal line-through'>CHF 15.90</span>
+                            <span className="off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white">
+                              -6%
+                            </span>
+                            <span className="text-[#777777] font-normal line-through">
+                              CHF 15.90
+                            </span>
                             <span>CHF 15.90</span>
                           </div>
                           <div className="buy-now-btn flex mt-[14px]">
@@ -319,11 +347,15 @@ export function Popularproducts({className}) {
             </div>
           </div>
           <div className="col relative w-[50%]">
-            <div className="col-inner px-[40px] py-[30px] bg-[#E7EFFF] rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
+            <div className="col-inner px-[40px] py-[30px] bg-white rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
               <div className="title-wrap mb-[35px] flex flex-wrap gap-[20px] justify-between items-center">
-                <h2 className="text-[#1C5F7B] text-[28px] font-bold text-left">
-                  Beliebte Produkte
-                </h2>
+                <div className="w-[140px]">
+                  <img
+                    className="max-w-full"
+                    src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/pingo_logo_2.png?v=1685447152"
+                    alt=""
+                  />
+                </div>
                 <div className="slider-nav flex gap-[20px] items-center">
                   <div
                     id="swiper-button-prev-popular-pro"
@@ -387,8 +419,12 @@ export function Popularproducts({className}) {
                             <IconStar className={'w-[17px] h-[15px]'} />
                           </div>
                           <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                            <span className='off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white'>-6%</span>
-                            <span className='text-[#777777] font-normal line-through'>CHF 15.90</span>
+                            <span className="off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white">
+                              -6%
+                            </span>
+                            <span className="text-[#777777] font-normal line-through">
+                              CHF 15.90
+                            </span>
                             <span>CHF 15.90</span>
                           </div>
                           <div className="buy-now-btn flex mt-[14px]">
@@ -430,8 +466,12 @@ export function Popularproducts({className}) {
                             <IconStar className={'w-[17px] h-[15px]'} />
                           </div>
                           <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                            <span className='off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white'>-6%</span>
-                            <span className='text-[#777777] font-normal line-through'>CHF 32.90</span>
+                            <span className="off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white">
+                              -6%
+                            </span>
+                            <span className="text-[#777777] font-normal line-through">
+                              CHF 32.90
+                            </span>
                             <span>CHF 32.90</span>
                           </div>
                           <div className="buy-now-btn flex mt-[14px]">
@@ -473,8 +513,12 @@ export function Popularproducts({className}) {
                             <IconStar className={'w-[17px] h-[15px]'} />
                           </div>
                           <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                            <span className='off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white'>-6%</span>
-                            <span className='text-[#777777] font-normal line-through'>CHF 16.90</span>
+                            <span className="off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white">
+                              -6%
+                            </span>
+                            <span className="text-[#777777] font-normal line-through">
+                              CHF 16.90
+                            </span>
                             <span>CHF 16.90</span>
                           </div>
                           <div className="buy-now-btn flex mt-[14px]">
@@ -516,8 +560,12 @@ export function Popularproducts({className}) {
                             <IconStar className={'w-[17px] h-[15px]'} />
                           </div>
                           <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                            <span className='off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white'>-6%</span>
-                            <span className='text-[#777777] font-normal line-through'>CHF 58.90</span>
+                            <span className="off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white">
+                              -6%
+                            </span>
+                            <span className="text-[#777777] font-normal line-through">
+                              CHF 58.90
+                            </span>
                             <span>CHF 58.90</span>
                           </div>
                           <div className="buy-now-btn flex mt-[14px]">
@@ -559,8 +607,12 @@ export function Popularproducts({className}) {
                             <IconStar className={'w-[17px] h-[15px]'} />
                           </div>
                           <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                            <span className='off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white'>-6%</span>
-                            <span className='text-[#777777] font-normal line-through'>CHF 15.90</span>
+                            <span className="off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white">
+                              -6%
+                            </span>
+                            <span className="text-[#777777] font-normal line-through">
+                              CHF 15.90
+                            </span>
                             <span>CHF 15.90</span>
                           </div>
                           <div className="buy-now-btn flex mt-[14px]">
@@ -602,8 +654,12 @@ export function Popularproducts({className}) {
                             <IconStar className={'w-[17px] h-[15px]'} />
                           </div>
                           <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                            <span className='off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white'>-6%</span>
-                            <span className='text-[#777777] font-normal line-through'>CHF 15.90</span>
+                            <span className="off bg-[#CC3F13] rounded-[17px] px-[10px] py-[3px] font-normal text-white">
+                              -6%
+                            </span>
+                            <span className="text-[#777777] font-normal line-through">
+                              CHF 15.90
+                            </span>
                             <span>CHF 15.90</span>
                           </div>
                           <div className="buy-now-btn flex mt-[14px]">

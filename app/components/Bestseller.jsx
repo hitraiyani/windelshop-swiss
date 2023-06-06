@@ -3,13 +3,13 @@ import {Autoplay, Navigation, Pagination, Scrollbar, A11y} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {IconChevronRight, IconStar} from '~/components';
 
-export function NewInTheShop({className}) {
+export function Bestseller({className}) {
   return (
-    <section className={`${className} new-in-Shop-section py-[50px]`}>
+    <section className={`${className} bestseller-section py-[50px]`}>
       <div className="container">
         <div className="title-wrap mb-[22px]">
-          <h2 className="text-[#1C5F7B] text-[28px] font-bold text-left">
-            Neu im Shop
+          <h2 className="text-black text-[28px] font-bold text-left">
+            Bestseller
           </h2>
         </div>
         <div className="relative new-in-Shop-slider">
@@ -26,7 +26,7 @@ export function NewInTheShop({className}) {
             //   delay: 5000,
             //   disableOnInteraction: false,
             // }}
-            className='myswiper2'
+            className="myswiper2"
           >
             <SwiperSlide>
               <div className="slide-item">

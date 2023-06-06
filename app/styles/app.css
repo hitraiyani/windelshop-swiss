@@ -325,3 +325,17 @@ strong {
   }
 }
 /* End  popularproduct-sec  */
+
+/* ShoppingByBrands section */
+.shopping-by-brands-section {
+  .logo-list {
+    a {
+      &:hover {
+        img {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+}
+/* ShoppingByBrands section */

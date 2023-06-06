@@ -12,6 +12,12 @@ import {
   NewInTheShop,
   CtaBanner,
   Popularproducts,
+  CustomerSatisfaction,
+  Bestseller,
+  ShoppingByBrands,
+  Popularproducts2,
+  SeasonalSets,
+  QuickRequest,
 } from '~/components';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {getHeroPlaceholder} from '~/lib/placeholders';
@@ -109,11 +115,17 @@ export default function Homepage() {
   return (
     <>
       <HeroSlider />
-      <BestsellerCategories />
-      <NewInTheShop />
-      <CtaBanner />
-      <Popularproducts />
-      {primaryHero && (
+      <BestsellerCategories className={''} />
+      <CustomerSatisfaction className={''} />
+      <NewInTheShop className={''} />
+      <CtaBanner className={''} />
+      <Popularproducts className={''} />
+      <Bestseller className={''} />
+      <ShoppingByBrands className={''} />
+      <Popularproducts2 className={''} />
+      <SeasonalSets className={''} />
+      <QuickRequest className={''} />
+      {/* {primaryHero && (
         <Hero {...primaryHero} height="full" top loading="eager" />
       )}
 
@@ -170,7 +182,7 @@ export default function Homepage() {
             }}
           </Await>
         </Suspense>
-      )}
+      )} */}
     </>
   );
 }

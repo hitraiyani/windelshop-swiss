@@ -530,7 +530,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
               className="flex flex-auto max-w-[695px] relative"
             >
               <Input
-                className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[16px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] ${
+                className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[16px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] ${
                   isSearchOpen ? '!text-left' : '!text-center'
                 }`}
                 type="search"
