@@ -11,7 +11,7 @@ export function Popularproducts({className}) {
           <div className="col relative w-[50%]">
             <div className="col-inner px-[40px] py-[30px] bg-[#E7EFFF] rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
               <div className="title-wrap mb-[35px] flex flex-wrap gap-[20px] justify-between items-center">
-                <h2 className="text-[#1C5F7B] text-[22px] font-bold text-left">
+                <h2 className="text-[#1C5F7B] text-[24px] font-bold text-left">
                   Aktuelle Aktionen
                 </h2>
                 <div className="slider-nav flex gap-[13px] items-center">
@@ -321,7 +321,7 @@ export function Popularproducts({className}) {
           <div className="col relative w-[50%]">
             <div className="col-inner px-[40px] py-[30px] bg-[#E7EFFF] rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
               <div className="title-wrap mb-[35px] flex flex-wrap gap-[20px] justify-between items-center">
-                <h2 className="text-[#1C5F7B] text-[22px] font-bold text-left">
+                <h2 className="text-[#1C5F7B] text-[24px] font-bold text-left">
                   Beliebte Produkte
                 </h2>
                 <div className="slider-nav flex gap-[13px] items-center">

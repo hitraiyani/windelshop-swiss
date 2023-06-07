@@ -7,7 +7,7 @@ export function Reviews({className}) {
     <section className={`${className} reviews-section py-[50px] overflow-hidden`}>
       <div className="container container-fluid-right">
         <div className="title-wrap mb-[22px]">
-          <h2 className="text-black text-[28px] font-bold text-left">
+          <h2 className="text-black text-[24px] font-bold text-left">
             Bewertungen
           </h2>
         </div>

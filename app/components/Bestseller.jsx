@@ -8,7 +8,7 @@ export function Bestseller({className}) {
     <section className={`${className} bestseller-section py-[50px]`}>
       <div className="container">
         <div className="title-wrap mb-[22px]">
-          <h2 className="text-black text-[28px] font-bold text-left">
+          <h2 className="text-black text-[24px] font-bold text-left">
             Bestseller
           </h2>
         </div>

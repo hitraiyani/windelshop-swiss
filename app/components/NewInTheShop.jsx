@@ -8,7 +8,7 @@ export function NewInTheShop({className}) {
     <section className={`${className} new-in-Shop-section py-[50px]`}>
       <div className="container">
         <div className="title-wrap mb-[22px]">
-          <h2 className="text-[#1C5F7B] text-[28px] font-bold text-left">
+          <h2 className="text-[#1C5F7B] text-[24px] font-bold text-left">
             Neu im Shop
           </h2>
         </div>

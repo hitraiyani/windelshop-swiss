@@ -2,41 +2,14 @@ import {ExpandingCard} from '~/components';
 
 export function Faq({className}) {
   return (
-    <section className={`${className} cta-banner-section py-[50px]`}>
+    <section className={`${className} faq-section py-[50px]`}>
       <div className="container">
         <div className="title-wrap mb-[22px]">
-          <h2 className="text-[#1C5F7B] text-[28px] font-bold text-left mb-[20px]">
+          <h2 className="text-[#1C5F7B] text-[24px] font-bold text-left mb-[20px]">
             Ihr Baby-Onlineshop in der Schweiz
           </h2>
           <div className="desc text-[14px] max-w-[868px] leading-[1.3]">
-            <p>
-              Die Kleinsten brauchen besonderen Schutz – von Kopf bis Fuss. Denn
-              nur so können sie sich wohlfühlen und gesund bleiben. Das Team von
-              windelshop.ch unterstützt Sie mit passenden Windeln, Feuchttüchern
-              und Pflegeprodukten für Ihr Baby. Entdecken Sie bekannte Marken
-              wie{' '}
-              <a className="underline" href="#">
-                Pampers
-              </a>
-              ,{' '}
-              <a className="underline" href="#">
-                Libero
-              </a>{' '}
-              und{' '}
-              <a className="underline" href="#">
-                Pingo oder
-              </a>{' '}
-              greifen Sie auf{' '}
-              <a className="underline" href="#">
-                Biowindeln
-              </a>{' '}
-              aus unsere m Baby-Onlineshop zurück. Darüber hinaus bieten wir
-              Ihnen ein vielfältiges Sortiment an{' '}
-              <a className="underline" href="#">
-                Hygieneprodukten
-              </a>{' '}
-              für Privathaushalte und Grosskunden.
-            </p>
+            <p> Die Kleinsten brauchen besonderen Schutz – von Kopf bis Fuss. Denn nur so können sie sich wohlfühlen und gesund bleiben. Das Team von windelshop.ch unterstützt Sie mit passenden Windeln, Feuchttüchern und Pflegeprodukten für Ihr Baby. Entdecken Sie bekannte Marken wie <a href="#"> Pampers </a> , <a href="#"> Libero </a> und <a href="#"> Pingo oder </a> greifen Sie auf <a href="#"> Biowindeln </a> aus unsere m Baby-Onlineshop zurück. Darüber hinaus bieten wir Ihnen ein vielfältiges Sortiment an <a href="#"> Hygieneprodukten </a> für Privathaushalte und Grosskunden. </p>
           </div>
         </div>
         <div className="expandingcard-wrap mt-[40px] last:border-black last:border-b-[2px]">

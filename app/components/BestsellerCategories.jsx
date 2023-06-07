@@ -3,7 +3,7 @@ export function BestsellerCategories({className}) {
     <section className={`${className} bestseller-categories-section py-[50px]`}>
       <div className="container">
         <div className="title-wrap mb-[22px]">
-          <h2 className="text-black text-[28px] font-bold text-left">
+          <h2 className="text-black text-[24px] font-bold text-left">
             Bestseller Kategorien
           </h2>
         </div>

@@ -228,7 +228,7 @@ strong {
     padding-left: calc(calc(100% - 1568px + 120px) / 2);
     padding-left: -webkit-calc(calc(100% - 1568px + 120px) / 2);
     padding-left: -moz-calc(calc(100% - 1568px + 120px) / 2);
-  } 
+  }
   &.container-fluid-left {
     max-width: 100%;
     padding-left: 0;
@@ -367,3 +367,26 @@ strong {
   }
 }
 /* End reviews section  */
+
+/* faq  */
+.faq-section {
+  .desc {
+    a {
+      text-decoration: underline;
+      transition: all 0.5s;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+.expandingcard-wrap {
+  a {
+    text-decoration: underline;
+    transition: all 0.5s;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+/* End faq  */

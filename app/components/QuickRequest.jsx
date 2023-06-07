@@ -7,7 +7,7 @@ export function QuickRequest({className}) {
         <div className="quick-request-row flex flex-row gap-[30px]">
           <div className="content-col w-[270px]">
             <div className="col-inner">
-              <h2 className="text-black text-[28px] font-bold text-left mb-[36px]">
+              <h2 className="text-black text-[24px] font-bold text-left mb-[36px]">
                 Schnellanfrage
               </h2>
               <div className="comtent-info">

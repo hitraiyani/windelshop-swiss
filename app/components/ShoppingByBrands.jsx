@@ -3,7 +3,7 @@ export function ShoppingByBrands({className}) {
     <section className={`${className} shopping-by-brands-section py-[50px]`}>
       <div className="container">
         <div className="title-wrap mb-[70px]">
-          <h2 className="text-black text-[28px] font-bold text-center">
+          <h2 className="text-black text-[24px] font-bold text-center">
             Einkaufen nach Marken
           </h2>
         </div>

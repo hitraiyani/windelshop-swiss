@@ -5,7 +5,7 @@ export function SeasonalSets({className}) {
     >
       <div className="container">
         <div className="title-wrap mb-[22px]">
-          <h2 className="text-black text-[28px] font-bold text-left">
+          <h2 className="text-black text-[24px] font-bold text-left">
             Saisonale Sets
           </h2>
         </div>
