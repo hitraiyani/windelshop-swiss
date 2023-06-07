@@ -11,7 +11,7 @@ export function Popularproducts2({className}) {
           <div className="col relative w-[50%]">
             <div className="col-inner px-[40px] py-[30px] bg-white rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
               <div className="title-wrap mb-[35px] flex flex-wrap gap-[20px] justify-between items-center">
-                <div className="w-[140px]">
+                <div className="w-[82px]">
                   <img
                     className="max-w-full"
                     src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/pampers.svg?v=1685605760"
@@ -95,7 +95,7 @@ export function Popularproducts2({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[16px] text-white text-center hover:opacity-70 transition-all duration-500"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                             >
                               Jetzt Kaufen
                             </a>
@@ -145,7 +145,7 @@ export function Popularproducts2({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[16px] text-white text-center hover:opacity-70 transition-all duration-500"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                             >
                               Jetzt Kaufen
                             </a>
@@ -192,7 +192,7 @@ export function Popularproducts2({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[16px] text-white text-center hover:opacity-70 transition-all duration-500"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                             >
                               Jetzt Kaufen
                             </a>
@@ -239,7 +239,7 @@ export function Popularproducts2({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[16px] text-white text-center hover:opacity-70 transition-all duration-500"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                             >
                               Jetzt Kaufen
                             </a>
@@ -286,7 +286,7 @@ export function Popularproducts2({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[16px] text-white text-center hover:opacity-70 transition-all duration-500"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                             >
                               Jetzt Kaufen
                             </a>
@@ -333,7 +333,7 @@ export function Popularproducts2({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[16px] text-white text-center hover:opacity-70 transition-all duration-500"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                             >
                               Jetzt Kaufen
                             </a>
@@ -349,7 +349,7 @@ export function Popularproducts2({className}) {
           <div className="col relative w-[50%]">
             <div className="col-inner px-[40px] py-[30px] bg-white rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
               <div className="title-wrap mb-[35px] flex flex-wrap gap-[20px] justify-between items-center">
-                <div className="w-[140px]">
+                <div className="w-[82px]">
                   <img
                     className="max-w-full"
                     src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/pingo_logo_2.png?v=1685447152"
@@ -430,7 +430,7 @@ export function Popularproducts2({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[16px] text-white text-center hover:opacity-70 transition-all duration-500"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                             >
                               Jetzt Kaufen
                             </a>
@@ -477,7 +477,7 @@ export function Popularproducts2({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[16px] text-white text-center hover:opacity-70 transition-all duration-500"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                             >
                               Jetzt Kaufen
                             </a>
@@ -524,7 +524,7 @@ export function Popularproducts2({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[16px] text-white text-center hover:opacity-70 transition-all duration-500"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                             >
                               Jetzt Kaufen
                             </a>
@@ -571,7 +571,7 @@ export function Popularproducts2({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[16px] text-white text-center hover:opacity-70 transition-all duration-500"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                             >
                               Jetzt Kaufen
                             </a>
@@ -618,7 +618,7 @@ export function Popularproducts2({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[16px] text-white text-center hover:opacity-70 transition-all duration-500"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                             >
                               Jetzt Kaufen
                             </a>
@@ -665,7 +665,7 @@ export function Popularproducts2({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[16px] text-white text-center hover:opacity-70 transition-all duration-500"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                             >
                               Jetzt Kaufen
                             </a>
