@@ -478,7 +478,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                 <li>
                   <a
                     href="#"
-                    className="text-black text-[16px] leading-none font-medium hover:opacity-70 transition-all duration-500"
+                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
                     Mein Konto
                   </a>
@@ -486,7 +486,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                 <li>
                   <a
                     href="#"
-                    className="text-black text-[16px] leading-none font-medium hover:opacity-70 transition-all duration-500"
+                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
                     Wunschliste <span>(0)</span>
                   </a>
@@ -494,7 +494,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                 <li>
                   <a
                     href="#"
-                    className="text-black text-[16px] leading-none font-medium hover:opacity-70 transition-all duration-500"
+                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
                     Bezahlen
                   </a>
@@ -502,7 +502,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                 <li>
                   <a
                     href="#"
-                    className="text-black text-[16px] leading-none font-medium hover:opacity-70 transition-all duration-500"
+                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
                     Anmelden
                   </a>
@@ -513,7 +513,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
           </div>
           <div className="middle flex gap-[15px] items-center justify-between">
             <Link
-              className="max-w-[342px] block flex-1"
+              className="max-w-[266px] block flex-1"
               to="/"
               prefetch="intent"
             >
@@ -527,10 +527,10 @@ function DesktopHeader({isHome, menu, openCart, title}) {
             <Form
               method="get"
               action={params.locale ? `/${params.locale}/search` : '/search'}
-              className="flex flex-auto max-w-[695px] relative"
+              className="flex flex-auto max-w-[575px] relative"
             >
               <Input
-                className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[16px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] ${
+                className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[12px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] ${
                   isSearchOpen ? '!text-left' : '!text-center'
                 }`}
                 type="search"
@@ -556,7 +556,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[16px] text-white font-bold leading-[1.2] h-[53px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Home
                 </a>
@@ -564,7 +564,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[16px] text-white font-bold leading-[1.2] h-[53px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Windeln & Feuchttücher
                 </a>
@@ -665,7 +665,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[16px] text-white font-bold leading-[1.2] h-[53px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Damenhygiene & Inkontinenz
                 </a>
@@ -673,7 +673,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[16px] text-white font-bold leading-[1.2] h-[53px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Waschmittel & Weichspüler
                 </a>
@@ -681,7 +681,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[16px] text-white font-bold leading-[1.2] h-[53px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Pflege & Hygiene
                 </a>
@@ -869,7 +869,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[16px] text-white font-bold leading-[1.2] h-[53px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Abos & Gutscheine
                 </a>
@@ -940,7 +940,7 @@ function Badge({openCart, dark, count}) {
         <div
           className={`${
             dark ? '' : ''
-          } text-black text-[16px] leading-none font-medium  flex items-center justify-center text-center`}
+          } text-black text-[12px] leading-none font-medium  flex items-center justify-center text-center`}
         >
           <span>{count || 0}</span>
           <span>&nbsp;Artikel -&nbsp;</span>
@@ -954,7 +954,7 @@ function Badge({openCart, dark, count}) {
   return isHydrated ? (
     <button
       onClick={openCart}
-      className="relative flex items-center justify-center bg-[#CCDDF1] rounded-[100px] max-w-[250px] p-[15px] h-[50px] flex-1 transition-all duration-500 hover:opacity-70"
+      className="relative flex items-center justify-center bg-[#CCDDF1] rounded-[100px] max-w-[215px] p-[15px] h-[50px] flex-1 transition-all duration-500 hover:opacity-70"
     >
       {BadgeCounter}
     </button>
