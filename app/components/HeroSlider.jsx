@@ -29,9 +29,9 @@ export function HeroSlider() {
                 <div className="slide-item-inner flex flex-row overflow-hidden rounded-[30px] h-full">
                   <div className="content-left w-[40%]">
                     <div className="col-inner bg-[#E7EFFF] pt-[29px] pb-[37px] px-[70px] flex flex-col h-full">
-                      <div className="brand-logo max-w-[145px]">
+                      <div className="brand-logo w-[145px] h-[95px]">
                         <img
-                          className="w-full h-auto block"
+                          className="w-full h-full block object-contain"
                           src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/pampers.svg?v=1685605760"
                           alt=""
                         />
@@ -74,14 +74,14 @@ export function HeroSlider() {
                 <div className="slide-item-inner flex flex-row overflow-hidden rounded-[30px] h-full">
                   <div className="content-left w-[40%]">
                     <div className="col-inner bg-[#DAEACB] pt-[29px] pb-[37px] px-[70px] flex flex-col h-full">
-                      <div className="brand-logo max-w-[145px]">
+                      <div className="brand-logo w-[145px] h-[95px]">
                         <img
-                          className="w-full h-auto block"
+                          className="w-full h-full block object-contain"
                           src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/swilet.svg?v=1685605760"
                           alt=""
                         />
                       </div>
-                      <h2 className="title mt-[50px] text-[#1F5406] text-[25px] leading-[1] font-semibold">
+                      <h2 className="title mt-[43px] text-[#1F5406] text-[25px] leading-[1] font-semibold">
                         Die nachhaltige Windel
                       </h2>
                       <div className="subtitle mt-[5px] mb-[119px] text-[#1F5406] leading-[1.2] text-[18px]">

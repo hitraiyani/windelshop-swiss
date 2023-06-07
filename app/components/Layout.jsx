@@ -520,7 +520,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
               {/* {title} */}
               <img
                 className="w-full h-auto"
-                src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/windelshop-2022-de_png.svg?v=1685423505"
+                src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/windelshop-2022-de_png.png?v=1685435114"
                 alt=""
               />
             </Link>
