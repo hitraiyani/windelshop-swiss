@@ -14,23 +14,23 @@ export function Popularproducts({className}) {
                 <h2 className="text-[#1C5F7B] text-[22px] font-bold text-left">
                   Aktuelle Aktionen
                 </h2>
-                <div className="slider-nav flex gap-[20px] items-center">
+                <div className="slider-nav flex gap-[13px] items-center">
                   <div
                     id="swiper-button-prev-aktuelle"
-                    className="w-[50px] h-[50px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+                    className="w-[30px] h-[30px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                   >
                     <IconChevronRight
                       className={
-                        'w-[14px] h-[20px] rotate-[180deg] relative left-[-1px]'
+                        'w-[12px] h-[14px] rotate-[180deg] relative left-[-1px]'
                       }
                     />
                   </div>
                   <div
                     id="swiper-button-next-aktuelle"
-                    className="w-[50px] h-[50px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+                    className="w-[30px] h-[30px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                   >
                     <IconChevronRight
-                      className={'w-[14px] h-[20px] relative left-[1px]'}
+                      className={'w-[12px] h-[14px] relative left-[1px]'}
                     />
                   </div>
                 </div>
@@ -67,7 +67,7 @@ export function Popularproducts({className}) {
                               </div>
                             </div>
                           </a>
-                          <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                          <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                             Pampers Baby-Dry Gr.3 Midi 6- 10kg (52 STK) Sparpack
                           </h4>
                           <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
@@ -112,7 +112,7 @@ export function Popularproducts({className}) {
                               </div>
                             </div>
                           </a>
-                          <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                          <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                             Pampers Baby-Dry Gr.5 Junior 11-16kg (90 STK) Maxi
                             Pack
                           </h4>
@@ -155,7 +155,7 @@ export function Popularproducts({className}) {
                               />
                             </div>
                           </a>
-                          <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                          <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                             Pampers Premium Protection Gr.5 Junior 11-16kg (34
                             STK) Sparpack
                           </h4>
@@ -198,7 +198,7 @@ export function Popularproducts({className}) {
                               />
                             </div>
                           </a>
-                          <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                          <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                             Pampers Baby-Dry PANTS Gr. 7 XXL +17kg (126 STK)
                             Monatsbox
                           </h4>
@@ -241,7 +241,7 @@ export function Popularproducts({className}) {
                               />
                             </div>
                           </a>
-                          <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                          <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                             Pampers Baby-Dry Gr.3 Midi 6- 10kg (52 STK)
                             Sparpack1
                           </h4>
@@ -284,7 +284,7 @@ export function Popularproducts({className}) {
                               />
                             </div>
                           </a>
-                          <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                          <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                             Pampers Baby-Dry Gr.3 Midi 6- 10kg (52 STK)
                             Sparpack2
                           </h4>
@@ -324,23 +324,23 @@ export function Popularproducts({className}) {
                 <h2 className="text-[#1C5F7B] text-[22px] font-bold text-left">
                   Beliebte Produkte
                 </h2>
-                <div className="slider-nav flex gap-[20px] items-center">
+                <div className="slider-nav flex gap-[13px] items-center">
                   <div
                     id="swiper-button-prev-popular-pro"
-                    className="w-[50px] h-[50px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+                    className="w-[30px] h-[30px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                   >
                     <IconChevronRight
                       className={
-                        'w-[14px] h-[20px] rotate-[180deg] relative left-[-1px]'
+                        'w-[12px] h-[14px] rotate-[180deg] relative left-[-1px]'
                       }
                     />
                   </div>
                   <div
                     id="swiper-button-next-popular-pro"
-                    className="w-[50px] h-[50px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+                    className="w-[30px] h-[30px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                   >
                     <IconChevronRight
-                      className={'w-[14px] h-[20px] relative left-[1px]'}
+                      className={'w-[12px] h-[14px] relative left-[1px]'}
                     />
                   </div>
                 </div>
@@ -374,7 +374,7 @@ export function Popularproducts({className}) {
                               />
                             </div>
                           </a>
-                          <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                          <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                             Pampers Baby-Dry Gr.3 Midi 6- 10kg (52 STK) Sparpack
                           </h4>
                           <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
@@ -416,7 +416,7 @@ export function Popularproducts({className}) {
                               />
                             </div>
                           </a>
-                          <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                          <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                             Pampers Baby-Dry Gr.5 Junior 11-16kg (90 STK) Maxi
                             Pack
                           </h4>
@@ -459,7 +459,7 @@ export function Popularproducts({className}) {
                               />
                             </div>
                           </a>
-                          <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                          <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                             Pampers Premium Protection Gr.5 Junior 11-16kg (34
                             STK) Sparpack
                           </h4>
@@ -502,7 +502,7 @@ export function Popularproducts({className}) {
                               />
                             </div>
                           </a>
-                          <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                          <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                             Pampers Baby-Dry PANTS Gr. 7 XXL +17kg (126 STK)
                             Monatsbox
                           </h4>
@@ -545,7 +545,7 @@ export function Popularproducts({className}) {
                               />
                             </div>
                           </a>
-                          <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                          <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                             Pampers Baby-Dry Gr.3 Midi 6- 10kg (52 STK)
                             Sparpack1
                           </h4>
@@ -588,7 +588,7 @@ export function Popularproducts({className}) {
                               />
                             </div>
                           </a>
-                          <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                          <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                             Pampers Baby-Dry Gr.3 Midi 6- 10kg (52 STK)
                             Sparpack2
                           </h4>

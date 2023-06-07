@@ -41,7 +41,7 @@ export function NewInTheShop({className}) {
                         />
                       </div>
                     </a>
-                    <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                    <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                       Pampers Baby-Dry Gr.3 Midi 6- 10kg (52 STK) Sparpack
                     </h4>
                     <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
@@ -79,7 +79,7 @@ export function NewInTheShop({className}) {
                         />
                       </div>
                     </a>
-                    <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                    <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                       Pampers Baby-Dry Gr.5 Junior 11-16kg (90 STK) Maxi Pack
                     </h4>
                     <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
@@ -117,7 +117,7 @@ export function NewInTheShop({className}) {
                         />
                       </div>
                     </a>
-                    <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                    <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                       Pampers Premium Protection Gr.5 Junior 11-16kg (34 STK)
                       Sparpack
                     </h4>
@@ -156,7 +156,7 @@ export function NewInTheShop({className}) {
                         />
                       </div>
                     </a>
-                    <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                    <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                       Pampers Baby-Dry PANTS Gr. 7 XXL +17kg (126 STK) Monatsbox
                     </h4>
                     <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
@@ -194,7 +194,7 @@ export function NewInTheShop({className}) {
                         />
                       </div>
                     </a>
-                    <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                    <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                       Pampers Baby-Dry Gr.3 Midi 6- 10kg (52 STK) Sparpack1
                     </h4>
                     <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
@@ -232,7 +232,7 @@ export function NewInTheShop({className}) {
                         />
                       </div>
                     </a>
-                    <h4 className="pro-name text-[16px] text-[#292929] font-normal">
+                    <h4 className="pro-name text-[14px] text-[#292929] font-normal">
                       Pampers Baby-Dry Gr.3 Midi 6- 10kg (52 STK) Sparpack2
                     </h4>
                     <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
