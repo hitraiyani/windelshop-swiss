@@ -20,6 +20,7 @@ import {
   QuickRequest,
   Reviews,
   Faq,
+  Subscribe,
 } from '~/components';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {getHeroPlaceholder} from '~/lib/placeholders';
@@ -129,6 +130,7 @@ export default function Homepage() {
       <QuickRequest className={''} />
       <Reviews className={''} />
       <Faq className={''} />
+      <Subscribe className={''} />
       {/* {primaryHero && (
         <Hero {...primaryHero} height="full" top loading="eager" />
       )}

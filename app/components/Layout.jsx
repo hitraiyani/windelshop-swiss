@@ -24,6 +24,13 @@ import {
   Link,
   ShopifyCookie,
   ChevronDownIcon,
+  IconArrowRight2,
+  IconGoogle,
+  IconStar2,
+  IconPhone,
+  IconMail,
+  IconMap,
+  IconFacebook,
 } from '~/components';
 import {useIsHomePath} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
@@ -595,7 +602,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] px-[15px]">
                         <div className="mega-menu-list-inner bg-white p-[50px] rounded-[30px] h-full">
                           <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
-                          Kollektionen
+                            Kollektionen
                           </div>
                           <ul>
                             <li>
@@ -605,7 +612,9 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                               <a href="#">Huggies Dry Nites</a>
                             </li>
                             <li>
-                              <a href="#">Sangenic Tommee Tippee Windelentsorgung</a>
+                              <a href="#">
+                                Sangenic Tommee Tippee Windelentsorgung
+                              </a>
                             </li>
                             <li>
                               <a href="#">Pampers Pants</a>
@@ -622,37 +631,55 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] px-[15px]">
                         <div className="mega-menu-list-inner bg-white p-[50px] rounded-[30px] h-full">
                           <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[20px] text-black">
-                          Marken
+                            Marken
                           </div>
-                          <ul className='!grid grid-cols-3 !gap-y-[60px] !gap-x-[20px] brands-logos'>
+                          <ul className="!grid grid-cols-3 !gap-y-[60px] !gap-x-[20px] brands-logos">
                             <li>
                               <a href="#">
-                                <img src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/g114768.png?v=1685447152" alt="" />
+                                <img
+                                  src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/g114768.png?v=1685447152"
+                                  alt=""
+                                />
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <img src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/pingo_logo_2.png?v=1685447152" alt="" />
+                                <img
+                                  src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/pingo_logo_2.png?v=1685447152"
+                                  alt=""
+                                />
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <img src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/triodoshippo_heroImageDesktop_1.png?v=1685447152" alt="" />
+                                <img
+                                  src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/triodoshippo_heroImageDesktop_1.png?v=1685447152"
+                                  alt=""
+                                />
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <img src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/Libero-Logo_1.png?v=1685447152" alt="" />
+                                <img
+                                  src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/Libero-Logo_1.png?v=1685447152"
+                                  alt=""
+                                />
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <img src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/Vector_4a305661-3e74-4ac9-87d5-76f98fecf6f0.png?v=1685447152" alt="" />
+                                <img
+                                  src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/Vector_4a305661-3e74-4ac9-87d5-76f98fecf6f0.png?v=1685447152"
+                                  alt=""
+                                />
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <img src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/huggies-brand-logo-vector_1.png?v=1685447152" alt="" />
+                                <img
+                                  src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/huggies-brand-logo-vector_1.png?v=1685447152"
+                                  alt=""
+                                />
                               </a>
                             </li>
                           </ul>
@@ -981,16 +1008,293 @@ function Footer({menu}) {
       divider={isHome ? 'none' : 'top'}
       as="footer"
       role="contentinfo"
-      className={`grid min-h-[25rem] items-start grid-flow-row w-full gap-6 py-8 px-6 md:px-8 lg:px-12 md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-${itemsCount}
-        bg-primary dark:bg-contrast dark:text-primary text-contrast overflow-hidden`}
+      className={`site-footer !p-0 !gap-0 mt-[50px]`}
     >
-      <FooterMenu menu={menu} />
-      <CountrySelector />
-      <div
-        className={`self-end pt-8 opacity-50 md:col-span-2 lg:col-span-${itemsCount}`}
-      >
-        &copy; {new Date().getFullYear()} / Shopify, Inc. Hydrogen is an MIT
-        Licensed Open Source project.
+      <div className="footer-top bg-[#1C5F7B] rounded-[30px_30px_0px_0px] pt-[52px] pb-[40px]">
+        <div className="container">
+          <div className="footer-row-wrap">
+            <div className="footer-row flex mx-[-15px] gap-x-[70px]">
+              <div className="footer-col px-[15px] w-[30%]">
+                <div className="col-inner">
+                  <div className="logo max-w-[292px] mb-[5px]">
+                    <img
+                      className="max-w-full h-auto"
+                      src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/footer-windelshop-de_png.png?v=1686140271"
+                      alt=""
+                    />
+                  </div>
+                  <div className="desc text-[#CCCCCC] text-[12px]">
+                    <p>
+                      Ihr Partner für Babypflege, Damenhygiene und Textilpflege
+                      – im Privaten und Geschäftlichen.
+                    </p>
+                  </div>
+                  <div className="subscribe-form-footer mt-[33px]">
+                    <form action="" className="">
+                      <div className="form-group flex gap-[10px]">
+                        <div className="form-control flex-1">
+                          <input
+                            type="email"
+                            placeholder="Newsletter abonnieren"
+                            className="w-full h-[50px] rounded-[100px] !bg-[#E7EFFF] text-[#1C5F7B] text-[16px] font-medium leading-none placeholder:!text-[#1C5F7B] placeholder:!opacity-100 focus:!border-white px-[20px] py-[16px] text-left !border-[#E7EFFF] focus:!ring-0"
+                          />
+                        </div>
+                        <div className="form-control">
+                          <button
+                            type="submit"
+                            className="bg-[#E7EFFF] rounded-full w-[50px] h-[50px] leading-none text-[12px] text-[#1C5F7B] text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center mx-auto"
+                          >
+                            <span className="icon w-[40px] h-[40px]">
+                              <IconArrowRight2 className={'w-full h-full'} />
+                            </span>
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div className="google-review-wrap mt-[43px]">
+                    <div className="google-review-inner">
+                      <div className="icon-with-star flex gap-[17px] items-center">
+                        <div className="icon w-[58px] h-[58px] rounded-[10px] bg-white p-[9px]">
+                          <IconGoogle className={'w-full h-full'} />
+                        </div>
+                        <div className="flex flex-1 flex-col gap-[3px]">
+                          <div className="desc text-[16px] text-white font-semibold">
+                            <p>Unsere Bewertungen auf Google!</p>
+                          </div>
+                          <div className="rating-start flex gap-[5px] items-center">
+                            <span className="text-[16px] text-white leading-none font-semibold ">
+                              4.7
+                            </span>
+                            <div className="star flex text-[#CCDDF1]">
+                              <IconStar2 className="w-[16px] h-[16px]" />
+                              <IconStar2 className="w-[16px] h-[16px]" />
+                              <IconStar2 className="w-[16px] h-[16px]" />
+                              <IconStar2 className="w-[16px] h-[16px]" />
+                              <IconStar2 className="w-[16px] h-[16px]" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="footer-col px-[15px] w-[16.33%]">
+                <div className="col-inner">
+                  <div className="nav">
+                    <h4 className="title text-[14px] text-white font-bold mb-[15px] uppercase">
+                      Informationen
+                    </h4>
+                    <ul className="nav-list flex flex-col gap-[15px]">
+                      <li className="text-[12px] text-white font-normal">
+                        <a
+                          href="#"
+                          className="hover:opacity-70 transition-all duration-500"
+                        >
+                          Windelshop Portrait
+                        </a>
+                      </li>
+                      <li className="text-[12px] text-white font-normal">
+                        <a
+                          href="#"
+                          className="hover:opacity-70 transition-all duration-500"
+                        >
+                          Bestellinfos
+                        </a>
+                      </li>
+                      <li className="text-[12px] text-white font-normal">
+                        <a
+                          href="#"
+                          className="hover:opacity-70 transition-all duration-500"
+                        >
+                          Datenschutz
+                        </a>
+                      </li>
+                      <li className="text-[12px] text-white font-normal">
+                        <a
+                          href="#"
+                          className="hover:opacity-70 transition-all duration-500"
+                        >
+                          AGBs
+                        </a>
+                      </li>
+                      <li className="text-[12px] text-white font-normal">
+                        <a
+                          href="#"
+                          className="hover:opacity-70 transition-all duration-500"
+                        >
+                          Partner / Nützliche Links
+                        </a>
+                      </li>
+                      <li className="text-[12px] text-white font-normal">
+                        <a
+                          href="#"
+                          className="hover:opacity-70 transition-all duration-500"
+                        >
+                          Ein Herz für Andere
+                        </a>
+                      </li>
+                      <li className="text-[12px] text-white font-normal">
+                        <a
+                          href="#"
+                          className="hover:opacity-70 transition-all duration-500"
+                        >
+                          Newsletter abonnieren
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div className="footer-col px-[15px] w-[16.33%]">
+                <div className="col-inner">
+                  <div className="nav">
+                    <h4 className="title text-[14px] text-white font-bold mb-[15px] uppercase">
+                      Kundendienst
+                    </h4>
+                    <ul className="nav-list flex flex-col gap-[15px]">
+                      <li className="text-[12px] text-white font-normal">
+                        <a
+                          href="#"
+                          className="hover:opacity-70 transition-all duration-500"
+                        >
+                          Kontakt
+                        </a>
+                      </li>
+                      <li className="text-[12px] text-white font-normal">
+                        <a
+                          href="#"
+                          className="hover:opacity-70 transition-all duration-500"
+                        >
+                          Seitenübersicht
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div className="footer-col px-[15px] w-[16.33%]">
+                <div className="col-inner">
+                  <div className="nav">
+                    <h4 className="title text-[14px] text-white font-bold mb-[15px] uppercase">
+                      Links
+                    </h4>
+                    <ul className="nav-list flex flex-col gap-[15px]">
+                      <li className="text-[12px] text-white font-normal">
+                        <a
+                          href="#"
+                          className="hover:opacity-70 transition-all duration-500"
+                        >
+                          Windeln & Feuchttücher
+                        </a>
+                      </li>
+                      <li className="text-[12px] text-white font-normal">
+                        <a
+                          href="#"
+                          className="hover:opacity-70 transition-all duration-500"
+                        >
+                          Damenhygiene & Inkontinenz
+                        </a>
+                      </li>
+                      <li className="text-[12px] text-white font-normal">
+                        <a
+                          href="#"
+                          className="hover:opacity-70 transition-all duration-500"
+                        >
+                          Datenschutz
+                        </a>
+                      </li>
+                      <li className="text-[12px] text-white font-normal">
+                        <a
+                          href="#"
+                          className="hover:opacity-70 transition-all duration-500"
+                        >
+                          Waschmittel & Weichspüler
+                        </a>
+                      </li>
+                      <li className="text-[12px] text-white font-normal">
+                        <a
+                          href="#"
+                          className="hover:opacity-70 transition-all duration-500"
+                        >
+                          Pflege & Hygiene
+                        </a>
+                      </li>
+                      <li className="text-[12px] text-white font-normal">
+                        <a
+                          href="#"
+                          className="hover:opacity-70 transition-all duration-500"
+                        >
+                          Abos & Gutscheine
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div className="footer-col px-[15px] w-[23%]">
+                <div className="col-inner">
+                  <div className="contact-info">
+                    <ul className="flex flex-col gap-[20px]">
+                      <li>
+                        <a
+                          href="#"
+                          className="text-[12px] flex gap-[10px] text-[#CCCCCC] font-normal items-center hover:text-white transition-all duration-500"
+                        >
+                          <span className="icon w-[31px] h-[31px] border-[2px] rounded-full border-[#E7EFFF] p-[7px] text-[#CCDDF1]">
+                            <IconMap className={'w-full h-full'} />
+                          </span>
+                          <span className="text flex-1">
+                            Homerunner GmbH, Schulstrasse 13a, CH-9553
+                            Bettwiesen
+                          </span>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          className="text-[12px] flex gap-[10px] text-[#CCCCCC] font-normal items-center hover:text-white transition-all duration-500"
+                        >
+                          <span className="icon w-[31px] h-[31px] border-[2px] rounded-full border-[#E7EFFF] p-[7px] text-[#CCDDF1]">
+                            <IconPhone className={'w-full h-full'} />
+                          </span>
+                          <span className="text flex-1">052 720 58 58</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          className="text-[12px] flex gap-[10px] text-[#CCCCCC] font-normal items-center hover:text-white transition-all duration-500"
+                        >
+                          <span className="icon w-[31px] h-[31px] border-[2px] rounded-full border-[#E7EFFF] p-[7px] text-[#CCDDF1]">
+                            <IconMail className={'w-full h-full'} />
+                          </span>
+                          <span className="text flex-1">E-Mail senden</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="social-links flex flex-wrap gap-[10px] mt-[30px]">
+                    <a href="#" className="w-[36px] text-[#E7EFFF] hover:text-white transition-all duration-500">
+                      <IconFacebook className={'w-full h-full'} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <FooterMenu menu={menu} /> */}
+      {/* <CountrySelector /> */}
+      <div className={`footer-bottom bg-[#CCDDF1] py-[15px]`}>
+        <div className="container">
+          <p className="text-[12px] text-[#1C5F7B] font-normal text-center">
+            {new Date().getFullYear()} Copyright &copy; Homerunner GmbH,
+            Windelshop & Swilet – All Rights Reserved
+          </p>
+        </div>
       </div>
     </Section>
   );

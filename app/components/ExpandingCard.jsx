@@ -35,7 +35,7 @@ export function ExpandingCard({title, content}) {
             leaveTo="max-h-0"
           >
             <Disclosure.Panel
-              className="editor-content pb-[30px] px-[25px] grid gap-2 text-[14px] font-normal leading-[1.3]"
+              className="editor-content pb-[30px] px-[25px] grid gap-2 text-[14px] font-normal leading-[1.3] text-black"
               static
             >
               <p dangerouslySetInnerHTML={{__html: content}}></p>

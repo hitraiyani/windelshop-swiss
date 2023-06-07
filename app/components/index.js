@@ -37,5 +37,6 @@ export {QuickRequest} from './QuickRequest';
 export {Reviews} from './Reviews';
 export {ExpandingCard} from './ExpandingCard';
 export {Faq} from './Faq';
+export {Subscribe} from './Subscribe';
 // Sue me
 export * from './Icon';

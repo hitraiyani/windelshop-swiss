@@ -20,7 +20,7 @@ export function QuickRequest({className}) {
                       <span className="icon w-[35px] h-[35px] border-[2px] rounded-full border-black p-[7px] text-[#1C5F7B]">
                         <IconPhone className={'w-full h-full'} />
                       </span>
-                      <span className="text">052 720 58 58</span>
+                      <span className="text flex-1">052 720 58 58</span>
                     </a>
                   </li>
                   <li>
@@ -31,7 +31,7 @@ export function QuickRequest({className}) {
                       <span className="icon w-[35px] h-[35px] border-[2px] rounded-full border-black p-[7px] text-[#1C5F7B]">
                         <IconMail className={'w-full h-full'} />
                       </span>
-                      <span className="text">Email senden</span>
+                      <span className="text flex-1">Email senden</span>
                     </a>
                   </li>
                 </ul>
@@ -73,7 +73,7 @@ export function QuickRequest({className}) {
                   <div className="submit-btn mt-[15px]">
                     <button
                       type="submit"
-                      className="bg-[#1C5F7B] rounded-[30px] py-[9px] pl-[19px] pr-[10px] px-[20px] min-h-[36px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center"
+                      className="bg-[#1C5F7B] rounded-[30px] py-[2px] pl-[19px] pr-[10px] px-[20px] min-h-[36px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center"
                     >
                       Senden
                       <span className="icon w-[24px] h-[24px]">
