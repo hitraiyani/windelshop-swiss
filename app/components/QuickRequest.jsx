@@ -5,7 +5,7 @@ export function QuickRequest({className}) {
     <section className={`${className} quick-request-section py-[50px]`}>
       <div className="container">
         <div className="quick-request-row flex flex-row gap-[30px]">
-          <div className="content-col w-[300px]">
+          <div className="content-col w-[270px]">
             <div className="col-inner">
               <h2 className="text-black text-[28px] font-bold text-left mb-[36px]">
                 Schnellanfrage
@@ -70,10 +70,10 @@ export function QuickRequest({className}) {
                       ></textarea>
                     </div>
                   </div>
-                  <div className="submit-btn">
+                  <div className="submit-btn mt-[15px]">
                     <button
                       type="submit"
-                      className="bg-[#1C5F7B] rounded-[30px] pl-[16px] pr-[10px] px-[20px] min-h-[50px] leading-none text-[16px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center"
+                      className="bg-[#1C5F7B] rounded-[30px] py-[9px] pl-[19px] pr-[10px] px-[20px] min-h-[36px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center"
                     >
                       Senden
                       <span className="icon w-[24px] h-[24px]">

@@ -573,7 +573,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                     <div className="mega-menu-lists flex flex-wrap py-[70px] gap-y-[30px] -mx-[15px]">
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] px-[15px]">
                         <div className="mega-menu-list-inner bg-white p-[50px] rounded-[30px] h-full">
-                          <div className="sub-menu-title text-[22px] leading-[1.1] font-bold mb-[10px] text-black">
+                          <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
                             Kategorien
                           </div>
                           <ul>
@@ -594,7 +594,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] px-[15px]">
                         <div className="mega-menu-list-inner bg-white p-[50px] rounded-[30px] h-full">
-                          <div className="sub-menu-title text-[22px] leading-[1.1] font-bold mb-[10px] text-black">
+                          <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
                           Kollektionen
                           </div>
                           <ul>
@@ -621,7 +621,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] px-[15px]">
                         <div className="mega-menu-list-inner bg-white p-[50px] rounded-[30px] h-full">
-                          <div className="sub-menu-title text-[22px] leading-[1.1] font-bold mb-[20px] text-black">
+                          <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[20px] text-black">
                           Marken
                           </div>
                           <ul className='!grid grid-cols-3 !gap-y-[60px] !gap-x-[20px] brands-logos'>
@@ -689,7 +689,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                   <div className="mega-menu-inner container">
                     <div className="mega-menu-lists flex flex-wrap py-[70px] gap-y-[70px] -mx-[15px]">
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[22px] leading-[1.1] font-bold mb-[10px] text-black">
+                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
                           Absfallentsorgung
                         </div>
                         <ul>
@@ -702,7 +702,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[22px] leading-[1.1] font-bold mb-[10px] text-black">
+                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
                           Bett- & Wickelunterlagen
                         </div>
                         <ul>
@@ -715,7 +715,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[22px] leading-[1.1] font-bold mb-[10px] text-black">
+                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
                           Bocoton Bio
                         </div>
                         <ul>
@@ -728,7 +728,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[22px] leading-[1.1] font-bold mb-[10px] text-black">
+                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
                           Hautpflege
                         </div>
                         <ul>
@@ -738,7 +738,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[22px] leading-[1.1] font-bold mb-[10px] text-black">
+                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
                           Sonnenschutzpflege
                         </div>
                         <ul>
@@ -751,7 +751,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[22px] leading-[1.1] font-bold mb-[10px] text-black">
+                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
                           Desinfektion
                         </div>
                         <ul>
@@ -764,7 +764,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[22px] leading-[1.1] font-bold mb-[10px] text-black">
+                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
                           Reinigen & Waschen
                         </div>
                         <ul>
@@ -780,7 +780,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[22px] leading-[1.1] font-bold mb-[10px] text-black">
+                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
                           Papierwaren
                         </div>
                         <ul>
@@ -802,7 +802,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[22px] leading-[1.1] font-bold mb-[10px] text-black">
+                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
                           Untersuchungshandschuhe
                         </div>
                         <ul>
@@ -812,7 +812,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[22px] leading-[1.1] font-bold mb-[10px] text-black">
+                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
                           Zahnhygiene
                         </div>
                         <ul>
@@ -825,7 +825,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[22px] leading-[1.1] font-bold mb-[10px] text-black">
+                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
                           Zubehör
                         </div>
                         <ul>
@@ -841,7 +841,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[22px] leading-[1.1] font-bold mb-[10px] text-black">
+                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
                           Feuchttücher
                         </div>
                         <ul>

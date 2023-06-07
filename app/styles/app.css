@@ -195,6 +195,12 @@ body {
   overflow-x: hidden;
   background-color: #fff;
 }
+p {
+  margin-bottom: 15px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
 strong {
   font-weight: 700;
 }
@@ -215,6 +221,20 @@ strong {
   @media (max-width: 767px) {
     padding-left: 15px;
     padding-right: 15px;
+  }
+  &.container-fluid-right {
+    max-width: 100%;
+    padding-right: 0;
+    padding-left: calc(calc(100% - 1568px + 120px) / 2);
+    padding-left: -webkit-calc(calc(100% - 1568px + 120px) / 2);
+    padding-left: -moz-calc(calc(100% - 1568px + 120px) / 2);
+  } 
+  &.container-fluid-left {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: calc(calc(100% - 1568px + 120px) / 2);
+    padding-right: -webkit-calc(calc(100% - 1568px + 120px) / 2);
+    padding-right: -moz-calc(calc(100% - 1568px + 120px) / 2);
   }
 }
 
@@ -249,13 +269,13 @@ strong {
   }
   a {
     background-image: url("data:image/svg+xml,%3Csvg width='7' height='12' viewBox='0 0 7 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L1 11' stroke='%231C5F7B' stroke-width='1.25' stroke-linecap='round'/%3E%3C/svg%3E%0A");
-    background-size: 8px;
+    background-size: 6px;
     background-repeat: no-repeat;
     background-position: left center;
     padding-left: 13px;
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 12px;
     line-height: 18px;
     color: #000000;
     transition: all 0.5s;
@@ -338,4 +358,12 @@ strong {
     }
   }
 }
-/* ShoppingByBrands section */
+/* End ShoppingByBrands section */
+
+/* reviews section  */
+.reviews-slider {
+  .swiper-slide {
+    height: auto;
+  }
+}
+/* End reviews section  */

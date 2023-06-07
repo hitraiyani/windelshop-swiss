@@ -2,7 +2,7 @@ import {IconGoogle, IconStar2} from '~/components';
 
 export function CustomerSatisfaction({className}) {
   return (
-    <section className={`${className} customer-satis-faction-section py-[50px]`}>
+    <section className={`${className} customer-satisfaction-section py-[50px]`}>
       <div className="container">
         <div className="bg-[#E7EFFF] google-review-wrap py-[32px] rounded-[20px]">
           <div className="flex flex-wrap max-w-[740px] mx-auto gap-[30px] items-center">

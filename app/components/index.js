@@ -34,5 +34,8 @@ export {ShoppingByBrands} from './ShoppingByBrands';
 export {Popularproducts2} from './Popularproducts2';
 export {SeasonalSets} from './SeasonalSets';
 export {QuickRequest} from './QuickRequest';
+export {Reviews} from './Reviews';
+export {ExpandingCard} from './ExpandingCard';
+export {Faq} from './Faq';
 // Sue me
 export * from './Icon';
