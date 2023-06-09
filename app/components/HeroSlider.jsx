@@ -1,10 +1,13 @@
 import {Autoplay, Navigation, Pagination, Scrollbar, A11y} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
-import {IconArrowRight,IconChevronRight} from '~/components';
+import {IconArrowRight,IconChevronRight, Link} from '~/components';
 /**
  * Hero component that renders metafields attached to collection resources
  **/
-export function HeroSlider() {
+export function HeroSlider({slides}) {
+  const slideOne = slides[0] ? slides[0] : {};
+  const slideTwo = slides[1] ? slides[1] : {};
+ 
   return (
     <section className="heroslider-section pt-[30px] pb-[50px]">
       <div className="container">
@@ -24,96 +27,100 @@ export function HeroSlider() {
             // }}
             className='myswiper1'
           >
-            <SwiperSlide>
-              <div className="slide-item h-full">
-                <div className="slide-item-inner flex flex-row overflow-hidden rounded-[30px] h-full">
-                  <div className="content-left w-[40%]">
-                    <div className="col-inner bg-[#E7EFFF] pt-[29px] pb-[37px] px-[70px] flex flex-col h-full">
-                      <div className="brand-logo w-[145px] h-[95px]">
-                        <img
-                          className="w-full h-full block object-contain"
-                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/pampers.svg?v=1685605760"
-                          alt=""
-                        />
-                      </div>
-                      <h2 className="title mt-[43px] text-[#00A49B] text-[25px] leading-[1] font-semibold">
-                        Die sichere Windel
-                      </h2>
-                      <div className="subtitle mt-[5px] mb-[119px] text-[#00A49B] leading-[1.2] text-[18px]">
-                        lange trocken
-                      </div>
-                      <div className="btn-wrap flex mt-auto">
-                        <a
-                          href="#"
-                          className='leading-none w-fit flex items-center justify-center text-center gap-[10px] text-[#00A49B] font-["Open_Sans"] uppercase font-bold text-[12px] hover:opacity-70 transition-all duration-500'
-                        >
-                          <span className="name">MEHR ERFAREN</span>
-                          <span className="icon">
-                            <IconArrowRight className={'w-[22px] h-[12px]'} />
-                          </span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="img-col w-[60%]">
-                    <div className="col-inner h-full">
-                      <div className="img-wrap h-full relative overflow-hidden">
-                        <img
-                          className="absolute w-full inset-0 h-full object-cover"
-                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/mother-and-baby-happy_1.jpg?v=1686120404"
-                          alt=""
-                        />
+            {slideOne && (
+              <SwiperSlide>
+                <div className="slide-item h-full">
+                  <div className="slide-item-inner flex flex-row overflow-hidden rounded-[30px] h-full">
+                    <div className="content-left w-[40%]">
+                      <div className="col-inner bg-[#E7EFFF] pt-[29px] pb-[37px] px-[70px] flex flex-col h-full">
+                        <div className="brand-logo w-[145px] h-[95px]">
+                          <img
+                            className="w-full h-full block object-contain"
+                            src={slideOne?.sub_image?.reference?.image?.url}
+                            alt=""
+                          />
+                        </div>
+                        <h2 className="title mt-[43px] text-[#00A49B] text-[25px] leading-[1] font-semibold">
+                          {slideOne?.heading?.value}
+                        </h2>
+                        <div className="subtitle mt-[5px] mb-[119px] text-[#00A49B] leading-[1.2] text-[18px]">
+                          {slideOne?.sub_heading?.value}
+                        </div>
+                        <div className="btn-wrap flex mt-auto">
+                        <Link
+                            to={slideOne?.cta_redirect?.value}
+                            className='leading-none w-fit flex items-center justify-center text-center gap-[10px] text-[#00A49B] font-["Open_Sans"] uppercase font-bold text-[12px] hover:opacity-70 transition-all duration-500'
+                          >
+                            <span className="name">{slideOne?.cta_label?.value}</span>
+                            <span className="icon">
+                              <IconArrowRight className={'w-[22px] h-[12px]'} />
+                            </span>
+                          </Link>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="slide-item h-full">
-                <div className="slide-item-inner flex flex-row overflow-hidden rounded-[30px] h-full">
-                  <div className="content-left w-[40%]">
-                    <div className="col-inner bg-[#DAEACB] pt-[29px] pb-[37px] px-[70px] flex flex-col h-full">
-                      <div className="brand-logo w-[145px] h-[95px]">
-                        <img
-                          className="w-full h-full block object-contain"
-                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/swilet.svg?v=1685605760"
-                          alt=""
-                        />
-                      </div>
-                      <h2 className="title mt-[43px] text-[#1F5406] text-[25px] leading-[1] font-semibold">
-                        Die nachhaltige Windel
-                      </h2>
-                      <div className="subtitle mt-[5px] mb-[119px] text-[#1F5406] leading-[1.2] text-[18px]">
-                        besonders hautfreundlich
-                      </div>
-                      <div className="btn-wrap flex mt-auto">
-                        <a
-                          href="#"
-                          className='leading-none w-fit flex items-center justify-center text-center gap-[10px] text-[#1F5406] font-["Open_Sans"] uppercase font-bold text-[12px] hover:opacity-70 transition-all duration-500'
-                        >
-                          <span className="name">MEHR ERFAREN</span>
-                          <span className="icon">
-                            <IconArrowRight className={'w-[22px] h-[12px]'} />
-                          </span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="img-col w-[60%]">
-                    <div className="col-inner h-full">
-                      <div className="img-wrap h-full relative overflow-hidden">
-                        <img
-                          className="absolute w-full inset-0 h-full object-cover"
-                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/mother-and-baby-happy_1_1_774c1555-b98c-4998-8076-9cacb9d9b103.png?v=1685605795"
-                          alt=""
-                        />
+                    <div className="img-col w-[60%]">
+                      <div className="col-inner h-full">
+                        <div className="img-wrap h-full relative overflow-hidden">
+                          <img
+                            className="absolute w-full inset-0 h-full object-cover"
+                            src={slideOne?.main_image?.reference?.image?.url}
+                            alt=""
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </SwiperSlide>
+              </SwiperSlide>
+            )}
+            {slideTwo && (
+              <SwiperSlide>
+                <div className="slide-item h-full">
+                  <div className="slide-item-inner flex flex-row overflow-hidden rounded-[30px] h-full">
+                    <div className="content-left w-[40%]">
+                      <div className="col-inner bg-[#DAEACB] pt-[29px] pb-[37px] px-[70px] flex flex-col h-full">
+                        <div className="brand-logo w-[145px] h-[95px]">
+                          <img
+                            className="w-full h-full block object-contain"
+                            src={slideTwo?.sub_image?.reference?.image?.url}
+                            alt=""
+                          />
+                        </div>
+                        <h2 className="title mt-[43px] text-[#1F5406] text-[25px] leading-[1] font-semibold">
+                          {slideTwo?.heading?.value}
+                        </h2>
+                        <div className="subtitle mt-[5px] mb-[119px] text-[#1F5406] leading-[1.2] text-[18px]">
+                          {slideTwo?.sub_heading?.value}
+                        </div>
+                        <div className="btn-wrap flex mt-auto">
+                        <Link
+                            to={slideTwo?.cta_redirect?.value}
+                            className='leading-none w-fit flex items-center justify-center text-center gap-[10px] text-[#1F5406] font-["Open_Sans"] uppercase font-bold text-[12px] hover:opacity-70 transition-all duration-500'
+                          >
+                            <span className="name">{slideTwo?.cta_label?.value}</span>
+                            <span className="icon">
+                              <IconArrowRight className={'w-[22px] h-[12px]'} />
+                            </span>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="img-col w-[60%]">
+                      <div className="col-inner h-full">
+                        <div className="img-wrap h-full relative overflow-hidden">
+                          <img
+                            className="absolute w-full inset-0 h-full object-cover"
+                            src={slideTwo?.main_image?.reference?.image?.url}
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            )}
           </Swiper>
           <div
             id="swiper-button-prev-heroslider"

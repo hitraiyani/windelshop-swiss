@@ -1,7 +1,7 @@
 function root({shop, url}) {
   return {
     title: shop?.name,
-    titleTemplate: '%s | Hydrogen Demo Store',
+    titleTemplate: '%s | Windelshop',
     description: truncate(shop?.description ?? ''),
     handle: '@shopify',
     url,
@@ -34,7 +34,7 @@ function root({shop, url}) {
 function home() {
   return {
     title: 'Home',
-    titleTemplate: '%s | Hydrogen Demo Store',
+    titleTemplate: 'Windelshop | Ihr Spezialist für Windeln & Hygiene',
     description: 'The best place to buy snowboarding products',
     robots: {
       noIndex: false,

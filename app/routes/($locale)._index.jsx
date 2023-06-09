@@ -41,9 +41,12 @@ export async function loader({params, context}) {
     throw new Response(null, {status: 404});
   }
 
-  const {shop, hero} = await context.storefront.query(HOMEPAGE_SEO_QUERY, {
-    variables: {handle: 'freestyle'},
-  });
+  const {shop, hero, home_hero_slider} = await context.storefront.query(
+    HOMEPAGE_SEO_QUERY,
+    {
+      variables: {handle: 'freestyle'},
+    },
+  );
 
   const seo = seoPayload.home();
 
@@ -51,10 +54,35 @@ export async function loader({params, context}) {
     {
       shop,
       primaryHero: hero,
+      homeHeroSlider: home_hero_slider,
+      bestsellerCategories: context.storefront.query(
+        HOMEPAGE_TOP_COLLECTION_QUERY,
+        {
+          variables: {metaObjectId: 'gid://shopify/Metaobject/1672904981'},
+        },
+      ),
+      bestsellerProducts: context.storefront.query(
+        HOMEPAGE_BEST_SELLER_PRODUCTS_QUERY,
+        {
+          variables: {metaObjectId: 'gid://shopify/Metaobject/1691681045'},
+        },
+      ),
+      sleepingChildBanner: context.storefront.query(
+        HOMEPAGE_SLEEPING_CHILD_BANNER_QUERY,
+        {
+          variables: {metaObjectId: 'gid://shopify/Metaobject/1691582741'},
+        },
+      ),
+      seasonalSets: context.storefront.query(
+        HOMEPAGE_SEASONAL_SETS_QUERY,
+        {
+          variables: {metaObjectId: 'gid://shopify/Metaobject/1692401941'},
+        },
+      ),
       // These different queries are separated to illustrate how 3rd party content
       // fetching can be optimized for both above and below the fold.
-      featuredProducts: context.storefront.query(
-        HOMEPAGE_FEATURED_PRODUCTS_QUERY,
+      latestProducts: context.storefront.query(
+        HOMEPAGE_LATEST_PRODUCTS_QUERY,
         {
           variables: {
             /**
@@ -106,10 +134,15 @@ export async function loader({params, context}) {
 export default function Homepage() {
   const {
     primaryHero,
+    homeHeroSlider,
+    bestsellerCategories,
+    bestsellerProducts,
+    seasonalSets,
     secondaryHero,
     tertiaryHero,
     featuredCollections,
-    featuredProducts,
+    latestProducts,
+    sleepingChildBanner
   } = useLoaderData();
 
   // TODO: skeletons vs placeholders
@@ -117,16 +150,77 @@ export default function Homepage() {
 
   return (
     <>
-      <HeroSlider />
-      <BestsellerCategories className={''} />
+      <HeroSlider slides={homeHeroSlider?.nodes} />
+      {bestsellerCategories && (
+        <Suspense>
+          <Await resolve={bestsellerCategories}>
+            {({data}) => {
+              if (!data) return <></>;
+              return <BestsellerCategories data={data} />;
+            }}
+          </Await>
+        </Suspense>
+      )}
+      
+      {/* <HeroSlider />
+      <BestsellerCategories className={''} /> */}
       <CustomerSatisfaction className={''} />
-      <NewInTheShop className={''} />
-      <CtaBanner className={''} />
+      {latestProducts && (
+        <Suspense>
+          <Await resolve={latestProducts}>
+            {({products}) => {
+              if (!products?.nodes) return <></>;
+              return (
+                <NewInTheShop
+                  products={products.nodes}
+                  title="Neu im Shop"
+                />
+              );
+            }}
+          </Await>
+        </Suspense>
+      )}
+      {sleepingChildBanner && (
+        <Suspense>
+          <Await resolve={sleepingChildBanner}>
+            {({data}) => {
+              return(
+                <CtaBanner banner={data.banner}/>
+              )
+            }}
+          </Await>
+        </Suspense>
+      )}
       <Popularproducts className={''} />
-      <Bestseller className={''} />
+      {bestsellerProducts && (
+        <Suspense>
+          <Await resolve={bestsellerProducts}>
+            {({data}) => {
+              return (
+                <Bestseller
+                  products={data?.products?.references?.edges}
+                  title={data?.title?.value}
+                />
+              );
+            }}
+          </Await>
+        </Suspense>
+      )}
       <ShoppingByBrands className={''} />
       <Popularproducts2 className={''} />
-      <SeasonalSets className={''} />
+      {seasonalSets && (
+        <Suspense>
+          <Await resolve={seasonalSets}>
+            {({data}) => {
+              return (
+                <SeasonalSets data={data} />
+              );
+            }}
+          </Await>
+        </Suspense>
+      )}
+      
+      {/* <SeasonalSets className={''} /> */}
       <QuickRequest className={''} />
       <Reviews className={''} />
       <Faq className={''} />
@@ -135,9 +229,9 @@ export default function Homepage() {
         <Hero {...primaryHero} height="full" top loading="eager" />
       )}
 
-      {featuredProducts && (
+      {latestProducts && (
         <Suspense>
-          <Await resolve={featuredProducts}>
+          <Await resolve={latestProducts}>
             {({products}) => {
               if (!products?.nodes) return <></>;
               return (
@@ -228,12 +322,185 @@ const HOMEPAGE_SEO_QUERY = `#graphql
     hero: collection(handle: $handle) {
       ...CollectionContent
     }
+    home_hero_slider : metaobjects(type: "home_hero_slider", first: 5) {
+      nodes {
+        id
+        heading: field(key: "heading") {
+          value
+        }
+        sub_heading: field(key: "sub_heading") {
+          value
+        }
+        main_image: field(key: "main_image") {
+          reference {
+            ...Media
+          }
+        }
+        sub_image: field(key: "sub_image") {
+          reference {
+            ...Media
+          }
+        }
+        cta_label: field(key: "cta_label") {
+          value
+        }
+        cta_redirect: field(key: "cta_redirect") {
+          value
+        }
+      }
+    }
     shop {
       name
       description
     }
   }
   ${COLLECTION_CONTENT_FRAGMENT}
+`;
+
+const HOMEPAGE_BEST_SELLER_PRODUCTS_QUERY = `#graphql
+  query homeTopCollections($metaObjectId: ID!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+    data : metaobject(id : $metaObjectId) {
+      handle
+      id
+      type
+      title : field(key: "title") {
+        value
+      }
+      collection_images_override : field(key: "collection_images_override") {
+        value
+      }
+      products: field(key: "products") {
+        references(first: 5) {
+          edges {
+            node {
+              ... on Product {
+                ...ProductCard
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  ${PRODUCT_CARD_FRAGMENT}
+`;
+
+
+const HOMEPAGE_TOP_COLLECTION_QUERY = `#graphql
+  query homeTopCollections($metaObjectId: ID!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+    data : metaobject(id : $metaObjectId) {
+      handle
+      id
+      type
+      title : field(key: "title") {
+        value
+      }
+      collection_images_override : field(key: "collection_images_override") {
+        value
+      }
+      collections : field(key: "collections") {
+        references(first: 5) {
+          edges {
+            node {
+              ... on Collection {
+                id
+                handle
+                title
+                image {
+                  id
+                  url
+                }
+                products(first: 1) {
+                  nodes {
+                    id
+                    handle
+                    variants(first: 1) {
+                      nodes {
+                        id
+                        image {
+                          id
+                          url
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+      
+  }
+`;
+const HOMEPAGE_SLEEPING_CHILD_BANNER_QUERY = `#graphql
+${MEDIA_FRAGMENT}
+  query homeTopCollections($metaObjectId: ID!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+    data : metaobject(id : $metaObjectId) {
+      handle
+      id
+      type
+      banner : field(key: "banner") {
+        reference {
+          ...Media
+        }
+      }
+    }
+      
+  }
+`;
+
+
+const HOMEPAGE_SEASONAL_SETS_QUERY = `#graphql
+${MEDIA_FRAGMENT}
+  query homeTopCollections($metaObjectId: ID!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+    data : metaobject(id : $metaObjectId) {
+      handle
+      id
+      type
+      title : field(key: "title") {
+        value
+      }
+      set_1_title : field(key: "set_1_title") {
+        value
+      }
+      set_1_image : field(key: "set_1_image") {
+        reference {
+          ...Media
+        }
+      }
+      set_1_redirect : field(key: "set_1_redirect") {
+        value
+      }
+      set_2_title : field(key: "set_2_title") {
+        value
+      }
+      set_2_image : field(key: "set_2_image") {
+        reference {
+          ...Media
+        }
+      }
+      set_2_redirect : field(key: "set_2_redirect") {
+        value
+      }
+      set_3_title : field(key: "set_3_title") {
+        value
+      }
+      set_3_image : field(key: "set_3_image") {
+        reference {
+          ...Media
+        }
+      }
+      set_3_redirect : field(key: "set_3_redirect") {
+        value
+      }
+    }
+  }
 `;
 
 const COLLECTION_HERO_QUERY = `#graphql
@@ -247,8 +514,8 @@ const COLLECTION_HERO_QUERY = `#graphql
 `;
 
 // @see: https://shopify.dev/api/storefront/2023-04/queries/products
-export const HOMEPAGE_FEATURED_PRODUCTS_QUERY = `#graphql
-  query homepageFeaturedProducts($country: CountryCode, $language: LanguageCode)
+export const HOMEPAGE_LATEST_PRODUCTS_QUERY = `#graphql
+  query homepagelatestProducts($country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
     products(first: 8) {
       nodes {

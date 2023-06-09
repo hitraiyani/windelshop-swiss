@@ -38,5 +38,6 @@ export {Reviews} from './Reviews';
 export {ExpandingCard} from './ExpandingCard';
 export {Faq} from './Faq';
 export {Subscribe} from './Subscribe';
+export {CompareAtPrice} from './CompareAtPrice';
 // Sue me
 export * from './Icon';

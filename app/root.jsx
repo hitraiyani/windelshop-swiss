@@ -16,7 +16,7 @@ import invariant from 'tiny-invariant';
 import {Layout} from '~/components';
 import {seoPayload} from '~/lib/seo.server';
 
-import favicon from '../public/favicon.svg';
+import favicon from '../public/cart.png';
 
 import {GenericError} from './components/GenericError';
 import {NotFound} from './components/NotFound';
@@ -36,11 +36,7 @@ export const links = () => {
       rel: 'preconnect',
       href: 'https://cdn.shopify.com',
     },
-    {
-      rel: 'preconnect',
-      href: 'https://shop.app',
-    },
-    {rel: 'icon', type: 'image/svg+xml', href: favicon},
+    {rel: 'icon', href: favicon},
     {rel: 'stylesheet', href: swiper},
     {rel: 'stylesheet', href: swiper_navigation},
     {rel: 'stylesheet', href: swiper_pagination},

@@ -1,11 +1,15 @@
-export function CtaBanner({className}) {
+import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
+
+
+export function CtaBanner({banner}) {
   return (
-    <section className={`${className} cta-banner-section py-[50px]`}>
+    <section className={`cta-banner-section py-[50px]`}>
       <div className="container">
         <div className="img-wrap">
-          <img className="max-w-full w-full h-auto"
-            src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/swilet-banner-de_jpg.png?v=1685617471"
-            alt=""
+          <Image 
+             className="max-w-full w-full h-auto"
+             data={banner?.reference?.image}
+             alt={banner?.reference?.alt}
           />
         </div>
       </div>
