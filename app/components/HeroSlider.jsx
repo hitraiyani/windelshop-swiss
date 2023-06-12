@@ -63,7 +63,7 @@ export function HeroSlider({slides}) {
                       <div className="col-inner h-full">
                         <div className="img-wrap h-full relative overflow-hidden">
                           <img
-                            className="absolute w-full inset-0 h-full object-cover"
+                            className="absolute w-full inset-0 h-full object-cover object-left-top"
                             src={slideOne?.main_image?.reference?.image?.url}
                             alt=""
                           />
@@ -110,7 +110,7 @@ export function HeroSlider({slides}) {
                       <div className="col-inner h-full">
                         <div className="img-wrap h-full relative overflow-hidden">
                           <img
-                            className="absolute w-full inset-0 h-full object-cover"
+                            className="absolute w-full inset-0 h-full object-cover object-left-top"
                             src={slideTwo?.main_image?.reference?.image?.url}
                             alt=""
                           />
