@@ -1,4 +1,4 @@
-import {useRef, Suspense, useMemo} from 'react';
+import {useRef, Suspense, useMemo, useState} from 'react';
 import {Disclosure, Listbox} from '@headlessui/react';
 import {defer} from '@shopify/remix-oxygen';
 import {
@@ -25,6 +25,13 @@ import {
   Link,
   AddToCartButton,
   Button,
+  IconPlus,
+  IconMinus,
+  IconCart,
+  IconWhishlist,
+  IconCompar,
+  IconStar,
+  Tabs,
 } from '~/components';
 import {getExcerpt} from '~/lib/utils';
 import {seoPayload} from '~/lib/seo.server';
@@ -105,46 +112,84 @@ export default function Product() {
 
   return (
     <>
-      <Section className="px-0 md:px-8 lg:px-12">
-        <div className="grid items-start md:gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3">
-          <ProductGallery
-            media={media.nodes}
-            className="w-full lg:col-span-2"
-          />
-          <div className="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:h-screen md:pt-nav hiddenScroll md:overflow-y-scroll">
-            <section className="flex flex-col w-full max-w-xl gap-8 p-6 md:mx-auto md:max-w-sm md:px-0">
-              <div className="grid gap-2">
-                <Heading as="h1" className="whitespace-normal">
-                  {title}
-                </Heading>
-                {vendor && (
+      <Section className="py-[50px] product-summary">
+        <div className="container">
+          <div className="flex flex-row gap-[33px]">
+            <ProductGallery
+              media={media.nodes}
+              className="w-[516px] product-gallery-wrap"
+            />
+            <div className="flex-1">
+              <section className="product-info">
+                <div className="stock-delivery-info">
+                  <div className="inner flex flex-wrap gap-[16px] items-center">
+                    <span className='rounded-[20px] bg-[#26D12D] uppercase text-[11px] leading-none font-["Open_Sans"] font-semibold p-[5px] min-h-[27px] min-w-[106px] flex items-center justify-center text-center text-white'>
+                      IN STOCK
+                    </span>
+                    <span className='rounded-[20px] bg-white uppercase text-[11px] leading-none font-["Open_Sans"] font-semibold p-[5px] min-h-[27px] min-w-[106px] flex items-center justify-center text-center text-black'>
+                      delivery tomorrow
+                    </span>
+                  </div>
+                </div>
+                <div className="grid gap-2 mt-[7px] mb-[38px]">
+                  <Heading
+                    as="h1"
+                    className="text-[28px] text-[#0A627E] font-bold"
+                  >
+                    {title}
+                  </Heading>
+                  {/* {vendor && (
                   <Text className={'opacity-50 font-medium'}>{vendor}</Text>
-                )}
-              </div>
-              <ProductForm />
-              <div className="grid gap-4 py-4">
-                {descriptionHtml && (
-                  <ProductDetail
-                    title="Product Details"
-                    content={descriptionHtml}
-                  />
-                )}
-                {shippingPolicy?.body && (
-                  <ProductDetail
-                    title="Shipping"
-                    content={getExcerpt(shippingPolicy.body)}
-                    learnMore={`/policies/${shippingPolicy.handle}`}
-                  />
-                )}
-                {refundPolicy?.body && (
-                  <ProductDetail
-                    title="Returns"
-                    content={getExcerpt(refundPolicy.body)}
-                    learnMore={`/policies/${refundPolicy.handle}`}
-                  />
-                )}
-              </div>
-            </section>
+                )} */}
+                </div>
+                <ProductForm />
+                <div className="tab-wrap border-t-[1px] border-[#E7EFFF] pt-[34px] mt-[35px]">
+                  <Tabs>
+                    <div label="Beschreibung">
+                     <div className='tab-content'>
+                      <h4 className='text-[19px] text-[#0A627E] font-bold mb-[15px]'>Pampers Baby-Dry Gr.3 Midi 6-10kg (52 STK) Sparpack</h4>
+                      <div className='desc text-[#666666] text-[14px] font-normal mb-[24px]'>
+                        <p>Babys bewegen sich ständig im Schlaf. Deshalb bieten Pampers Baby-Dry mit Stop & Schutz Täschchen am Rücken bis zu 100 % Auslaufschutz die ganze Nacht. Die Sicherheit des Babys steht an erster Stelle. Pampers Baby-Dry Windeln enthalten 0% EU-Parfümallergene (gemäß EU-Kosmetikverordnung Nr. 1223/2009) und sind dermatologisch getestet. Sie sind getestet und zertifiziert gemäss Oeko-Tex-Standard 100.</p>
+                        <ul>
+                          <li>Mit Stop & Schutz Täschchen, das ein Auslaufen am Rücken verhindert</li>
+                        </ul>
+                      </div>
+                     </div>
+                    </div>
+                    <div label="Schnellsuche">
+                      <em>React</em> a JavaScript library for building user
+                      interfaces.
+                    </div>
+                    <div label="Bewertungen (0)">
+                      <em>Redux</em> is a predictable state container for
+                      JavaScript apps.
+                    </div>
+                  </Tabs>
+                </div>
+                {/* <div className="grid gap-4 py-4">
+                  {descriptionHtml && (
+                    <ProductDetail
+                      title="Product Details"
+                      content={descriptionHtml}
+                    />
+                  )}
+                  {shippingPolicy?.body && (
+                    <ProductDetail
+                      title="Shipping"
+                      content={getExcerpt(shippingPolicy.body)}
+                      learnMore={`/policies/${shippingPolicy.handle}`}
+                    />
+                  )}
+                  {refundPolicy?.body && (
+                    <ProductDetail
+                      title="Returns"
+                      content={getExcerpt(refundPolicy.body)}
+                      learnMore={`/policies/${refundPolicy.handle}`}
+                    />
+                  )}
+                </div> */}
+              </section>
+            </div>
           </div>
         </div>
       </Section>
@@ -218,13 +263,69 @@ export function ProductForm() {
   };
 
   return (
-    <div className="grid gap-10">
-      <div className="grid gap-4">
+    <div className="productForm-col">
+      <div className="price-col">
+        <div className="Price">
+          <div className="discount-price flex flex-wrap items-center gap-[16px]">
+            <span className="line-through text-black text-[22px] font-normal leading-none">
+              CHF <span className="font-bold">21.95</span>
+            </span>
+            <span className="off bg-[#D12631] rounded-[20px] px-[10px] py-[3px] font-normal text-white text-[20px] uppercase font-['Open_Sans']">
+              -28%
+            </span>
+          </div>
+          <div className="sale-price text-[#D12631] text-[28px] font-normal mt-[16px] flex items-center gap-x-[74px]">
+            <span>
+              CHF <span className="font-bold">15.90</span>
+            </span>
+            <span className="price-without-VAT text-black text-opacity-[50%] text-[18px] font-medium">
+              Preis ohne MWST CHF 14.76
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className="product-options-wrap border-t-[1px] border-[#E7EFFF] mt-[46px] pt-[37px] flex flex-row gap-[52px]">
         <ProductOptions
           options={product.options}
           searchParamsWithDefaults={searchParamsWithDefaults}
         />
-        {selectedVariant && (
+      </div>
+      <div className="product-crowd pt-[50px]">
+        <h2 className='title mb-[17px] text-[14px] text-[#666666] uppercase font-bold font-["Open_Sans"]'>
+          Menge
+        </h2>
+        <div className="col-inner flex justify-between gap-[20px]">
+          <div className="flex w-[60%] flex-wrap gap-[20px]">
+            <QuantityComponent />
+            <div className="pro-btns flex flex-col flex-1">
+              <button className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'>
+                <IconCart className={'w-[15px] h-[14px]'} /> + Jetzt kaufen
+              </button>
+              <div className="btn-group flex items-center justify-center gap-[30px] mt-[11px]">
+                <button className='flex items-center gap-[3px] text-black uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]'>
+                  <IconWhishlist className={'w-[11px] h-[10px]'} />+ Wunschliste
+                </button>
+                <button className='flex items-center gap-[3px] text-black uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]'>
+                  <IconCompar className={'w-[14px] h-[11px]'} />+ Vergleich
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="flex-1 rating-wrap">
+            <div className="flex gap-[7px] items-center text-black font-semibold font-['Open_Sans'] py-[17px] justify-end">
+              <div className="rating flex gap-[3px] text-[#18A1DC]">
+                <IconStar className={'w-[17px] h-[15px]'} />
+                <IconStar className={'w-[17px] h-[15px]'} />
+                <IconStar className={'w-[17px] h-[15px] fill-black'} />
+                <IconStar className={'w-[17px] h-[15px]'} />
+                <IconStar className={'w-[17px] h-[15px]'} />
+              </div>
+              <span>0 Bewertungen / + Bewertung</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* {selectedVariant && (
           <div className="grid items-stretch gap-4">
             {isOutOfStock ? (
               <Button variant="secondary" disabled>
@@ -274,8 +375,47 @@ export function ProductForm() {
               />
             )}
           </div>
-        )}
-      </div>
+        )} */}
+    </div>
+  );
+}
+
+function QuantityComponent() {
+  const [quantity, setQuantity] = useState(0);
+
+  const decreaseQuantity = () => {
+    if (quantity > 0) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
+  };
+
+  const increaseQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  return (
+    <div className="flex items-center flex-wrap">
+      <input
+        type="number"
+        id="quantity"
+        className='h-[52px] w-[80px] flex items-center justify-center border-[2px] !border-[#18A1DC] rounded-[10px] mr-[9px] text-[16px] font-bold font-["Open_Sans"] text-[#18A1DC] !ring-0 !shadow-none appearance-none text-center'
+        value={quantity}
+      />
+      <button
+        onClick={decreaseQuantity}
+        disabled={quantity === 0}
+        className={`${
+          quantity === 0 ? '!bg-[#E7EFFF]' : ''
+        } w-[37px] h-[37px] flex items-center justify-center text-[14px] text-[#18A1DC] bg-[#CCDDF1] rounded-[100px] mr-[2px]`}
+      >
+        <IconMinus />
+      </button>
+      <button
+        onClick={increaseQuantity}
+        className="w-[37px] h-[37px] flex items-center justify-center text-[14px] text-[#18A1DC] bg-[#CCDDF1] rounded-[100px] mr-[2px]"
+      >
+        <IconPlus />
+      </button>
     </div>
   );
 }
@@ -287,14 +427,15 @@ function ProductOptions({options, searchParamsWithDefaults}) {
       {options
         .filter((option) => option.values.length > 1)
         .map((option) => (
-          <div
-            key={option.name}
-            className="flex flex-col flex-wrap mb-4 gap-y-2 last:mb-0"
-          >
-            <Heading as="legend" size="lead" className="min-w-[4rem]">
+          <div key={option.name} className="flex flex-col flex-wrap gap-[17px]">
+            <Heading
+              as="legend"
+              size="lead"
+              className="text-[14px] text-[#666666] uppercase font-bold font-['Open_Sans']"
+            >
               {option.name}
             </Heading>
-            <div className="flex flex-wrap items-baseline gap-4">
+            <div className="flex flex-wrap gap-[6px]">
               {/**
                * First, we render a bunch of <Link> elements for each option value.
                * When the user clicks one of these buttons, it will hit the loader
@@ -371,14 +512,14 @@ function ProductOptions({options, searchParamsWithDefaults}) {
                     const id = `option-${option.name}-${value}`;
 
                     return (
-                      <Text key={id}>
+                      <Text key={id} className={'w-fit min-h-[52px]'}>
                         <ProductOptionLink
                           optionName={option.name}
                           optionValue={value}
                           searchParams={searchParamsWithDefaults}
                           className={clsx(
-                            'leading-none py-1 border-b-[1.5px] cursor-pointer transition-all duration-200',
-                            checked ? 'border-primary/50' : 'border-primary/0',
+                            'border-[2px] border-[#18A1DC] flex items-center justify-center transition-all duration-500 text-[#18A1DC] text-[16px] leading-none h-full w-full rounded-[10px] font-bold font-["Open_Sans"] px-[15px] py-[10px] hover:opacity-100 min-w-[60px]',
+                            checked ? 'opacity-100 bg-[#E7EFFF]' : 'opacity-70',
                           )}
                         />
                       </Text>

@@ -39,5 +39,7 @@ export {ExpandingCard} from './ExpandingCard';
 export {Faq} from './Faq';
 export {Subscribe} from './Subscribe';
 export {CompareAtPrice} from './CompareAtPrice';
+export {Tabs} from './Tabs';
+export {Tab} from './Tab';
 // Sue me
 export * from './Icon';

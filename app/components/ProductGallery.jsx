@@ -35,19 +35,102 @@ export function ProductGallery({media, className}) {
   };
 
   return (
-    <div
-      className={` ${className}`}
-    >
-      <div className="slider__flex flex flex-wrap flex-col-reverse md:flex-row items-start gap-y-4">
-        <div className="slider__col">
+    <div className={` ${className}`}>
+      <div className="slider__flex flex flex-col gap-[30px]">
+        <div className="slider__images w-full">
+          <Swiper
+            modules={[Navigation, Pagination, Scrollbar, A11y, Thumbs]}
+            thumbs={{swiper: thumbsSwiper}}
+            spaceBetween={30}
+            onSwiper={(swiper) => {}}
+            autoHeight="true"
+          >
+            {media.map((med, i) => {
+              let mediaProps = {};
+              const data = {
+                ...med,
+                image: {
+                  // @ts-ignore
+                  ...med.image,
+                  altText: med.alt || 'Product image',
+                },
+              };
+
+              switch (med.mediaContentType) {
+                case 'IMAGE':
+                  mediaProps = {
+                    width: 800,
+                    widths: [400, 800, 1200, 1600, 2000, 2400],
+                  };
+                  break;
+                case 'VIDEO':
+                  mediaProps = {
+                    width: '100%',
+                    autoPlay: true,
+                    controls: false,
+                    muted: true,
+                    loop: true,
+                    preload: 'auto',
+                  };
+                  break;
+                case 'EXTERNAL_VIDEO':
+                  mediaProps = {width: '100%'};
+                  break;
+                case 'MODEL_3D':
+                  mediaProps = {
+                    width: '100%',
+                    interactionPromptThreshold: '0',
+                    ar: true,
+                    loading: ATTR_LOADING_EAGER,
+                    disableZoom: true,
+                  };
+                  break;
+              }
+
+              if (i === 0 && med.mediaContentType === 'IMAGE') {
+                mediaProps.loading = ATTR_LOADING_EAGER;
+              }
+
+              return (
+                <SwiperSlide key={i}>
+                  <div className='relative p-[38px] bg-[#E7EFFF4D] bg-opacity-30 rounded-[10px]'
+                    // @ts-ignore
+                    key={med.id || med.image.id}
+                  >
+                    {/* TODO: Replace with MediaFile when it's available */}
+
+                    <MediaFile
+                      tabIndex="0"
+                      className={`w-full h-auto fadeIn object-contain rounded-[20px]`}
+                      data={data}
+                      sizes={
+                        '(min-width: 64em) 30vw, (min-width: 48em) 25vw, 90vw'
+                      }
+                      // @ts-ignore
+                      options={{
+                        crop: 'center',
+                        scale: 2,
+                      }}
+                      {...mediaProps}
+                    />
+                    <div className='lable absolute text-white text-[20px] leading-none font-["Open_Sans"] bg-[#D12631] border-[4px] border-white py-[6px] px-[10px] font-bold top-[20px] left-[10px] uppercase rounded-[20px]'>
+                      <span>sale-28%</span>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
+        <div className="slider__col w-full">
           <Swiper
             onSwiper={setThumbsSwiper}
             modules={[Navigation, Thumbs]}
             direction="horizontal"
-            spaceBetween={10}
+            spaceBetween={30}
             centeredSlides="false"
             centeredSlidesBounds="true"
-            slidesPerView='auto'
+            slidesPerView={3}
             watchOverflow="true"
             watchslidesvisibility="true"
             watchSlidesProgress="true"
@@ -116,91 +199,7 @@ export function ProductGallery({media, className}) {
                   >
                     <MediaFile
                       tabIndex="0"
-                      className={`fadeIn object-contain w-full h-full`}
-                      data={data}
-                      sizes={
-                        '(min-width: 64em) 30vw, (min-width: 48em) 25vw, 90vw'
-                      }
-                      // @ts-ignore
-                      options={{
-                        crop: 'center',
-                        scale: 2,
-                      }}
-                      {...mediaProps}
-                    />
-                  </div>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-        </div>
-        <div className="slider__images">
-          <Swiper
-            modules={[Navigation, Pagination, Scrollbar, A11y, Thumbs]}
-            thumbs={{ swiper: thumbsSwiper }}
-            spaceBetween={5}
-            navigation
-            onSwiper={(swiper) => { }}
-            onSlideChange={() => console.log('slide change')}
-            autoHeight= "true"
-          >
-            {media.map((med, i) => {
-              let mediaProps = {};
-              const data = {
-                ...med,
-                image: {
-                  // @ts-ignore
-                  ...med.image,
-                  altText: med.alt || 'Product image',
-                },
-              };
-
-              switch (med.mediaContentType) {
-                case 'IMAGE':
-                  mediaProps = {
-                    width: 800,
-                    widths: [400, 800, 1200, 1600, 2000, 2400],
-                  };
-                  break;
-                case 'VIDEO':
-                  mediaProps = {
-                    width: '100%',
-                    autoPlay: true,
-                    controls: false,
-                    muted: true,
-                    loop: true,
-                    preload: 'auto',
-                  };
-                  break;
-                case 'EXTERNAL_VIDEO':
-                  mediaProps = {width: '100%'};
-                  break;
-                case 'MODEL_3D':
-                  mediaProps = {
-                    width: '100%',
-                    interactionPromptThreshold: '0',
-                    ar: true,
-                    loading: ATTR_LOADING_EAGER,
-                    disableZoom: true,
-                  };
-                  break;
-              }
-
-              if (i === 0 && med.mediaContentType === 'IMAGE') {
-                mediaProps.loading = ATTR_LOADING_EAGER;
-              }
-
-              return (
-                <SwiperSlide key={i}>
-                  <div
-                    // @ts-ignore
-                    key={med.id || med.image.id}
-                  >
-                    {/* TODO: Replace with MediaFile when it's available */}
-
-                    <MediaFile
-                      tabIndex="0"
-                      className={`w-full h-auto aspect-square fadeIn object-contain`}
+                      className={`w-[152px] h-[152px] object-cover rounded-[10px] cursor-pointer`}
                       data={data}
                       sizes={
                         '(min-width: 64em) 30vw, (min-width: 48em) 25vw, 90vw'
