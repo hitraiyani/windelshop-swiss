@@ -343,7 +343,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
       role="banner"
       className={`${isHome ? '' : ''} ${
         !isHome && y > 50 && ''
-      } relative top-0 bg-[#E7EFFF] py-[20px] z-[10px]`}
+      } relative top-0 bg-[#E7EFFF] py-[20px] z-[10] rounded-[0_0_20px_20px]`}
     >
       <div className="container">
         <div className="header-row gap-[33px] flex flex-col">
