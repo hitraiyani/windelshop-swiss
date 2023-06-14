@@ -32,16 +32,33 @@ import {
   IconMap,
   IconFacebook,
 } from '~/components';
-import {useIsHomePath} from '~/lib/utils';
+import {useIsHomePath, toHTML} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {Helmet} from 'react-helmet';
-import {COOKIEBOT_KEY} from '~/lib/const';
+import {COOKIEBOT_KEY, AICO_API_URL, AICO_API_TOKEN} from '~/lib/const';
 
 export function Layout({children, layout, locale}) {
   const [isCookieAccepted, setisCookieAccepted] = useState(false);
 
+  const [brandData, setbrandData] = useState([]);
+
+  const loadBrandData = async () => {
+    const brandResponse = await fetch(
+      `${AICO_API_URL}brands?filter[isTopBrand]=1`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${AICO_API_TOKEN}`,
+        },
+      },
+    );
+    const brandResponseData = await brandResponse.json();
+    setbrandData(brandResponseData.data);
+  };
+
   useEffect(() => {
+    //loadBrandData();
     function handleCookiebotAccept(e) {
       if (Cookiebot.consent.marketing) {
         //Execute code that sets marketing cookies
@@ -79,6 +96,8 @@ export function Layout({children, layout, locale}) {
       <Header
         title={layout?.shop.name ?? 'Hydrogen'}
         menu={layout?.headerMenu}
+        toBar={layout?.hederTopBar}
+        
       />
       <main role="main" id="mainContent" className="flex-grow">
         {children}
@@ -88,7 +107,7 @@ export function Layout({children, layout, locale}) {
   );
 }
 
-function Header({title, menu}) {
+function Header({title, menu, toBar}) {
   const isHome = useIsHomePath();
 
   const {
@@ -117,7 +136,7 @@ function Header({title, menu}) {
       {menu && (
         <MenuDrawer isOpen={isMenuOpen} onClose={closeMenu} menu={menu} />
       )}
-      <TopbarHeader />
+      <TopbarHeader toBar={toBar} />
       <DesktopHeader
         isHome={isHome}
         title={title}
@@ -250,7 +269,8 @@ function MobileHeader({title, isHome, openCart, openMenu}) {
   );
 }
 
-function TopbarHeader() {
+function TopbarHeader({toBar}) {
+ 
   return (
     <div className="top-bar-sec bg-[#CCDDF1] py-[10px]">
       <div className="container !max-w-[1420px]">
@@ -264,8 +284,9 @@ function TopbarHeader() {
                   alt=""
                 />
               </span>
-              <span className="name uppercase font-medium tracking-[0.5px] text-[12px] text-black">
-                GRATIS LIEFERUNG ab <strong>CHF 99.–</strong>
+              <span className="name uppercase font-medium tracking-[0.5px] text-[12px] text-black"
+                 dangerouslySetInnerHTML={{__html: toHTML(toBar?.section_1?.value)}}
+              >
               </span>
             </li>
             <li className="flex gap-[5px] items-center">
@@ -276,8 +297,9 @@ function TopbarHeader() {
                   alt=""
                 />
               </span>
-              <span className="name uppercase font-medium tracking-[0.5px] text-[12px] text-black">
-                Privatkunden: <strong>Paketversand</strong>
+              <span className="name uppercase font-medium tracking-[0.5px] text-[12px] text-black"
+                dangerouslySetInnerHTML={{__html: toHTML(toBar?.section_2?.value)}}
+              >
               </span>
             </li>
             <li className="flex gap-[5px] items-center">
@@ -288,8 +310,9 @@ function TopbarHeader() {
                   alt=""
                 />
               </span>
-              <span className="name uppercase font-medium tracking-[0.5px] text-[12px] text-black">
-                KMU: <strong>Lieferung bis Lagerplatz</strong>
+              <span className="name uppercase font-medium tracking-[0.5px] text-[12px] text-black"
+                dangerouslySetInnerHTML={{__html: toHTML(toBar?.section_3?.value)}}
+              >
               </span>
             </li>
             <li className="flex gap-[5px] items-center">
@@ -300,8 +323,9 @@ function TopbarHeader() {
                   alt=""
                 />
               </span>
-              <span className="name uppercase font-medium tracking-[0.5px] text-[12px] text-black">
-                Rufen Sie uns an <strong>052 720 58 58</strong>
+              <span className="name uppercase font-medium tracking-[0.5px] text-[12px] text-black"
+                dangerouslySetInnerHTML={{__html: toHTML(toBar?.section_4?.value)}}
+              >
               </span>
             </li>
           </ul>
@@ -483,12 +507,12 @@ function DesktopHeader({isHome, menu, openCart, title}) {
             <div className="login-menu flex-2">
               <ul className="flex gap-[50px]">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to={'/account'}
                     className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
                     Mein Konto
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a
@@ -499,20 +523,20 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to={'/cart'}
                     className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
                     Bezahlen
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to={'/account/register'}
                     className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
                     Anmelden
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

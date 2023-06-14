@@ -147,6 +147,7 @@ const LAYOUT_QUERY = `#graphql
     $language: LanguageCode
     $headerMenuHandle: String!
     $footerMenuHandle: String!
+    $headTopBar: ID!
   ) @inContext(language: $language) {
     shop {
       id
@@ -181,6 +182,23 @@ const LAYOUT_QUERY = `#graphql
         }
       }
     }
+    hederTopBar : metaobject(id : $headTopBar) {
+      handle
+      type
+      section_1: field(key: "section_1") {
+        value
+      }
+      section_2: field(key: "section_2") {
+        value
+      }
+      section_3: field(key: "section_3") {
+        value
+      }
+      section_4: field(key: "section_4") {
+        value
+      }
+    }
+    
   }
   fragment MenuItem on MenuItem {
     id
@@ -200,6 +218,7 @@ async function getLayoutData({storefront}) {
     variables: {
       headerMenuHandle: HEADER_MENU_HANDLE,
       footerMenuHandle: FOOTER_MENU_HANDLE,
+      headTopBar: 'gid://shopify/Metaobject/1699578133',
       language: storefront.i18n.language,
     },
   });
@@ -224,7 +243,7 @@ async function getLayoutData({storefront}) {
     ? parseMenu(data.footerMenu, customPrefixes)
     : undefined;
 
-  return {shop: data.shop, headerMenu, footerMenu};
+  return {shop: data.shop, headerMenu, footerMenu, hederTopBar : data?.hederTopBar};
 }
 
 const CART_QUERY = `#graphql

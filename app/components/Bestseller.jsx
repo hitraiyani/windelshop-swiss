@@ -14,7 +14,6 @@ import {isDiscounted} from '~/lib/utils';
 
 export function Bestseller({products, title}) {
  
-  console.log("products", products);
   return (
     <section className={`bestseller-section py-[50px]`}>
       <div className="container">

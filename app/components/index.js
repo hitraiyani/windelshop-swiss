@@ -31,7 +31,7 @@ export {Popularproducts} from './Popularproducts';
 export {CustomerSatisfaction} from './CustomerSatisfaction';
 export {Bestseller} from './Bestseller';
 export {ShoppingByBrands} from './ShoppingByBrands';
-export {Popularproducts2} from './Popularproducts2';
+export {ProductsByBrands} from './ProductsByBrands';
 export {SeasonalSets} from './SeasonalSets';
 export {QuickRequest} from './QuickRequest';
 export {Reviews} from './Reviews';

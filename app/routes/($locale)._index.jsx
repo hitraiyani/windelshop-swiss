@@ -15,7 +15,7 @@ import {
   CustomerSatisfaction,
   Bestseller,
   ShoppingByBrands,
-  Popularproducts2,
+  ProductsByBrands,
   SeasonalSets,
   QuickRequest,
   Reviews,
@@ -45,6 +45,13 @@ export async function loader({params, context}) {
     HOMEPAGE_SEO_QUERY,
     {
       variables: {handle: 'freestyle'},
+    },
+  );
+
+  const {data : productsbyBrandMetaInfo} = await context.storefront.query(
+    HOMEPAGE_PRODUCTS_BY_BRAND_QUERY,
+    {
+      variables: {metaObjectId: 'gid://shopify/Metaobject/1700102421'},
     },
   );
 
@@ -79,6 +86,16 @@ export async function loader({params, context}) {
           variables: {metaObjectId: 'gid://shopify/Metaobject/1692401941'},
         },
       ),
+      productsbyBrandMetaInfo,
+      productsByBrandsData : context.storefront.query(
+        HOMEPAGE_PRODUCTS_BY_VENDOR_QUERY,
+        {
+          variables: {
+            brandNameOneQuery: `vendor:"${productsbyBrandMetaInfo.brand_name_1.value}"`,
+            brandNameTwoQuery: `vendor:"${productsbyBrandMetaInfo.brand_name_2.value}"`,
+          },
+        },
+      ),
       // These different queries are separated to illustrate how 3rd party content
       // fetching can be optimized for both above and below the fold.
       latestProducts: context.storefront.query(
@@ -95,29 +112,6 @@ export async function loader({params, context}) {
           },
         },
       ),
-      secondaryHero: context.storefront.query(COLLECTION_HERO_QUERY, {
-        variables: {
-          handle: 'backcountry',
-          country,
-          language,
-        },
-      }),
-      featuredCollections: context.storefront.query(
-        FEATURED_COLLECTIONS_QUERY,
-        {
-          variables: {
-            country,
-            language,
-          },
-        },
-      ),
-      tertiaryHero: context.storefront.query(COLLECTION_HERO_QUERY, {
-        variables: {
-          handle: 'winter-2022',
-          country,
-          language,
-        },
-      }),
       analytics: {
         pageType: AnalyticsPageType.home,
       },
@@ -137,10 +131,9 @@ export default function Homepage() {
     homeHeroSlider,
     bestsellerCategories,
     bestsellerProducts,
+    productsbyBrandMetaInfo,
+    productsByBrandsData,
     seasonalSets,
-    secondaryHero,
-    tertiaryHero,
-    featuredCollections,
     latestProducts,
     sleepingChildBanner
   } = useLoaderData();
@@ -162,8 +155,6 @@ export default function Homepage() {
         </Suspense>
       )}
       
-      {/* <HeroSlider />
-      <BestsellerCategories className={''} /> */}
       <CustomerSatisfaction className={''} />
       {latestProducts && (
         <Suspense>
@@ -207,7 +198,20 @@ export default function Homepage() {
         </Suspense>
       )}
       <ShoppingByBrands className={''} />
-      <Popularproducts2 className={''} />
+      {productsByBrandsData && (
+        <Suspense>
+          <Await resolve={productsByBrandsData}>
+            {(data) => {
+              return (
+                <ProductsByBrands
+                  brand_one_products={{...data.brand_one_products, "brand_image_1" : productsbyBrandMetaInfo.brand_image_1}}
+                  brand_two_products={{...data.brand_two_products, "brand_image_2" : productsbyBrandMetaInfo.brand_image_2 }}
+               />
+              );
+            }}
+          </Await>
+        </Suspense>
+      )}
       {seasonalSets && (
         <Suspense>
           <Await resolve={seasonalSets}>
@@ -225,64 +229,6 @@ export default function Homepage() {
       <Reviews className={''} />
       <Faq className={''} />
       <Subscribe className={''} />
-      {/* {primaryHero && (
-        <Hero {...primaryHero} height="full" top loading="eager" />
-      )}
-
-      {latestProducts && (
-        <Suspense>
-          <Await resolve={latestProducts}>
-            {({products}) => {
-              if (!products?.nodes) return <></>;
-              return (
-                <ProductSwimlane
-                  products={products.nodes}
-                  title="Featured Products"
-                  count={4}
-                />
-              );
-            }}
-          </Await>
-        </Suspense>
-      )}
-
-      {secondaryHero && (
-        <Suspense fallback={<Hero {...skeletons[1]} />}>
-          <Await resolve={secondaryHero}>
-            {({hero}) => {
-              if (!hero) return <></>;
-              return <Hero {...hero} />;
-            }}
-          </Await>
-        </Suspense>
-      )}
-
-      {featuredCollections && (
-        <Suspense>
-          <Await resolve={featuredCollections}>
-            {({collections}) => {
-              if (!collections?.nodes) return <></>;
-              return (
-                <FeaturedCollections
-                  collections={collections.nodes}
-                  title="Collections"
-                />
-              );
-            }}
-          </Await>
-        </Suspense>
-      )}
-
-      {tertiaryHero && (
-        <Suspense fallback={<Hero {...skeletons[2]} />}>
-          <Await resolve={tertiaryHero}>
-            {({hero}) => {
-              if (!hero) return <></>;
-              return <Hero {...hero} />;
-            }}
-          </Await>
-        </Suspense>
-      )} */}
     </>
   );
 }
@@ -455,6 +401,35 @@ ${MEDIA_FRAGMENT}
 `;
 
 
+const HOMEPAGE_PRODUCTS_BY_BRAND_QUERY = `#graphql
+${MEDIA_FRAGMENT}
+  query homeTopCollections($metaObjectId: ID!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+    data : metaobject(id : $metaObjectId) {
+      handle
+      id
+      type
+      brand_name_1 : field(key: "brand_name_1") {
+        value
+      }
+      brand_name_2 : field(key: "brand_name_2") {
+        value
+      }
+      brand_image_1 : field(key: "brand_image_1") {
+        reference {
+          ...Media
+        }
+      }
+      brand_image_2 : field(key: "brand_image_2") {
+        reference {
+          ...Media
+        }
+      }
+    }
+  }
+`;
+
+
 const HOMEPAGE_SEASONAL_SETS_QUERY = `#graphql
 ${MEDIA_FRAGMENT}
   query homeTopCollections($metaObjectId: ID!, $country: CountryCode, $language: LanguageCode)
@@ -501,6 +476,25 @@ ${MEDIA_FRAGMENT}
       }
     }
   }
+`;
+
+
+// @see: https://shopify.dev/api/storefront/2023-04/queries/products
+export const HOMEPAGE_PRODUCTS_BY_VENDOR_QUERY = `#graphql
+  query homepagelatestProducts($country: CountryCode, $language: LanguageCode, $brandNameOneQuery: String, $brandNameTwoQuery: String)
+  @inContext(country: $country, language: $language) {
+    brand_one_products :  products(first: 10, query: $brandNameOneQuery) {
+      nodes {
+        ...ProductCard
+      }
+    }
+    brand_two_products :  products(first: 10, query: $brandNameTwoQuery) {
+      nodes {
+        ...ProductCard
+      }
+    }
+  }
+  ${PRODUCT_CARD_FRAGMENT}
 `;
 
 const COLLECTION_HERO_QUERY = `#graphql
