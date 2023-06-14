@@ -1008,7 +1008,7 @@ function Footer({menu}) {
       divider={isHome ? 'none' : 'top'}
       as="footer"
       role="contentinfo"
-      className={`site-footer !p-0 !gap-0 mt-[50px]`}
+      className={`site-footer !p-0 !gap-0 mt-[50px] border-none`}
     >
       <div className="footer-top bg-[#1C5F7B] rounded-[30px_30px_0px_0px] pt-[52px] pb-[40px]">
         <div className="container">

@@ -32,6 +32,15 @@ import {
   IconCompar,
   IconStar,
   Tabs,
+  IconStop,
+  IconDrop,
+  IconDerma,
+  IconPerfume,
+  IconLayers,
+  IconSecure,
+  IconShield,
+  IconOekoTex,
+  YouMayAlsoLike,
 } from '~/components';
 import {getExcerpt} from '~/lib/utils';
 import {seoPayload} from '~/lib/seo.server';
@@ -146,23 +155,69 @@ export default function Product() {
                 <div className="tab-wrap border-t-[1px] border-[#E7EFFF] pt-[34px] mt-[35px]">
                   <Tabs>
                     <div label="Beschreibung">
-                     <div className='tab-content'>
-                      <h4 className='text-[19px] text-[#0A627E] font-bold mb-[15px]'>Pampers Baby-Dry Gr.3 Midi 6-10kg (52 STK) Sparpack</h4>
-                      <div className='desc text-[#666666] text-[14px] font-normal mb-[24px]'>
-                        <p>Babys bewegen sich ständig im Schlaf. Deshalb bieten Pampers Baby-Dry mit Stop & Schutz Täschchen am Rücken bis zu 100 % Auslaufschutz die ganze Nacht. Die Sicherheit des Babys steht an erster Stelle. Pampers Baby-Dry Windeln enthalten 0% EU-Parfümallergene (gemäß EU-Kosmetikverordnung Nr. 1223/2009) und sind dermatologisch getestet. Sie sind getestet und zertifiziert gemäss Oeko-Tex-Standard 100.</p>
-                        <ul>
-                          <li>Mit Stop & Schutz Täschchen, das ein Auslaufen am Rücken verhindert</li>
-                        </ul>
+                      <div className="tab-content">
+                        <h4 className="text-[19px] text-[#0A627E] font-bold mb-[15px]">
+                          Pampers Baby-Dry Gr.3 Midi 6-10kg (52 STK) Sparpack
+                        </h4>
+                        <div className="desc text-[#666666] text-[14px] font-normal mb-[24px] pro-detail-desc">
+                          <p>
+                            Babys bewegen sich ständig im Schlaf. Deshalb bieten
+                            Pampers Baby-Dry mit Stop & Schutz Täschchen am
+                            Rücken bis zu 100 % Auslaufschutz die ganze Nacht.
+                            Die Sicherheit des Babys steht an erster Stelle.
+                            Pampers Baby-Dry Windeln enthalten 0%
+                            EU-Parfümallergene (gemäß EU-Kosmetikverordnung Nr.
+                            1223/2009) und sind dermatologisch getestet. Sie
+                            sind getestet und zertifiziert gemäss
+                            Oeko-Tex-Standard 100.
+                          </p>
+                          <ul>
+                            <li>
+                              <span className="icon">
+                                <IconStop />
+                              </span>
+                              <span className="text">
+                                Mit Stop & Schutz Täschchen, das ein Auslaufen
+                                am Rücken verhindert
+                              </span>
+                            </li>
+                            <li>
+                              <span className="icon"><IconDrop /></span>
+                              <span className="text">Bis zu 100 % Auslaufschutz während der ganzen Nacht</span>
+                            </li>
+                            <li>
+                              <span className="icon"><IconDerma /></span>
+                              <span className="text">Dermatologisch getestet</span>
+                            </li>
+                            <li>
+                              <span className="icon"><IconPerfume /></span>
+                              <span className="text">0% EU-Parfümallergene (gemäss EU-Kosmetikverordnung Nr. 1223/2009)</span>
+                            </li>
+                            <li>
+                              <span className="icon"><IconLayers /></span>
+                              <span className="text">Die extra Trockenheitslage verteilt die Feuchtigkeit gleichmässig, und hält sie von der Babyhaut fern</span>
+                            </li>
+                            <li>
+                              <span className="icon"><IconSecure /></span>
+                              <span className="text">Sichere Passform durch die dehnbaren Flexi-Seitenflügel, die sich angenehm an die Taille Ihres Babys anpassen</span>
+                            </li>
+                            <li>
+                              <span className="icon"><IconShield /></span>
+                              <span className="text">Doppelte Sicherheitsbündchen helfen, Auslaufen rund um die Beinchen zu verhindern</span>
+                            </li>
+                            <li>
+                              <span className="icon"><IconOekoTex /></span>
+                              <span className="text">Gemäss Standard 100 von Oeko-Tex getestet und zertifiziert</span>
+                            </li>
+                          </ul>
+                        </div>
                       </div>
-                     </div>
                     </div>
                     <div label="Schnellsuche">
-                      <em>React</em> a JavaScript library for building user
-                      interfaces.
+                      <p>Schnellsuche tab</p>
                     </div>
                     <div label="Bewertungen (0)">
-                      <em>Redux</em> is a predictable state container for
-                      JavaScript apps.
+                    <p>Bewertungen tab</p>
                     </div>
                   </Tabs>
                 </div>
@@ -193,7 +248,8 @@ export default function Product() {
           </div>
         </div>
       </Section>
-      <Suspense fallback={<Skeleton className="h-32" />}>
+      <YouMayAlsoLike className={'bg-[#E7EFFF] bg-opacity-30 mb-[-50px] py-[100px]'} />
+      {/* <Suspense fallback={<Skeleton className="h-32" />}>
         <Await
           errorElement="There was a problem loading related products"
           resolve={recommended}
@@ -202,7 +258,7 @@ export default function Product() {
             <ProductSwimlane title="Related Products" products={products} />
           )}
         </Await>
-      </Suspense>
+      </Suspense> */}
     </>
   );
 }

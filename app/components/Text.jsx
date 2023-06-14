@@ -22,7 +22,7 @@ export function Text({
 
   const sizes = {
     lead: 'text-lead font-medium',
-    copy: 'text-copy',
+    copy: '',
     fine: 'text-fine subpixel-antialiased',
   };
 

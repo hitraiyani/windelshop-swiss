@@ -41,5 +41,6 @@ export {Subscribe} from './Subscribe';
 export {CompareAtPrice} from './CompareAtPrice';
 export {Tabs} from './Tabs';
 export {Tab} from './Tab';
+export {YouMayAlsoLike} from './YouMayAlsoLike';
 // Sue me
 export * from './Icon';
