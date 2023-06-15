@@ -51,7 +51,7 @@ export function YouMayAlsoLike({className}) {
                       <IconStar className={'w-[17px] h-[15px]'} />
                       <IconStar className={'w-[17px] h-[15px]'} />
                     </div>
-                    <div className="price text-[18px] text-black font-bold mt-[12px]">
+                    <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
                       <span>CHF 15.90</span>
                     </div>
                     <div className="buy-now-btn flex mt-[14px]">
@@ -89,7 +89,7 @@ export function YouMayAlsoLike({className}) {
                       <IconStar className={'w-[17px] h-[15px]'} />
                       <IconStar className={'w-[17px] h-[15px]'} />
                     </div>
-                    <div className="price text-[18px] text-black font-bold mt-[12px]">
+                    <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
                       <span>CHF 32.90</span>
                     </div>
                     <div className="buy-now-btn flex mt-[14px]">
@@ -128,7 +128,7 @@ export function YouMayAlsoLike({className}) {
                       <IconStar className={'w-[17px] h-[15px]'} />
                       <IconStar className={'w-[17px] h-[15px]'} />
                     </div>
-                    <div className="price text-[18px] text-black font-bold mt-[12px]">
+                    <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
                       <span>CHF 16.90</span>
                     </div>
                     <div className="buy-now-btn flex mt-[14px]">
@@ -166,7 +166,7 @@ export function YouMayAlsoLike({className}) {
                       <IconStar className={'w-[17px] h-[15px]'} />
                       <IconStar className={'w-[17px] h-[15px]'} />
                     </div>
-                    <div className="price text-[18px] text-black font-bold mt-[12px]">
+                    <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
                       <span>CHF 58.90</span>
                     </div>
                     <div className="buy-now-btn flex mt-[14px]">
@@ -204,7 +204,7 @@ export function YouMayAlsoLike({className}) {
                       <IconStar className={'w-[17px] h-[15px]'} />
                       <IconStar className={'w-[17px] h-[15px]'} />
                     </div>
-                    <div className="price text-[18px] text-black font-bold mt-[12px]">
+                    <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
                       <span>CHF 15.90</span>
                     </div>
                     <div className="buy-now-btn flex mt-[14px]">
@@ -242,7 +242,7 @@ export function YouMayAlsoLike({className}) {
                       <IconStar className={'w-[17px] h-[15px]'} />
                       <IconStar className={'w-[17px] h-[15px]'} />
                     </div>
-                    <div className="price text-[18px] text-black font-bold mt-[12px]">
+                    <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
                       <span>CHF 15.90</span>
                     </div>
                     <div className="buy-now-btn flex mt-[14px]">

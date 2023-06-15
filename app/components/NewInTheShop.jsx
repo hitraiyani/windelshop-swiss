@@ -88,8 +88,7 @@ export function NewInTheShop({products, title}) {
                         <IconStar className={'w-[17px] h-[15px]'} />
                         <IconStar className={'w-[17px] h-[15px]'} />
                       </div> */}
-                        <div className="price text-[18px] text-black font-bold mt-[12px]">
-                          <span>
+                        <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
                             <Money withoutTrailingZeros data={price} />
                             {isDiscounted(price, compareAtPrice) && (
                               <CompareAtPrice
@@ -97,7 +96,6 @@ export function NewInTheShop({products, title}) {
                                 data={compareAtPrice}
                               />
                             )}
-                          </span>
                         </div>
                         <div className="buy-now-btn flex mt-[14px]">
                           <AddToCartButton

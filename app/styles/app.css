@@ -169,6 +169,7 @@ shop-pay-button {
       transform: translateY(-50%);
       background: rgb(var(--color-primary));
       box-shadow: 0.5px 0.5px 0px 0.5px rgb(var(--color-contrast));
+      opacity: 0;
     }
   }
 

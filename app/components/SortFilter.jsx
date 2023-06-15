@@ -20,7 +20,7 @@ export function SortFilter({
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <div className="flex items-center justify-between w-full">
+      <div className="flex items-center justify-between w-full hidden">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className={
@@ -29,14 +29,13 @@ export function SortFilter({
         >
           <IconFilters />
         </button>
-        <SortMenu />
       </div>
       <div className="flex flex-col flex-wrap md:flex-row">
         <div
           className={`transition-all duration-200 ${
             isOpen
-              ? 'opacity-100 min-w-full md:min-w-[240px] md:w-[240px] md:pr-8 max-h-full'
-              : 'opacity-0 md:min-w-[0px] md:w-[0px] pr-0 max-h-0 md:max-h-full'
+              ? ''
+              : ''
           }`}
         >
           <FiltersDrawer
@@ -45,7 +44,10 @@ export function SortFilter({
             appliedFilters={appliedFilters}
           />
         </div>
-        <div className="flex-1">{children}</div>
+        <div className="flex-1">
+          <SortMenu />
+          {children}
+        </div>
       </div>
     </>
   );

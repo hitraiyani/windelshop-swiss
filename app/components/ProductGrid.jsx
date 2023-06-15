@@ -60,7 +60,7 @@ export function ProductGrid({url, collection, ...props}) {
 
   return (
     <>
-      <Grid layout="products" {...props}>
+      <div className='grid grid-cols-3 gap-[30px] product-grid' layout="products" {...props}>
         {products.map((product, i) => (
           <ProductCard
             key={product.id}
@@ -68,7 +68,7 @@ export function ProductGrid({url, collection, ...props}) {
             loading={getImageLoadingPriority(i)}
           />
         ))}
-      </Grid>
+      </div>
 
       {nextPage && (
         <div className="flex items-center justify-center mt-6">

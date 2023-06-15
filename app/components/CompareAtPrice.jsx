@@ -5,7 +5,7 @@ export function CompareAtPrice({data, className}) {
     const {currencyNarrowSymbol, withoutTrailingZerosAndCurrency} =
       useMoney(data);
   
-    const styles = clsx('strike', className);
+    const styles = clsx('strike text-[#777777] font-normal line-through !opacity-100', className);
   
     return (
       <span className={styles}>
