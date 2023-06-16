@@ -48,7 +48,7 @@ export async function loader({params, context}) {
     },
   );
 
-  const {data : productsbyBrandMetaInfo} = await context.storefront.query(
+  const {data: productsbyBrandMetaInfo} = await context.storefront.query(
     HOMEPAGE_PRODUCTS_BY_BRAND_QUERY,
     {
       variables: {metaObjectId: 'gid://shopify/Metaobject/1700102421'},
@@ -80,14 +80,15 @@ export async function loader({params, context}) {
           variables: {metaObjectId: 'gid://shopify/Metaobject/1691582741'},
         },
       ),
-      seasonalSets: context.storefront.query(
-        HOMEPAGE_SEASONAL_SETS_QUERY,
-        {
-          variables: {metaObjectId: 'gid://shopify/Metaobject/1692401941'},
-        },
-      ),
+      seasonalSets: context.storefront.query(HOMEPAGE_SEASONAL_SETS_QUERY, {
+        variables: {metaObjectId: 'gid://shopify/Metaobject/1692401941'},
+      }),
+      faqSets: context.storefront.query(FAQ_SETS_QUERY, {
+        variables: {metaObjectId: 'gid://shopify/Metaobject/1710620949'},
+      }),
+
       productsbyBrandMetaInfo,
-      productsByBrandsData : context.storefront.query(
+      productsByBrandsData: context.storefront.query(
         HOMEPAGE_PRODUCTS_BY_VENDOR_QUERY,
         {
           variables: {
@@ -98,20 +99,17 @@ export async function loader({params, context}) {
       ),
       // These different queries are separated to illustrate how 3rd party content
       // fetching can be optimized for both above and below the fold.
-      latestProducts: context.storefront.query(
-        HOMEPAGE_LATEST_PRODUCTS_QUERY,
-        {
-          variables: {
-            /**
-             * Country and language properties are automatically injected
-             * into all queries. Passing them is unnecessary unless you
-             * want to override them from the following default:
-             */
-            country,
-            language,
-          },
+      latestProducts: context.storefront.query(HOMEPAGE_LATEST_PRODUCTS_QUERY, {
+        variables: {
+          /**
+           * Country and language properties are automatically injected
+           * into all queries. Passing them is unnecessary unless you
+           * want to override them from the following default:
+           */
+          country,
+          language,
         },
-      ),
+      }),
       analytics: {
         pageType: AnalyticsPageType.home,
       },
@@ -134,8 +132,9 @@ export default function Homepage() {
     productsbyBrandMetaInfo,
     productsByBrandsData,
     seasonalSets,
+    faqSets,
     latestProducts,
-    sleepingChildBanner
+    sleepingChildBanner,
   } = useLoaderData();
 
   // TODO: skeletons vs placeholders
@@ -154,7 +153,7 @@ export default function Homepage() {
           </Await>
         </Suspense>
       )}
-      
+
       <CustomerSatisfaction className={''} />
       {latestProducts && (
         <Suspense>
@@ -162,10 +161,7 @@ export default function Homepage() {
             {({products}) => {
               if (!products?.nodes) return <></>;
               return (
-                <NewInTheShop
-                  products={products.nodes}
-                  title="Neu im Shop"
-                />
+                <NewInTheShop products={products.nodes} title="Neu im Shop" />
               );
             }}
           </Await>
@@ -175,9 +171,7 @@ export default function Homepage() {
         <Suspense>
           <Await resolve={sleepingChildBanner}>
             {({data}) => {
-              return(
-                <CtaBanner banner={data.banner}/>
-              )
+              return <CtaBanner banner={data.banner} />;
             }}
           </Await>
         </Suspense>
@@ -204,9 +198,15 @@ export default function Homepage() {
             {(data) => {
               return (
                 <ProductsByBrands
-                  brand_one_products={{...data.brand_one_products, "brand_image_1" : productsbyBrandMetaInfo.brand_image_1}}
-                  brand_two_products={{...data.brand_two_products, "brand_image_2" : productsbyBrandMetaInfo.brand_image_2 }}
-               />
+                  brand_one_products={{
+                    ...data.brand_one_products,
+                    brand_image_1: productsbyBrandMetaInfo.brand_image_1,
+                  }}
+                  brand_two_products={{
+                    ...data.brand_two_products,
+                    brand_image_2: productsbyBrandMetaInfo.brand_image_2,
+                  }}
+                />
               );
             }}
           </Await>
@@ -216,18 +216,26 @@ export default function Homepage() {
         <Suspense>
           <Await resolve={seasonalSets}>
             {({data}) => {
-              return (
-                <SeasonalSets data={data} />
-              );
+              return <SeasonalSets data={data} />;
             }}
           </Await>
         </Suspense>
       )}
-      
+
       {/* <SeasonalSets className={''} /> */}
       <QuickRequest className={''} />
       <Reviews className={''} />
-      <Faq className={''} />
+      {/* <Faq data={faqSets} className={''} /> */}
+      {faqSets && (
+        <Suspense>
+          <Await resolve={faqSets}>
+            {({data}) => {
+              return <Faq data={data} />;
+            }}
+          </Await>
+        </Suspense>
+      )}
+
       <Subscribe className={''} />
     </>
   );
@@ -332,7 +340,6 @@ const HOMEPAGE_BEST_SELLER_PRODUCTS_QUERY = `#graphql
   ${PRODUCT_CARD_FRAGMENT}
 `;
 
-
 const HOMEPAGE_TOP_COLLECTION_QUERY = `#graphql
   query homeTopCollections($metaObjectId: ID!, $country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
@@ -400,7 +407,6 @@ ${MEDIA_FRAGMENT}
   }
 `;
 
-
 const HOMEPAGE_PRODUCTS_BY_BRAND_QUERY = `#graphql
 ${MEDIA_FRAGMENT}
   query homeTopCollections($metaObjectId: ID!, $country: CountryCode, $language: LanguageCode)
@@ -428,7 +434,6 @@ ${MEDIA_FRAGMENT}
     }
   }
 `;
-
 
 const HOMEPAGE_SEASONAL_SETS_QUERY = `#graphql
 ${MEDIA_FRAGMENT}
@@ -478,6 +483,23 @@ ${MEDIA_FRAGMENT}
   }
 `;
 
+const FAQ_SETS_QUERY = `#graphql
+  query homeTopCollections($metaObjectId: ID!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+    data : metaobject(id : $metaObjectId) {
+      id  
+      title : field(key: "title") {
+        value
+      }
+       description : field(key: "description") {
+        value
+      }
+       faq_json : field(key: "faq_data") {
+        value
+      }
+    }
+  }
+`;
 
 // @see: https://shopify.dev/api/storefront/2023-04/queries/products
 export const HOMEPAGE_PRODUCTS_BY_VENDOR_QUERY = `#graphql
