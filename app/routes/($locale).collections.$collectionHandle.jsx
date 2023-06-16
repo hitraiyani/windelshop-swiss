@@ -148,7 +148,7 @@ export default function Collection() {
               collection={collection}
               url={`/collections/${collection.handle}`}
               data-test="product-grid"
-              className="mt-[30px] grid grid-cols-3 gap-[30px]"
+              className="mt-[30px] grid grid-cols-3 gap-x-[30px] gap-y-[60px]"
             />
           </SortFilter>
         </div>

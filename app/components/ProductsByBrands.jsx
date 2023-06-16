@@ -16,7 +16,7 @@ export function ProductsByBrands({brand_one_products, brand_two_products}) {
   console.log('brand_one_products', brand_one_products);
   console.log('brand_two_products', brand_two_products);
   return (
-    <section className={` popularproduct-sec py-[50px]`}>
+    <section className={` popularproduct-sec py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
       <div className="container">
         <div className="flex gap-[30px]">
           <div className="col relative w-[50%]">

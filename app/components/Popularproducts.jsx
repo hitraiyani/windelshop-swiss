@@ -5,7 +5,7 @@ import {IconChevronRight, IconStar} from '~/components';
 
 export function Popularproducts({className}) {
   return (
-    <section className={`${className} popularproduct-sec py-[50px]`}>
+    <section className={`${className} popularproduct-sec py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
       <div className="container">
         <div className="flex gap-[30px]">
           <div className="col relative w-[50%]">

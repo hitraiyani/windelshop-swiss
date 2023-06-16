@@ -211,17 +211,27 @@ strong {
   margin-right: auto;
   padding-left: 60px;
   padding-right: 60px;
-  @media (max-width: 1280px) {
+  @media (max-width: 1650px) {
+    max-width: 1420px;
+  }
+  @media (max-width: 1439px) {
+    max-width: 1260px;
+  }
+  @media (max-width: 1279px) {
     padding-left: 40px;
     padding-right: 40px;
+    max-width: 1000px;
   }
-  @media (max-width: 1024px) {
-    padding-left: 30px;
-    padding-right: 30px;
+  @media (max-width: 1023px) {
+    max-width: 900px;
+  }
+  @media (max-width: 991px) {
+    max-width: 700px;
   }
   @media (max-width: 767px) {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    max-width: 100%;
   }
   &.container-fluid-right {
     max-width: 100%;
@@ -229,6 +239,35 @@ strong {
     padding-left: calc(calc(100% - 1568px + 120px) / 2);
     padding-left: -webkit-calc(calc(100% - 1568px + 120px) / 2);
     padding-left: -moz-calc(calc(100% - 1568px + 120px) / 2);
+    @media (max-width: 1650px) {
+      padding-left: calc(calc(100% - 1420px + 120px) / 2);
+      padding-left: -webkit-calc(calc(100% - 1420px + 120px) / 2);
+      padding-left: -moz-calc(calc(100% - 1420px + 120px) / 2);
+    }
+    @media (max-width: 1439px) {
+      padding-left: calc(calc(100% - 1260px + 120px) / 2);
+      padding-left: -webkit-calc(calc(100% - 1260px + 120px) / 2);
+      padding-left: -moz-calc(calc(100% - 1260px + 120px) / 2);
+    }
+    @media (max-width: 1279px) {
+      padding-left: calc(calc(100% - 1000px + 80px) / 2);
+      padding-left: -webkit-calc(calc(100% - 1000px + 80px) / 2);
+      padding-left: -moz-calc(calc(100% - 1000px + 80px) / 2);
+    }
+    @media (max-width: 1023px) {
+      padding-left: calc(calc(100% - 900px + 80px) / 2);
+      padding-left: -webkit-calc(calc(100% - 900px + 80px) / 2);
+      padding-left: -moz-calc(calc(100% - 900px + 80px) / 2);
+    }
+    @media (max-width: 991px) {
+      padding-left: calc(calc(100% - 700px + 80px) / 2);
+      padding-left: -webkit-calc(calc(100% - 700px + 80px) / 2);
+      padding-left: -moz-calc(calc(100% - 700px + 80px) / 2);
+    }
+    @media (max-width: 767px) {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
   }
   &.container-fluid-left {
     max-width: 100%;
@@ -236,6 +275,35 @@ strong {
     padding-right: calc(calc(100% - 1568px + 120px) / 2);
     padding-right: -webkit-calc(calc(100% - 1568px + 120px) / 2);
     padding-right: -moz-calc(calc(100% - 1568px + 120px) / 2);
+    @media (max-width: 1650px) {
+      padding-right: calc(calc(100% - 1420px + 120px) / 2);
+      padding-right: -webkit-calc(calc(100% - 1420px + 120px) / 2);
+      padding-right: -moz-calc(calc(100% - 1420px + 120px) / 2);
+    }
+    @media (max-width: 1439px) {
+      padding-right: calc(calc(100% - 1260px + 120px) / 2);
+      padding-right: -webkit-calc(calc(100% - 1260px + 120px) / 2);
+      padding-right: -moz-calc(calc(100% - 1260px + 120px) / 2);
+    }
+    @media (max-width: 1279px) {
+      padding-right: calc(calc(100% - 1000px + 80px) / 2);
+      padding-right: -webkit-calc(calc(100% - 1000px + 80px) / 2);
+      padding-right: -moz-calc(calc(100% - 1000px + 80px) / 2);
+    }
+    @media (max-width: 1023px) {
+      padding-right: calc(calc(100% - 900px + 80px) / 2);
+      padding-right: -webkit-calc(calc(100% - 900px + 80px) / 2);
+      padding-right: -moz-calc(calc(100% - 900px + 80px) / 2);
+    }
+    @media (max-width: 991px) {
+      padding-right: calc(calc(100% - 700px + 80px) / 2);
+      padding-right: -webkit-calc(calc(100% - 700px + 80px) / 2);
+      padding-right: -moz-calc(calc(100% - 700px + 80px) / 2);
+    }
+    @media (max-width: 767px) {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
   }
 }
 
@@ -461,8 +529,8 @@ input.appearance-none[type='number'] {
       padding-left: 13px;
       transition: all 0.5s;
     }
-    &:hover{
-      a{
+    &:hover {
+      a {
         background-image: url("data:image/svg+xml,%3Csvg width='7' height='12' viewBox='0 0 7 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L1 11' stroke='%230A627E' stroke-width='1.25' stroke-linecap='round'/%3E%3C/svg%3E%0A");
       }
     }

@@ -27,7 +27,7 @@ export function ShoppingByBrands({className}) {
 
 
   return (
-    <section className={`${className} shopping-by-brands-section py-[50px]`}>
+    <section className={`${className} shopping-by-brands-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
       <div className="container">
         <div className="title-wrap mb-[70px]">
           <h2 className="text-black text-[24px] font-bold text-center">

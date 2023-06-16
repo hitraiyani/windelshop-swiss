@@ -121,7 +121,7 @@ export default function Product() {
 
   return (
     <>
-      <Section className="py-[50px] product-summary">
+      <Section className="py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px] product-summary">
         <div className="container">
           <div className="flex flex-row gap-[33px]">
             <ProductGallery

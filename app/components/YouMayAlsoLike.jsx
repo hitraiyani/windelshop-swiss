@@ -5,7 +5,7 @@ import {IconChevronRight, IconStar} from '~/components';
 
 export function YouMayAlsoLike({className}) {
   return (
-    <section className={`${className} new-in-Shop-section py-[50px]`}>
+    <section className={`${className} new-in-Shop-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
       <div className="container">
         <div className="title-wrap mb-[22px]">
           <h2 className="text-[#1C5F7B] text-[24px] font-bold text-left">
@@ -260,20 +260,20 @@ export function YouMayAlsoLike({className}) {
           </Swiper>
           <div
             id="swiper-button-prev-new-in-Shop"
-            className="absolute left-[-36px] top-1/2 translate-y-[-160%] w-[73px] h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+            className="absolute left-[-36px] top-1/2 translate-y-[-180%] xl:translate-y-[-140%] w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
           >
             <IconChevronRight
               className={
-                'w-[14px] h-[27px] rotate-[180deg] relative left-[-1px]'
+                'w-[20px] h-[20px] xl:w-[14px] xl:h-[27px] rotate-[180deg] relative left-[-1px]'
               }
             />
           </div>
           <div
             id="swiper-button-next-new-in-Shop"
-            className="absolute right-[-36px] top-1/2 translate-y-[-160%] w-[73px] h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+            className="absolute right-[-36px] top-1/2 translate-y-[-180%] xl:translate-y-[-140%] w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
           >
             <IconChevronRight
-              className={'w-[14px] h-[27px] relative left-[3px]'}
+              className={'w-[20px] h-[20px] xl:w-[14px] xl:h-[27px] relative left-[3px]'}
             />
           </div>
         </div>
