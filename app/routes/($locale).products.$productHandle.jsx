@@ -248,7 +248,7 @@ export default function Product() {
           </div>
         </div>
       </Section>
-      <YouMayAlsoLike className={'bg-[#E7EFFF] bg-opacity-30 mb-[-50px] py-[100px]'} />
+      <YouMayAlsoLike className={'bg-[#E7EFFF] bg-opacity-30 mb-[-50px] !py-[100px]'} />
       {/* <Suspense fallback={<Skeleton className="h-32" />}>
         <Await
           errorElement="There was a problem loading related products"

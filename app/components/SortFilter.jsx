@@ -9,7 +9,16 @@ import {
 import {useDebounce} from 'react-use';
 import {Disclosure} from '@headlessui/react';
 
-import {Heading, IconFilters, IconCaret, IconXMark, Text} from '~/components';
+import {
+  Heading,
+  IconFilters,
+  IconCaret,
+  IconXMark,
+  Text,
+  IconShortby,
+  IconGrid,
+  IconList,
+} from '~/components';
 
 export function SortFilter({
   filters,
@@ -30,13 +39,9 @@ export function SortFilter({
           <IconFilters />
         </button>
       </div>
-      <div className="flex flex-col flex-wrap md:flex-row">
+      <div className="flex flex-col flex-wrap md:flex-row gap-[45px]">
         <div
-          className={`transition-all duration-200 ${
-            isOpen
-              ? ''
-              : ''
-          }`}
+          className={`transition-all duration-200 w-[30%] ${isOpen ? '' : ''}`}
         >
           <FiltersDrawer
             collections={collections}
@@ -79,11 +84,7 @@ export function FiltersDrawer({
       default:
         const to = getFilterLink(filter, option.input, params, location);
         return (
-          <Link
-            className="focus:underline hover:underline"
-            prefetch="intent"
-            to={to}
-          >
+          <Link className="block" prefetch="intent" to={to}>
             {option.label}
           </Link>
         );
@@ -95,7 +96,7 @@ export function FiltersDrawer({
       <li key={collection.handle} className="pb-4">
         <Link
           to={`/collections/${collection.handle}`}
-          className="focus:underline hover:underline"
+          className="block"
           key={collection.handle}
           prefetch="intent"
         >
@@ -107,41 +108,81 @@ export function FiltersDrawer({
 
   return (
     <>
-      <nav className="py-8">
-        {appliedFilters.length > 0 ? (
-          <div className="pb-8">
-            <AppliedFilters filters={appliedFilters} />
-          </div>
-        ) : null}
-
-        <Heading as="h4" size="lead" className="pb-4">
-          Filter By
+      <nav className="filter-list-wrap bg-[#E7EFFF] rounded-[30px] overflow-hidden">
+        <Heading
+          as="h4"
+          size="lead"
+          className="text-[#1C5F7B] text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[48px]"
+        >
+          Kategorien
         </Heading>
-        <div className="divide-y">
+        <div className="px-[48px] py-[27px] hidden">
+          {appliedFilters.length > 0 ? (
+            <div className="">
+              <AppliedFilters filters={appliedFilters} />
+            </div>
+          ) : null}
+        </div>
+        <div className="px-[48px] py-[25px] flex flex-col gap-y-[10px]">
           {filters.map(
             (filter) =>
               filter.values.length > 1 && (
-                <Disclosure as="div" key={filter.id} className="w-full">
-                  {({open}) => (
-                    <>
-                      <Disclosure.Button className="flex justify-between w-full py-4">
-                        <Text size="lead">{filter.label}</Text>
-                        <IconCaret direction={open ? 'up' : 'down'} />
-                      </Disclosure.Button>
-                      <Disclosure.Panel key={filter.id}>
-                        <ul key={filter.id} className="py-2">
-                          {filter.values?.map((option) => {
-                            return (
-                              <li key={option.id} className="pb-4">
-                                {filterMarkup(filter, option)}
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </Disclosure.Panel>
-                    </>
-                  )}
-                </Disclosure>
+                <>
+                  <Disclosure as="div" key={filter.id} className="w-full">
+                    {({open}) => (
+                      <>
+                        <Disclosure.Button className="flex justify-between items-center w-full text-[20px] text-[#292929] font-medium outline-none">
+                          <Text size="lead">{filter.label}</Text>
+                          <IconCaret direction={open ? 'up' : 'down'} />
+                        </Disclosure.Button>
+                        <Disclosure.Panel key={filter.id}>
+                          <ul
+                            key={filter.id}
+                            className="py-[18px] flex flex-col gap-y-[18px] filter-sub-items"
+                          >
+                            {filter.values?.map((option) => {
+                              return (
+                                <li
+                                  key={option.id}
+                                  className="text-[16px] text-[#292929] font-normal hover:text-[#0A627E] hover:font-bold"
+                                >
+                                  {filterMarkup(filter, option)}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
+                  <Disclosure as="div" key={filter.id} className="w-full">
+                    {({open}) => (
+                      <>
+                        <Disclosure.Button className="flex justify-between items-center w-full text-[20px] text-[#292929] font-medium outline-none">
+                          <Text size="lead">{filter.label}</Text>
+                          <IconCaret direction={open ? 'up' : 'down'} />
+                        </Disclosure.Button>
+                        <Disclosure.Panel key={filter.id}>
+                          <ul
+                            key={filter.id}
+                            className="py-[18px] flex flex-col gap-y-[18px]"
+                          >
+                            {filter.values?.map((option) => {
+                              return (
+                                <li
+                                  key={option.id}
+                                  className="text-[16px] text-[#292929] font-normal hover:text-[#0A627E] hover:font-bold"
+                                >
+                                  {filterMarkup(filter, option)}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
+                </>
               ),
           )}
         </div>
@@ -163,7 +204,7 @@ function AppliedFilters({filters = []}) {
           return (
             <Link
               to={getAppliedFilterLink(filter, params, location)}
-              className="flex px-2 border rounded-full gap"
+              className="flex px-[15px] py-[10px] border-[1px] border-[#292929] rounded-full gap"
               key={`${filter.label}-${filter.urlParam}`}
             >
               <span className="flex-grow">{filter.label}</span>
@@ -329,34 +370,121 @@ export default function SortMenu() {
   const activeItem = items.find((item) => item.key === params.get('sort'));
 
   return (
-    <Menu as="div" className="relative z-40">
-      <Menu.Button className="flex items-center">
-        <span className="px-2">
-          <span className="px-2 font-medium">Sort by:</span>
-          <span>{(activeItem || items[0]).label}</span>
-        </span>
-        <IconCaret />
-      </Menu.Button>
-
-      <Menu.Items
-        as="nav"
-        className="absolute right-0 flex flex-col p-4 text-right rounded-sm bg-contrast"
-      >
-        {items.map((item) => (
-          <Menu.Item key={item.label}>
-            {() => (
-              <Link
-                className={`block text-sm pb-2 px-3 ${
-                  activeItem?.key === item.key ? 'font-bold' : 'font-normal'
-                }`}
-                to={getSortLink(item.key, params, location)}
+    <>
+      <div className="collection-shrt-desc mb-[42px]">
+        <div className="col-inner p-[30px] bg-white rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
+          <div className="img-wrap mb-[10px] max-w-[148px] text-[14px] text-[#292929]">
+            <img
+              className="block w-full h-auto"
+              src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/layer1.png?v=1685017639"
+              alt=""
+            />
+          </div>
+          <div className="desc">
+            <p>
+              Die Marke Pampers wird bei vielen Menschen synonym zum Begriff
+              Windeln verwendet – so populär ist das Produkt. Doch welche
+              Windeln von Pampers sind die richtigen für Ihr Baby? Bei
+              windelshop.ch geben wir Ihnen nicht nur die richtigen Tipps für
+              eine perfekte Wahl der passenden Windeln, sondern haben auch Ihr
+              Wunschprodukt stets vorrätig.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="top-filter-wrap">
+        <div className="filter-inner flex flex-wrap gap-[25px]">
+          <div className="col-left flex-1 gap-[25px] items-center flex">
+            <div className="pro-view-filter flex gap-[3px]">
+              <div className="grid-filter w-[35px] h-[35px] p-[10px] bg-[#0A627E] border-[1px] border-[#0A627E] text-white cursor-pointer">
+                <IconGrid className={'w-full h-full object-contain'} />
+              </div>
+              <div className="list-filter w-[35px] h-[35px] p-[10px] bg-white border-[1px] border-[#CED4DA] text-[#333333] cursor-pointer">
+                <IconList className={'w-full h-full object-contain'} />
+              </div>
+            </div>
+            <div className="product-comparison-number">
+              <div className='text-[#666666] text-[14px] font-["Open_Sans"] font-bold flex gap-[3px]'>
+                <span>Produktvergleich</span>
+                <span>(0)</span>
+              </div>
+            </div>
+          </div>
+          <div className="col-right flex-1 flex gap-[25px] items-center justify-end">
+            <Menu as="div" className="relative z-[40] w-fit">
+              <Menu.Button className="flex items-center">
+                <span className="flex items-center">
+                  <span className="text-[#666666] text-[14px] font-['Open_Sans'] font-bold pr-[7px]">
+                    Sortieren nach
+                  </span>
+                  <span className='px-[13px] py-[7px] bg-white border-[1px] border-[#E7EFFF] min-w-[187px] text-[14px] font-semibold text-[#495057] font-["Open_Sans"] flex justify-between gap-[10px] items-center'>
+                    {(activeItem || items[0]).label}
+                    <IconShortby />
+                  </span>
+                </span>
+              </Menu.Button>
+              <Menu.Items
+                as="nav"
+                className="absolute right-0 flex flex-col p-4 text-right rounded-sm bg-contrast"
               >
-                {item.label}
-              </Link>
-            )}
-          </Menu.Item>
-        ))}
-      </Menu.Items>
-    </Menu>
+                {items.map((item) => (
+                  <Menu.Item key={item.label}>
+                    {() => (
+                      <Link
+                        className={`block text-sm pb-2 px-3 ${
+                          activeItem?.key === item.key
+                            ? 'font-bold'
+                            : 'font-normal'
+                        }`}
+                        to={getSortLink(item.key, params, location)}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
+                  </Menu.Item>
+                ))}
+              </Menu.Items>
+            </Menu>
+            <Menu as="div" className="relative z-[40] w-fit">
+              <Menu.Button className="flex items-center">
+                <span className="flex items-center">
+                  <span className="text-[#666666] text-[14px] font-bold pr-[7px]">
+                    Anzeige
+                  </span>
+                  <span className='px-[13px] py-[7px] bg-white border-[1px] border-[#E7EFFF] min-w-[65px] text-[14px] font-semibold text-[#495057] font-["Open_Sans"] flex justify-between gap-[10px] items-center'>
+                    50
+                    <IconShortby />
+                  </span>
+                </span>
+              </Menu.Button>
+              <Menu.Items
+                as="nav"
+                className="absolute right-0 flex flex-col p-4 text-right rounded-sm bg-contrast"
+              >
+                <Menu.Item>
+                  <>
+                    <a href="#" className="block text-sm pb-2 px-3">
+                      80
+                    </a>
+                    <a href="#" className="block text-sm pb-2 px-3">
+                      100
+                    </a>
+                    <a href="#" className="block text-sm pb-2 px-3">
+                      120
+                    </a>
+                    <a href="#" className="block text-sm pb-2 px-3">
+                      140
+                    </a>
+                    <a href="#" className="block text-sm pb-2 px-3">
+                      160
+                    </a>
+                  </>
+                </Menu.Item>
+              </Menu.Items>
+            </Menu>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
