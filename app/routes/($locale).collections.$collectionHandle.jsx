@@ -119,30 +119,32 @@ export default function Collection() {
 
   return (
     <>
-      <PageHeader heading={collection.title}>
-        {collection?.description && (
-          <div className="flex items-baseline justify-between w-full">
-            <div>
-              <Text format width="narrow" as="p" className="inline-block">
-                {collection.description}
-              </Text>
-            </div>
-          </div>
-        )}
-      </PageHeader>
-      <Section>
-        <SortFilter
-          filters={collection.products.filters}
-          appliedFilters={appliedFilters}
-          collections={collections}
-        >
-          <ProductGrid
-            key={collection.id}
-            collection={collection}
-            url={`/collections/${collection.handle}`}
-            data-test="product-grid"
-          />
-        </SortFilter>
+      <Section className="collections-product-list-sec">
+        <div className="container">
+          <PageHeader heading={collection.title} className={'hidden'}>
+            {collection?.description && (
+              <div className="flex items-baseline justify-between w-full">
+                <div>
+                  <Text format width="narrow" as="p" className="inline-block">
+                    {collection.description}
+                  </Text>
+                </div>
+              </div>
+            )}
+          </PageHeader>
+          <SortFilter
+            filters={collection.products.filters}
+            appliedFilters={appliedFilters}
+            collections={collections}
+          >
+            <ProductGrid
+              key={collection.id}
+              collection={collection}
+              url={`/collections/${collection.handle}`}
+              data-test="product-grid"
+            />
+          </SortFilter>
+        </div>
       </Section>
     </>
   );
