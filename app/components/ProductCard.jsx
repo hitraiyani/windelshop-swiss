@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
 
-import {Text, Link, AddToCartButton} from '~/components';
+import {Text, Link, AddToCartButton, IconStar} from '~/components';
 import {isDiscounted, isNewArrival} from '~/lib/utils';
 import {getProductPlaceholder} from '~/lib/placeholders';
 
@@ -42,17 +42,18 @@ export function ProductCard({
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <Link
-        onClick={onClick}
-        to={`/products/${product.handle}`}
-        prefetch="intent"
-      >
-        <div className={clsx('grid gap-4', className)}>
-          <div className="card-image aspect-[4/5] bg-primary/5">
+    <div className="product-card">
+      <div className="product-card-inner">
+        <Link
+          onClick={onClick}
+          to={`/products/${product.handle}`}
+          prefetch="intent"
+          className="img-link"
+        >
+          <div className="img-wrap relative overflow-hidden pb-[100%] mb-[10px] rounded-[20px]">
             {image && (
               <Image
-                className="object-cover w-full fadeIn"
+                className="absolute inset-0 object-contain w-full h-full transition-all duration-500"
                 sizes="(min-width: 64em) 25vw, (min-width: 48em) 30vw, 45vw"
                 aspectRatio="4/5"
                 data={image}
@@ -63,32 +64,32 @@ export function ProductCard({
             <Text
               as="label"
               size="fine"
-              className="absolute top-0 right-0 m-4 text-right text-notice"
+              className="lable flex absolute top-[10px] left-[10px] bg-[#CC3F13] text-white uppercase w-fit px-[10px] py-[7px] rounded-[89px] leading-none items-center justify-center text-center min-h-[40px]"
             >
-              {cardLabel}
+              <span>{cardLabel}</span>
             </Text>
           </div>
-          <div className="grid gap-1">
-            <Text
-              className="w-full overflow-hidden whitespace-nowrap text-ellipsis "
-              as="h3"
-            >
-              {product.title}
-            </Text>
-            <div className="flex gap-4">
-              <Text className="flex gap-4">
-                <Money withoutTrailingZeros data={price} />
-                {isDiscounted(price, compareAtPrice) && (
-                  <CompareAtPrice
-                    className={'opacity-50'}
-                    data={compareAtPrice}
-                  />
-                )}
-              </Text>
-            </div>
-          </div>
+        </Link>
+        <Text
+          className="pro-name text-[14px] text-[#292929] font-normal"
+          as="h4"
+        >
+          {product.title}
+        </Text>
+        <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
+          <IconStar className={'w-[17px] h-[15px]'} />
+          <IconStar className={'w-[17px] h-[15px]'} />
+          <IconStar className={'w-[17px] h-[15px] fill-black'} />
+          <IconStar className={'w-[17px] h-[15px]'} />
+          <IconStar className={'w-[17px] h-[15px]'} />
         </div>
-      </Link>
+        <Text className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
+          <Money withoutTrailingZeros data={price} />
+          {isDiscounted(price, compareAtPrice) && (
+            <CompareAtPrice className={'opacity-50'} data={compareAtPrice} />
+          )}
+        </Text>
+      </div>
       {quickAdd && (
         <AddToCartButton
           lines={[
@@ -98,14 +99,17 @@ export function ProductCard({
             },
           ]}
           variant="secondary"
-          className="mt-2"
+          className="buy-now-btn flex mt-[14px]"
           analytics={{
             products: [productAnalytics],
             totalValue: parseFloat(productAnalytics.price),
           }}
         >
-          <Text as="span" className="flex items-center justify-center gap-2">
-            Add to Cart
+          <Text
+            as="span"
+            className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+          >
+            Jetzt Kaufen
           </Text>
         </AddToCartButton>
       )}
@@ -117,7 +121,10 @@ function CompareAtPrice({data, className}) {
   const {currencyNarrowSymbol, withoutTrailingZerosAndCurrency} =
     useMoney(data);
 
-  const styles = clsx('strike text-[#777777] font-normal line-through !opacity-100', className);
+  const styles = clsx(
+    'strike text-[#777777] font-normal line-through !opacity-100',
+    className,
+  );
 
   return (
     <span className={styles}>

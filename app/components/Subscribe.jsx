@@ -2,7 +2,7 @@ import {IconArrowRight2} from '~/components';
 
 export function Subscribe({className}) {
   return (
-    <section className={`${className} subscribe-section py-[50px]`}>
+    <section className={`${className} subscribe-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
       <div className="container">
         <div className="subscribe-wrap">
           <div className="subscribe-inner bg-[#CCDDF1] py-[63px] px-[30px] rounded-[30px]">

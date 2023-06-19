@@ -367,7 +367,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
       role="banner"
       className={`${isHome ? '' : ''} ${
         !isHome && y > 50 && ''
-      } relative top-0 bg-[#E7EFFF] py-[20px] z-[10] rounded-[0_0_20px_20px]`}
+      } relative top-0 bg-[#E7EFFF] py-[20px]  rounded-[0_0_20px_20px]`}
     >
       <div className="container">
         <div className="header-row gap-[33px] flex flex-col">
@@ -599,7 +599,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                 >
                   Windeln & Feuchttücher
                 </a>
-                <div className="mega-menu absolute bg-[#CCDDF1] rounded-[20px] z-[11]">
+                <div className="mega-menu absolute bg-[#CCDDF1] rounded-[20px] z-[99]">
                   <div className="mega-menu-inner container">
                     <div className="mega-menu-lists flex flex-wrap py-[70px] gap-y-[30px] -mx-[15px]">
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] px-[15px]">
@@ -736,7 +736,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                 >
                   Pflege & Hygiene
                 </a>
-                <div className="mega-menu absolute bg-[#CCDDF1] rounded-[20px] z-[11]">
+                <div className="mega-menu absolute bg-[#CCDDF1] rounded-[20px] z-[99]">
                   <div className="mega-menu-inner container">
                     <div className="mega-menu-lists flex flex-wrap py-[70px] gap-y-[70px] -mx-[15px]">
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">

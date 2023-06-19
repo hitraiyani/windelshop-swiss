@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react';
 import {getImageLoadingPriority} from '~/lib/const';
 import {Button, Grid, ProductCard, Link} from '~/components';
 
-export function ProductGrid({url, collection, ...props}) {
+export function ProductGrid({url, collection, className, ...props}) {
   const [initialProducts, setInitialProducts] = useState(
     collection?.products?.nodes || [],
   );
@@ -60,12 +60,13 @@ export function ProductGrid({url, collection, ...props}) {
 
   return (
     <>
-      <div className='grid grid-cols-3 gap-[30px] product-grid' layout="products" {...props}>
+      <div className={`product-grid ${className}`} layout="products" {...props}>
         {products.map((product, i) => (
           <ProductCard
             key={product.id}
             product={product}
             loading={getImageLoadingPriority(i)}
+            quickAdd
           />
         ))}
       </div>

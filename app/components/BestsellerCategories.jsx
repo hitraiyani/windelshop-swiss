@@ -4,7 +4,7 @@ export function BestsellerCategories({data, className}) {
   
   const collectionImageOverride = data?.collection_images_override?.value ? JSON.parse(data?.collection_images_override?.value) : {};
   return (
-    <section className={`${className} bestseller-categories-section py-[50px]`}>
+    <section className={`${className} bestseller-categories-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
       <div className="container">
         <div className="title-wrap mb-[22px]">
           <h2 className="text-black text-[24px] font-bold text-left">

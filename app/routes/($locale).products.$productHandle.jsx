@@ -121,7 +121,7 @@ export default function Product() {
 
   return (
     <>
-      <Section className="py-[50px] product-summary">
+      <Section className="py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px] product-summary">
         <div className="container">
           <div className="flex flex-row gap-[33px]">
             <ProductGallery
@@ -248,7 +248,7 @@ export default function Product() {
           </div>
         </div>
       </Section>
-      <YouMayAlsoLike className={'bg-[#E7EFFF] bg-opacity-30 mb-[-50px] py-[100px]'} />
+      <YouMayAlsoLike className={'bg-[#E7EFFF] bg-opacity-30 mb-[-50px] !py-[100px]'} />
       {/* <Suspense fallback={<Skeleton className="h-32" />}>
         <Await
           errorElement="There was a problem loading related products"

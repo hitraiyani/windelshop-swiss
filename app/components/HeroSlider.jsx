@@ -9,7 +9,7 @@ export function HeroSlider({slides}) {
   const slideTwo = slides[1] ? slides[1] : {};
  
   return (
-    <section className="heroslider-section pt-[30px] pb-[50px]">
+    <section className="heroslider-section pt-[20px] md:pt-[30px] pb-[20px] md:pb-[30px] xl:pb-[40px] 2xl:pb-[50px]">
       <div className="container">
         <div className="heroslider-wrap relative">
           <Swiper
@@ -124,12 +124,12 @@ export function HeroSlider({slides}) {
           </Swiper>
           <div
             id="swiper-button-prev-heroslider"
-            className="absolute left-[-36px] top-1/2 -translate-y-1/2 w-[73px] h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
-          ><IconChevronRight className={'w-[14px] h-[27px] rotate-[180deg] relative left-[-1px]'} /></div>
+            className="absolute left-[-36px] top-1/2 -translate-y-1/2 w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+          ><IconChevronRight className={'w-[20px] h-[20px] xl:w-[14px] xl:h-[27px] rotate-[180deg] relative left-[-1px]'} /></div>
           <div
             id="swiper-button-next-heroslider"
-            className="absolute right-[-36px] top-1/2 -translate-y-1/2 w-[73px] h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
-          ><IconChevronRight className={'w-[14px] h-[27px] relative left-[3px]'} /></div>
+            className="absolute right-[-36px] top-1/2 -translate-y-1/2 w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+          ><IconChevronRight className={'w-[20px] h-[20px] xl:w-[14px] xl:h-[27px] relative left-[3px]'} /></div>
         </div>
       </div>
     </section>

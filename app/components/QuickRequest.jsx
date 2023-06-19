@@ -45,7 +45,7 @@ export function QuickRequest({className}) {
   }, [fetcher]);
 
   return (
-    <section className={`${className} quick-request-section py-[50px]`}>
+    <section className={`${className} quick-request-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
       <div className="container">
         <div className="quick-request-row flex flex-row gap-[30px]">
           <div className="content-col w-[270px]">

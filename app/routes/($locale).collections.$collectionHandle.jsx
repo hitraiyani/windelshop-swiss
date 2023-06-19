@@ -3,7 +3,13 @@ import {useLoaderData} from '@remix-run/react';
 import {flattenConnection, AnalyticsPageType} from '@shopify/hydrogen';
 import invariant from 'tiny-invariant';
 
-import {PageHeader, Section, Text, SortFilter} from '~/components';
+import {
+  PageHeader,
+  Section,
+  Text,
+  SortFilter,
+  ExpandingCard,
+} from '~/components';
 import {ProductGrid} from '~/components/ProductGrid';
 import {PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {CACHE_SHORT, routeHeaders} from '~/data/cache';
@@ -142,10 +148,41 @@ export default function Collection() {
               collection={collection}
               url={`/collections/${collection.handle}`}
               data-test="product-grid"
+              className="mt-[30px] grid grid-cols-3 gap-x-[30px] gap-y-[60px]"
             />
           </SortFilter>
         </div>
       </Section>
+      <section className={`collection-section bg-[#E7EFFF] bg-opacity-30 mb-[-50px] py-[100px]`}>
+        <div className="container">
+          <div className="expandingcard-wrap last:border-black last:border-b-[2px]">
+            <ExpandingCard
+              content="Pampers Premium Protection"
+              title="Pampers Premium Protection"
+            />
+            <ExpandingCard
+              content="Pampers Baby-Dry"
+              title="Pampers Baby-Dry"
+            />
+            <ExpandingCard
+              content="Pampers Active Fit"
+              title="Pampers Active Fit"
+            />
+            <ExpandingCard
+              content="Pampers – die ideale Lösung für alle Eltern"
+              title="Pampers – die ideale Lösung für alle Eltern"
+            />
+            <ExpandingCard
+              content="Pampers und viele andere Hersteller: Bei windelshop.ch haben Sie die Auswahl"
+              title="Pampers und viele andere Hersteller: Bei windelshop.ch haben Sie die Auswahl"
+            />
+            <ExpandingCard
+              content="Qualitativ hochwertige Produkte und bester Service bei windelshop.ch"
+              title="Qualitativ hochwertige Produkte und bester Service bei windelshop.ch"
+            />
+          </div>
+        </div>
+      </section>
     </>
   );
 }
