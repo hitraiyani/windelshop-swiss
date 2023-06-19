@@ -7,16 +7,16 @@ export function Popularproducts({className}) {
   return (
     <section className={`${className} popularproduct-sec py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
       <div className="container">
-        <div className="flex gap-[30px]">
-          <div className="col relative w-[50%]">
+        <div className="flex flex-col lg:flex-row gap-[30px]">
+          <div className="col relative w-full lg:w-[50%]">
             <div className="col-inner px-[40px] py-[30px] bg-[#E7EFFF] rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
-              <div className="title-wrap mb-[35px] flex flex-wrap gap-[20px] justify-between items-center">
-                <h2 className="text-[#1C5F7B] text-[24px] font-bold text-left">
+              <div className="title-wrap mb-[35px] flex gap-[20px] justify-between items-center">
+                <h2 className="text-[#1C5F7B] text-[24px] font-bold text-left flex-1">
                   Aktuelle Aktionen
                 </h2>
-                <div className="slider-nav flex gap-[13px] items-center">
+                <div className="slider-nav flex gap-[13px] items-center w-[100px] justify-end">
                   <div
-                    id="swiper-button-prev-aktuelle"
+                    id="swiper-button-prev-aktuelle2"
                     className="w-[30px] h-[30px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                   >
                     <IconChevronRight
@@ -26,7 +26,7 @@ export function Popularproducts({className}) {
                     />
                   </div>
                   <div
-                    id="swiper-button-next-aktuelle"
+                    id="swiper-button-next-aktuelle2"
                     className="w-[30px] h-[30px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                   >
                     <IconChevronRight
@@ -41,14 +41,24 @@ export function Popularproducts({className}) {
                   spaceBetween={28}
                   slidesPerView={2}
                   navigation={{
-                    nextEl: '#swiper-button-next-aktuelle',
-                    prevEl: '#swiper-button-prev-aktuelle',
+                    nextEl: '#swiper-button-next-aktuelle2',
+                    prevEl: '#swiper-button-prev-aktuelle2',
                   }}
                   // loop={true}
                   // autoplay={{
                   //   delay: 5000,
                   //   disableOnInteraction: false,
                   // }}
+                  breakpoints={{
+                    0: {
+                      slidesPerView: 1,
+                      spaceBetween: 10,
+                    },
+                    640: {
+                      slidesPerView: 2,
+                      spaceBetween: 20,
+                    }
+                  }}
                   className="myswiper3"
                 >
                   <SwiperSlide>
@@ -87,7 +97,7 @@ export function Popularproducts({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
                               Jetzt Kaufen
                             </a>
@@ -133,7 +143,7 @@ export function Popularproducts({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
                               Jetzt Kaufen
                             </a>
@@ -176,7 +186,7 @@ export function Popularproducts({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
                               Jetzt Kaufen
                             </a>
@@ -219,7 +229,7 @@ export function Popularproducts({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
                               Jetzt Kaufen
                             </a>
@@ -262,7 +272,7 @@ export function Popularproducts({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
                               Jetzt Kaufen
                             </a>
@@ -305,7 +315,7 @@ export function Popularproducts({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
                               Jetzt Kaufen
                             </a>
@@ -318,13 +328,13 @@ export function Popularproducts({className}) {
               </div>
             </div>
           </div>
-          <div className="col relative w-[50%]">
+          <div className="col relative w-full lg:w-[50%]">
             <div className="col-inner px-[40px] py-[30px] bg-[#E7EFFF] rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
-              <div className="title-wrap mb-[35px] flex flex-wrap gap-[20px] justify-between items-center">
-                <h2 className="text-[#1C5F7B] text-[24px] font-bold text-left">
+              <div className="title-wrap mb-[35px] flex gap-[20px] justify-between items-center">
+                <h2 className="text-[#1C5F7B] text-[24px] font-bold text-left flex-1">
                   Beliebte Produkte
                 </h2>
-                <div className="slider-nav flex gap-[13px] items-center">
+                <div className="slider-nav flex gap-[13px] items-center w-[100px] justify-end">
                   <div
                     id="swiper-button-prev-popular-pro"
                     className="w-[30px] h-[30px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
@@ -359,6 +369,16 @@ export function Popularproducts({className}) {
                   //   delay: 5000,
                   //   disableOnInteraction: false,
                   // }}
+                  breakpoints={{
+                    0: {
+                      slidesPerView: 1,
+                      spaceBetween: 10,
+                    },
+                    640: {
+                      slidesPerView: 2,
+                      spaceBetween: 20,
+                    }
+                  }}
                   className="myswiper4"
                 >
                   <SwiperSlide>
@@ -394,7 +414,7 @@ export function Popularproducts({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
                               Jetzt Kaufen
                             </a>
@@ -437,7 +457,7 @@ export function Popularproducts({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
                               Jetzt Kaufen
                             </a>
@@ -480,7 +500,7 @@ export function Popularproducts({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
                               Jetzt Kaufen
                             </a>
@@ -523,7 +543,7 @@ export function Popularproducts({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
                               Jetzt Kaufen
                             </a>
@@ -566,7 +586,7 @@ export function Popularproducts({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
                               Jetzt Kaufen
                             </a>
@@ -609,7 +629,7 @@ export function Popularproducts({className}) {
                           <div className="buy-now-btn flex mt-[14px]">
                             <a
                               href="#"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
                               Jetzt Kaufen
                             </a>

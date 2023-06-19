@@ -15,7 +15,7 @@ export function SeasonalSets({className, data}) {
           </h2>
         </div>
         <div className="bestseller-item-lists">
-          <div className="bestseller-items grid grid-cols-3 gap-[30px]">
+          <div className="bestseller-items grid grid-cols-2 lg:grid-cols-3 gap-y-[30px] gap-x-[15px] lg:gap-x-[30px]">
             <div className="bestseller-item">
               <div className="bestseller-item-inner">
                 <Link to={data?.set_1_redirect?.value}>
