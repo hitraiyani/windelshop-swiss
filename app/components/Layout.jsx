@@ -134,7 +134,7 @@ function Header({title, menu, aicoMenu, toBar}) {
     <>
       <CartDrawer isOpen={isCartOpen} onClose={closeCart} />
       {menu && (
-        <MenuDrawer isOpen={isMenuOpen} onClose={closeMenu} menu={menu} />
+        <MenuDrawer isOpen={isMenuOpen} onClose={closeMenu} menu={menu} aicoMenu={aicoMenu} />
       )}
       <TopbarHeader toBar={toBar} />
       <DesktopHeader
@@ -170,32 +170,32 @@ function CartDrawer({isOpen, onClose}) {
   );
 }
 
-export function MenuDrawer({isOpen, onClose, menu}) {
+export function MenuDrawer({isOpen, onClose, menu, aicoMenu}) {
   return (
     <Drawer open={isOpen} onClose={onClose} openFrom="left" heading="Menu">
       <div className="grid">
-        <MenuMobileNav menu={menu} onClose={onClose} />
+        <MenuMobileNav menu={menu} aicoMenu={aicoMenu} onClose={onClose} />
       </div>
     </Drawer>
   );
 }
 
-function MenuMobileNav({menu, onClose}) {
+function MenuMobileNav({menu, aicoMenu,  onClose}) {
+  
   return (
     <nav className="grid gap-4 p-6 sm:gap-6 sm:px-12 sm:py-8">
       {/* Top level menu items */}
-      {(menu?.items || []).map((item) => (
-        <span key={item.id} className="block">
+      {(aicoMenu || []).map((item, index) => (
+        <span key={index} className="block">
           <Link
-            to={item.to}
-            target={item.target}
+            to={`${item.category.name == ' Home' ? '/' : getMenuHandle(item.category) }`}
             onClick={onClose}
             className={({isActive}) =>
               isActive ? 'pb-1 border-b -mb-px' : 'pb-1'
             }
           >
             <Text as="span" size="copy">
-              {item.title}
+            {item.category.name}
             </Text>
           </Link>
         </span>
