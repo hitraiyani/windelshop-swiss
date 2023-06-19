@@ -97,7 +97,6 @@ export function Layout({children, layout, locale}) {
         title={layout?.shop.name ?? 'Hydrogen'}
         menu={layout?.headerMenu}
         toBar={layout?.hederTopBar}
-        
       />
       <main role="main" id="mainContent" className="flex-grow">
         {children}
@@ -207,76 +206,134 @@ function MobileHeader({title, isHome, openCart, openMenu}) {
   // useHeaderStyleFix(containerStyle, setContainerStyle, isHome);
 
   const params = useParams();
+  const [isActiveSearchMobile, setActiveSearchMobile] = useState(false);
 
+  const toggleSearchClassMobile = () => {
+    setActiveSearchMobile(!isActiveSearchMobile);
+  };
   return (
     <header
       role="banner"
-      className={`${
-        isHome
-          ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-          : 'bg-contrast/80 text-primary'
-      } flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8`}
+      className={`${isHome ? '' : ''} bg-[#E7EFFF] relative lg:hidden`}
     >
-      <div className="flex items-center justify-start w-full gap-4">
-        <button
-          onClick={openMenu}
-          className="relative flex items-center justify-center w-8 h-8"
-        >
-          <IconMenu />
-        </button>
-        <Form
-          method="get"
-          action={params.locale ? `/${params.locale}/search` : '/search'}
-          className="items-center gap-2 sm:flex"
-        >
-          <button
-            type="submit"
-            className="relative flex items-center justify-center w-[20px] h-[20px]"
-          >
-            <IconSearch2 />
-          </button>
-          <Input
-            className={
-              isHome
-                ? 'focus:border-contrast/20 dark:focus:border-primary/20'
-                : 'focus:border-primary/20'
-            }
-            type="search"
-            variant="minisearch"
-            placeholder="Search"
-            name="q"
-          />
-        </Form>
+      <div className="container py-[10px] !px-[10px] md:!px-[40px]">
+        <div className="row flex justify-between">
+          <div className="logo-col w-[140px] sm:w-[230px] flex items-center">
+            <Link className="block" to="/">
+              {/* <Heading
+                className="font-bold text-center leading-none"
+                as={isHome ? 'h1' : 'h2'}
+              >
+                {title}
+              </Heading> */}
+              <img
+                className="w-full h-full object-contain object-left-top"
+                src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/windelshop-2022-de_png.png?v=1685435114"
+                alt=""
+              />
+            </Link>
+          </div>
+          <div className="flex items-center justify-end gap-[5px]">
+            <button
+              onClick={openMenu}
+              className="relative flex items-center justify-center w-[20px] h-[20px]"
+            >
+              <IconMenu className={'w-full h-full'} />
+            </button>
+            <div className="w-[20px] h-[20px]">
+              <button
+                className={`relative flex items-center justify-center w-full h-full`}
+                onClick={toggleSearchClassMobile}
+              >
+                <IconSearch2 />
+              </button>
+            </div>
+            {/* <Form
+              method="get"
+              action={params.locale ? `/${params.locale}/search` : '/search'}
+              className="items-center gap-2 sm:flex"
+            >
+              <button
+                type="submit"
+                className="relative flex items-center justify-center w-[20px] h-[20px]"
+              >
+                <IconSearch2 />
+              </button>
+              <Input
+                className={
+                  isHome
+                    ? 'focus:border-contrast/20 dark:focus:border-primary/20'
+                    : 'focus:border-primary/20'
+                }
+                type="search"
+                variant="minisearch"
+                placeholder="Search"
+                name="q"
+              />
+            </Form> */}
+            <CartCount isHome={isHome} openCart={openCart} />
+            {/* <div className="flex items-center justify-end w-full gap-4">
+          <AccountLink className="relative flex items-center justify-center w-8 h-8" />
+        </div> */}
+          </div>
+        </div>
       </div>
-
-      <Link
-        className="flex items-center self-stretch leading-[3rem] md:leading-[4rem] justify-center flex-grow w-full h-full"
-        to="/"
+      <div
+        className={`${
+          isActiveSearchMobile ? 'block' : 'hidden'
+        } search-box absolute top-full left-0 right-0 w-full bg-[#E7EFFF] py-[20px] z-[10] border-t-[2px] border-[#ccddf1]`}
       >
-        <Heading
-          className="font-bold text-center leading-none"
-          as={isHome ? 'h1' : 'h2'}
-        >
-          {title}
-        </Heading>
-      </Link>
-
-      <div className="flex items-center justify-end w-full gap-4">
-        <AccountLink className="relative flex items-center justify-center w-8 h-8" />
-        <CartCount isHome={isHome} openCart={openCart} />
+        <div className="container">
+          <div className="flex items-center gap-[10px]">
+            <Form
+              method="get"
+              action={params.locale ? `/${params.locale}/search` : '/search'}
+              className="flex flex-auto relative"
+            >
+              <Input
+                className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[12px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] !text-left !block`}
+                type="search"
+                variant="minisearch"
+                placeholder="Suche"
+                name="q"
+              />
+              <button
+                type="submit"
+                className={`left-[30px] absolute flex items-center justify-center w-8 h-8 focus:ring-primary/5 top-1/2  -translate-x-1/2 -translate-y-1/2`}
+              >
+                <IconSearch2 />
+              </button>
+            </Form>
+            <span
+              className="icon search-overlay__close cursor-pointer block"
+              onClick={toggleSearchClassMobile}
+              data-icon="x"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 100 100"
+                width={24}
+                height={24}
+              >
+                <g id="x">
+                  <polygon points="97.83 7.83 92.17 2.17 50 44.34 7.83 2.17 2.17 7.83 44.34 50 2.17 92.17 7.83 97.83 50 55.66 92.17 97.83 97.83 92.17 55.66 50 97.83 7.83" />
+                </g>
+              </svg>
+            </span>
+          </div>
+        </div>
       </div>
     </header>
   );
 }
 
 function TopbarHeader({toBar}) {
- 
   return (
     <div className="top-bar-sec bg-[#CCDDF1] py-[10px]">
       <div className="container !max-w-[1420px]">
         <div className="top-bar-inner">
-          <ul className="topbar-list flex justify-between flex-wrap gap-[15px]">
-            <li className="flex gap-[5px] items-center">
+          <ul className="topbar-list flex justify-between flex-nowrap overflow-auto gap-[15px]">
+            <li className="flex gap-[5px] items-center flex-[0_0_auto]">
               <span className="icon w-[20px] h-[20px] relative overflow-hidden">
                 <img
                   className="w-full h-full object-contain inset-0 absolute"
@@ -284,12 +341,14 @@ function TopbarHeader({toBar}) {
                   alt=""
                 />
               </span>
-              <span className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
-                 dangerouslySetInnerHTML={{__html: toHTML(toBar?.section_1?.value)}}
-              >
-              </span>
+              <span
+                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
+                dangerouslySetInnerHTML={{
+                  __html: toHTML(toBar?.section_1?.value),
+                }}
+              ></span>
             </li>
-            <li className="flex gap-[5px] items-center">
+            <li className="flex gap-[5px] items-center flex-[0_0_auto]">
               <span className="icon w-[20px] h-[20px] relative overflow-hidden">
                 <img
                   className="w-full h-full object-contain inset-0 absolute"
@@ -297,12 +356,14 @@ function TopbarHeader({toBar}) {
                   alt=""
                 />
               </span>
-              <span className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
-                dangerouslySetInnerHTML={{__html: toHTML(toBar?.section_2?.value)}}
-              >
-              </span>
+              <span
+                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
+                dangerouslySetInnerHTML={{
+                  __html: toHTML(toBar?.section_2?.value),
+                }}
+              ></span>
             </li>
-            <li className="flex gap-[5px] items-center">
+            <li className="flex gap-[5px] items-center flex-[0_0_auto]">
               <span className="icon w-[20px] h-[20px] relative overflow-hidden">
                 <img
                   className="w-full h-full object-contain inset-0 absolute"
@@ -310,12 +371,14 @@ function TopbarHeader({toBar}) {
                   alt=""
                 />
               </span>
-              <span className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
-                dangerouslySetInnerHTML={{__html: toHTML(toBar?.section_3?.value)}}
-              >
-              </span>
+              <span
+                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
+                dangerouslySetInnerHTML={{
+                  __html: toHTML(toBar?.section_3?.value),
+                }}
+              ></span>
             </li>
-            <li className="flex gap-[5px] items-center">
+            <li className="flex gap-[5px] items-center flex-[0_0_auto]">
               <span className="icon w-[20px] h-[20px] relative overflow-hidden">
                 <img
                   className="w-full h-full object-contain inset-0 absolute"
@@ -323,10 +386,12 @@ function TopbarHeader({toBar}) {
                   alt=""
                 />
               </span>
-              <span className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
-                dangerouslySetInnerHTML={{__html: toHTML(toBar?.section_4?.value)}}
-              >
-              </span>
+              <span
+                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
+                dangerouslySetInnerHTML={{
+                  __html: toHTML(toBar?.section_4?.value),
+                }}
+              ></span>
             </li>
           </ul>
         </div>
@@ -1005,7 +1070,7 @@ function Badge({openCart, dark, count}) {
   return isHydrated ? (
     <button
       onClick={openCart}
-      className="relative flex items-center justify-center bg-[#CCDDF1] rounded-[100px] max-w-[215px] p-[15px] h-[50px] flex-1 transition-all duration-500 hover:opacity-70"
+      className="relative flex items-center justify-center bg-[#CCDDF1] rounded-[100px] max-w-[215px] p-[15px] h-auto lg:h-[50px] flex-1 transition-all duration-500 hover:opacity-70"
     >
       {BadgeCounter}
     </button>
@@ -1029,7 +1094,7 @@ function Footer({menu}) {
 
   return (
     <Section
-      divider={isHome ? 'none' : 'top'} 
+      divider={isHome ? 'none' : 'top'}
       as="footer"
       role="contentinfo"
       className={`site-footer !p-0 !gap-0 mt-[20px] md:mt-[30px] xl:mt-[40px] 2xl:mt-[50px] border-none`}
@@ -1086,7 +1151,7 @@ function Footer({menu}) {
                           <div className="desc text-[16px] text-white font-semibold">
                             <p>Unsere Bewertungen auf Google!</p>
                           </div>
-                          <div className="rating-start flex gap-[5px] items-center">
+                          <div className="rating-start flex gap-[5px] items-center flex-[0_0_auto]">
                             <span className="text-[16px] text-white leading-none font-semibold ">
                               4.7
                             </span>
@@ -1104,30 +1169,38 @@ function Footer({menu}) {
                   </div>
                 </div>
               </div>
-              {
-                menu?.items?.map((item,index) => {
-                    return (
-                      <div className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[16.33%]" key={index}>
-                        <div className="col-inner">
-                          <div className="nav">
-                            <h4 className="title text-[14px] text-white font-bold mb-[15px] uppercase">
-                               {item.title}
-                            </h4>
-                            <ul className="nav-list flex flex-col gap-[15px]">
-                               {item.items.map((subItem, subIndex) => (
-                                  <li className="text-[12px] text-white font-normal" key={subIndex}>
-                                    <Link to={item.to} target={item.target} className="hover:opacity-70 transition-all duration-500">
-                                      {subItem.title}
-                                    </Link>
-                                  </li>
-                               ))}
-                            </ul>
-                          </div>
-                        </div>
+              {menu?.items?.map((item, index) => {
+                return (
+                  <div
+                    className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[16.33%]"
+                    key={index}
+                  >
+                    <div className="col-inner">
+                      <div className="nav">
+                        <h4 className="title text-[14px] text-white font-bold mb-[15px] uppercase">
+                          {item.title}
+                        </h4>
+                        <ul className="nav-list flex flex-col gap-[15px]">
+                          {item.items.map((subItem, subIndex) => (
+                            <li
+                              className="text-[12px] text-white font-normal"
+                              key={subIndex}
+                            >
+                              <Link
+                                to={item.to}
+                                target={item.target}
+                                className="hover:opacity-70 transition-all duration-500"
+                              >
+                                {subItem.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                    );
-                })
-              }
+                    </div>
+                  </div>
+                );
+              })}
               <div className="footer-col px-[15px] w-[23%]">
                 <div className="col-inner">
                   <div className="contact-info">
@@ -1171,7 +1244,10 @@ function Footer({menu}) {
                     </ul>
                   </div>
                   <div className="social-links flex flex-wrap gap-[10px] mt-[30px]">
-                    <a href="#" className="w-[36px] text-[#E7EFFF] hover:text-white transition-all duration-500">
+                    <a
+                      href="#"
+                      className="w-[36px] text-[#E7EFFF] hover:text-white transition-all duration-500"
+                    >
                       <IconFacebook className={'w-full h-full'} />
                     </a>
                   </div>

@@ -124,11 +124,11 @@ export function HeroSlider({slides}) {
           </Swiper>
           <div
             id="swiper-button-prev-heroslider"
-            className="absolute left-[-20px] md:left-[-36px] top-1/2 translate-y-[-40%] lg:-translate-y-1/2 w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+            className="absolute left-[-20px] md:left-[-36px] top-1/2 translate-y-[-140%] lg:-translate-y-1/2 w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
           ><IconChevronRight className={'w-[20px] h-[20px] xl:w-[14px] xl:h-[27px] rotate-[180deg] relative left-[-1px]'} /></div>
           <div
             id="swiper-button-next-heroslider"
-            className="absolute right-[-20px] md:right-[-36px] top-1/2 translate-y-[-40%] lg:-translate-y-1/2 w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+            className="absolute right-[-20px] md:right-[-36px] top-1/2 translate-y-[-140%] lg:-translate-y-1/2 w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
           ><IconChevronRight className={'w-[20px] h-[20px] xl:w-[14px] xl:h-[27px] relative left-[3px]'} /></div>
         </div>
       </div>
