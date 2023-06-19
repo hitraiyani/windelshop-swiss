@@ -101,6 +101,12 @@ export async function loader({params, context}) {
           variables: {metaObjectId: 'gid://shopify/Metaobject/1672904981'},
         },
       ),
+      popularProducts: context.storefront.query(
+        HOMEPAGE_POPULAR_PRODUCTS_QUERY,
+        {
+          variables: {metaObjectId: 'gid://shopify/Metaobject/1710489877'},
+        },
+      ),
       bestsellerProducts: context.storefront.query(
         HOMEPAGE_BEST_SELLER_PRODUCTS_QUERY,
         {
@@ -162,6 +168,7 @@ export default function Homepage() {
     homeHeroSlider,
     bestsellerCategories,
     bestsellerProducts,
+    popularProducts,
     productsbyBrandMetaInfo,
     productsByBrandsData,
     seasonalSets,
@@ -209,7 +216,24 @@ export default function Homepage() {
           </Await>
         </Suspense>
       )}
-      <Popularproducts className={''} />
+      {popularProducts && (
+        <Suspense>
+          <Await resolve={popularProducts}>
+            {({data}) => {
+                return (
+                <Popularproducts 
+                    className={''}
+                    left_section_title={data?.left_section_title?.value}
+                    right_section_title={data?.right_section_title?.value}
+                    left_section_products={data?.left_section_products?.references?.edges}
+                    right_section_products={data?.right_section_products?.references?.edges}
+                />
+                )
+            }}
+          </Await>
+        </Suspense>
+      )}
+
       {bestsellerProducts && (
         <Suspense>
           <Await resolve={bestsellerProducts}>
@@ -342,6 +366,47 @@ const HOMEPAGE_SEO_QUERY = `#graphql
   }
   ${COLLECTION_CONTENT_FRAGMENT}
 `;
+
+const HOMEPAGE_POPULAR_PRODUCTS_QUERY = `#graphql
+  query homeTopCollections($metaObjectId: ID!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+    data : metaobject(id : $metaObjectId) {
+      handle
+      id
+      type
+      left_section_title : field(key: "left_section_title") {
+        value
+      }
+      right_section_title : field(key: "right_section_title") {
+        value
+      }
+      left_section_products: field(key: "left_section_products") {
+        references(first: 5) {
+          edges {
+            node {
+              ... on Product {
+                ...ProductCard
+              }
+            }
+          }
+        }
+      }
+      right_section_products: field(key: "right_section_products") {
+        references(first: 5) {
+          edges {
+            node {
+              ... on Product {
+                ...ProductCard
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  ${PRODUCT_CARD_FRAGMENT}
+`;
+
 
 const HOMEPAGE_BEST_SELLER_PRODUCTS_QUERY = `#graphql
   query homeTopCollections($metaObjectId: ID!, $country: CountryCode, $language: LanguageCode)

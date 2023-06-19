@@ -13,8 +13,7 @@ import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
 import {isDiscounted} from '~/lib/utils';
 
 export function ProductsByBrands({brand_one_products, brand_two_products}) {
-  console.log('brand_one_products', brand_one_products);
-  console.log('brand_two_products', brand_two_products);
+  
   return (
     <section className={` popularproduct-sec py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
       <div className="container">
@@ -64,8 +63,7 @@ export function ProductsByBrands({brand_one_products, brand_two_products}) {
                   className="myswiper3"
                 >
                   {brand_one_products?.nodes?.map((product, index) => {
-                    console.log('product', product);
-
+                    
                     const firstVariant = flattenConnection(
                       product?.variants,
                     )[0];
@@ -82,8 +80,6 @@ export function ProductsByBrands({brand_one_products, brand_two_products}) {
                     if (isDiscountedPrice) {
                         dicountedPr = Math.round(((parseFloat(price.amount) - parseFloat(compareAtPrice.amount)) / parseFloat(price.amount)) * 100);
                     }
-                    console.log("dicountedPr", dicountedPr);
-                    console.log("isDiscountedPrice", isDiscountedPrice);
 
                     const productAnalytics = {
                       productGid: product.id,
@@ -231,8 +227,7 @@ export function ProductsByBrands({brand_one_products, brand_two_products}) {
                   className="myswiper4"
                 >
                    {brand_two_products?.nodes?.map((product, index) => {
-                    console.log('product', product);
-
+                    
                     const firstVariant = flattenConnection(
                       product?.variants,
                     )[0];
@@ -249,8 +244,6 @@ export function ProductsByBrands({brand_one_products, brand_two_products}) {
                     if (isDiscountedPrice) {
                         dicountedPr = Math.round(((parseFloat(price.amount) - parseFloat(compareAtPrice.amount)) / parseFloat(price.amount)) * 100);
                     }
-                    console.log("dicountedPr", dicountedPr);
-                    console.log("isDiscountedPrice", isDiscountedPrice);
 
                     const productAnalytics = {
                       productGid: product.id,
