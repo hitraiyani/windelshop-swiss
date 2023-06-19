@@ -4,8 +4,8 @@ export function CustomerSatisfaction({className}) {
   return (
     <section className={`${className} customer-satisfaction-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
       <div className="container">
-        <div className="bg-[#E7EFFF] google-review-wrap py-[32px] rounded-[20px]">
-          <div className="flex flex-wrap max-w-[740px] mx-auto gap-[30px] items-center">
+        <div className="bg-[#E7EFFF] google-review-wrap py-[32px] px-[20px] rounded-[20px]">
+          <div className="flex flex-wrap max-w-[760px] mx-auto gap-[30px] items-center">
             <div className="content max-w-[324px] flex flex-col gap-[7px]">
               <h3 className='text-[22px] text-[#292929] font-semibold block'>Kundenzufriedenheit & Service stehen im Fokus</h3>
               <h4 className='text-[16px] text-[#292929] block'>Das sehen auch unsere Kunden so</h4>

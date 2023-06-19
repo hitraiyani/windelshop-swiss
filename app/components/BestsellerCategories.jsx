@@ -12,7 +12,7 @@ export function BestsellerCategories({data, className}) {
           </h2>
         </div>
         <div className="bestseller-item-lists">
-          <div className="bestseller-items grid grid-cols-3 gap-[30px]">
+          <div className="bestseller-items grid grid-cols-2 lg:grid-cols-3 gap-y-[30px] gap-x-[15px] lg:gap-x-[30px]">
             {data?.collections?.references?.edges?.map((item, index) => {
               return (
                 <div className="bestseller-item" key={index}>
