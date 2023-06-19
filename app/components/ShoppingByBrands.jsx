@@ -29,7 +29,7 @@ export function ShoppingByBrands({className}) {
   return (
     <section className={`${className} shopping-by-brands-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
       <div className="container">
-        <div className="title-wrap mb-[20px] lg:mb-[40px] xl:mb-[50px] 2xl:mb-[70px]">
+        <div className="title-wrap mb-[70px]">
           <h2 className="text-black text-[24px] font-bold text-center">
             Einkaufen nach Marken
           </h2>
@@ -57,10 +57,10 @@ export function ShoppingByBrands({className}) {
                   }
                 }
                 return (
-                  <li key={index} className=" w-[117px] md:w-[197px] lg:w-[217px] h-[92px] md:h-[132px] lg:h-[152px] flex items-center justify-center bg-[#E7EFFF] bg-opacity-[0.4] rounded-[10px] relative overflow-hidden">
-                    <Link to={'/'} className="block w-full h-full absolute inset-0">
+                  <li key={index} className="w-[217px] h-[152px] flex items-center justify-center bg-[#E7EFFF] bg-opacity-[0.4] rounded-[10px]">
+                    <Link to={'/'} className="p-[20px] block w-full h-full">
                       <img
-                        className="p-[5px] md:p-[10px] lg:p-[20px] w-full h-full object-contain transition-all duration-500 absolute inset-0"
+                        className="w-full h-full object-contain transition-all duration-500"
                         src={brandImage}
                         alt=""
                       />

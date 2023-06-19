@@ -284,7 +284,7 @@ function TopbarHeader({toBar}) {
                   alt=""
                 />
               </span>
-              <span className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
+              <span className="name uppercase font-medium tracking-[0.5px] text-[12px] text-black"
                  dangerouslySetInnerHTML={{__html: toHTML(toBar?.section_1?.value)}}
               >
               </span>
@@ -297,7 +297,7 @@ function TopbarHeader({toBar}) {
                   alt=""
                 />
               </span>
-              <span className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
+              <span className="name uppercase font-medium tracking-[0.5px] text-[12px] text-black"
                 dangerouslySetInnerHTML={{__html: toHTML(toBar?.section_2?.value)}}
               >
               </span>
@@ -310,7 +310,7 @@ function TopbarHeader({toBar}) {
                   alt=""
                 />
               </span>
-              <span className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
+              <span className="name uppercase font-medium tracking-[0.5px] text-[12px] text-black"
                 dangerouslySetInnerHTML={{__html: toHTML(toBar?.section_3?.value)}}
               >
               </span>
@@ -323,7 +323,7 @@ function TopbarHeader({toBar}) {
                   alt=""
                 />
               </span>
-              <span className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
+              <span className="name uppercase font-medium tracking-[0.5px] text-[12px] text-black"
                 dangerouslySetInnerHTML={{__html: toHTML(toBar?.section_4?.value)}}
               >
               </span>
@@ -367,7 +367,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
       role="banner"
       className={`${isHome ? '' : ''} ${
         !isHome && y > 50 && ''
-      } relative top-0 bg-[#E7EFFF] py-[20px]  rounded-[0_0_20px_20px] hidden lg:block`}
+      } relative top-0 bg-[#E7EFFF] py-[20px]  rounded-[0_0_20px_20px]`}
     >
       <div className="container">
         <div className="header-row gap-[33px] flex flex-col">
@@ -1029,16 +1029,16 @@ function Footer({menu}) {
 
   return (
     <Section
-      divider={isHome ? 'none' : 'top'} 
+      divider={isHome ? 'none' : 'top'}
       as="footer"
       role="contentinfo"
-      className={`site-footer !p-0 !gap-0 mt-[20px] md:mt-[30px] xl:mt-[40px] 2xl:mt-[50px] border-none`}
+      className={`site-footer !p-0 !gap-0 mt-[50px] border-none`}
     >
       <div className="footer-top bg-[#1C5F7B] rounded-[30px_30px_0px_0px] pt-[52px] pb-[40px]">
         <div className="container">
           <div className="footer-row-wrap">
-            <div className="footer-row flex flex-row flex-wrap xl:flex-nowrap mx-[-15px] gap-y-[30px] md:gap-y-[40px] xl:gap-x-[20px] 2xl:gap-x-[70px]">
-              <div className="footer-col px-[15px] w-[100%] md:w-[50%] xl:w-[30%]">
+            <div className="footer-row flex mx-[-15px] gap-x-[70px]">
+              <div className="footer-col px-[15px] w-[30%]">
                 <div className="col-inner">
                   <div className="logo max-w-[292px] mb-[5px]">
                     <img
@@ -1104,7 +1104,7 @@ function Footer({menu}) {
                   </div>
                 </div>
               </div>
-              <div className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[16.33%]">
+              <div className="footer-col px-[15px] w-[16.33%]">
                 <div className="col-inner">
                   <div className="nav">
                     <h4 className="title text-[14px] text-white font-bold mb-[15px] uppercase">
@@ -1171,7 +1171,7 @@ function Footer({menu}) {
                   </div>
                 </div>
               </div>
-              <div className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[16.33%]">
+              <div className="footer-col px-[15px] w-[16.33%]">
                 <div className="col-inner">
                   <div className="nav">
                     <h4 className="title text-[14px] text-white font-bold mb-[15px] uppercase">
@@ -1198,7 +1198,7 @@ function Footer({menu}) {
                   </div>
                 </div>
               </div>
-              <div className="footer-col px-[15px] w-[100%] md:w-[50%] xl:w-[16.33%]">
+              <div className="footer-col px-[15px] w-[16.33%]">
                 <div className="col-inner">
                   <div className="nav">
                     <h4 className="title text-[14px] text-white font-bold mb-[15px] uppercase">
@@ -1257,7 +1257,7 @@ function Footer({menu}) {
                   </div>
                 </div>
               </div>
-              <div className="footer-col px-[15px] w-[100%] md:w-[50%] xl:w-[23%]">
+              <div className="footer-col px-[15px] w-[23%]">
                 <div className="col-inner">
                   <div className="contact-info">
                     <ul className="flex flex-col gap-[20px]">

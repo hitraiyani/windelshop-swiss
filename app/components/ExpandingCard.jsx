@@ -9,12 +9,12 @@ export function ExpandingCard({title, content}) {
           <Disclosure.Button
             className={`${
               open ? 'active' : ''
-            }  py-[15px] lg:py-[20px] px-[15px] lg:px-[30px] px-5outline-none focus:outline-none`}
+            }  py-[20px] px-[30px] px-5outline-none focus:outline-none`}
           >
             <div className="flex items-center gap-x-3 justify-between">
               <Text
                 as="h5"
-                className="text-sub text-[#1C5F7B] text-left !text-[16px] md:!text-[18px] lg:!text-[22px] font-semibold flex-1 leading-[1.2]"
+                className="text-sub text-[#1C5F7B] text-left !text-[22px] font-semibold flex-1 leading-[1.2]"
                 dangerouslySetInnerHTML={{__html: title}}
               ></Text>
               <IconArrowRight2
@@ -35,7 +35,7 @@ export function ExpandingCard({title, content}) {
             leaveTo="max-h-0"
           >
             <Disclosure.Panel
-              className="editor-content pb-[15px] lg:pb-[30px] px-[15px] lg:px-[25px] grid gap-2 text-[14px] font-normal leading-[1.3] text-black"
+              className="editor-content pb-[30px] px-[25px] grid gap-2 text-[14px] font-normal leading-[1.3] text-black"
               static
             >
               <p dangerouslySetInnerHTML={{__html: content}}></p>

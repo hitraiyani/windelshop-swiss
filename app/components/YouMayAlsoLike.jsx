@@ -26,28 +26,6 @@ export function YouMayAlsoLike({className}) {
             //   delay: 5000,
             //   disableOnInteraction: false,
             // }}
-            breakpoints={{
-              0: {
-                slidesPerView: 2,
-                spaceBetween: 10,
-              },
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-              },
-              1280: {
-                slidesPerView: 4,
-                spaceBetween: 28,
-              },
-            }}
             className='myswiper2'
           >
             <SwiperSlide>
@@ -79,7 +57,7 @@ export function YouMayAlsoLike({className}) {
                     <div className="buy-now-btn flex mt-[14px]">
                       <a
                         href="#"
-                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                       >
                         Jetzt Kaufen
                       </a>
@@ -117,7 +95,7 @@ export function YouMayAlsoLike({className}) {
                     <div className="buy-now-btn flex mt-[14px]">
                       <a
                         href="#"
-                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                       >
                         Jetzt Kaufen
                       </a>
@@ -156,7 +134,7 @@ export function YouMayAlsoLike({className}) {
                     <div className="buy-now-btn flex mt-[14px]">
                       <a
                         href="#"
-                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                       >
                         Jetzt Kaufen
                       </a>
@@ -194,7 +172,7 @@ export function YouMayAlsoLike({className}) {
                     <div className="buy-now-btn flex mt-[14px]">
                       <a
                         href="#"
-                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                       >
                         Jetzt Kaufen
                       </a>
@@ -232,7 +210,7 @@ export function YouMayAlsoLike({className}) {
                     <div className="buy-now-btn flex mt-[14px]">
                       <a
                         href="#"
-                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                       >
                         Jetzt Kaufen
                       </a>
@@ -270,7 +248,7 @@ export function YouMayAlsoLike({className}) {
                     <div className="buy-now-btn flex mt-[14px]">
                       <a
                         href="#"
-                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[45px] min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                       >
                         Jetzt Kaufen
                       </a>
@@ -282,7 +260,7 @@ export function YouMayAlsoLike({className}) {
           </Swiper>
           <div
             id="swiper-button-prev-new-in-Shop"
-            className="absolute left-[-20px] md:left-[-36px] top-1/2 translate-y-[-180%] xl:translate-y-[-140%] w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+            className="absolute left-[-36px] top-1/2 translate-y-[-180%] xl:translate-y-[-140%] w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
           >
             <IconChevronRight
               className={
@@ -292,7 +270,7 @@ export function YouMayAlsoLike({className}) {
           </div>
           <div
             id="swiper-button-next-new-in-Shop"
-            className="absolute right-[-20px] md:right-[-36px] top-1/2 translate-y-[-180%] xl:translate-y-[-140%] w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+            className="absolute right-[-36px] top-1/2 translate-y-[-180%] xl:translate-y-[-140%] w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
           >
             <IconChevronRight
               className={'w-[20px] h-[20px] xl:w-[14px] xl:h-[27px] relative left-[3px]'}
