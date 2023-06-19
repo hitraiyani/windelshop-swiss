@@ -336,3 +336,13 @@ export function toHTML(content) {
 	});
 	return html.replace(/\n/g, "<br />");
 }
+
+export function getMenuHandle(menuItem) {
+  if (menuItem?.id && menuItem?.handle && menuItem.id.includes('Collection')) {
+      return `/collections/${menuItem?.handle}`;
+  } else if (menuItem?.id && menuItem?.handle && menuItem.id.includes('Product')) {
+    return `/products/${menuItem?.handle}`;
+  } else {
+    return menuItem?.id ? `/${menuItem?.handle}` : `#`;
+  }
+}

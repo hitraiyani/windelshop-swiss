@@ -32,7 +32,7 @@ import {
   IconMap,
   IconFacebook,
 } from '~/components';
-import {useIsHomePath, toHTML} from '~/lib/utils';
+import {useIsHomePath, toHTML, getMenuHandle} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {Helmet} from 'react-helmet';
@@ -96,6 +96,7 @@ export function Layout({children, layout, locale}) {
       <Header
         title={layout?.shop.name ?? 'Hydrogen'}
         menu={layout?.headerMenu}
+        aicoMenu={layout?.aicoHeaderMenu}
         toBar={layout?.hederTopBar}
       />
       <main role="main" id="mainContent" className="flex-grow">
@@ -106,7 +107,7 @@ export function Layout({children, layout, locale}) {
   );
 }
 
-function Header({title, menu, toBar}) {
+function Header({title, menu, aicoMenu, toBar}) {
   const isHome = useIsHomePath();
 
   const {
@@ -140,6 +141,7 @@ function Header({title, menu, toBar}) {
         isHome={isHome}
         title={title}
         menu={menu}
+        aicoMenu={aicoMenu}
         openCart={openCart}
       />
       <MobileHeader
@@ -404,7 +406,50 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-function DesktopHeader({isHome, menu, openCart, title}) {
+function SubMegaMenu({subMenus}) {
+
+    return (  
+    <div className="mega-menu absolute bg-[#CCDDF1] rounded-[20px] z-[99]" >
+    <div className="mega-menu-inner container">
+      <div className="mega-menu-lists flex flex-wrap py-[70px] gap-y-[70px] -mx-[15px]">
+         {
+          subMenus.map((subItem, subIndex) => {
+            return (
+              <div
+                className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]"
+                key={subIndex}
+              >
+                <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                  {/* <Link
+                    to={getMenuHandle(subItem.subCategory)}
+                  > */}
+                  {subItem?.subCategory?.name}
+                  {/* </Link> */}
+                </div>
+                {subItem.subCategory.subSubCategories?.length > 0 && (
+                  <ul>
+                    {subItem.subCategory.subSubCategories.map(
+                      (innerSubItem, innerSubIndex) => (
+                        <li key={innerSubIndex}>
+                          <Link to={getMenuHandle(innerSubItem.subSubCategory)}>
+                            {innerSubItem?.subSubCategory?.name}
+                          </Link>
+                        </li>
+                      ),
+                    )}
+                  </ul>
+                )}
+              </div>
+            );
+          })
+         }
+      </div>
+    </div>
+  </div>
+  );
+}
+
+function DesktopHeader({isHome, menu, aicoMenu,  openCart, title}) {
   const params = useParams();
   const {y} = useWindowScroll();
 
@@ -649,7 +694,21 @@ function DesktopHeader({isHome, menu, openCart, title}) {
           <div className="bottom">
             <nav className="flex gap-[5px] relative main-navbar">
               {/* Top level menu items */}
-              <div className="menu-item flex-auto">
+               {aicoMenu.map((item,index) => {
+                  return (
+                    <div className="menu-item flex-auto" key={index}>
+                      <Link
+                        to={`${item.category.name == ' Home' ? '/' : getMenuHandle(item.category) }`}
+                        className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                      >
+                        {item.category.name}
+                      </Link>
+                      {item?.category?.subCategories?.length > 0 && ( <SubMegaMenu subMenus={item?.category?.subCategories} key={index}/> )}
+                    </div>
+                  );
+              })}
+
+              {/* <div className="menu-item flex-auto">
                 <a
                   href="#"
                   className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
@@ -989,7 +1048,7 @@ function DesktopHeader({isHome, menu, openCart, title}) {
                 >
                   Abos & Gutscheine
                 </a>
-              </div>
+              </div> */}
               {/* {(menu?.items || []).map((item) => (
                 <Link
                   key={item.id}
