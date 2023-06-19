@@ -39,9 +39,9 @@ export function SortFilter({
           <IconFilters />
         </button>
       </div>
-      <div className="flex flex-col flex-wrap md:flex-row gap-[45px]">
+      <div className="flex flex-col flex-wrap lg:flex-row gap-[45px]">
         <div
-          className={`transition-all duration-200 w-[30%] ${isOpen ? '' : ''}`}
+          className={`transition-all duration-200 w-full lg:w-[30%] ${isOpen ? '' : ''}`}
         >
           <FiltersDrawer
             collections={collections}
@@ -49,7 +49,7 @@ export function SortFilter({
             appliedFilters={appliedFilters}
           />
         </div>
-        <div className="flex-1">
+        <div className="w-full lg:flex-1">
           <SortMenu />
           {children}
         </div>
@@ -112,7 +112,7 @@ export function FiltersDrawer({
         <Heading
           as="h4"
           size="lead"
-          className="text-[#1C5F7B] text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[48px]"
+          className="text-[#1C5F7B] text-[28px] font-bold bg-[#CCDDF1] leading-none px-[20px] lg:px-[30px] 2xl:px-[48px] py-[20px] 2xl:py-[25px]"
         >
           Kategorien
         </Heading>
@@ -123,7 +123,7 @@ export function FiltersDrawer({
             </div>
           ) : null}
         </div>
-        <div className="px-[48px] py-[25px] flex flex-col gap-y-[10px]">
+        <div className="px-[20px] lg:px-[30px] 2xl:px-[48px] py-[20px] 2xl:py-[25px] flex flex-col xl:gap-y-[10px]">
           {filters.map(
             (filter) =>
               filter.values.length > 1 && (
@@ -393,8 +393,8 @@ export default function SortMenu() {
         </div>
       </div>
       <div className="top-filter-wrap">
-        <div className="filter-inner flex flex-wrap gap-[25px]">
-          <div className="col-left flex-1 gap-[25px] items-center flex">
+        <div className="filter-inner flex flex-col xl:flex-row flex-wrap gap-[25px]">
+          <div className="col-left gap-[25px] items-center flex">
             <div className="pro-view-filter flex gap-[3px]">
               <div className="grid-filter w-[35px] h-[35px] p-[10px] bg-[#0A627E] border-[1px] border-[#0A627E] text-white cursor-pointer">
                 <IconGrid className={'w-full h-full object-contain'} />
@@ -410,7 +410,7 @@ export default function SortMenu() {
               </div>
             </div>
           </div>
-          <div className="col-right flex-1 flex gap-[25px] items-center justify-end">
+          <div className="col-right flex-[1.5] flex gap-y-[15px] gap-x-[25px] items-center justify-start xl:justify-end flex-wrap ">
             <Menu as="div" className="relative z-[40] w-fit">
               <Menu.Button className="flex items-center">
                 <span className="flex items-center">

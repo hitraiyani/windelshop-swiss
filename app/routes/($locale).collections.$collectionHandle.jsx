@@ -125,7 +125,7 @@ export default function Collection() {
 
   return (
     <>
-      <Section className="collections-product-list-sec">
+      <Section className="collections-product-list-sec !px-0 !py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px]">
         <div className="container">
           <PageHeader heading={collection.title} className={'hidden'}>
             {collection?.description && (
@@ -148,12 +148,12 @@ export default function Collection() {
               collection={collection}
               url={`/collections/${collection.handle}`}
               data-test="product-grid"
-              className="mt-[30px] grid grid-cols-3 gap-x-[30px] gap-y-[60px]"
+              className="mt-[30px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-x-[15px] lg:gap-x-[30px] gap-y-[20px] lg:gap-y-[30px] xl:gap-y-[60px]"
             />
           </SortFilter>
         </div>
       </Section>
-      <section className={`collection-section bg-[#E7EFFF] bg-opacity-30 mb-[-50px] py-[100px]`}>
+      <section className={`collection-section bg-[#E7EFFF] bg-opacity-30 mb-[-50px] py-[40px] md:py-[60px] xl:py-[80px] 2xl:py-[100px]`}>
         <div className="container">
           <div className="expandingcard-wrap last:border-black last:border-b-[2px]">
             <ExpandingCard

@@ -52,7 +52,7 @@ export function QuickRequest({className}) {
         <div className="quick-request-row flex flex-col lg:flex-row gap-[30px]">
           <div className="content-col w-full lg:w-[270px]">
             <div className="col-inner">
-              <h2 className="text-black text-[24px] font-bold text-left mb-[36px]">
+              <h2 className="text-black text-[24px] font-bold text-left mb-[20px] lg:mb-[36px]">
                 Schnellanfrage
               </h2>
               <div className="comtent-info">
@@ -84,7 +84,7 @@ export function QuickRequest({className}) {
             </div>
           </div>
           <div className="form-col w-full lg:flex-1">
-            <div className="col-inner bg-[#CCDDF1] rounded-[30px] px-[20px] md:px-[30px] py-[20px] md:py-[30px] lg:py-[40px] 2xl:py-[61px]">
+            <div className="col-inner bg-[#CCDDF1] rounded-[30px] px-[30px] md:px-[30px] py-[30px] md:py-[30px] lg:py-[40px] 2xl:py-[61px]">
               <div className="form-wrap max-w-[795px] mx-auto">
                 {fetcher?.data?.status == true && (
                   <span className="text-green-700">
