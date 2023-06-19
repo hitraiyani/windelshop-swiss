@@ -17,6 +17,7 @@
   "prettier": "@shopify/prettier-config",
   "dependencies": {
     "@headlessui/react": "^1.7.2",
+    "@hookform/resolvers": "^3.1.1",
     "@remix-run/react": "1.15.0",
     "@shopify/cli": "3.45.0",
     "@shopify/cli-hydrogen": "^4.2.1",
@@ -30,13 +31,15 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
+    "react-hook-form": "^7.44.3",
     "react-intersection-observer": "^9.4.1",
     "react-use": "^17.4.0",
     "schema-dts": "^1.1.0",
     "swiper": "^9.3.2",
     "tiny-invariant": "^1.2.0",
     "typographic-base": "^1.0.4",
-    "worktop": "^0.7.3"
+    "worktop": "^0.7.3",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@remix-run/dev": "1.15.0",

@@ -1,4 +1,4 @@
-import {defer} from '@shopify/remix-oxygen';
+import {defer, json} from '@shopify/remix-oxygen';
 import {Suspense} from 'react';
 import {Await, useLoaderData} from '@remix-run/react';
 import {AnalyticsPageType} from '@shopify/hydrogen';
@@ -28,7 +28,40 @@ import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders, CACHE_SHORT} from '~/data/cache';
 
 export const headers = routeHeaders;
+function isValidEmail(email) {
+  return /\S+@\S+\.\S+/.test(email);
+}
 
+export async function action({request}) {
+  const formData = await request.formData();
+  const inquiryData = Object.fromEntries(formData);
+  console.log(inquiryData);
+  const responseData = {
+    status: false,
+    message: 'E-Mail ist obligatorisch.',
+  };
+
+  if (inquiryData.name.trim().length < 3) {
+    responseData.status = false;
+    responseData.message = 'Invalid name - must be at least 3 characters long.';
+  } else if (!isValidEmail(inquiryData.email)) {
+    responseData.status = false;
+    responseData.message = 'Email ist ungültig.';
+  } else if (inquiryData.inquiry.trim().length < 5) {
+    responseData.status = false;
+    responseData.message =
+      'Invalid inquiry - must be at least 5 characters long.';
+  } else {
+    responseData.status = true;
+    responseData.message = 'success';
+  }
+
+  return responseData;
+
+  return json({
+    ...responseData,
+  });
+}
 export async function loader({params, context}) {
   const {language, country} = context.storefront.i18n;
 
@@ -225,7 +258,6 @@ export default function Homepage() {
       {/* <SeasonalSets className={''} /> */}
       <QuickRequest className={''} />
       <Reviews className={''} />
-      {/* <Faq data={faqSets} className={''} /> */}
       {faqSets && (
         <Suspense>
           <Await resolve={faqSets}>
