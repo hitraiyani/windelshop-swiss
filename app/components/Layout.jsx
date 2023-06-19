@@ -1104,159 +1104,30 @@ function Footer({menu}) {
                   </div>
                 </div>
               </div>
-              <div className="footer-col px-[15px] w-[16.33%]">
-                <div className="col-inner">
-                  <div className="nav">
-                    <h4 className="title text-[14px] text-white font-bold mb-[15px] uppercase">
-                      Informationen
-                    </h4>
-                    <ul className="nav-list flex flex-col gap-[15px]">
-                      <li className="text-[12px] text-white font-normal">
-                        <a
-                          href="#"
-                          className="hover:opacity-70 transition-all duration-500"
-                        >
-                          Windelshop Portrait
-                        </a>
-                      </li>
-                      <li className="text-[12px] text-white font-normal">
-                        <a
-                          href="#"
-                          className="hover:opacity-70 transition-all duration-500"
-                        >
-                          Bestellinfos
-                        </a>
-                      </li>
-                      <li className="text-[12px] text-white font-normal">
-                        <a
-                          href="#"
-                          className="hover:opacity-70 transition-all duration-500"
-                        >
-                          Datenschutz
-                        </a>
-                      </li>
-                      <li className="text-[12px] text-white font-normal">
-                        <a
-                          href="#"
-                          className="hover:opacity-70 transition-all duration-500"
-                        >
-                          AGBs
-                        </a>
-                      </li>
-                      <li className="text-[12px] text-white font-normal">
-                        <a
-                          href="#"
-                          className="hover:opacity-70 transition-all duration-500"
-                        >
-                          Partner / Nützliche Links
-                        </a>
-                      </li>
-                      <li className="text-[12px] text-white font-normal">
-                        <a
-                          href="#"
-                          className="hover:opacity-70 transition-all duration-500"
-                        >
-                          Ein Herz für Andere
-                        </a>
-                      </li>
-                      <li className="text-[12px] text-white font-normal">
-                        <a
-                          href="#"
-                          className="hover:opacity-70 transition-all duration-500"
-                        >
-                          Newsletter abonnieren
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="footer-col px-[15px] w-[16.33%]">
-                <div className="col-inner">
-                  <div className="nav">
-                    <h4 className="title text-[14px] text-white font-bold mb-[15px] uppercase">
-                      Kundendienst
-                    </h4>
-                    <ul className="nav-list flex flex-col gap-[15px]">
-                      <li className="text-[12px] text-white font-normal">
-                        <a
-                          href="#"
-                          className="hover:opacity-70 transition-all duration-500"
-                        >
-                          Kontakt
-                        </a>
-                      </li>
-                      <li className="text-[12px] text-white font-normal">
-                        <a
-                          href="#"
-                          className="hover:opacity-70 transition-all duration-500"
-                        >
-                          Seitenübersicht
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="footer-col px-[15px] w-[16.33%]">
-                <div className="col-inner">
-                  <div className="nav">
-                    <h4 className="title text-[14px] text-white font-bold mb-[15px] uppercase">
-                      Links
-                    </h4>
-                    <ul className="nav-list flex flex-col gap-[15px]">
-                      <li className="text-[12px] text-white font-normal">
-                        <a
-                          href="#"
-                          className="hover:opacity-70 transition-all duration-500"
-                        >
-                          Windeln & Feuchttücher
-                        </a>
-                      </li>
-                      <li className="text-[12px] text-white font-normal">
-                        <a
-                          href="#"
-                          className="hover:opacity-70 transition-all duration-500"
-                        >
-                          Damenhygiene & Inkontinenz
-                        </a>
-                      </li>
-                      <li className="text-[12px] text-white font-normal">
-                        <a
-                          href="#"
-                          className="hover:opacity-70 transition-all duration-500"
-                        >
-                          Datenschutz
-                        </a>
-                      </li>
-                      <li className="text-[12px] text-white font-normal">
-                        <a
-                          href="#"
-                          className="hover:opacity-70 transition-all duration-500"
-                        >
-                          Waschmittel & Weichspüler
-                        </a>
-                      </li>
-                      <li className="text-[12px] text-white font-normal">
-                        <a
-                          href="#"
-                          className="hover:opacity-70 transition-all duration-500"
-                        >
-                          Pflege & Hygiene
-                        </a>
-                      </li>
-                      <li className="text-[12px] text-white font-normal">
-                        <a
-                          href="#"
-                          className="hover:opacity-70 transition-all duration-500"
-                        >
-                          Abos & Gutscheine
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              {
+                menu?.items?.map((item,index) => {
+                    return (
+                      <div className="footer-col px-[15px] w-[16.33%]" key={index}>
+                        <div className="col-inner">
+                          <div className="nav">
+                            <h4 className="title text-[14px] text-white font-bold mb-[15px] uppercase">
+                               {item.title}
+                            </h4>
+                            <ul className="nav-list flex flex-col gap-[15px]">
+                               {item.items.map((subItem, subIndex) => (
+                                  <li className="text-[12px] text-white font-normal" key={subIndex}>
+                                    <Link to={item.to} target={item.target} className="hover:opacity-70 transition-all duration-500">
+                                      {subItem.title}
+                                    </Link>
+                                  </li>
+                               ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                })
+              }
               <div className="footer-col px-[15px] w-[23%]">
                 <div className="col-inner">
                   <div className="contact-info">
