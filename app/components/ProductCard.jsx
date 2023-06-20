@@ -89,30 +89,30 @@ export function ProductCard({
             <CompareAtPrice className={'opacity-50'} data={compareAtPrice} />
           )}
         </Text>
-      </div>
-      {quickAdd && (
-        <AddToCartButton
-          lines={[
-            {
-              quantity: 1,
-              merchandiseId: firstVariant.id,
-            },
-          ]}
-          variant="secondary"
-          className="buy-now-btn flex mt-[14px]"
-          analytics={{
-            products: [productAnalytics],
-            totalValue: parseFloat(productAnalytics.price),
-          }}
-        >
-          <Text
-            as="span"
-            className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+        {quickAdd && (
+          <AddToCartButton
+            lines={[
+              {
+                quantity: 1,
+                merchandiseId: firstVariant.id,
+              },
+            ]}
+            variant="secondary"
+            className="buy-now-btn flex mt-[14px]"
+            analytics={{
+              products: [productAnalytics],
+              totalValue: parseFloat(productAnalytics.price),
+            }}
           >
-            Jetzt Kaufen
-          </Text>
-        </AddToCartButton>
-      )}
+            <Text
+              as="span"
+              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+            >
+              Jetzt Kaufen
+            </Text>
+          </AddToCartButton>
+        )}
+      </div>
     </div>
   );
 }
