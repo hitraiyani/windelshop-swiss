@@ -42,7 +42,7 @@ import {
   IconOekoTex,
   YouMayAlsoLike,
 } from '~/components';
-import {getExcerpt} from '~/lib/utils';
+import {getExcerpt, isDiscounted} from '~/lib/utils';
 import {seoPayload} from '~/lib/seo.server';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {routeHeaders, CACHE_SHORT} from '~/data/cache';
@@ -119,6 +119,25 @@ export default function Product() {
   const {media, title, vendor, descriptionHtml} = product;
   const {shippingPolicy, refundPolicy} = shop;
 
+  const firstVariant = product.variants.nodes[0];
+  const selectedVariant = product.selectedVariant ?? firstVariant;
+
+  const isOnSale =
+    selectedVariant?.price?.amount &&
+    selectedVariant?.compareAtPrice?.amount &&
+    isDiscounted(selectedVariant?.price, selectedVariant?.compareAtPrice);
+
+  let dicountedPr = 0;
+  if (isOnSale) {
+    dicountedPr = Math.round(
+      ((parseFloat(selectedVariant?.price?.amount) - parseFloat(selectedVariant?.compareAtPrice?.amount)) /
+        parseFloat(selectedVariant?.price?.amount)) *
+        100,
+    );
+  }
+
+  console.log("selectedVariant", selectedVariant);
+
   return (
     <>
       <Section className="!py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px] product-summary !px-0 !block">
@@ -126,15 +145,18 @@ export default function Product() {
           <div className="flex flex-col min-[992px]:flex-row gap-[33px]">
             <ProductGallery
               media={media.nodes}
+              dicountedPr={dicountedPr}
               className="w-full min-[992px]:w-[35%] product-gallery-wrap"
             />
             <div className="w-full min-[992px]:w-[65%]">
               <section className="product-info">
                 <div className="stock-delivery-info">
                   <div className="inner flex flex-wrap gap-[16px] items-center">
-                    <span className='rounded-[20px] bg-[#26D12D] uppercase text-[11px] leading-none font-["Open_Sans"] font-semibold p-[5px] min-h-[27px] min-w-[106px] flex items-center justify-center text-center text-white'>
-                      IN STOCK
-                    </span>
+                    {selectedVariant.availableForSale && (
+                      <span className='rounded-[20px] bg-[#26D12D] uppercase text-[11px] leading-none font-["Open_Sans"] font-semibold p-[5px] min-h-[27px] min-w-[106px] flex items-center justify-center text-center text-white'>
+                        IN STOCK
+                      </span>
+                    )}
                     <span className='rounded-[20px] bg-white uppercase text-[11px] leading-none font-["Open_Sans"] font-semibold p-[5px] min-h-[27px] min-w-[106px] flex items-center justify-center text-center text-black'>
                       delivery tomorrow
                     </span>
@@ -155,8 +177,10 @@ export default function Product() {
                 <div className="tab-wrap border-t-[1px] border-[#E7EFFF] pt-[14px] lg:pt-[34px] mt-[35px]">
                   <Tabs>
                     <div label="Beschreibung">
-                      <div className="tab-content">
-                        <h4 className="text-[19px] text-[#0A627E] font-bold mb-[15px]">
+                      <div className="tab-content"
+                        dangerouslySetInnerHTML={{__html: product.descriptionHtml}}
+                      >
+                        {/* <h4 className="text-[19px] text-[#0A627E] font-bold mb-[15px]">
                           Pampers Baby-Dry Gr.3 Midi 6-10kg (52 STK) Sparpack
                         </h4>
                         <div className="desc text-[#666666] text-[14px] font-normal mb-[24px] pro-detail-desc">
@@ -210,7 +234,7 @@ export default function Product() {
                               <span className="text">Gemäss Standard 100 von Oeko-Tex getestet und zertifiziert</span>
                             </li>
                           </ul>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                     <div label="Schnellsuche">
@@ -311,11 +335,23 @@ export function ProductForm() {
   const isOnSale =
     selectedVariant?.price?.amount &&
     selectedVariant?.compareAtPrice?.amount &&
-    selectedVariant?.price?.amount < selectedVariant?.compareAtPrice?.amount;
+    isDiscounted(selectedVariant?.price, selectedVariant?.compareAtPrice);
+
+  let dicountedPr = 0;
+  if (isOnSale) {
+    dicountedPr = Math.round(
+      ((parseFloat(selectedVariant?.price?.amount) - parseFloat(selectedVariant?.compareAtPrice?.amount)) /
+        parseFloat(selectedVariant?.price?.amount)) *
+        100,
+    );
+  }
+
+  const [quantity, setQuantity] = useState(1);
+
 
   const productAnalytics = {
     ...analytics.products[0],
-    quantity: 1,
+    quantity: quantity,
   };
 
   return (
@@ -323,17 +359,27 @@ export function ProductForm() {
       <div className="price-col">
         <div className="Price">
           <div className="discount-price flex flex-wrap items-center gap-[16px]">
-            <span className="line-through text-black text-[22px] font-normal leading-none">
-              CHF <span className="font-bold">21.95</span>
-            </span>
-            <span className="off bg-[#D12631] rounded-[20px] px-[10px] py-[3px] font-normal text-white text-[20px] uppercase font-['Open_Sans']">
-              -28%
-            </span>
+            {isOnSale && (
+              <>
+                <Money
+                  withoutTrailingZeros
+                  data={selectedVariant?.compareAtPrice}
+                  as="span"
+                  className="line-through text-black text-[22px] font-normal leading-none"
+                />
+                <span className="off bg-[#D12631] rounded-[20px] px-[10px] py-[3px] font-normal text-white text-[20px] uppercase font-['Open_Sans']">
+                  {dicountedPr}%
+                </span>
+              </>
+            )}
           </div>
           <div className="sale-price text-[#D12631] text-[28px] font-normal mt-[16px] flex items-center gap-x-[10px] sm:gap-x-[20px] md:gap-x-[30px] lg:gap-x-[40px] xl:gap-x-[50px] 2xl:gap-x-[74px] flex-wrap">
-            <span>
-              CHF <span className="font-bold">15.90</span>
-            </span>
+            <Money
+              as="span"
+              withoutTrailingZeros
+              data={selectedVariant?.price}
+              className="font-bold"
+            />
             <span className="price-without-VAT text-black text-opacity-[50%] text-[18px] font-medium">
               Preis ohne MWST CHF 14.76
             </span>
@@ -351,12 +397,25 @@ export function ProductForm() {
           Menge
         </h2>
         <div className="col-inner flex justify-between gap-[20px] flex-wrap">
-          <div className="flex flex-[1_1_60%] flex-wrap gap-[20px]">
-            <QuantityComponent />
+          <div className="flex w-[60%] flex-wrap gap-[20px]">
+            <QuantityComponent quantity={quantity} setQuantity={setQuantity}/>
             <div className="pro-btns flex flex-col flex-1">
-              <button className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'>
+              <AddToCartButton
+                lines={[
+                  {
+                    merchandiseId: selectedVariant.id,
+                    quantity: quantity,
+                  },
+                ]}
+                className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
+                data-test="add-to-cart"
+                analytics={{
+                  products: [productAnalytics],
+                  totalValue: parseFloat(productAnalytics.price),
+                }}
+              >
                 <IconCart className={'w-[15px] h-[14px]'} /> + Jetzt kaufen
-              </button>
+              </AddToCartButton>
               <div className="btn-group flex items-center justify-center gap-[30px] mt-[11px]">
                 <button className='flex items-center gap-[3px] text-black uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]'>
                   <IconWhishlist className={'w-[11px] h-[10px]'} />+ Wunschliste
@@ -436,9 +495,7 @@ export function ProductForm() {
   );
 }
 
-function QuantityComponent() {
-  const [quantity, setQuantity] = useState(0);
-
+function QuantityComponent({quantity, setQuantity}) {
   const decreaseQuantity = () => {
     if (quantity > 0) {
       setQuantity((prevQuantity) => prevQuantity - 1);
@@ -449,6 +506,14 @@ function QuantityComponent() {
     setQuantity((prevQuantity) => prevQuantity + 1);
   };
 
+  const handleInputChange = (event) => {
+    const inputValue = event.target.value;
+    // Ensure input value is a number
+    if (!isNaN(inputValue)) {
+      setQuantity(parseInt(inputValue));
+    }
+  };
+
   return (
     <div className="flex items-center flex-wrap">
       <input
@@ -456,6 +521,7 @@ function QuantityComponent() {
         id="quantity"
         className='h-[52px] w-[80px] flex items-center justify-center border-[2px] !border-[#18A1DC] rounded-[10px] mr-[9px] text-[16px] font-bold font-["Open_Sans"] text-[#18A1DC] !ring-0 !shadow-none appearance-none text-center'
         value={quantity}
+        onChange={handleInputChange}
       />
       <button
         onClick={decreaseQuantity}
