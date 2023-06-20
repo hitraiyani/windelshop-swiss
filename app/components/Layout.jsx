@@ -134,7 +134,12 @@ function Header({title, menu, aicoMenu, toBar}) {
     <>
       <CartDrawer isOpen={isCartOpen} onClose={closeCart} />
       {menu && (
-        <MenuDrawer isOpen={isMenuOpen} onClose={closeMenu} menu={menu} aicoMenu={aicoMenu} />
+        <MenuDrawer
+          isOpen={isMenuOpen}
+          onClose={closeMenu}
+          menu={menu}
+          aicoMenu={aicoMenu}
+        />
       )}
       <TopbarHeader toBar={toBar} />
       <DesktopHeader
@@ -180,26 +185,73 @@ export function MenuDrawer({isOpen, onClose, menu, aicoMenu}) {
   );
 }
 
-function MenuMobileNav({menu, aicoMenu,  onClose}) {
-  
+function MenuMobileNav({menu, aicoMenu, onClose}) {
+  const megaMenuMobileClick = (event) => {
+    const menuItems = document.querySelectorAll('.mobile-nav-sec .menu-item');
+    event.currentTarget.parentNode.parentNode.classList.toggle('active');
+    // const currentMenuContainer = event.currentTarget.parentNode?.parentNode?.getElementsByClassName('menu-item')[0];
+    menuItems.forEach((item) => {
+      if (
+        item !== event.currentTarget.parentNode.parentNode &&
+        item.classList.contains('active')
+      ) {
+        item.classList.remove('active');
+      }
+    });
+    // setTimeout(() => {
+    //   if (currentMenuContainer) {
+    //       currentMenuContainer?.scrollIntoView({behavior:'smooth', block:'start'});
+    //   }
+    // },200);
+  };
   return (
-    <nav className="grid gap-4 p-6 sm:gap-6 sm:px-12 sm:py-8">
+    <nav className="grid p-[20px] mobile-nav-sec">
       {/* Top level menu items */}
-      {(aicoMenu || []).map((item, index) => (
-        <span key={index} className="block">
-          <Link
-            to={`${item.category.name == ' Home' ? '/' : getMenuHandle(item.category) }`}
-            onClick={onClose}
-            className={({isActive}) =>
-              isActive ? 'pb-1 border-b -mb-px' : 'pb-1'
-            }
-          >
-            <Text as="span" size="copy">
-            {item.category.name}
-            </Text>
-          </Link>
-        </span>
-      ))}
+      {aicoMenu.map((item, index) => {
+        return (
+          <div className="menu-item flex-auto" key={index}>
+            <div className="flex flex-wrap items-center w-full sticky top-0 z-[92] py-[10px] bg-gray-50">
+              <Link
+                to={`${
+                  item.category.name == ' Home'
+                    ? '/'
+                    : getMenuHandle(item.category)
+                }`}
+                className="text-[14px] text-black"
+              >
+                {item.category.name}
+              </Link>
+              <div
+                onClick={megaMenuMobileClick}
+                className="flex-1 flex justify-end"
+              >
+                <svg
+                  className="icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={20}
+                  height={20}
+                  viewBox="0 0 32 32"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="m6 12l10 10l10-10"
+                  />
+                </svg>
+              </div>
+            </div>
+            {item?.category?.subCategories?.length > 0 && (
+              <SubMegaMenu
+                subMenus={item?.category?.subCategories}
+                key={index}
+              />
+            )}
+          </div>
+        );
+      })}
     </nav>
   );
 }
@@ -407,13 +459,11 @@ function classNames(...classes) {
 }
 
 function SubMegaMenu({subMenus}) {
-
-    return (  
-    <div className="mega-menu absolute bg-[#CCDDF1] rounded-[20px] z-[99]" >
-    <div className="mega-menu-inner container">
-      <div className="mega-menu-lists flex flex-wrap py-[70px] gap-y-[70px] -mx-[15px]">
-         {
-          subMenus.map((subItem, subIndex) => {
+  return (
+    <div className="mega-menu absolute bg-[#CCDDF1] rounded-[20px] z-[99]">
+      <div className="mega-menu-inner container">
+        <div className="mega-menu-lists flex flex-wrap py-[30px] lg:py-[40px] xl:py-[60px] 2xl:py-[70px] gap-y-[15px] lg:gap-y-[30px] xl:gap-y-[50px] 2xl:gap-y-[70px] -mx-[15px]">
+          {subMenus.map((subItem, subIndex) => {
             return (
               <div
                 className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]"
@@ -441,15 +491,14 @@ function SubMegaMenu({subMenus}) {
                 )}
               </div>
             );
-          })
-         }
+          })}
+        </div>
       </div>
     </div>
-  </div>
   );
 }
 
-function DesktopHeader({isHome, menu, aicoMenu,  openCart, title}) {
+function DesktopHeader({isHome, menu, aicoMenu, openCart, title}) {
   const params = useParams();
   const {y} = useWindowScroll();
 
@@ -694,18 +743,27 @@ function DesktopHeader({isHome, menu, aicoMenu,  openCart, title}) {
           <div className="bottom">
             <nav className="flex gap-[5px] relative main-navbar">
               {/* Top level menu items */}
-               {aicoMenu.map((item,index) => {
-                  return (
-                    <div className="menu-item flex-auto" key={index}>
-                      <Link
-                        to={`${item.category.name == ' Home' ? '/' : getMenuHandle(item.category) }`}
-                        className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
-                      >
-                        {item.category.name}
-                      </Link>
-                      {item?.category?.subCategories?.length > 0 && ( <SubMegaMenu subMenus={item?.category?.subCategories} key={index}/> )}
-                    </div>
-                  );
+              {aicoMenu.map((item, index) => {
+                return (
+                  <div className="menu-item flex-auto" key={index}>
+                    <Link
+                      to={`${
+                        item.category.name == ' Home'
+                          ? '/'
+                          : getMenuHandle(item.category)
+                      }`}
+                      className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                    >
+                      {item.category.name}
+                    </Link>
+                    {item?.category?.subCategories?.length > 0 && (
+                      <SubMegaMenu
+                        subMenus={item?.category?.subCategories}
+                        key={index}
+                      />
+                    )}
+                  </div>
+                );
               })}
 
               {/* <div className="menu-item flex-auto">
@@ -862,7 +920,7 @@ function DesktopHeader({isHome, menu, aicoMenu,  openCart, title}) {
                 </a>
                 <div className="mega-menu absolute bg-[#CCDDF1] rounded-[20px] z-[99]">
                   <div className="mega-menu-inner container">
-                    <div className="mega-menu-lists flex flex-wrap py-[70px] gap-y-[70px] -mx-[15px]">
+                    <div className="mega-menu-lists flex flex-wrap py-[30px] lg:py-[40px] xl:py-[60px] 2xl:py-[70px] gap-y-[15px] lg:gap-y-[30px] xl:gap-y-[50px] 2xl:gap-y-[70px] -mx-[15px]">
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
                         <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
                           Absfallentsorgung

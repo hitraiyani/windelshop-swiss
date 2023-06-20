@@ -363,7 +363,43 @@ strong {
     }
   }
 }
-
+.mobile-nav-sec {
+  .menu-item {
+    &.active {
+      .mega-menu {
+        display: block;
+      }
+      .icon {
+        transform: rotate(180deg);
+      }
+    }
+    .mega-menu {
+      position: relative;
+      display: none;
+      left: auto;
+      right: auto;
+      margin: 0;
+      width: 100%;
+      border-radius: 10px;
+    }
+    .mega-menu-lists {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      gap: 20px 0;
+      .mega-menu-list {
+        width: calc(50% - 10px);
+        .sub-menu-title {
+          word-break: break-word;
+          word-wrap: break-word;
+        }
+        a {
+          display: block;
+          background-position: left 4px;
+        }
+      }
+    }
+  }
+}
 /* End Mega menu css */
 
 /* Hero slider section  */
@@ -516,6 +552,16 @@ input.appearance-none[type='number'] {
       .text {
         flex: 1;
       }
+    }
+  }
+}
+.slider__col {
+  .swiper-slide {
+    height: auto;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    > div {
+      height: 100%;
     }
   }
 }

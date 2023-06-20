@@ -153,7 +153,7 @@ export default function Collection() {
           </SortFilter>
         </div>
       </Section>
-      <section className={`collection-section bg-[#E7EFFF] bg-opacity-30 mb-[-50px] py-[40px] md:py-[60px] xl:py-[80px] 2xl:py-[100px]`}>
+      <section className={`collection-section bg-[#E7EFFF] bg-opacity-30 mb-[-20px] md:mb-[-30px] xl:mb-[-40px] 2xl:mb-[-50px] py-[40px] md:py-[60px] xl:py-[80px] 2xl:py-[100px]`}> 
         <div className="container">
           <div className="expandingcard-wrap last:border-black last:border-b-[2px]">
             <ExpandingCard

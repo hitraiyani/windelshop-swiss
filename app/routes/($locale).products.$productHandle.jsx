@@ -121,14 +121,14 @@ export default function Product() {
 
   return (
     <>
-      <Section className="py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px] product-summary">
-        <div className="container">
-          <div className="flex flex-row gap-[33px]">
+      <Section className="!py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px] product-summary !px-0 !block">
+        <div className="container"> 
+          <div className="flex flex-col min-[992px]:flex-row gap-[33px]">
             <ProductGallery
               media={media.nodes}
-              className="w-[516px] product-gallery-wrap"
+              className="w-full min-[992px]:w-[35%] product-gallery-wrap"
             />
-            <div className="flex-1">
+            <div className="w-full min-[992px]:w-[65%]">
               <section className="product-info">
                 <div className="stock-delivery-info">
                   <div className="inner flex flex-wrap gap-[16px] items-center">
@@ -152,7 +152,7 @@ export default function Product() {
                 )} */}
                 </div>
                 <ProductForm />
-                <div className="tab-wrap border-t-[1px] border-[#E7EFFF] pt-[34px] mt-[35px]">
+                <div className="tab-wrap border-t-[1px] border-[#E7EFFF] pt-[14px] lg:pt-[34px] mt-[35px]">
                   <Tabs>
                     <div label="Beschreibung">
                       <div className="tab-content">
@@ -248,7 +248,7 @@ export default function Product() {
           </div>
         </div>
       </Section>
-      <YouMayAlsoLike className={'bg-[#E7EFFF] bg-opacity-30 mb-[-50px] !py-[100px]'} />
+      <YouMayAlsoLike className={'bg-[#E7EFFF] bg-opacity-30 mb-[-20px] md:mb-[-30px] xl:mb-[-40px] 2xl:mb-[-50px] !py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px]'} />
       {/* <Suspense fallback={<Skeleton className="h-32" />}>
         <Await
           errorElement="There was a problem loading related products"
@@ -330,7 +330,7 @@ export function ProductForm() {
               -28%
             </span>
           </div>
-          <div className="sale-price text-[#D12631] text-[28px] font-normal mt-[16px] flex items-center gap-x-[74px]">
+          <div className="sale-price text-[#D12631] text-[28px] font-normal mt-[16px] flex items-center gap-x-[10px] sm:gap-x-[20px] md:gap-x-[30px] lg:gap-x-[40px] xl:gap-x-[50px] 2xl:gap-x-[74px] flex-wrap">
             <span>
               CHF <span className="font-bold">15.90</span>
             </span>
@@ -340,7 +340,7 @@ export function ProductForm() {
           </div>
         </div>
       </div>
-      <div className="product-options-wrap border-t-[1px] border-[#E7EFFF] mt-[46px] pt-[37px] flex flex-row gap-[52px]">
+      <div className="product-options-wrap border-t-[1px] border-[#E7EFFF] mt-[46px] pt-[37px] flex flex-row flex-wrap gap-y-[20px] gap-x-[52px]">
         <ProductOptions
           options={product.options}
           searchParamsWithDefaults={searchParamsWithDefaults}
@@ -350,8 +350,8 @@ export function ProductForm() {
         <h2 className='title mb-[17px] text-[14px] text-[#666666] uppercase font-bold font-["Open_Sans"]'>
           Menge
         </h2>
-        <div className="col-inner flex justify-between gap-[20px]">
-          <div className="flex w-[60%] flex-wrap gap-[20px]">
+        <div className="col-inner flex justify-between gap-[20px] flex-wrap">
+          <div className="flex flex-[1_1_60%] flex-wrap gap-[20px]">
             <QuantityComponent />
             <div className="pro-btns flex flex-col flex-1">
               <button className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'>
@@ -367,7 +367,7 @@ export function ProductForm() {
               </div>
             </div>
           </div>
-          <div className="flex-1 rating-wrap">
+          <div className="w-auto rating-wrap">
             <div className="flex gap-[7px] items-center text-black font-semibold font-['Open_Sans'] py-[17px] justify-end">
               <div className="rating flex gap-[3px] text-[#18A1DC]">
                 <IconStar className={'w-[17px] h-[15px]'} />

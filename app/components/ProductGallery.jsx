@@ -199,7 +199,7 @@ export function ProductGallery({media, className}) {
                   >
                     <MediaFile
                       tabIndex="0"
-                      className={`w-[152px] h-[152px] object-cover rounded-[10px] cursor-pointer`}
+                      className={`w-full !aspect-square object-contain rounded-[10px] h-full cursor-pointer`}
                       data={data}
                       sizes={
                         '(min-width: 64em) 30vw, (min-width: 48em) 25vw, 90vw'
