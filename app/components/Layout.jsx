@@ -218,6 +218,7 @@ function MenuMobileNav({menu, aicoMenu, onClose}) {
                     : getMenuHandle(item.category)
                 }`}
                 className="text-[14px] text-black"
+                onClick={onClose}
               >
                 {item.category.name}
               </Link>
@@ -247,6 +248,7 @@ function MenuMobileNav({menu, aicoMenu, onClose}) {
               <SubMegaMenu
                 subMenus={item?.category?.subCategories}
                 key={index}
+                onClose={onClose}
               />
             )}
           </div>
@@ -458,7 +460,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-function SubMegaMenu({subMenus}) {
+function SubMegaMenu({subMenus, onClose}) {
   return (
     <div className="mega-menu absolute bg-[#CCDDF1] rounded-[20px] z-[99]">
       <div className="mega-menu-inner container">
@@ -481,7 +483,10 @@ function SubMegaMenu({subMenus}) {
                     {subItem.subCategory.subSubCategories.map(
                       (innerSubItem, innerSubIndex) => (
                         <li key={innerSubIndex}>
-                          <Link to={getMenuHandle(innerSubItem.subSubCategory)}>
+                          <Link
+                            to={getMenuHandle(innerSubItem.subSubCategory)}
+                            onClick={onClose}
+                          >
                             {innerSubItem?.subSubCategory?.name}
                           </Link>
                         </li>
