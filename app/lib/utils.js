@@ -346,3 +346,11 @@ export function getMenuHandle(menuItem) {
     return menuItem?.id ? `/${menuItem?.handle}` : `#`;
   }
 }
+
+export function stringTruncate(str, num = 155) {
+  if (typeof str !== 'string') return '';
+  if (str.length <= num) {
+    return str;
+  }
+  return str.slice(0, num - 3) + '...';
+}

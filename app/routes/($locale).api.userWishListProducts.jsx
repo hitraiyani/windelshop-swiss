@@ -42,6 +42,7 @@ export const USER_WHISHLIST_PRODUCT_QUERY = `#graphql
         id
         title
         handle
+        description
         variants(first: 1) {
           nodes {
             id
