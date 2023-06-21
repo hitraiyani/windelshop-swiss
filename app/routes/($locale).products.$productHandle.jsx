@@ -1,4 +1,4 @@
-import {useRef, Suspense, useMemo, useState} from 'react';
+import {useRef, Suspense, useMemo, useContext, useEffect, useState} from 'react';
 import {Disclosure, Listbox} from '@headlessui/react';
 import {defer} from '@shopify/remix-oxygen';
 import {
@@ -46,6 +46,7 @@ import {getExcerpt, isDiscounted} from '~/lib/utils';
 import {seoPayload} from '~/lib/seo.server';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {routeHeaders, CACHE_SHORT} from '~/data/cache';
+import {WishlistContext } from '~/store/WishlistContext';
 
 export const headers = routeHeaders;
 
@@ -135,8 +136,6 @@ export default function Product() {
         100,
     );
   }
-
-  console.log("selectedVariant", selectedVariant);
 
   return (
     <>
@@ -293,6 +292,27 @@ export function ProductForm() {
   const [currentSearchParams] = useSearchParams();
   const {location} = useNavigation();
 
+  const { wishlistItems, addToWishlist, removeFromWishlist } = useContext(
+    WishlistContext
+  );
+
+  const [isWhishListAdded, setIsWhishListAdded] = useState(false);
+
+  const handleAddWishlist = () => {
+    addToWishlist(product.id);
+  };
+
+  const handleRemoveWishlist = () => {
+    removeFromWishlist(product.id);
+  };
+
+  useEffect(() => {
+      if (wishlistItems.includes(product.id)) {
+        setIsWhishListAdded(true);
+      } else {
+        setIsWhishListAdded(false);
+      }
+  }, [wishlistItems]);
   /**
    * We update `searchParams` with in-flight request data from `location` (if available)
    * to create an optimistic UI, e.g. check the product option before the
@@ -417,7 +437,7 @@ export function ProductForm() {
                 <IconCart className={'w-[15px] h-[14px]'} /> + Jetzt kaufen
               </AddToCartButton>
               <div className="btn-group flex items-center justify-center gap-[30px] mt-[11px]">
-                <button className='flex items-center gap-[3px] text-black uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]'>
+                <button  onClick={ isWhishListAdded ?  handleRemoveWishlist : handleAddWishlist }  className={`flex items-center gap-[3px] ${isWhishListAdded ? 'text-[#0A627E]' : 'text-black'} uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]`}>
                   <IconWhishlist className={'w-[11px] h-[10px]'} />+ Wunschliste
                 </button>
                 <button className='flex items-center gap-[3px] text-black uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]'>

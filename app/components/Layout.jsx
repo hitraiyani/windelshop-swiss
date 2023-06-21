@@ -2,7 +2,8 @@ import {useParams, Form, Await, useMatches} from '@remix-run/react';
 import {useWindowScroll} from 'react-use';
 import {Disclosure, Menu, Transition} from '@headlessui/react';
 import {Suspense, useEffect, useMemo, useState, useRef} from 'react';
-import {Fragment} from 'react';
+import {Fragment, useContext } from 'react';
+import {WishlistContext } from '~/store/WishlistContext';
 
 import {
   Drawer,
@@ -507,6 +508,10 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title}) {
   const params = useParams();
   const {y} = useWindowScroll();
 
+  const wishlistContextData = useContext(
+    WishlistContext
+  );
+
   const [isSearchOpen, setSearchOpen] = useState(false);
 
   useEffect(() => {
@@ -679,12 +684,12 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title}) {
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to={'/wishlist'}
                     className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
-                    Wunschliste <span>(0)</span>
-                  </a>
+                    Wunschliste <span>({wishlistContextData?.wishlistItems ? wishlistContextData?.wishlistItems.length : 0})</span>
+                  </Link>
                 </li>
                 <li>
                   <Link
