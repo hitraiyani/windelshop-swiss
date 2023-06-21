@@ -25,6 +25,9 @@ export function SortFilter({
   appliedFilters = [],
   children,
   collections = [],
+  isGrid,
+  gridView,
+  listView
 }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -39,9 +42,9 @@ export function SortFilter({
           <IconFilters />
         </button>
       </div>
-      <div className="flex flex-col flex-wrap lg:flex-row gap-[45px]">
+      <div className="flex flex-col flex-wrap md:flex-row gap-[45px]">
         <div
-          className={`transition-all duration-200 w-full lg:w-[30%] ${isOpen ? '' : ''}`}
+          className={`transition-all duration-200 w-[30%] ${isOpen ? '' : ''}`}
         >
           <FiltersDrawer
             collections={collections}
@@ -49,8 +52,8 @@ export function SortFilter({
             appliedFilters={appliedFilters}
           />
         </div>
-        <div className="w-full lg:flex-1">
-          <SortMenu />
+        <div className="flex-1">
+          <SortMenu gridView={gridView} listView={listView} isGrid={isGrid} />
           {children}
         </div>
       </div>
@@ -112,9 +115,9 @@ export function FiltersDrawer({
         <Heading
           as="h4"
           size="lead"
-          className="text-[#1C5F7B] text-[28px] font-bold bg-[#CCDDF1] leading-none px-[20px] lg:px-[30px] 2xl:px-[48px] py-[20px] 2xl:py-[25px]"
+          className="text-[#1C5F7B] text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[48px]"
         >
-          Kategorien
+          Kategorien 
         </Heading>
         <div className="px-[48px] py-[27px] hidden">
           {appliedFilters.length > 0 ? (
@@ -123,11 +126,13 @@ export function FiltersDrawer({
             </div>
           ) : null}
         </div>
-        <div className="px-[20px] lg:px-[30px] 2xl:px-[48px] py-[20px] 2xl:py-[25px] flex flex-col xl:gap-y-[10px]">
+        <div className="px-[48px] py-[25px] flex flex-col gap-y-[10px]">
           {filters.map(
+            
             (filter) =>
               filter.values.length > 1 && (
-                <>
+                
+                  <div  key={filter.id}>
                   <Disclosure as="div" key={filter.id} className="w-full">
                     {({open}) => (
                       <>
@@ -155,7 +160,7 @@ export function FiltersDrawer({
                       </>
                     )}
                   </Disclosure>
-                  <Disclosure as="div" key={filter.id} className="w-full">
+                  {/* <Disclosure as="div" key={filter.id} className="w-full">
                     {({open}) => (
                       <>
                         <Disclosure.Button className="flex justify-between items-center w-full text-[20px] text-[#292929] font-medium outline-none">
@@ -181,8 +186,8 @@ export function FiltersDrawer({
                         </Disclosure.Panel>
                       </>
                     )}
-                  </Disclosure>
-                </>
+                  </Disclosure> */}
+                </div>
               ),
           )}
         </div>
@@ -351,7 +356,7 @@ function filterInputToParams(type, rawInput, params) {
   return params;
 }
 
-export default function SortMenu() {
+export default function SortMenu({gridView,listView,isGrid}) {
   const items = [
     {label: 'Featured', key: 'featured'},
     {
@@ -397,7 +402,7 @@ export default function SortMenu() {
   const location = useLocation();
   const activeItem = items.find((item) => item.key === params.get('sort'));
   const activePagination = itemsPagination.find((item) => item.key === params.get('pagination'));
-
+ 
   return (
     <>
       <div className="collection-shrt-desc mb-[42px]">
@@ -422,13 +427,13 @@ export default function SortMenu() {
         </div>
       </div>
       <div className="top-filter-wrap">
-        <div className="filter-inner flex flex-col xl:flex-row flex-wrap gap-[25px]">
-          <div className="col-left gap-[25px] items-center flex">
+        <div className="filter-inner flex flex-wrap gap-[25px]">
+          <div className="col-left flex-1 gap-[25px] items-center flex">
             <div className="pro-view-filter flex gap-[3px]">
-              <div className="grid-filter w-[35px] h-[35px] p-[10px] bg-[#0A627E] border-[1px] border-[#0A627E] text-white cursor-pointer">
-                <IconGrid className={'w-full h-full object-contain'} />
+              <div  className={`grid-filter w-[35px] h-[35px] p-[10px] ${(isGrid== true) ? 'bg-[#0A627E] border-[1px] border-[#0A627E] text-white' : 'bg-white border-[1px] border-[#CED4DA] text-[#333333]' }  cursor-pointer`}  onClick={gridView} >
+                <IconGrid className={'w-full h-full object-contain'}  />
               </div>
-              <div className="list-filter w-[35px] h-[35px] p-[10px] bg-white border-[1px] border-[#CED4DA] text-[#333333] cursor-pointer">
+              <div className={`list-filter w-[35px] h-[35px] p-[10px] ${(isGrid == false) ? 'bg-[#0A627E] border-[1px] border-[#0A627E] text-white' : 'bg-white border-[1px] border-[#CED4DA] text-[#333333]'}  cursor-pointer`} onClick={listView}>
                 <IconList className={'w-full h-full object-contain'} />
               </div>
             </div>
@@ -439,7 +444,7 @@ export default function SortMenu() {
               </div>
             </div>
           </div>
-          <div className="col-right flex-[1.5] flex gap-y-[15px] gap-x-[25px] items-center justify-start xl:justify-end flex-wrap ">
+          <div className="col-right flex-1 flex gap-[25px] items-center justify-end">
             <Menu as="div" className="relative z-[40] w-fit">
               <Menu.Button className="flex items-center">
                 <span className="flex items-center">

@@ -1,5 +1,5 @@
 import {json} from '@shopify/remix-oxygen';
-import {useLoaderData} from '@remix-run/react';
+import {Await, useLoaderData} from '@remix-run/react';
 import {flattenConnection, AnalyticsPageType} from '@shopify/hydrogen';
 import invariant from 'tiny-invariant';
 
@@ -14,6 +14,7 @@ import {ProductGrid} from '~/components/ProductGrid';
 import {PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {CACHE_SHORT, routeHeaders} from '~/data/cache';
 import {seoPayload} from '~/lib/seo.server';
+import {Suspense, useEffect, useState} from 'react';
 
 export const headers = routeHeaders;
 
@@ -83,7 +84,6 @@ export async function loader({params, request, context}) {
       price,
     });
   }
-  console.log('fetcher call');
   const {collection, collections} = await context.storefront.query(
     COLLECTION_QUERY,
     {
@@ -131,6 +131,14 @@ export async function loader({params, request, context}) {
 
 export default function Collection() {
   const {collection, collections, appliedFilters} = useLoaderData();
+  const [isGrid, setIsGrid] = useState(true);
+
+  const listView = () => {
+    setIsGrid(false);
+  };
+  const gridView = () => {
+    setIsGrid(true);
+  };
 
   return (
     <>
@@ -147,23 +155,41 @@ export default function Collection() {
               </div>
             )}
           </PageHeader>
+
           <SortFilter
             filters={collection.products.filters}
             appliedFilters={appliedFilters}
             collections={collections}
+            listView={listView}
+            gridView={gridView}
+            isGrid={isGrid}
           >
-            <ProductGrid
-              key={collection.id}
-              collection={collection}
-              collections={collections}
-              url={`/collections/${collection.handle}`}
-              data-test="product-grid"
-              className="mt-[30px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-x-[15px] lg:gap-x-[30px] gap-y-[20px] lg:gap-y-[30px] xl:gap-y-[60px]"
-            />
+            {collection && (
+              <Suspense>
+                <Await resolve={collection}>
+                  {({data}) => {
+                    return (
+                      <ProductGrid
+                        key={collection.id}
+                        collection={collection}
+                        collections={collections}
+                        url={`/collections/${collection.handle}`}
+                        data-test="product-grid"
+                        className={`mt-[30px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-x-[15px] lg:gap-x-[30px] gap-y-[20px] lg:gap-y-[30px] xl:gap-y-[60px]  ${
+                          isGrid == true ? 'product-grid' : 'product-list'
+                        }`}
+                      />
+                    );
+                  }}
+                </Await>
+              </Suspense>
+            )}
           </SortFilter>
         </div>
       </Section>
-      <section className={`collection-section bg-[#E7EFFF] bg-opacity-30 mb-[-20px] md:mb-[-30px] xl:mb-[-40px] 2xl:mb-[-50px] py-[40px] md:py-[60px] xl:py-[80px] 2xl:py-[100px]`}> 
+      <section
+        className={`collection-section bg-[#E7EFFF] bg-opacity-30 mb-[-20px] md:mb-[-30px] xl:mb-[-40px] 2xl:mb-[-50px] py-[40px] md:py-[60px] xl:py-[80px] 2xl:py-[100px]`}
+      >
         <div className="container">
           <div className="expandingcard-wrap last:border-black last:border-b-[2px]">
             <ExpandingCard

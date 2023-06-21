@@ -62,6 +62,7 @@ export function ProductGrid({
     // fetcher.load(url.pathname + url.search);
     setIsFetcherCall(true);
     const modifiedUrl = `${location.pathname}?direction=prev&startCursor=${startCursor}&${params}`;
+
     fetcher.load(
       `${location.pathname}?direction=prev&startCursor=${startCursor}&${params}`,
     );
@@ -105,12 +106,10 @@ export function ProductGrid({
   if (!haveProducts) {
     return (
       <>
-        <div className='mt-[20px]'>
-          <p>No products found on this collection</p>
-          <Link to="/products">
-            <p className="underline">Browse catalog</p>
-          </Link>
-        </div>
+        <p>No products found on this collection</p>
+        <Link to="/products">
+          <p className="underline">Browse catalog</p>
+        </Link>
       </>
     );
   }
