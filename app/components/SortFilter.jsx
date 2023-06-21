@@ -241,6 +241,12 @@ function getSortLink(sort, params, location) {
   return `${location.pathname}?${params.toString()}`;
 }
 
+function getPaginationLink(sort, params, location) {
+  params.set('pagination', sort);
+  
+  return `${location.pathname}?${params.toString()}`;
+}
+
 function getFilterLink(filter, rawInput, params, location) {
   const paramsClone = new URLSearchParams(params);
   const newParams = filterInputToParams(filter.type, rawInput, paramsClone);
@@ -365,9 +371,32 @@ export default function SortMenu() {
       key: 'newest',
     },
   ];
+
+  const itemsPagination = [
+    {label: '2', key: '2'},
+    {label: '3', key: '3'},
+    {label: '50', key: '50'},
+    {
+      label: '80',
+      key: '80',
+    },
+    {
+      label: '100',
+      key: '100',
+    },
+    {
+      label: '120',
+      key: '120',
+    },
+    {
+      label: '140',
+      key: '140',
+    },
+  ];
   const [params] = useSearchParams();
   const location = useLocation();
   const activeItem = items.find((item) => item.key === params.get('sort'));
+  const activePagination = itemsPagination.find((item) => item.key === params.get('pagination'));
 
   return (
     <>
@@ -452,16 +481,34 @@ export default function SortMenu() {
                     Anzeige
                   </span>
                   <span className='px-[13px] py-[7px] bg-white border-[1px] border-[#E7EFFF] min-w-[65px] text-[14px] font-semibold text-[#495057] font-["Open_Sans"] flex justify-between gap-[10px] items-center'>
-                    50
+                  {(activePagination || itemsPagination[0]).label}
                     <IconShortby />
                   </span>
                 </span>
               </Menu.Button>
+              
               <Menu.Items
                 as="nav"
                 className="absolute right-0 flex flex-col p-4 text-right rounded-sm bg-contrast"
               >
-                <Menu.Item>
+
+{itemsPagination.map((item) => (
+                  <Menu.Item key={item.label}>
+                    {() => (
+                      <Link
+                        className={`block text-sm pb-2 px-3 ${
+                          activePagination?.key === item.key
+                            ? 'font-bold'
+                            : 'font-normal'
+                        }`}
+                        to={getPaginationLink(item.key, params, location)}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
+                  </Menu.Item>
+                ))}
+                {/* <Menu.Item>
                   <>
                     <a href="#" className="block text-sm pb-2 px-3">
                       80
@@ -479,7 +526,7 @@ export default function SortMenu() {
                       160
                     </a>
                   </>
-                </Menu.Item>
+                </Menu.Item> */}
               </Menu.Items>
             </Menu>
           </div>

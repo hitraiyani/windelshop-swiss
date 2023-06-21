@@ -17,7 +17,7 @@ import {seoPayload} from '~/lib/seo.server';
 
 export const headers = routeHeaders;
 
-const PAGINATION_SIZE = 48;
+//const PAGINATION_SIZE = 2;
 
 export async function loader({params, request, context}) {
   const {collectionHandle} = params;
@@ -30,6 +30,13 @@ export async function loader({params, request, context}) {
   const variantOption = 'variantOption';
   const {sortKey, reverse} = getSortValuesFromParam(searchParams.get('sort'));
   const cursor = searchParams.get('cursor');
+  const endCursordata = searchParams.get('endCursor');
+  const startCursordata = searchParams.get('startCursor');
+  const PAGINATION_SIZE = parseInt(searchParams.get('pagination'))
+    ? parseInt(searchParams.get('pagination'))
+    : 2;
+  const direction = searchParams.get('direction');
+
   const filters = [];
   const appliedFilters = [];
 
@@ -76,14 +83,16 @@ export async function loader({params, request, context}) {
       price,
     });
   }
-
+  console.log('fetcher call');
   const {collection, collections} = await context.storefront.query(
     COLLECTION_QUERY,
     {
       variables: {
         handle: collectionHandle,
-        pageBy: PAGINATION_SIZE,
-        cursor,
+        first: direction === 'prev' ? null : PAGINATION_SIZE,
+        last: direction === 'prev' ? PAGINATION_SIZE : null,
+        endCursors: endCursordata,
+        startCursors: startCursordata,
         filters,
         sortKey,
         reverse,
@@ -146,6 +155,7 @@ export default function Collection() {
             <ProductGrid
               key={collection.id}
               collection={collection}
+              collections={collections}
               url={`/collections/${collection.handle}`}
               data-test="product-grid"
               className="mt-[30px] grid grid-cols-3 gap-x-[30px] gap-y-[60px]"
@@ -153,7 +163,9 @@ export default function Collection() {
           </SortFilter>
         </div>
       </Section>
-      <section className={`collection-section bg-[#E7EFFF] bg-opacity-30 mb-[-50px] py-[100px]`}>
+      <section
+        className={`collection-section bg-[#E7EFFF] bg-opacity-30 mb-[-50px] py-[100px]`}
+      >
         <div className="container">
           <div className="expandingcard-wrap last:border-black last:border-b-[2px]">
             <ExpandingCard
@@ -192,8 +204,11 @@ const COLLECTION_QUERY = `#graphql
     $handle: String!
     $country: CountryCode
     $language: LanguageCode
-    $pageBy: Int!
-    $cursor: String
+    $first: Int
+    $last: Int
+    $endCursors: String
+    $startCursors: String
+    
     $filters: [ProductFilter!]
     $sortKey: ProductCollectionSortKeys!
     $reverse: Boolean
@@ -215,8 +230,11 @@ const COLLECTION_QUERY = `#graphql
         altText
       }
       products(
-        first: $pageBy,
-        after: $cursor,
+        first: $first,
+        last: $last
+        after: $endCursors,
+        before: $startCursors,
+        
         filters: $filters,
         sortKey: $sortKey,
         reverse: $reverse
@@ -236,6 +254,8 @@ const COLLECTION_QUERY = `#graphql
           ...ProductCard
         }
         pageInfo {
+          hasPreviousPage
+          startCursor
           hasNextPage
           endCursor
         }
