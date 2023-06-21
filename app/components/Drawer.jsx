@@ -48,9 +48,9 @@ export function Drawer({heading, open, onClose, openFrom = 'right', children}) {
                 leaveFrom="translate-x-0"
                 leaveTo={offScreen[openFrom]}
               >
-                <Dialog.Panel className="w-screen max-w-lg text-left align-middle transition-all transform shadow-xl h-screen-dynamic bg-contrast">
+                <Dialog.Panel className="w-screen max-w-lg text-left align-middle transition-all transform shadow-xl h-screen-dynamic bg-contrast overflow-auto">
                   <header
-                    className={`sticky top-0 flex items-center px-6 h-nav sm:px-8 md:px-12 ${
+                    className={`sticky top-0 p-[20px] flex ${
                       heading ? 'justify-between' : 'justify-end'
                     }`}
                   >

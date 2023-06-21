@@ -156,6 +156,9 @@ const LAYOUT_QUERY = `#graphql
       primaryDomain {
         url
       }
+      aico_navigation_menu: metafield(namespace: "aico_metafields", key: "aico_navigation_menu") {
+        value
+      }
       brand {
        logo {
          image {
@@ -243,7 +246,7 @@ async function getLayoutData({storefront}) {
     ? parseMenu(data.footerMenu, customPrefixes)
     : undefined;
 
-  return {shop: data.shop, headerMenu, footerMenu, hederTopBar : data?.hederTopBar};
+  return {shop: data.shop, aicoHeaderMenu : data?.shop?.aico_navigation_menu?.value ? JSON.parse(data?.shop?.aico_navigation_menu?.value) : [] , headerMenu, footerMenu, hederTopBar : data?.hederTopBar};
 }
 
 const CART_QUERY = `#graphql

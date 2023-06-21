@@ -45,12 +45,14 @@ export function QuickRequest({className}) {
   }, [fetcher]);
 
   return (
-    <section className={`${className} quick-request-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
+    <section
+      className={`${className} quick-request-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}
+    >
       <div className="container">
-        <div className="quick-request-row flex flex-row gap-[30px]">
-          <div className="content-col w-[270px]">
+        <div className="quick-request-row flex flex-col lg:flex-row gap-[30px]">
+          <div className="content-col w-full lg:w-[270px]">
             <div className="col-inner">
-              <h2 className="text-black text-[24px] font-bold text-left mb-[36px]">
+              <h2 className="text-black text-[24px] font-bold text-left mb-[20px] lg:mb-[36px]">
                 Schnellanfrage
               </h2>
               <div className="comtent-info">
@@ -81,20 +83,16 @@ export function QuickRequest({className}) {
               </div>
             </div>
           </div>
-          <div className="form-col flex-1">
-            <div className="col-inner bg-[#CCDDF1] rounded-[30px] px-[30px] py-[61px]">
+          <div className="form-col w-full lg:flex-1">
+            <div className="col-inner bg-[#CCDDF1] rounded-[30px] px-[30px] md:px-[30px] py-[30px] md:py-[30px] lg:py-[40px] 2xl:py-[61px]">
               <div className="form-wrap max-w-[795px] mx-auto">
                 {fetcher?.data?.status == true && (
                   <span className="text-green-700">
-                    {' '}
-                    {fetcher?.data?.message}{' '}
+                    {fetcher?.data?.message}
                   </span>
                 )}
                 {fetcher?.data?.status == false && (
-                  <span className="text-red-700">
-                    {' '}
-                    {fetcher?.data?.message}{' '}
-                  </span>
+                  <span className="text-red-700">{fetcher?.data?.message}</span>
                 )}
                 <fetcher.Form
                   ref={formRef}
@@ -103,7 +101,7 @@ export function QuickRequest({className}) {
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex gap-[15px] flex-col"
                 >
-                  <div className="form-group flex gap-[11px]">
+                  <div className="form-group flex flex-col md:flex-row gap-[11px]">
                     <div className="form-control flex-1">
                       <input
                         name="name"
@@ -125,7 +123,7 @@ export function QuickRequest({className}) {
                       <p className="text-red-700">{errors.email?.message}</p>
                     </div>
                   </div>
-                  <div className="form-group flex gap-[11px]">
+                  <div className="form-group flex flex-col md:flex-row gap-[11px]">
                     <div className="form-control flex-1">
                       <textarea
                         className="w-full rounded-[20px] !bg-white text-[#1C5F7B] text-[16px] font-medium leading-none placeholder:!text-[#1C5F7B] placeholder:!opacity-100 focus:!border-[#1C5F7B] px-[20px] py-[16px] text-left !border-white focus:!ring-0"
@@ -139,7 +137,7 @@ export function QuickRequest({className}) {
                       <p className="text-red-700">{errors.inquiry?.message}</p>
                     </div>
                   </div>
-                  <div className="submit-btn mt-[15px]">
+                  <div className="submit-btn xl:mt-[15px]">
                     <button
                       type="submit"
                       className="bg-[#1C5F7B] rounded-[30px] py-[2px] pl-[19px] pr-[10px] px-[20px] min-h-[36px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center"

@@ -105,10 +105,12 @@ export function ProductGrid({
   if (!haveProducts) {
     return (
       <>
-        <p>No products found on this collection</p>
-        <Link to="/products">
-          <p className="underline">Browse catalog</p>
-        </Link>
+        <div className='mt-[20px]'>
+          <p>No products found on this collection</p>
+          <Link to="/products">
+            <p className="underline">Browse catalog</p>
+          </Link>
+        </div>
       </>
     );
   }

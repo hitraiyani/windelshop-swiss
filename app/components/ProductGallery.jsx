@@ -16,7 +16,7 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 /**
  * A client component that defines a media gallery for hosting images, 3D models, and videos of products
  */
-export function ProductGallery({media, className}) {
+export function ProductGallery({media, dicountedPr,  className}) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   if (!media.length) {
@@ -113,9 +113,11 @@ export function ProductGallery({media, className}) {
                       }}
                       {...mediaProps}
                     />
-                    <div className='lable absolute text-white text-[20px] leading-none font-["Open_Sans"] bg-[#D12631] border-[4px] border-white py-[6px] px-[10px] font-bold top-[20px] left-[10px] uppercase rounded-[20px]'>
-                      <span>sale-28%</span>
-                    </div>
+                    {dicountedPr != 0 && (
+                      <div className='lable absolute text-white text-[20px] leading-none font-["Open_Sans"] bg-[#D12631] border-[4px] border-white py-[6px] px-[10px] font-bold top-[20px] left-[10px] uppercase rounded-[20px]'>
+                        <span>sale-{dicountedPr}%</span>
+                      </div>
+                    )}
                   </div>
                 </SwiperSlide>
               );
@@ -199,7 +201,7 @@ export function ProductGallery({media, className}) {
                   >
                     <MediaFile
                       tabIndex="0"
-                      className={`w-[152px] h-[152px] object-cover rounded-[10px] cursor-pointer`}
+                      className={`w-full !aspect-square object-contain rounded-[10px] h-full cursor-pointer`}
                       data={data}
                       sizes={
                         '(min-width: 64em) 30vw, (min-width: 48em) 25vw, 90vw'

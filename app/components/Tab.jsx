@@ -8,7 +8,7 @@ export function Tab({ activeTab, label, onClick }) {
   const handleClick = () => {
     onClick(label);
   };
-  let className = "tab-list-item text-[14px] font-bold uppercase pb-[28px] pt-[13px] border-b-[3px] mb-[-2px] cursor-pointer transition-all duration-500 hover:text-[#0A627E]";
+  let className = "tab-list-item text-[12px] md:text-[14px] font-bold uppercase pb-[14px] lg:pb-[28px] pt-[13px] border-b-[3px] mb-[-2px] cursor-pointer transition-all duration-500 hover:text-[#0A627E]";
   return (
     <>
       <li
