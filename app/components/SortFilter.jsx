@@ -21,6 +21,7 @@ import {
   IconGrid,
   IconList,
 } from '~/components';
+import {Image} from '@shopify/hydrogen';
 
 export function SortFilter({
   filters,
@@ -31,6 +32,7 @@ export function SortFilter({
   gridView,
   listView,
   menudata = [],
+  collection,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -57,7 +59,12 @@ export function SortFilter({
           />
         </div>
         <div className="flex-1">
-          <SortMenu gridView={gridView} listView={listView} isGrid={isGrid} />
+          <SortMenu
+            gridView={gridView}
+            listView={listView}
+            isGrid={isGrid}
+            collection={collection}
+          />
           {children}
         </div>
       </div>
@@ -355,7 +362,7 @@ function filterInputToParams(type, rawInput, params) {
   return params;
 }
 
-export default function SortMenu({gridView, listView, isGrid}) {
+export default function SortMenu({gridView, listView, isGrid, collection}) {
   const items = [
     {label: 'Featured', key: 'featured'},
     {
@@ -404,27 +411,30 @@ export default function SortMenu({gridView, listView, isGrid}) {
 
   return (
     <>
-      <div className="collection-shrt-desc mb-[42px]">
-        <div className="col-inner p-[30px] bg-white rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
-          <div className="img-wrap mb-[10px] max-w-[148px] text-[14px] text-[#292929]">
-            <img
+      {collection.description && (
+        <div className="collection-shrt-desc mb-[42px]">
+          <div className="col-inner p-[30px] bg-white rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
+            <div className="img-wrap mb-[10px] max-w-[148px] text-[14px] text-[#292929]">
+              {/* <img
               className="block w-full h-auto"
               src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/layer1.png?v=1685017639"
               alt=""
-            />
-          </div>
-          <div className="desc">
-            <p>
-              Die Marke Pampers wird bei vielen Menschen synonym zum Begriff
-              Windeln verwendet – so populär ist das Produkt. Doch welche
-              Windeln von Pampers sind die richtigen für Ihr Baby? Bei
-              windelshop.ch geben wir Ihnen nicht nur die richtigen Tipps für
-              eine perfekte Wahl der passenden Windeln, sondern haben auch Ihr
-              Wunschprodukt stets vorrätig.
-            </p>
+            /> */}
+              {collection?.image && (
+                <Image
+                  className="block w-full h-auto"
+                  src={collection.image.url}
+                  width={collection.image.width}
+                  height={collection.image.height}
+                  alt={collection.image.altText}
+                />
+              )}
+            </div>
+            <div className="desc">{collection?.description}</div>
           </div>
         </div>
-      </div>
+      )}
+
       <div className="top-filter-wrap">
         <div className="filter-inner flex flex-wrap gap-[25px]">
           <div className="col-left flex-1 gap-[25px] items-center flex">

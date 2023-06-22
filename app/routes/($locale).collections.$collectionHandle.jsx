@@ -139,7 +139,6 @@ export async function loader({params, request, context}) {
 
 export default function Collection() {
   const {collection, collections, appliedFilters, shop} = useLoaderData();
-
   const [isGrid, setIsGrid] = useState(true);
 
   const listView = () => {
@@ -177,6 +176,7 @@ export default function Collection() {
                 ? JSON.parse(shop?.aico_navigation_menu?.value)
                 : []
             }
+            collection={collection}
           >
             {collection && (
               <Suspense>
@@ -271,6 +271,14 @@ const COLLECTION_QUERY = `#graphql
       handle
       title
       description
+      image {
+    	  id,
+        url
+        width,
+        height,
+        altText
+        __typename
+      }
       seo {
         description
         title
