@@ -5,6 +5,8 @@ import {
   useLocation,
   useSearchParams,
   useNavigate,
+  useLoaderData,
+  NavLink,
 } from '@remix-run/react';
 import {useDebounce} from 'react-use';
 import {Disclosure} from '@headlessui/react';
@@ -27,7 +29,8 @@ export function SortFilter({
   collections = [],
   isGrid,
   gridView,
-  listView
+  listView,
+  menudata = [],
 }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -50,6 +53,7 @@ export function SortFilter({
             collections={collections}
             filters={filters}
             appliedFilters={appliedFilters}
+            menudata={menudata}
           />
         </div>
         <div className="flex-1">
@@ -65,6 +69,7 @@ export function FiltersDrawer({
   filters = [],
   appliedFilters = [],
   collections = [],
+  menudata = [],
 }) {
   const [params] = useSearchParams();
   const location = useLocation();
@@ -117,7 +122,7 @@ export function FiltersDrawer({
           size="lead"
           className="text-[#1C5F7B] text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[48px]"
         >
-          Kategorien 
+          Kategorien
         </Heading>
         <div className="px-[48px] py-[27px] hidden">
           {appliedFilters.length > 0 ? (
@@ -127,25 +132,46 @@ export function FiltersDrawer({
           ) : null}
         </div>
         <div className="px-[48px] py-[25px] flex flex-col gap-y-[10px]">
-          {filters.map(
-            
+          {menudata?.map(
             (filter) =>
-              filter.values.length > 1 && (
-                
-                  <div  key={filter.id}>
-                  <Disclosure as="div" key={filter.id} className="w-full">
+              filter.category.name !== 'Home' && (
+                <div key={filter?.category?.handle}>
+                  <Disclosure
+                    as="div"
+                    key={filter.category.handle}
+                    className="w-full"
+                  >
                     {({open}) => (
                       <>
                         <Disclosure.Button className="flex justify-between items-center w-full text-[20px] text-[#292929] font-medium outline-none">
-                          <Text size="lead">{filter.label}</Text>
+                          <Text size="lead">{filter.category.name}</Text>
                           <IconCaret direction={open ? 'up' : 'down'} />
                         </Disclosure.Button>
-                        <Disclosure.Panel key={filter.id}>
+                        <Disclosure.Panel key={filter.category.handle}>
                           <ul
-                            key={filter.id}
+                            key={filter.category.handle}
                             className="py-[18px] flex flex-col gap-y-[18px] filter-sub-items"
                           >
-                            {filter.values?.map((option) => {
+                            {filter.category.subCategories?.map((submenu) =>
+                              submenu.subCategory.subSubCategories?.map(
+                                (subcategory) => (
+                                  // console.log(subcategory.subSubCategory)
+                                  <li
+                                    key={subcategory.subSubCategory.handle}
+                                    className="text-[16px] text-[#292929] font-normal hover:text-[#0A627E] hover:font-bold"
+                                  >
+                                    <NavLink
+                                      className="block"
+                                      prefetch="intent"
+                                      to={`/collections/${subcategory.subSubCategory.handle}`}
+                                    >
+                                      {subcategory.subSubCategory.name}
+                                    </NavLink>
+                                  </li>
+                                ),
+                              ),
+                            )}
+                            {/* {filter.values?.map((option) => {
                               return (
                                 <li
                                   key={option.id}
@@ -154,39 +180,12 @@ export function FiltersDrawer({
                                   {filterMarkup(filter, option)}
                                 </li>
                               );
-                            })}
+                            })} */}
                           </ul>
                         </Disclosure.Panel>
                       </>
                     )}
                   </Disclosure>
-                  {/* <Disclosure as="div" key={filter.id} className="w-full">
-                    {({open}) => (
-                      <>
-                        <Disclosure.Button className="flex justify-between items-center w-full text-[20px] text-[#292929] font-medium outline-none">
-                          <Text size="lead">{filter.label}</Text>
-                          <IconCaret direction={open ? 'up' : 'down'} />
-                        </Disclosure.Button>
-                        <Disclosure.Panel key={filter.id}>
-                          <ul
-                            key={filter.id}
-                            className="py-[18px] flex flex-col gap-y-[18px]"
-                          >
-                            {filter.values?.map((option) => {
-                              return (
-                                <li
-                                  key={option.id}
-                                  className="text-[16px] text-[#292929] font-normal hover:text-[#0A627E] hover:font-bold"
-                                >
-                                  {filterMarkup(filter, option)}
-                                </li>
-                              );
-                            })}
-                          </ul>
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure> */}
                 </div>
               ),
           )}
@@ -248,7 +247,7 @@ function getSortLink(sort, params, location) {
 
 function getPaginationLink(sort, params, location) {
   params.set('pagination', sort);
-  
+
   return `${location.pathname}?${params.toString()}`;
 }
 
@@ -356,7 +355,7 @@ function filterInputToParams(type, rawInput, params) {
   return params;
 }
 
-export default function SortMenu({gridView,listView,isGrid}) {
+export default function SortMenu({gridView, listView, isGrid}) {
   const items = [
     {label: 'Featured', key: 'featured'},
     {
@@ -378,8 +377,6 @@ export default function SortMenu({gridView,listView,isGrid}) {
   ];
 
   const itemsPagination = [
-    {label: '2', key: '2'},
-    {label: '3', key: '3'},
     {label: '50', key: '50'},
     {
       label: '80',
@@ -401,8 +398,10 @@ export default function SortMenu({gridView,listView,isGrid}) {
   const [params] = useSearchParams();
   const location = useLocation();
   const activeItem = items.find((item) => item.key === params.get('sort'));
-  const activePagination = itemsPagination.find((item) => item.key === params.get('pagination'));
- 
+  const activePagination = itemsPagination.find(
+    (item) => item.key === params.get('pagination'),
+  );
+
   return (
     <>
       <div className="collection-shrt-desc mb-[42px]">
@@ -430,10 +429,24 @@ export default function SortMenu({gridView,listView,isGrid}) {
         <div className="filter-inner flex flex-wrap gap-[25px]">
           <div className="col-left flex-1 gap-[25px] items-center flex">
             <div className="pro-view-filter flex gap-[3px]">
-              <div  className={`grid-filter w-[35px] h-[35px] p-[10px] ${(isGrid== true) ? 'bg-[#0A627E] border-[1px] border-[#0A627E] text-white' : 'bg-white border-[1px] border-[#CED4DA] text-[#333333]' }  cursor-pointer`}  onClick={gridView} >
-                <IconGrid className={'w-full h-full object-contain'}  />
+              <div
+                className={`grid-filter w-[35px] h-[35px] p-[10px] ${
+                  isGrid == true
+                    ? 'bg-[#0A627E] border-[1px] border-[#0A627E] text-white'
+                    : 'bg-white border-[1px] border-[#CED4DA] text-[#333333]'
+                }  cursor-pointer`}
+                onClick={gridView}
+              >
+                <IconGrid className={'w-full h-full object-contain'} />
               </div>
-              <div className={`list-filter w-[35px] h-[35px] p-[10px] ${(isGrid == false) ? 'bg-[#0A627E] border-[1px] border-[#0A627E] text-white' : 'bg-white border-[1px] border-[#CED4DA] text-[#333333]'}  cursor-pointer`} onClick={listView}>
+              <div
+                className={`list-filter w-[35px] h-[35px] p-[10px] ${
+                  isGrid == false
+                    ? 'bg-[#0A627E] border-[1px] border-[#0A627E] text-white'
+                    : 'bg-white border-[1px] border-[#CED4DA] text-[#333333]'
+                }  cursor-pointer`}
+                onClick={listView}
+              >
                 <IconList className={'w-full h-full object-contain'} />
               </div>
             </div>
@@ -486,18 +499,17 @@ export default function SortMenu({gridView,listView,isGrid}) {
                     Anzeige
                   </span>
                   <span className='px-[13px] py-[7px] bg-white border-[1px] border-[#E7EFFF] min-w-[65px] text-[14px] font-semibold text-[#495057] font-["Open_Sans"] flex justify-between gap-[10px] items-center'>
-                  {(activePagination || itemsPagination[0]).label}
+                    {(activePagination || itemsPagination[0]).label}
                     <IconShortby />
                   </span>
                 </span>
               </Menu.Button>
-              
+
               <Menu.Items
                 as="nav"
                 className="absolute right-0 flex flex-col p-4 text-right rounded-sm bg-contrast"
               >
-
-{itemsPagination.map((item) => (
+                {itemsPagination.map((item) => (
                   <Menu.Item key={item.label}>
                     {() => (
                       <Link
