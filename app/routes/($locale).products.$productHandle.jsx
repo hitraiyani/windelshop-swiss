@@ -412,7 +412,6 @@ export function ProductForm({setShowProductCompareAlert, setShowProductCompareAl
   const [quantity, setQuantity] = useState(1);
 
   const filteredOption =  product.options.filter((option) => option.values.length > 1);
-  console.log("filteredOption", filteredOption);
 
 
   const productAnalytics = {
@@ -468,6 +467,9 @@ export function ProductForm({setShowProductCompareAlert, setShowProductCompareAl
           <div className="flex w-[60%] flex-wrap gap-[20px]">
             <QuantityComponent quantity={quantity} setQuantity={setQuantity}/>
             <div className="pro-btns flex flex-col flex-1">
+            {isOutOfStock ? (<Button variant="secondary" disabled className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'>
+                <Text>Sold out</Text>
+              </Button>) : (
               <AddToCartButton
                 lines={[
                   {
@@ -484,6 +486,7 @@ export function ProductForm({setShowProductCompareAlert, setShowProductCompareAl
               >
                 <IconCart className={'w-[15px] h-[14px]'} /> + Jetzt kaufen
               </AddToCartButton>
+            ) }
               <div className="btn-group flex items-center justify-center gap-[30px] mt-[11px]">
                 <button  onClick={ isWhishListAdded ?  handleRemoveWishlist : handleAddWishlist }  className={`flex items-center gap-[3px] ${isWhishListAdded ? 'text-[#0A627E]' : 'text-black'} uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]`}>
                   <IconWhishlist className={'w-[11px] h-[10px]'} />+ Wunschliste

@@ -8,7 +8,8 @@ import {
     CompareAtPrice,
     AddToCartButton,
     IconCart,
-    Link
+    Link,
+    Button
   } from '~/components';
   import {isDiscounted, stringTruncate} from '~/lib/utils';
 
@@ -146,18 +147,29 @@ export function ProductCompare() {
                       key={product.id}
                       className="py-2 px-4 border-b border-gray-200"
                     >
-                      <AddToCartButton
-                        lines={[
-                          {
-                            merchandiseId: selectedVariant.id,
-                            quantity: 1,
-                          },
-                        ]}
-                        className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
-                        data-test="add-to-cart"
-                      >
-                        <IconCart className={'w-[15px] h-[14px]'} />+ Jetzt kaufen
-                      </AddToCartButton>
+                      {isOutOfStock ? (
+                        <Button
+                          variant="secondary"
+                          disabled
+                          className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
+                        >
+                          <Text>Sold out</Text>
+                        </Button>
+                      ) : (
+                        <AddToCartButton
+                          lines={[
+                            {
+                              merchandiseId: selectedVariant.id,
+                              quantity: 1,
+                            },
+                          ]}
+                          className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
+                          data-test="add-to-cart"
+                        >
+                          <IconCart className={'w-[15px] h-[14px]'} />+ Jetzt
+                          kaufen
+                        </AddToCartButton>
+                      )}
                       <button
                         onClick={() => {
                           removeFromProductCompare(product.id);
