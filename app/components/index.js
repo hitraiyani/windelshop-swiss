@@ -42,5 +42,8 @@ export {CompareAtPrice} from './CompareAtPrice';
 export {Tabs} from './Tabs';
 export {Tab} from './Tab';
 export {YouMayAlsoLike} from './YouMayAlsoLike';
+export {Wishlist} from './Wishlist';
+export {ProductCompare} from './ProductCompare';
+export {AlertBar} from './AlertBar';
 // Sue me
 export * from './Icon';

@@ -15,6 +15,7 @@ import invariant from 'tiny-invariant';
 
 import {Layout} from '~/components';
 import {seoPayload} from '~/lib/seo.server';
+import {WishlistProvider} from '~/store/WishlistContext';
 
 import favicon from '../public/cart.png';
 
@@ -80,13 +81,15 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Layout
-          layout={data.layout}
-          key={`${locale.language}-${locale.country}`}
-          locale={locale}
-        >
-          <Outlet />
-        </Layout>
+       <WishlistProvider>
+          <Layout
+            layout={data.layout}
+            key={`${locale.language}-${locale.country}`}
+            locale={locale}
+          >
+            <Outlet />
+          </Layout>
+       </WishlistProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

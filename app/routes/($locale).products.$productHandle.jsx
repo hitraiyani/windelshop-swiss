@@ -1,4 +1,4 @@
-import {useRef, Suspense, useMemo, useState} from 'react';
+import {useRef, Suspense, useMemo, useContext, useEffect, useState} from 'react';
 import {Disclosure, Listbox} from '@headlessui/react';
 import {defer} from '@shopify/remix-oxygen';
 import {
@@ -41,11 +41,13 @@ import {
   IconShield,
   IconOekoTex,
   YouMayAlsoLike,
+  AlertBar
 } from '~/components';
 import {getExcerpt, isDiscounted} from '~/lib/utils';
 import {seoPayload} from '~/lib/seo.server';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {routeHeaders, CACHE_SHORT} from '~/data/cache';
+import {WishlistContext } from '~/store/WishlistContext';
 
 export const headers = routeHeaders;
 
@@ -136,12 +138,13 @@ export default function Product() {
     );
   }
 
-  console.log("selectedVariant", selectedVariant);
+  const [showProductCompareNotification, setShowProductCompareNotification] = useState(false);
 
   return (
     <>
       <Section className="!py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px] product-summary !px-0 !block">
         <div className="container"> 
+          <AlertBar showNotification={showProductCompareNotification} setShowNotification={setShowProductCompareNotification}  product={product}/>
           <div className="flex flex-col min-[992px]:flex-row gap-[33px]">
             <ProductGallery
               media={media.nodes}
@@ -173,7 +176,7 @@ export default function Product() {
                   <Text className={'opacity-50 font-medium'}>{vendor}</Text>
                 )} */}
                 </div>
-                <ProductForm />
+                <ProductForm  showProductCompareNotification={showProductCompareNotification} setShowProductCompareNotification={setShowProductCompareNotification}/>
                 <div className="tab-wrap border-t-[1px] border-[#E7EFFF] pt-[14px] lg:pt-[34px] mt-[35px]">
                   <Tabs>
                     <div label="Beschreibung">
@@ -287,12 +290,53 @@ export default function Product() {
   );
 }
 
-export function ProductForm() {
+export function ProductForm({showProductCompareNotification, setShowProductCompareNotification}) {
   const {product, analytics, storeDomain} = useLoaderData();
 
   const [currentSearchParams] = useSearchParams();
   const {location} = useNavigation();
 
+  const { wishlistItems, productCompareItems, addToProductCompare, removeFromProductCompare,  addToWishlist, removeFromWishlist } = useContext(
+    WishlistContext
+  );
+
+  const [isWhishListAdded, setIsWhishListAdded] = useState(false);
+  const [isProductCompareAdded, setIsProductCompareAdded] = useState(false);
+
+  const handleAddWishlist = () => {
+    addToWishlist(product.id);
+  };
+
+  const handleRemoveWishlist = () => {
+    removeFromWishlist(product.id);
+  };
+
+  const handleaddToProductCompare = () => {
+    addToProductCompare(product.id);
+    setShowProductCompareNotification(true);
+  };
+
+  const handleRemoveFromProductCompare = () => {
+    removeFromProductCompare(product.id);
+    setShowProductCompareNotification(false);
+  };
+
+  useEffect(() => {
+      if (wishlistItems.includes(product.id)) {
+        setIsWhishListAdded(true);
+      } else {
+        setIsWhishListAdded(false);
+      }
+  }, [wishlistItems]);
+
+
+  useEffect(() => {
+      if (productCompareItems.includes(product.id)) {
+        setIsProductCompareAdded(true);
+      } else {
+        setIsProductCompareAdded(false);
+      }
+  }, [productCompareItems]);
   /**
    * We update `searchParams` with in-flight request data from `location` (if available)
    * to create an optimistic UI, e.g. check the product option before the
@@ -417,10 +461,10 @@ export function ProductForm() {
                 <IconCart className={'w-[15px] h-[14px]'} /> + Jetzt kaufen
               </AddToCartButton>
               <div className="btn-group flex items-center justify-center gap-[30px] mt-[11px]">
-                <button className='flex items-center gap-[3px] text-black uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]'>
+                <button  onClick={ isWhishListAdded ?  handleRemoveWishlist : handleAddWishlist }  className={`flex items-center gap-[3px] ${isWhishListAdded ? 'text-[#0A627E]' : 'text-black'} uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]`}>
                   <IconWhishlist className={'w-[11px] h-[10px]'} />+ Wunschliste
                 </button>
-                <button className='flex items-center gap-[3px] text-black uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]'>
+                <button onClick={ isProductCompareAdded ?  handleRemoveFromProductCompare : handleaddToProductCompare }  className={`flex items-center gap-[3px] ${isProductCompareAdded ? 'text-[#0A627E]' : 'text-black'} uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]`}>
                   <IconCompar className={'w-[14px] h-[11px]'} />+ Vergleich
                 </button>
               </div>

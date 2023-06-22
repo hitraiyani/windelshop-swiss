@@ -1,8 +1,8 @@
 function root({shop, url}) {
   return {
     title: shop?.name,
-    titleTemplate: '%s | Windelshop',
-    description: truncate(shop?.description ?? ''),
+    titleTemplate: '%s',
+    description: 'Wir sind Ihr zuverlässiger Partner für klassische und ökologische Windeln, Hygieneprodukte und Zubehör ✔Alles für Ihr Baby » Jetzt bestellen!',
     handle: '@shopify',
     url,
     robots: {
@@ -35,7 +35,7 @@ function home() {
   return {
     title: 'Home',
     titleTemplate: 'Windelshop | Ihr Spezialist für Windeln & Hygiene',
-    description: 'The best place to buy snowboarding products',
+    description: 'Wir sind Ihr zuverlässiger Partner für klassische und ökologische Windeln, Hygieneprodukte und Zubehör ✔Alles für Ihr Baby » Jetzt bestellen!',
     robots: {
       noIndex: false,
       noFollow: false,
@@ -313,7 +313,16 @@ function policies({policies, url}) {
   };
 }
 
+function customPage({title, url, description}) {
+  return {
+    title,
+    description,
+    url
+  };
+}
+
 export const seoPayload = {
+  customPage,
   article,
   blog,
   collection,
