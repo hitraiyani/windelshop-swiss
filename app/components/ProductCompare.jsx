@@ -26,159 +26,165 @@ export function ProductCompare() {
   console.log("data", data);
 
   return (
-    <div>
-      {data?.products.length > 0 && (
-        <table className="min-w-full bg-white border border-gray-200">
-          <thead>
-            <tr>
-              <td colSpan="5">
-                <strong>Details</strong>
-              </td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th className="py-2 px-4 border-b border-gray-200">Produkt</th>
-              {data?.products.map((product) => (
-                <td
-                  key={product.id}
-                  className="py-2 px-4 border-b border-gray-200"
-                >
-                  {product.title}
+     <>
+        {!data ? (
+          'Loading...'
+        ) : (
+          <>
+          {data?.products.length > 0 && (
+          <table className="min-w-full bg-white border border-gray-200">
+            <thead>
+              <tr>
+                <td colSpan="5" className="py-2 px-4 border-b border-gray-200">
+                  <strong>Einzelheiten</strong>
                 </td>
-              ))}
-            </tr>
-            <tr>
-              <th className="py-2 px-4 border-b border-gray-200">Bild</th>
-              {data?.products.map((product) => {
-                const cardProduct = product?.variants ? product : {};
-                if (!cardProduct?.variants?.nodes?.length) return null;
-
-                const firstVariant = flattenConnection(cardProduct.variants)[0];
-
-                if (!firstVariant) return null;
-                const {image} = firstVariant;
-                return (
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th className="py-2 px-4 border-b border-gray-200">Produkt</th>
+                {data?.products.map((product) => (
                   <td
                     key={product.id}
                     className="py-2 px-4 border-b border-gray-200"
                   >
-                    {image && (
-                      <Image
-                        width={220}
-                        height={220}
-                        data={image}
-                        className="object-cover justify-center object-center w-24 h-24 border rounded md:w-28 md:h-28"
-                        alt={product.title}
-                      />
-                    )}
+                    <Link to={`/products/${product.handle}`} className="font-bold">{product.title}</Link>
                   </td>
-                );
-              })}
-            </tr>
-            <tr>
-              <th className="py-2 px-4 border-b border-gray-200">Preis</th>
-              {data?.products.map((product) => {
-                const cardProduct = product?.variants ? product : {};
-                if (!cardProduct?.variants?.nodes?.length) return null;
+                ))}
+              </tr>
+              <tr>
+                <th className="py-2 px-4 border-b border-gray-200">Bild</th>
+                {data?.products.map((product) => {
+                  const cardProduct = product?.variants ? product : {};
+                  if (!cardProduct?.variants?.nodes?.length) return null;
 
-                const firstVariant = flattenConnection(cardProduct.variants)[0];
+                  const firstVariant = flattenConnection(cardProduct.variants)[0];
 
-                if (!firstVariant) return null;
-                const {image, price, compareAtPrice} = firstVariant;
-
-                const selectedVariant = product.selectedVariant ?? firstVariant;
-                const isOutOfStock = !selectedVariant?.availableForSale;
-
-                return (
-                  <td
-                    key={product.id}
-                    className="py-2 px-4 border-b border-gray-200"
-                  >
-                    <Text className="flex gap-3 text-xs md:text-base lg:text-lg font-bold text-black">
-                      <Money withoutTrailingZeros data={price} />
-                      {isDiscounted(price, compareAtPrice) && (
-                        <CompareAtPrice
-                          className={'text-black line-through font-medium'}
-                          data={compareAtPrice}
+                  if (!firstVariant) return null;
+                  const {image} = firstVariant;
+                  return (
+                    <td
+                      key={product.id}
+                      className="py-2 px-4 border-b border-gray-200"
+                    >
+                      {image && (
+                        <Image
+                          width={220}
+                          height={220}
+                          data={image}
+                          className="object-cover justify-center object-center w-24 h-24 border rounded md:w-28 md:h-28"
+                          alt={product.title}
                         />
                       )}
-                    </Text>
-                  </td>
-                );
-              })}
-            </tr>
-            <tr>
-              <th className="py-2 px-4 border-b border-gray-200">
-                Zusammenfassung
-              </th>
-              {data?.products.map((product) => {
-                return (
-                  <td
-                    key={product.id}
-                    className="py-2 px-4 border-b border-gray-200"
-                  >
-                    {stringTruncate(product.description, 150)}
-                  </td>
-                );
-              })}
-            </tr>
-            <tr>
-              <th className="py-2 px-4 border-b border-gray-200"></th>
-              {data?.products.map((product) => {
-                const cardProduct = product?.variants ? product : {};
-                if (!cardProduct?.variants?.nodes?.length) return null;
+                    </td>
+                  );
+                })}
+              </tr>
+              <tr>
+                <th className="py-2 px-4 border-b border-gray-200">Preis</th>
+                {data?.products.map((product) => {
+                  const cardProduct = product?.variants ? product : {};
+                  if (!cardProduct?.variants?.nodes?.length) return null;
 
-                const firstVariant = flattenConnection(cardProduct.variants)[0];
+                  const firstVariant = flattenConnection(cardProduct.variants)[0];
 
-                if (!firstVariant) return null;
-                const {image, price, compareAtPrice} = firstVariant;
+                  if (!firstVariant) return null;
+                  const {image, price, compareAtPrice} = firstVariant;
 
-                const selectedVariant = product.selectedVariant ?? firstVariant;
-                const isOutOfStock = !selectedVariant?.availableForSale;
+                  const selectedVariant = product.selectedVariant ?? firstVariant;
+                  const isOutOfStock = !selectedVariant?.availableForSale;
 
-                return (
-                  <td
-                    key={product.id}
-                    className="py-2 px-4 border-b border-gray-200"
-                  >
-                    <AddToCartButton
-                      lines={[
-                        {
-                          merchandiseId: selectedVariant.id,
-                          quantity: 1,
-                        },
-                      ]}
-                      className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
-                      data-test="add-to-cart"
+                  return (
+                    <td
+                      key={product.id}
+                      className="py-2 px-4 border-b border-gray-200"
                     >
-                      <IconCart className={'w-[15px] h-[14px]'} />+ Jetzt kaufen
-                    </AddToCartButton>
-                    <button
-                      onClick={() => {
-                        removeFromProductCompare(product.id);
-                      }}
-                      className='bg-[#dc3545] rounded-[100px] mt-2 w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
+                      <Text className="flex gap-3 text-xs md:text-base lg:text-lg font-bold text-black">
+                        <Money withoutTrailingZeros data={price} />
+                        {isDiscounted(price, compareAtPrice) && (
+                          <CompareAtPrice
+                            className={'text-black line-through font-medium'}
+                            data={compareAtPrice}
+                          />
+                        )}
+                      </Text>
+                    </td>
+                  );
+                })}
+              </tr>
+              <tr>
+                <th className="py-2 px-4 border-b border-gray-200">
+                  Zusammenfassung
+                </th>
+                {data?.products.map((product) => {
+                  return (
+                    <td
+                      key={product.id}
+                      className="py-2 px-4 border-b border-gray-200"
                     >
-                      Entfernen
-                    </button>
-                  </td>
-                );
-              })}
-            </tr>
-          </tbody>
-        </table>
-      )}
-      {data?.products.length == 0 && (
-        <section className="grid gap-6">
-          <Text format>
-              Keine Produkte zum Vergleich gewählt
-          </Text>
-          <div>
-            <Link to={'/'}>Mit dem Einkaufen fortfahren</Link>
-          </div>
-        </section>
-      )}
-    </div>
+                      {stringTruncate(product.description, 150)}
+                    </td>
+                  );
+                })}
+              </tr>
+              <tr>
+                <th className="py-2 px-4 border-b border-gray-200"></th>
+                {data?.products.map((product) => {
+                  const cardProduct = product?.variants ? product : {};
+                  if (!cardProduct?.variants?.nodes?.length) return null;
+
+                  const firstVariant = flattenConnection(cardProduct.variants)[0];
+
+                  if (!firstVariant) return null;
+                  const {image, price, compareAtPrice} = firstVariant;
+
+                  const selectedVariant = product.selectedVariant ?? firstVariant;
+                  const isOutOfStock = !selectedVariant?.availableForSale;
+
+                  return (
+                    <td
+                      key={product.id}
+                      className="py-2 px-4 border-b border-gray-200"
+                    >
+                      <AddToCartButton
+                        lines={[
+                          {
+                            merchandiseId: selectedVariant.id,
+                            quantity: 1,
+                          },
+                        ]}
+                        className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
+                        data-test="add-to-cart"
+                      >
+                        <IconCart className={'w-[15px] h-[14px]'} />+ Jetzt kaufen
+                      </AddToCartButton>
+                      <button
+                        onClick={() => {
+                          removeFromProductCompare(product.id);
+                        }}
+                        className='bg-[#dc3545] rounded-[100px] mt-2 w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
+                      >
+                        Entfernen
+                      </button>
+                    </td>
+                  );
+                })}
+              </tr>
+            </tbody>
+          </table>
+        )}
+        {data?.products.length == 0 && (
+          <section className="grid gap-6">
+            <Text format>
+                Keine Produkte zum Vergleich gewählt
+            </Text>
+            <div>
+              <Link to={'/'}>Mit dem Einkaufen fortfahren</Link>
+            </div>
+          </section>
+        )}
+          </>
+        )}
+     </>
   );
 }
