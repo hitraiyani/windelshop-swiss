@@ -1,4 +1,4 @@
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {Menu} from '@headlessui/react';
 import {
   Link,
@@ -35,6 +35,28 @@ export function SortFilter({
   collection,
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  var categoryname = '';
+  const location = useLocation();
+  menudata.map(
+    (filter) =>
+      filter.category.subCategories.length > 1 &&
+      //console.log(filter.category.subCategories);
+      filter.category.subCategories.map((submenu) => {
+        if (submenu.subCategory.subSubCategories.length > 0) {
+          submenu.subCategory.subSubCategories.map((subsubMenu) => {
+            if (
+              location.pathname ==
+              '/collections/' + subsubMenu.subSubCategory.handle
+            ) {
+              categoryname = filter.category.handle;
+            }
+          });
+        }
+      }),
+  );
+  console.log(categoryname);
+  console.log('categoryname');
+
   return (
     <>
       <div className="flex items-center justify-between w-full hidden">
@@ -56,6 +78,7 @@ export function SortFilter({
             filters={filters}
             appliedFilters={appliedFilters}
             menudata={menudata}
+            categoryname={categoryname}
           />
         </div>
         <div className="flex-1">
@@ -77,6 +100,7 @@ export function FiltersDrawer({
   appliedFilters = [],
   collections = [],
   menudata = [],
+  categoryname,
 }) {
   const [params] = useSearchParams();
   const location = useLocation();
@@ -147,6 +171,9 @@ export function FiltersDrawer({
                     as="div"
                     key={filter.category.handle}
                     className="w-full"
+                    open={
+                      filter.category.handle == categoryname ? true : false
+                    }
                   >
                     {({open}) => (
                       <>
