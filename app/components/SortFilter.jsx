@@ -35,26 +35,7 @@ export function SortFilter({
   collection,
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  var categoryname = '';
-  const location = useLocation();
-  menudata.map(
-    (filter) =>
-      filter.category.subCategories.length > 1 &&
-      //console.log(filter.category.subCategories);
-      filter.category.subCategories.map((submenu) => {
-        if (submenu.subCategory.subSubCategories.length > 0) {
-          submenu.subCategory.subSubCategories.map((subsubMenu) => {
-            if (
-              location.pathname ==
-              '/collections/' + subsubMenu.subSubCategory.handle
-            ) {
-              console.log("fsfsf");
-              categoryname = filter.category.handle;
-            }
-          });
-        }
-      }),
-  );
+  
 
   return (
     <>
@@ -77,7 +58,7 @@ export function SortFilter({
             filters={filters}
             appliedFilters={appliedFilters}
             menudata={menudata}
-            categoryname={categoryname}
+           
           />
         </div>
         <div className="flex-1">
@@ -103,6 +84,36 @@ export function FiltersDrawer({
 }) {
   const [params] = useSearchParams();
   const location = useLocation();
+  var categoryname = '';
+  const [categoryName,setCategoryName] = useState('null')
+  const [isOpen, setOpen] = useState(false);
+  useEffect(() => {
+
+    
+  menudata.map(
+    (filter) =>
+      filter.category.subCategories.length > 1 &&
+      //console.log(filter.category.subCategories);
+      filter.category.subCategories.map((submenu) => {
+        if (submenu.subCategory.subSubCategories.length > 0) {
+          submenu.subCategory.subSubCategories.map((subsubMenu) => {
+            if (
+              location.pathname ==
+              '/collections/' + subsubMenu.subSubCategory.handle
+            ) {
+              console.log("fsfsf");
+              //categoryname = filter.category.handle;
+               setCategoryName(filter.category.handle);
+            }
+          });
+        }
+      }),
+  );
+
+   
+  },[location.pathname])
+  
+  
 
   const filterMarkup = (filter, option) => {
     switch (filter.type) {
@@ -168,12 +179,13 @@ export function FiltersDrawer({
                 <div key={filter?.category?.handle}>
                   <Disclosure
                     as="div"
-                    key={filter.category.handle}
+                    key={filter.category.handle+categoryName}
+                    id={filter.category.handle}
                     className="w-full"
                     defaultOpen={
-                      filter.category.handle == categoryname ? true : false
+                      filter.category.handle == categoryName ? true : false
                     }
-                  >
+                    >
                     {({open}) => (
                       <>
                         <Disclosure.Button className="flex justify-between items-center w-full text-[20px] text-[#292929] font-medium outline-none">
@@ -204,16 +216,7 @@ export function FiltersDrawer({
                                 ),
                               ),
                             )}
-                            {/* {filter.values?.map((option) => {
-                              return (
-                                <li
-                                  key={option.id}
-                                  className="text-[16px] text-[#292929] font-normal hover:text-[#0A627E] hover:font-bold"
-                                >
-                                  {filterMarkup(filter, option)}
-                                </li>
-                              );
-                            })} */}
+                            
                           </ul>
                         </Disclosure.Panel>
                       </>
