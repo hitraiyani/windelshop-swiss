@@ -223,27 +223,29 @@ function MenuMobileNav({menu, aicoMenu, onClose}) {
               >
                 {item.category.name}
               </Link>
-              <div
-                onClick={megaMenuMobileClick}
-                className="flex-1 flex justify-end"
-              >
-                <svg
-                  className="icon"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={20}
-                  height={20}
-                  viewBox="0 0 32 32"
-                >
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="m6 12l10 10l10-10"
-                  />
-                </svg>
-              </div>
+              {item?.category?.subCategories?.length > 0 && (
+                  <div
+                    onClick={megaMenuMobileClick}
+                    className="flex-1 flex justify-end"
+                  >
+                    <svg
+                      className="icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={20}
+                      height={20}
+                      viewBox="0 0 32 32"
+                    >
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="m6 12l10 10l10-10"
+                      />
+                    </svg>
+                  </div>
+              )}
             </div>
             {item?.category?.subCategories?.length > 0 && (
               <SubMegaMenu
