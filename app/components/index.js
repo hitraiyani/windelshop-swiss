@@ -27,7 +27,7 @@ export {HeroSlider} from './HeroSlider';
 export {BestsellerCategories} from './BestsellerCategories';
 export {NewInTheShop} from './NewInTheShop';
 export {CtaBanner} from './CtaBanner';
-export {Popularproducts} from './Popularproducts';
+export {Popularproducts, ProductCardView} from './Popularproducts';
 export {CustomerSatisfaction} from './CustomerSatisfaction';
 export {Bestseller} from './Bestseller';
 export {ShoppingByBrands} from './ShoppingByBrands';

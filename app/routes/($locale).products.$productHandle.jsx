@@ -7,6 +7,7 @@ import {
   useSearchParams,
   useLocation,
   useNavigation,
+  useFetcher
 } from '@remix-run/react';
 import {AnalyticsPageType, Money, ShopPayButton} from '@shopify/hydrogen';
 import invariant from 'tiny-invariant';
@@ -76,7 +77,7 @@ export async function loader({params, request, context}) {
     throw new Response('product', {status: 404});
   }
 
-  const recommended = getRecommendedProducts(context.storefront, product.id);
+  const recommended = getRecommendedProducts(context.storefront, product.cross_selling);
   const firstVariant = product.variants.nodes[0];
   const selectedVariant = product.selectedVariant ?? firstVariant;
 
@@ -121,6 +122,8 @@ export default function Product() {
   const {product, shop, recommended} = useLoaderData();
   const {media, title, vendor, descriptionHtml} = product;
   const {shippingPolicy, refundPolicy} = shop;
+  const {load, data } = useFetcher();
+
 
   const firstVariant = product.variants.nodes[0];
   const selectedVariant = product.selectedVariant ?? firstVariant;
@@ -139,6 +142,27 @@ export default function Product() {
     );
   }
 
+  const [bundleProdListSorted, setBundleProdListSorted] = useState([]);
+  const [productBundleData, setProductBundleData] = useState([]);
+
+  useEffect(() => {
+    setBundleProdListSorted([]);
+    setProductBundleData([]);
+      load(`/api/productBundle?productHandle=${encodeURIComponent(product?.handle)}`);
+  }, [product?.handle]);
+
+  useEffect(() => {
+    if (data) {
+      if (data?.bundleProdList) {
+       setBundleProdListSorted(data.bundleProdList);
+      }
+      if (data?.productBundleData) {
+        setProductBundleData(data.productBundleData);
+      }
+    }
+  }, [data]);
+
+
   const [showProductCompareAlert, setShowProductCompareAlert] = useState(false);
   const [showProductWishlistAlert, setShowProductWishlistAlert] = useState(false);
   const [showProductCompareAlertType, setShowProductCompareAlertType] = useState('added');
@@ -147,17 +171,21 @@ export default function Product() {
   return (
     <>
       <Section className="!py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px] product-summary !px-0 !block">
-        <div className="container"> 
-          {
-            showProductCompareAlert && (
-              <ProductCompareAlertBar setShowProductCompareAlert={setShowProductCompareAlert} alertType={showProductCompareAlertType}  product={product}/>
-            )
-          }
-          {
-            showProductWishlistAlert && (
-              <ProductWishListAlertBar setShowProductWishlistAlert={setShowProductWishlistAlert} alertType={showProductWishlistAlertType}  product={product}/>
-            )
-          }
+        <div className="container">
+          {showProductCompareAlert && (
+            <ProductCompareAlertBar
+              setShowProductCompareAlert={setShowProductCompareAlert}
+              alertType={showProductCompareAlertType}
+              product={product}
+            />
+          )}
+          {showProductWishlistAlert && (
+            <ProductWishListAlertBar
+              setShowProductWishlistAlert={setShowProductWishlistAlert}
+              alertType={showProductWishlistAlertType}
+              product={product}
+            />
+          )}
           <div className="flex flex-col min-[992px]:flex-row gap-[33px]">
             <ProductGallery
               media={media.nodes}
@@ -168,14 +196,16 @@ export default function Product() {
               <section className="product-info">
                 <div className="stock-delivery-info">
                   <div className="inner flex flex-wrap gap-[16px] items-center">
-                    {selectedVariant.availableForSale && (
-                      <span className='rounded-[20px] bg-[#26D12D] uppercase text-[11px] leading-none font-["Open_Sans"] font-semibold p-[5px] min-h-[27px] min-w-[106px] flex items-center justify-center text-center text-white'>
-                        IN STOCK
-                      </span>
+                    {selectedVariant.quantityAvailable > 0 && (
+                      <>
+                        <span className='rounded-[20px] bg-[#26D12D] uppercase text-[11px] leading-none font-["Open_Sans"] font-semibold p-[5px] min-h-[27px] min-w-[106px] flex items-center justify-center text-center text-white'>
+                          IN STOCK
+                        </span>
+                        <span className='rounded-[20px] bg-white uppercase text-[11px] leading-none font-["Open_Sans"] font-semibold p-[5px] min-h-[27px] min-w-[106px] flex items-center justify-center text-center text-black'>
+                          delivery tomorrow
+                        </span>
+                      </>
                     )}
-                    <span className='rounded-[20px] bg-white uppercase text-[11px] leading-none font-["Open_Sans"] font-semibold p-[5px] min-h-[27px] min-w-[106px] flex items-center justify-center text-center text-black'>
-                      delivery tomorrow
-                    </span>
                   </div>
                 </div>
                 <div className="grid gap-2 mt-[7px] mb-[38px]">
@@ -189,13 +219,57 @@ export default function Product() {
                   <Text className={'opacity-50 font-medium'}>{vendor}</Text>
                 )} */}
                 </div>
-                <ProductForm setShowProductCompareAlert={setShowProductCompareAlert} setShowProductCompareAlertType={setShowProductCompareAlertType} setShowProductWishlistAlert={setShowProductWishlistAlert} setShowProductWishlistAlertType={setShowProductWishlistAlertType}/>
+                <ProductForm
+                  setShowProductCompareAlert={setShowProductCompareAlert}
+                  setShowProductCompareAlertType={
+                    setShowProductCompareAlertType
+                  }
+                  setShowProductWishlistAlert={setShowProductWishlistAlert}
+                  setShowProductWishlistAlertType={
+                    setShowProductWishlistAlertType
+                  }
+                />
                 <div className="tab-wrap border-t-[1px] border-[#E7EFFF] pt-[14px] lg:pt-[34px] mt-[35px]">
                   <Tabs>
                     <div label="Beschreibung">
-                      <div className="tab-content"
-                        dangerouslySetInnerHTML={{__html: product.descriptionHtml}}
+                      <div
+                        className="tab-content"
                       >
+                        <div
+                            dangerouslySetInnerHTML={{
+                              __html: product.descriptionHtml,
+                            }}
+                        >
+                        </div>
+                        {bundleProdListSorted.length > 0 && (
+                          <>
+                            <div className="set_enthalt">
+                              <Text className="title" as="h4">
+                                Set enthält:
+                              </Text>
+                              <div className="">
+                                <ul>
+                                  {bundleProdListSorted.map((item, i) => (
+                                    <span key={i}>
+                                      {item.href ? (
+                                        <li className="opacity-100">
+                                          {' '}
+                                          <Link to={item.href}>
+                                            {item.content}
+                                          </Link>
+                                        </li>
+                                      ) : (
+                                        <li key={i} className="opacity-100">
+                                          {item.content}
+                                        </li>
+                                      )}
+                                    </span>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          </>
+                        )}
                         {/* <h4 className="text-[19px] text-[#0A627E] font-bold mb-[15px]">
                           Pampers Baby-Dry Gr.3 Midi 6-10kg (52 STK) Sparpack
                         </h4>
@@ -253,52 +327,34 @@ export default function Product() {
                         </div> */}
                       </div>
                     </div>
-                    <div label="Schnellsuche">
-                      <p>Schnellsuche tab</p>
-                    </div>
                     <div label="Bewertungen (0)">
-                    <p>Bewertungen tab</p>
+                      <p>Bewertungen tab</p>
                     </div>
                   </Tabs>
                 </div>
-                {/* <div className="grid gap-4 py-4">
-                  {descriptionHtml && (
-                    <ProductDetail
-                      title="Product Details"
-                      content={descriptionHtml}
-                    />
-                  )}
-                  {shippingPolicy?.body && (
-                    <ProductDetail
-                      title="Shipping"
-                      content={getExcerpt(shippingPolicy.body)}
-                      learnMore={`/policies/${shippingPolicy.handle}`}
-                    />
-                  )}
-                  {refundPolicy?.body && (
-                    <ProductDetail
-                      title="Returns"
-                      content={getExcerpt(refundPolicy.body)}
-                      learnMore={`/policies/${refundPolicy.handle}`}
-                    />
-                  )}
-                </div> */}
               </section>
             </div>
           </div>
         </div>
       </Section>
-      <YouMayAlsoLike className={'bg-[#E7EFFF] bg-opacity-30 mb-[-20px] md:mb-[-30px] xl:mb-[-40px] 2xl:mb-[-50px] !py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px]'} />
-      {/* <Suspense fallback={<Skeleton className="h-32" />}>
+      <Suspense fallback={<Skeleton className="h-32" />}>
         <Await
           errorElement="There was a problem loading related products"
           resolve={recommended}
         >
-          {(products) => (
-            <ProductSwimlane title="Related Products" products={products} />
-          )}
+          {(products) => {
+            return (
+              <YouMayAlsoLike
+                products={products}
+                title={'Das könnte Ihnen auch gefallen'}
+                className={
+                  'bg-[#E7EFFF] bg-opacity-30 mb-[-20px] md:mb-[-30px] xl:mb-[-40px] 2xl:mb-[-50px] !py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px]'
+                }
+              />
+            );
+          }}
         </Await>
-      </Suspense> */}
+      </Suspense>
     </>
   );
 }
@@ -446,18 +502,23 @@ export function ProductForm({setShowProductCompareAlert, setShowProductCompareAl
               className="font-bold"
             />
             <span className="price-without-VAT text-black text-opacity-[50%] text-[18px] font-medium">
-              Preis ohne MWST CHF 14.76
+              Preis ohne MWST{' '}
+              <Money
+                as="span"
+                withoutTrailingZeros
+                data={selectedVariant?.price}
+              />
             </span>
           </div>
         </div>
       </div>
       {filteredOption.length > 0 && (
-          <div className="product-options-wrap border-t-[1px] border-[#E7EFFF] mt-[46px] pt-[37px] flex flex-row flex-wrap gap-y-[20px] gap-x-[52px]">
-            <ProductOptions
-              options={product.options}
-              searchParamsWithDefaults={searchParamsWithDefaults}
-            />
-          </div>
+        <div className="product-options-wrap border-t-[1px] border-[#E7EFFF] mt-[46px] pt-[37px] flex flex-row flex-wrap gap-y-[20px] gap-x-[52px]">
+          <ProductOptions
+            options={product.options}
+            searchParamsWithDefaults={searchParamsWithDefaults}
+          />
+        </div>
       )}
       <div className="product-crowd pt-[50px]">
         <h2 className='title mb-[17px] text-[14px] text-[#666666] uppercase font-bold font-["Open_Sans"]'>
@@ -465,33 +526,55 @@ export function ProductForm({setShowProductCompareAlert, setShowProductCompareAl
         </h2>
         <div className="col-inner flex justify-between gap-[20px] flex-wrap">
           <div className="flex w-[60%] flex-wrap gap-[20px]">
-            <QuantityComponent quantity={quantity} setQuantity={setQuantity}/>
+            <QuantityComponent quantity={quantity} setQuantity={setQuantity} />
             <div className="pro-btns flex flex-col flex-1">
-            {isOutOfStock ? (<Button variant="secondary" disabled className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'>
-                <Text>Sold out</Text>
-              </Button>) : (
-              <AddToCartButton
-                lines={[
-                  {
-                    merchandiseId: selectedVariant.id,
-                    quantity: quantity,
-                  },
-                ]}
-                className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
-                data-test="add-to-cart"
-                analytics={{
-                  products: [productAnalytics],
-                  totalValue: parseFloat(productAnalytics.price),
-                }}
-              >
-                <IconCart className={'w-[15px] h-[14px]'} /> + Jetzt kaufen
-              </AddToCartButton>
-            ) }
+              {isOutOfStock ? (
+                <Button
+                  variant="secondary"
+                  disabled
+                  className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
+                >
+                  <Text>Sold out</Text>
+                </Button>
+              ) : (
+                <AddToCartButton
+                  lines={[
+                    {
+                      merchandiseId: selectedVariant.id,
+                      quantity: quantity,
+                    },
+                  ]}
+                  className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
+                  data-test="add-to-cart"
+                  analytics={{
+                    products: [productAnalytics],
+                    totalValue: parseFloat(productAnalytics.price),
+                  }}
+                >
+                  <IconCart className={'w-[15px] h-[14px]'} /> + Jetzt kaufen
+                </AddToCartButton>
+              )}
               <div className="btn-group flex items-center justify-center gap-[30px] mt-[11px]">
-                <button  onClick={ isWhishListAdded ?  handleRemoveWishlist : handleAddWishlist }  className={`flex items-center gap-[3px] ${isWhishListAdded ? 'text-[#0A627E]' : 'text-black'} uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]`}>
+                <button
+                  onClick={
+                    isWhishListAdded ? handleRemoveWishlist : handleAddWishlist
+                  }
+                  className={`flex items-center gap-[3px] ${
+                    isWhishListAdded ? 'text-[#0A627E]' : 'text-black'
+                  } uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]`}
+                >
                   <IconWhishlist className={'w-[11px] h-[10px]'} />+ Wunschliste
                 </button>
-                <button onClick={ isProductCompareAdded ?  handleRemoveFromProductCompare : handleaddToProductCompare }  className={`flex items-center gap-[3px] ${isProductCompareAdded ? 'text-[#0A627E]' : 'text-black'} uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]`}>
+                <button
+                  onClick={
+                    isProductCompareAdded
+                      ? handleRemoveFromProductCompare
+                      : handleaddToProductCompare
+                  }
+                  className={`flex items-center gap-[3px] ${
+                    isProductCompareAdded ? 'text-[#0A627E]' : 'text-black'
+                  } uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]`}
+                >
                   <IconCompar className={'w-[14px] h-[11px]'} />+ Vergleich
                 </button>
               </div>
@@ -802,6 +885,7 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
   fragment ProductVariantFragment on ProductVariant {
     id
     availableForSale
+    quantityAvailable
     selectedOptions {
       name
       value
@@ -865,6 +949,9 @@ const PRODUCT_QUERY = `#graphql
           ...ProductVariantFragment
         }
       }
+      cross_selling : metafield(namespace: "custom_fields", key: "cross_selling") {
+        value
+      }
       seo {
         description
         title
@@ -890,43 +977,90 @@ const PRODUCT_QUERY = `#graphql
 `;
 
 const RECOMMENDED_PRODUCTS_QUERY = `#graphql
-  query productRecommendations(
-    $productId: ID!
-    $count: Int
+  ${MEDIA_FRAGMENT}
+  ${PRODUCT_VARIANT_FRAGMENT}
+  query Product(
     $country: CountryCode
     $language: LanguageCode
+    $handle: String!
   ) @inContext(country: $country, language: $language) {
-    recommended: productRecommendations(productId: $productId) {
-      ...ProductCard
-    }
-    additional: products(first: $count, sortKey: BEST_SELLING) {
-      nodes {
-        ...ProductCard
+    product(handle: $handle) {
+      id
+      title
+      handle
+      options {
+        name
+        values
+      }
+      media(first: 7) {
+        nodes {
+          ...Media
+        }
+      }
+      variants(first: 1) {
+        nodes {
+          ...ProductVariantFragment
+        }
       }
     }
   }
-  ${PRODUCT_CARD_FRAGMENT}
 `;
 
-async function getRecommendedProducts(storefront, productId) {
-  const products = await storefront.query(RECOMMENDED_PRODUCTS_QUERY, {
-    variables: {productId, count: 12},
-  });
+// const RECOMMENDED_PRODUCTS_QUERY = `#graphql
+//   query productRecommendations(
+//     $productId: ID!
+//     $count: Int
+//     $country: CountryCode
+//     $language: LanguageCode
+//   ) @inContext(country: $country, language: $language) {
+//     recommended: productRecommendations(productId: $productId) {
+//       ...ProductCard
+//     }
+//     additional: products(first: $count, sortKey: BEST_SELLING) {
+//       nodes {
+//         ...ProductCard
+//       }
+//     }
+//   }
+//   ${PRODUCT_CARD_FRAGMENT}
+// `;
 
-  invariant(products, 'No data returned from Shopify API');
-
-  const mergedProducts = products.recommended
-    .concat(products.additional.nodes)
-    .filter(
-      (value, index, array) =>
-        array.findIndex((value2) => value2.id === value.id) === index,
+async function getRecommendedProducts(storefront, cross_selling) {
+  const recommendedProd = [];
+  if (cross_selling?.value) {
+    const crossSellingProducts = cross_selling?.value.split('|');
+    await Promise.all(
+      crossSellingProducts.map(async (productHandle) => {
+        const data = await storefront.query(RECOMMENDED_PRODUCTS_QUERY, {
+          variables: {
+            handle: productHandle,
+            country: storefront.i18n.country,
+            language: storefront.i18n.language,
+          },
+        });
+        recommendedProd.push(data.product);
+      }),
     );
+  }
+  return recommendedProd;
+  // const products = await storefront.query(RECOMMENDED_PRODUCTS_QUERY, {
+  //   variables: {productId, count: 12},
+  // });
 
-  const originalProduct = mergedProducts
-    .map((item) => item.id)
-    .indexOf(productId);
+  // invariant(products, 'No data returned from Shopify API');
 
-  mergedProducts.splice(originalProduct, 1);
+  // const mergedProducts = products.recommended
+  //   .concat(products.additional.nodes)
+  //   .filter(
+  //     (value, index, array) =>
+  //       array.findIndex((value2) => value2.id === value.id) === index,
+  //   );
 
-  return mergedProducts;
+  // const originalProduct = mergedProducts
+  //   .map((item) => item.id)
+  //   .indexOf(productId);
+
+  // mergedProducts.splice(originalProduct, 1);
+
+  // return mergedProducts;
 }

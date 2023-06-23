@@ -8,6 +8,7 @@ import {
   CompareAtPrice,
   AddToCartButton,
   Text,
+  Button,
 } from '~/components';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
 import {isDiscounted} from '~/lib/utils';
@@ -169,11 +170,13 @@ export function Popularproducts({
   );
 }
 
-function ProductCardView({product}) {
+export function ProductCardView({product}) {
   const firstVariant = flattenConnection(product?.variants)[0];
 
   if (!firstVariant) return null;
   const {image, price, compareAtPrice} = firstVariant;
+
+  const isOutOfStock = !firstVariant?.availableForSale;
 
   const isDiscountedPrice = isDiscounted(price, compareAtPrice);
 
@@ -242,26 +245,36 @@ function ProductCardView({product}) {
           </span>
         </div>
         <div className="buy-now-btn flex mt-[14px]">
-          <AddToCartButton
-            lines={[
-              {
-                quantity: 1,
-                merchandiseId: firstVariant.id,
-              },
-            ]}
-            variant="secondary"
-            analytics={{
-              products: [productAnalytics],
-              totalValue: parseFloat(productAnalytics.price),
-            }}
-          >
-            <Text
-              as="span"
-              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+          {isOutOfStock ? (
+            <Button
+              variant="secondary"
+              disabled
+              className='bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold'
             >
-              Jetzt Kaufen
-            </Text>
-          </AddToCartButton>
+              <Text>Sold out</Text>
+            </Button>
+          ) : (
+            <AddToCartButton
+              lines={[
+                {
+                  quantity: 1,
+                  merchandiseId: firstVariant.id,
+                },
+              ]}
+              variant="secondary"
+              analytics={{
+                products: [productAnalytics],
+                totalValue: parseFloat(productAnalytics.price),
+              }}
+            >
+              <Text
+                as="span"
+                className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+              >
+                Jetzt Kaufen
+              </Text>
+            </AddToCartButton>
+          )}
         </div>
       </div>
     </div>
