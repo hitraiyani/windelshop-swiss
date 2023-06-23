@@ -41,7 +41,8 @@ import {
   IconShield,
   IconOekoTex,
   YouMayAlsoLike,
-  AlertBar
+  ProductCompareAlertBar,
+  ProductWishListAlertBar
 } from '~/components';
 import {getExcerpt, isDiscounted} from '~/lib/utils';
 import {seoPayload} from '~/lib/seo.server';
@@ -138,13 +139,25 @@ export default function Product() {
     );
   }
 
-  const [showProductCompareNotification, setShowProductCompareNotification] = useState(false);
+  const [showProductCompareAlert, setShowProductCompareAlert] = useState(false);
+  const [showProductWishlistAlert, setShowProductWishlistAlert] = useState(false);
+  const [showProductCompareAlertType, setShowProductCompareAlertType] = useState('added');
+  const [showProductWishlistAlertType, setShowProductWishlistAlertType] = useState('added');
 
   return (
     <>
       <Section className="!py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px] product-summary !px-0 !block">
         <div className="container"> 
-          <AlertBar showNotification={showProductCompareNotification} setShowNotification={setShowProductCompareNotification}  product={product}/>
+          {
+            showProductCompareAlert && (
+              <ProductCompareAlertBar setShowProductCompareAlert={setShowProductCompareAlert} alertType={showProductCompareAlertType}  product={product}/>
+            )
+          }
+          {
+            showProductWishlistAlert && (
+              <ProductWishListAlertBar setShowProductWishlistAlert={setShowProductWishlistAlert} alertType={showProductWishlistAlertType}  product={product}/>
+            )
+          }
           <div className="flex flex-col min-[992px]:flex-row gap-[33px]">
             <ProductGallery
               media={media.nodes}
@@ -176,7 +189,7 @@ export default function Product() {
                   <Text className={'opacity-50 font-medium'}>{vendor}</Text>
                 )} */}
                 </div>
-                <ProductForm  showProductCompareNotification={showProductCompareNotification} setShowProductCompareNotification={setShowProductCompareNotification}/>
+                <ProductForm setShowProductCompareAlert={setShowProductCompareAlert} setShowProductCompareAlertType={setShowProductCompareAlertType} setShowProductWishlistAlert={setShowProductWishlistAlert} setShowProductWishlistAlertType={setShowProductWishlistAlertType}/>
                 <div className="tab-wrap border-t-[1px] border-[#E7EFFF] pt-[14px] lg:pt-[34px] mt-[35px]">
                   <Tabs>
                     <div label="Beschreibung">
@@ -290,7 +303,7 @@ export default function Product() {
   );
 }
 
-export function ProductForm({showProductCompareNotification, setShowProductCompareNotification}) {
+export function ProductForm({setShowProductCompareAlert, setShowProductCompareAlertType, setShowProductWishlistAlert, setShowProductWishlistAlertType}) {
   const {product, analytics, storeDomain} = useLoaderData();
 
   const [currentSearchParams] = useSearchParams();
@@ -305,20 +318,26 @@ export function ProductForm({showProductCompareNotification, setShowProductCompa
 
   const handleAddWishlist = () => {
     addToWishlist(product.id);
+    setShowProductWishlistAlert(true);
+    setShowProductWishlistAlertType('added');
   };
 
   const handleRemoveWishlist = () => {
     removeFromWishlist(product.id);
+    setShowProductWishlistAlert(true);
+    setShowProductWishlistAlertType('removed');
   };
 
   const handleaddToProductCompare = () => {
     addToProductCompare(product.id);
-    setShowProductCompareNotification(true);
+    setShowProductCompareAlert(true);
+    setShowProductCompareAlertType('added');
   };
 
   const handleRemoveFromProductCompare = () => {
     removeFromProductCompare(product.id);
-    setShowProductCompareNotification(false);
+    setShowProductCompareAlert(true);
+    setShowProductCompareAlertType('removed');
   };
 
   useEffect(() => {
@@ -392,6 +411,8 @@ export function ProductForm({showProductCompareNotification, setShowProductCompa
 
   const [quantity, setQuantity] = useState(1);
 
+  const filteredOption =  product.options.filter((option) => option.values.length > 1);
+
 
   const productAnalytics = {
     ...analytics.products[0],
@@ -430,12 +451,14 @@ export function ProductForm({showProductCompareNotification, setShowProductCompa
           </div>
         </div>
       </div>
-      <div className="product-options-wrap border-t-[1px] border-[#E7EFFF] mt-[46px] pt-[37px] flex flex-row flex-wrap gap-y-[20px] gap-x-[52px]">
-        <ProductOptions
-          options={product.options}
-          searchParamsWithDefaults={searchParamsWithDefaults}
-        />
-      </div>
+      {filteredOption.length > 0 && (
+          <div className="product-options-wrap border-t-[1px] border-[#E7EFFF] mt-[46px] pt-[37px] flex flex-row flex-wrap gap-y-[20px] gap-x-[52px]">
+            <ProductOptions
+              options={product.options}
+              searchParamsWithDefaults={searchParamsWithDefaults}
+            />
+          </div>
+      )}
       <div className="product-crowd pt-[50px]">
         <h2 className='title mb-[17px] text-[14px] text-[#666666] uppercase font-bold font-["Open_Sans"]'>
           Menge
@@ -444,6 +467,9 @@ export function ProductForm({showProductCompareNotification, setShowProductCompa
           <div className="flex w-[60%] flex-wrap gap-[20px]">
             <QuantityComponent quantity={quantity} setQuantity={setQuantity}/>
             <div className="pro-btns flex flex-col flex-1">
+            {isOutOfStock ? (<Button variant="secondary" disabled className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'>
+                <Text>Sold out</Text>
+              </Button>) : (
               <AddToCartButton
                 lines={[
                   {
@@ -460,6 +486,7 @@ export function ProductForm({showProductCompareNotification, setShowProductCompa
               >
                 <IconCart className={'w-[15px] h-[14px]'} /> + Jetzt kaufen
               </AddToCartButton>
+            ) }
               <div className="btn-group flex items-center justify-center gap-[30px] mt-[11px]">
                 <button  onClick={ isWhishListAdded ?  handleRemoveWishlist : handleAddWishlist }  className={`flex items-center gap-[3px] ${isWhishListAdded ? 'text-[#0A627E]' : 'text-black'} uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]`}>
                   <IconWhishlist className={'w-[11px] h-[10px]'} />+ Wunschliste

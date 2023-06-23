@@ -36,7 +36,14 @@ export const WishlistProvider = ({ children }) => {
   };
 
   const addToProductCompare = (item) => {
-    setproductCompareItems((prevItems) => [...prevItems, item]);
+    setproductCompareItems((prevItems) => {
+      // Remove the oldest element if the array has reached the maximum length
+      if (prevItems.length === 4) {
+        prevItems.shift(); // Remove the first element (oldest)
+      }
+      // Add the new item to the end of the array
+      return [...prevItems, item];
+    });
   };
 
   const removeFromProductCompare = (itemId) => {
