@@ -48,14 +48,13 @@ export function SortFilter({
               location.pathname ==
               '/collections/' + subsubMenu.subSubCategory.handle
             ) {
+              console.log("fsfsf");
               categoryname = filter.category.handle;
             }
           });
         }
       }),
   );
-  console.log(categoryname);
-  console.log('categoryname');
 
   return (
     <>
@@ -171,7 +170,7 @@ export function FiltersDrawer({
                     as="div"
                     key={filter.category.handle}
                     className="w-full"
-                    open={
+                    defaultOpen={
                       filter.category.handle == categoryname ? true : false
                     }
                   >
