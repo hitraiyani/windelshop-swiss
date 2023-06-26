@@ -5,6 +5,14 @@ import Cookies from 'js-cookie';
 
 
 import {countries, languageSwitchOption} from '~/data/countries';
+import deJson from '~/data/de.json';
+import frJson from '~/data/fr.json';
+
+
+export const translate = (key, language) => {
+  const translations = language.toLowerCase() === 'fr' ? frJson : deJson;
+  return translations[key] || '';
+};
 
 export function missingClass(string, prefix) {
   if (!string) {

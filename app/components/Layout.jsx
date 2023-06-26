@@ -34,7 +34,7 @@ import {
   IconMap,
   IconFacebook,
 } from '~/components';
-import {useIsHomePath, toHTML, getMenuHandle} from '~/lib/utils';
+import {useIsHomePath, toHTML, getMenuHandle, translate} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {Helmet} from 'react-helmet';
@@ -669,7 +669,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                     to={'/account'}
                     className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
-                    Mein Konto
+                    { translate('account', locale?.language) }
                   </Link>
                 </li>
                 <li>
@@ -677,7 +677,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                     to={'/wishlist'}
                     className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
-                    Wunschliste <span>({wishlistContextData?.wishlistItems ? wishlistContextData?.wishlistItems.length : 0})</span>
+                    {translate('wishlist', locale?.language)} <span>({wishlistContextData?.wishlistItems ? wishlistContextData?.wishlistItems.length : 0})</span>
                   </Link>
                 </li>
                 <li>
@@ -685,7 +685,8 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                     to={'/cart'}
                     className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
-                    Bezahlen
+                    {translate('cart', locale?.language)}
+                    
                   </Link>
                 </li>
                 <li>
@@ -693,7 +694,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                     to={'/account/register'}
                     className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
-                    Anmelden
+                    {translate('register', locale?.language)}
                   </Link>
                 </li>
               </ul>
@@ -724,7 +725,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                 }`}
                 type="search"
                 variant="minisearch"
-                placeholder="Suche"
+                placeholder={translate('search_box', locale?.language)}
                 name="q"
                 onClick={handleSearchClick}
               />
@@ -1164,6 +1165,7 @@ function CartCount({isHome, openCart}) {
 
 function Badge({openCart, dark, count}) {
   const isHydrated = useIsHydrated();
+  const [root] = useMatches();
 
   const BadgeCounter = useMemo(
     () => (
@@ -1175,7 +1177,7 @@ function Badge({openCart, dark, count}) {
           } text-black text-[12px] leading-none font-medium  flex items-center justify-center text-center`}
         >
           <span>{count || 0}</span>
-          <span>&nbsp;Artikel -&nbsp;</span>
+          <span>&nbsp;{translate('cart_artikel',root?.data?.selectedLocale?.language)} -&nbsp;</span>
           <span>CHF 0.00</span>
         </div>
       </>
