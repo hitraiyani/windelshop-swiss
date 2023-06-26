@@ -1,8 +1,10 @@
 import {useLocation, useMatches} from '@remix-run/react';
 import {parse as parseCookie} from 'worktop/cookie';
 import typographicBase from 'typographic-base';
+import Cookies from 'js-cookie';
 
-import {countries} from '~/data/countries';
+
+import {countries, languageSwitchOption} from '~/data/countries';
 
 export function missingClass(string, prefix) {
   if (!string) {
@@ -230,9 +232,15 @@ export const DEFAULT_LOCALE = Object.freeze({
 });
 
 export function getLocaleFromRequest(request) {
+
+  const cookieValue = request.headers.get('Cookie');
+  const languageCookie = cookieValue ? cookieValue.split(';').find(cookie => cookie.trim().startsWith('language=')) : null;
+  const language = languageCookie ? languageCookie.split('=')[1] : null;
+
   const url = new URL(request.url);
   const firstPathPart =
     '/' + url.pathname.substring(1).split('/')[0].toLowerCase();
+
 
   return countries[firstPathPart]
     ? {
@@ -241,6 +249,31 @@ export function getLocaleFromRequest(request) {
       }
     : {
         ...countries['default'],
+        pathPrefix: '',
+      };
+}
+
+export function getLocaleFromRequestNew(request) {
+
+  const cookieValue = request.headers.get('Cookie');
+  const languageCookie = cookieValue ? cookieValue.split(';').find(cookie => cookie.trim().startsWith('language=')) : null;
+  const language = languageCookie ? languageCookie.split('=')[1] : null;
+
+  console.log("language", language);
+
+  const url = new URL(request.url);
+  const firstPathPart =
+    '/' + url.pathname.substring(1).split('/')[0].toLowerCase();
+
+  const languageSwitchKey = (language && language == 'fr')  ? '/fr' : firstPathPart;
+
+  return languageSwitchOption[languageSwitchKey]
+    ? {
+        ...languageSwitchOption[languageSwitchKey],
+        pathPrefix: languageSwitchKey,
+      }
+    : {
+        ...languageSwitchOption['default'],
         pathPrefix: '',
       };
 }

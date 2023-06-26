@@ -4,6 +4,7 @@ import {Disclosure, Menu, Transition} from '@headlessui/react';
 import {Suspense, useEffect, useMemo, useState, useRef} from 'react';
 import {Fragment, useContext } from 'react';
 import {WishlistContext } from '~/store/WishlistContext';
+import Cookies from 'js-cookie';
 
 import {
   Drawer,
@@ -37,9 +38,10 @@ import {useIsHomePath, toHTML, getMenuHandle} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {Helmet} from 'react-helmet';
-import {COOKIEBOT_KEY, AICO_API_URL, AICO_API_TOKEN} from '~/lib/const';
+import {COOKIEBOT_KEY, AICO_API_URL, AICO_API_TOKEN, STORE_LANG_FR, STORE_LANG_DE} from '~/lib/const';
 
 export function Layout({children, layout, locale}) {
+
   const [isCookieAccepted, setisCookieAccepted] = useState(false);
 
   const [brandData, setbrandData] = useState([]);
@@ -58,8 +60,17 @@ export function Layout({children, layout, locale}) {
     setbrandData(brandResponseData.data);
   };
 
+  const checkLanguageCookie = () => {
+    // const lang = Cookies.get('language');
+    // const firstPathPart = location.pathname.substring(1).split('/')[0].toLowerCase();
+    // if (firstPathPart == 'fr' && lang != 'fr') {
+    //     Cookies.set('language', 'fr', { expires: 30 });
+    // }
+  }
+
   useEffect(() => {
     //loadBrandData();
+    checkLanguageCookie();
     function handleCookiebotAccept(e) {
       if (Cookiebot.consent.marketing) {
         //Execute code that sets marketing cookies
@@ -99,6 +110,7 @@ export function Layout({children, layout, locale}) {
         menu={layout?.headerMenu}
         aicoMenu={layout?.aicoHeaderMenu}
         toBar={layout?.hederTopBar}
+        locale={locale}
       />
       <main role="main" id="mainContent" className="flex-grow">
         {children}
@@ -108,7 +120,7 @@ export function Layout({children, layout, locale}) {
   );
 }
 
-function Header({title, menu, aicoMenu, toBar}) {
+function Header({title, menu, aicoMenu, toBar, locale}) {
   const isHome = useIsHomePath();
 
   const {
@@ -149,6 +161,7 @@ function Header({title, menu, aicoMenu, toBar}) {
         menu={menu}
         aicoMenu={aicoMenu}
         openCart={openCart}
+        locale={locale}
       />
       <MobileHeader
         isHome={isHome}
@@ -506,7 +519,7 @@ function SubMegaMenu({subMenus, onClose}) {
   );
 }
 
-function DesktopHeader({isHome, menu, aicoMenu, openCart, title}) {
+function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
   const params = useParams();
   const {y} = useWindowScroll();
 
@@ -533,6 +546,27 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title}) {
     setSearchOpen(true);
   };
 
+  const handleLanguageChange = (e) => {
+    e.stopPropagation();
+    let selectedLang =  e.currentTarget.getAttribute('data-lang');
+    if (selectedLang) {
+        Cookies.set('language', selectedLang, { expires: 30 });
+        setTimeout(() => {
+          var selectedLanguage = selectedLang;
+          const currentUrl = window.location.href;
+          let newUrl = currentUrl;
+          const firstPathPart = location.pathname.substring(1).split('/')[0].toLowerCase();
+          if (firstPathPart == 'fr' && selectedLanguage != 'fr') {
+            newUrl = currentUrl.replace('/fr', '');
+          }
+          if (firstPathPart != 'fr' && selectedLanguage == 'fr') {
+            newUrl = location.origin+'/fr/'+(location.pathname+location.search).substr(1);
+          }
+          window.location.href = newUrl;
+        }, 200);
+    }
+  }
+
   return (
     <header
       role="banner"
@@ -550,12 +584,12 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title}) {
                     <span className="flag w-[16px] h-[16px] overflow-hidden relative">
                       <img
                         className="inset-0 w-full h-full object-contain"
-                        src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/de_png.svg?v=1685425346"
+                        src={locale?.language == STORE_LANG_FR ? 'https://cdn.shopify.com/s/files/1/0763/5307/7525/files/fr.png?v=1687766463' : 'https://cdn.shopify.com/s/files/1/0763/5307/7525/files/de_png.svg?v=1685425346'}
                         alt=""
                       />
                     </span>
                     <span className="name text-[16px] text-black leading-[1.1] font-medium">
-                      Deutsch
+                        {locale?.language == STORE_LANG_FR ? 'Français' : 'Deutsch'}
                     </span>
                     <ChevronDownIcon className={'w-[10px] h-[7px]'} />
                   </Menu.Button>
@@ -574,8 +608,10 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title}) {
                     <div className="py-1">
                       <Menu.Item>
                         {({active}) => (
-                          <a
-                            href="#"
+                          <button
+                            
+                            onClick={handleLanguageChange}
+                            data-lang='de'
                             className={classNames(
                               active
                                 ? 'bg-gray-100 text-gray-900'
@@ -593,13 +629,14 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title}) {
                             <span className="name text-[16px] text-black leading-[1.1] font-medium">
                               Deutsch
                             </span>
-                          </a>
+                          </button>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({active}) => (
-                          <a
-                            href="#"
+                          <button
+                            data-lang='fr'
+                            onClick={handleLanguageChange}
                             className={classNames(
                               active
                                 ? 'bg-gray-100 text-gray-900'
@@ -610,66 +647,16 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title}) {
                             <span className="flag  w-[16px] h-[16px] overflow-hidden relative">
                               <img
                                 className="inset-0 w-full h-full object-contain"
-                                src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/de_png.svg?v=1685425346"
+                                src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/fr.png?v=1687766463"
                                 alt=""
                               />
                             </span>
                             <span className="name text-[16px] text-black leading-[1.1] font-medium">
-                              Deutsch
+                              Français
                             </span>
-                          </a>
+                          </button>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
-                        {({active}) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active
-                                ? 'bg-gray-100 text-gray-900'
-                                : 'text-gray-700',
-                              'px-4 py-2 text-sm flex gap-[6px] items-center',
-                            )}
-                          >
-                            <span className="flag  w-[16px] h-[16px] overflow-hidden relative">
-                              <img
-                                className="inset-0 w-full h-full object-contain"
-                                src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/de_png.svg?v=1685425346"
-                                alt=""
-                              />
-                            </span>
-                            <span className="name text-[16px] text-black leading-[1.1] font-medium">
-                              Deutsch
-                            </span>
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <form method="POST" action="#">
-                        <Menu.Item>
-                          {({active}) => (
-                            <button
-                              type="submit"
-                              className={classNames(
-                                active
-                                  ? 'bg-gray-100 text-gray-900'
-                                  : 'text-gray-700',
-                                'px-4 py-2 text-sm flex gap-[6px] items-center',
-                              )}
-                            >
-                              <span className="flag  w-[16px] h-[16px] overflow-hidden relative">
-                                <img
-                                  className="inset-0 w-full h-full object-contain"
-                                  src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/de_png.svg?v=1685425346"
-                                  alt=""
-                                />
-                              </span>
-                              <span className="name text-[16px] text-black leading-[1.1] font-medium">
-                                Deutsch
-                              </span>
-                            </button>
-                          )}
-                        </Menu.Item>
-                      </form>
                     </div>
                   </Menu.Items>
                 </Transition>

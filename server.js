@@ -7,7 +7,7 @@ import {
 import {createStorefrontClient, storefrontRedirect} from '@shopify/hydrogen';
 
 import {HydrogenSession} from '~/lib/session.server';
-import {getLocaleFromRequest} from '~/lib/utils';
+import {getLocaleFromRequest, getLocaleFromRequestNew} from '~/lib/utils';
 
 /**
  * Export a fetch handler in module format.
@@ -34,7 +34,7 @@ export default {
       const {storefront} = createStorefrontClient({
         cache,
         waitUntil,
-        i18n: getLocaleFromRequest(request),
+        i18n: getLocaleFromRequestNew(request),
         publicStorefrontToken: env.PUBLIC_STOREFRONT_API_TOKEN,
         privateStorefrontToken: env.PRIVATE_STOREFRONT_API_TOKEN,
         storeDomain: `https://${env.PUBLIC_STORE_DOMAIN}`,
