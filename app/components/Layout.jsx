@@ -691,10 +691,10 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                 </li>
                 <li>
                   <Link
-                    to={'/account/register'}
+                    to={'/account/login'}
                     className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
-                    {translate('register', locale?.language)}
+                    {translate('login', locale?.language)}
                   </Link>
                 </li>
               </ul>

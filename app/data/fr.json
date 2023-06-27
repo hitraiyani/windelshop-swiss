@@ -1,8 +1,8 @@
 {
-    "account": "Mon compte",
-    "wishlist" : "liste de souhaits",
-    "cart" : "Bezahlen",
-    "register" : "Enregistrer",
-    "search_box" : "Chercher",
-    "cart_artikel" : "Article"
+    "account": "Compte",
+    "wishlist" : "Liste de souhaits",
+    "cart" : "Commander",
+    "login" : "Connexion",
+    "search_box" : "Recherche",
+    "cart_artikel" : "élément"
 }

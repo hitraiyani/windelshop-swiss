@@ -10,7 +10,7 @@ import frJson from '~/data/fr.json';
 
 
 export const translate = (key, language) => {
-  const translations = language.toLowerCase() === 'fr' ? frJson : deJson;
+  const translations = language?.toLowerCase() === 'fr' ? frJson : deJson;
   return translations[key] || '';
 };
 
