@@ -24,7 +24,6 @@ export function ProductCompare() {
     );
   }, [productCompareItems]);
 
-  console.log("data", data);
 
   return (
      <>

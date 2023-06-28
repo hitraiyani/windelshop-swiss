@@ -1,20 +1,20 @@
 import {redirect, json} from '@shopify/remix-oxygen';
-import {Form, useActionData} from '@remix-run/react';
+import {Form, useActionData, useLoaderData} from '@remix-run/react';
 import {useState} from 'react';
 
-import {getInputStyleClasses} from '~/lib/utils';
+import {getInputStyleClasses, translate} from '~/lib/utils';
 import {Link} from '~/components';
-
+import {seoPayload} from '~/lib/seo.server';
 import {doLogin} from './($locale).account.login';
 
-export async function loader({context, params}) {
+export async function loader({context, params, request}) {
   const customerAccessToken = await context.session.get('customerAccessToken');
 
   if (customerAccessToken) {
     return redirect(params.locale ? `${params.locale}/account` : '/account');
   }
-
-  return new Response(null);
+  const seo = seoPayload.customPage({title : translate('register_page_title', context.storefront.i18n.language), url: request.url});
+  return json({locale : context.storefront.i18n.language, seo});
 }
 
 const badRequest = (data) => json(data, {status: 400});
@@ -33,7 +33,7 @@ export const action = async ({request, context, params}) => {
     typeof password !== 'string'
   ) {
     return badRequest({
-      formError: 'Please provide both an email and a password.',
+      formError: translate('login_empty_error_message', context.storefront.i18n.language),
     });
   }
 
@@ -82,6 +82,7 @@ export const meta = () => {
 };
 
 export default function Register() {
+  const {locale} = useLoaderData();
   const actionData = useActionData();
   const [nativeEmailError, setNativeEmailError] = useState(null);
   const [nativePasswordError, setNativePasswordError] = useState(null);
@@ -89,7 +90,7 @@ export default function Register() {
   return (
     <div className="flex justify-center my-24 px-4">
       <div className="max-w-md w-full">
-        <h1 className="text-4xl">Create an Account.</h1>
+        <h1 className="text-4xl">{translate('register_page_title',locale)}</h1>
         {/* TODO: Add onSubmit to validate _before_ submission with native? */}
         <Form
           method="post"
@@ -109,7 +110,7 @@ export default function Register() {
               type="email"
               autoComplete="email"
               required
-              placeholder="Email address"
+              placeholder={translate('email_placeholder', locale)}
               aria-label="Email address"
               // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus
@@ -133,7 +134,7 @@ export default function Register() {
               name="password"
               type="password"
               autoComplete="current-password"
-              placeholder="Password"
+              placeholder={translate('password_placeholder', locale)}
               aria-label="Password"
               minLength={8}
               required
@@ -148,8 +149,8 @@ export default function Register() {
                 } else {
                   setNativePasswordError(
                     event.currentTarget.validity.valueMissing
-                      ? 'Please enter a password'
-                      : 'Passwords must be at least 8 characters',
+                      ?  translate('empty_password_error_message', locale)
+                      : translate('empty_password_length_error_message', locale),
                   );
                 }
               }}
@@ -167,14 +168,14 @@ export default function Register() {
               type="submit"
               disabled={!!(nativePasswordError || nativeEmailError)}
             >
-              Create Account
+              { translate('register_btn',locale) }
             </button>
           </div>
           <div className="flex items-center mt-8 border-t border-gray-300">
             <p className="align-baseline text-sm mt-6">
-              Already have an account? &nbsp;
+              {translate('is_alredy_customer', locale)} &nbsp;
               <Link className="inline underline" to="/account/login">
-                Sign in
+                {translate('back_to_login', locale)}
               </Link>
             </p>
           </div>

@@ -21,11 +21,12 @@ import {
   ProductSwimlane,
 } from '~/components';
 import {FeaturedCollections} from '~/components/FeaturedCollections';
-import {usePrefixPathWithLocale} from '~/lib/utils';
+import {usePrefixPathWithLocale, translate} from '~/lib/utils';
 import {CACHE_NONE, routeHeaders} from '~/data/cache';
 
 import {getFeaturedData} from './($locale).featured-products';
 import {doLogout} from './($locale).account.logout';
+import {seoPayload} from '~/lib/seo.server';
 
 export const headers = routeHeaders;
 
@@ -63,6 +64,7 @@ export async function loader({request, context, params}) {
       orders,
       addresses: flattenConnection(customer.addresses),
       featuredData: getFeaturedData(context.storefront),
+      locale : context.storefront.i18n.language
     },
     {
       headers: {
@@ -106,10 +108,31 @@ export default function Authenticated() {
   return <Account {...data} />;
 }
 
-function Account({customer, orders, heading, addresses, featuredData}) {
+function Account({customer, orders, heading, addresses, featuredData, locale}) {
+  console.log("locale", locale);
   return (
     <>
-      <PageHeader heading={heading}>
+    <section className="container mx-auto py-10">
+        <PageHeader className="pb-8" heading={translate('acount_page_heading', locale)} />
+        <div className="flex flex-wrap -mx-4 gap-y-5">
+          <div className="px-4 w-full md:w-1/3">
+            <div className="h-full flex items-start">
+              <AccountDetails customer={customer} locale={locale}/>
+            </div>
+          </div>
+          <div className="px-4 w-full md:w-1/3">
+            <div className="h-full flex items-start">
+              {orders && <AccountOrderHistory orders={orders} />}
+            </div>
+          </div>
+          <div className="px-4 w-full md:w-1/3">
+            <div className="h-full flex items-start">
+              <AccountAddressBook addresses={addresses} customer={customer} />
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* <PageHeader heading={heading}>
         <Form method="post" action={usePrefixPathWithLocale('/account/logout')}>
           <button type="submit" className="text-primary/50">
             Sign out
@@ -118,25 +141,7 @@ function Account({customer, orders, heading, addresses, featuredData}) {
       </PageHeader>
       {orders && <AccountOrderHistory orders={orders} />}
       <AccountDetails customer={customer} />
-      <AccountAddressBook addresses={addresses} customer={customer} />
-      {!orders.length && (
-        <Suspense>
-          <Await
-            resolve={featuredData}
-            errorElement="There was a problem loading featured products."
-          >
-            {(data) => (
-              <>
-                <FeaturedCollections
-                  title="Popular Collections"
-                  collections={data.featuredCollections}
-                />
-                <ProductSwimlane products={data.featuredProducts} />
-              </>
-            )}
-          </Await>
-        </Suspense>
-      )}
+      <AccountAddressBook addresses={addresses} customer={customer} /> */}
     </>
   );
 }

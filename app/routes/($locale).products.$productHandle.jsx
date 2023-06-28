@@ -144,6 +144,8 @@ export default function Product() {
 
   const [bundleProdListSorted, setBundleProdListSorted] = useState([]);
   const [productBundleData, setProductBundleData] = useState([]);
+  const [productSizeKeyValueData, setProductSizeKeyValueData] = useState([]);
+  const [productPackageKeyValueData, setProductPackageKeyValueData] = useState([]);
 
   useEffect(() => {
     setBundleProdListSorted([]);
@@ -158,6 +160,12 @@ export default function Product() {
       }
       if (data?.productBundleData) {
         setProductBundleData(data.productBundleData);
+      }
+      if (data?.productSizeKeyValue) {
+        setProductSizeKeyValueData(data.productSizeKeyValue);
+      }
+      if (data?.productPackageKeyValue) {
+        setProductPackageKeyValueData(data.productPackageKeyValue);
       }
     }
   }, [data]);
@@ -220,6 +228,8 @@ export default function Product() {
                 )} */}
                 </div>
                 <ProductForm
+                  productSizeKeyValueData={productSizeKeyValueData}
+                  productPackageKeyValueData={productPackageKeyValueData}
                   setShowProductCompareAlert={setShowProductCompareAlert}
                   setShowProductCompareAlertType={
                     setShowProductCompareAlertType
@@ -359,8 +369,11 @@ export default function Product() {
   );
 }
 
-export function ProductForm({setShowProductCompareAlert, setShowProductCompareAlertType, setShowProductWishlistAlert, setShowProductWishlistAlertType}) {
+export function ProductForm({setShowProductCompareAlert, setShowProductCompareAlertType, setShowProductWishlistAlert, setShowProductWishlistAlertType, productSizeKeyValueData, productPackageKeyValueData}) {
   const {product, analytics, storeDomain} = useLoaderData();
+
+  console.log("ProductFormproductSizeKeyValueData", productSizeKeyValueData);
+  console.log("ProductFormproductPackageKeyValueData", productPackageKeyValueData);
 
   const [currentSearchParams] = useSearchParams();
   const {location} = useNavigation();
@@ -475,6 +488,8 @@ export function ProductForm({setShowProductCompareAlert, setShowProductCompareAl
     quantity: quantity,
   };
 
+  const closeRef = useRef(null);
+
   return (
     <div className="productForm-col">
       <div className="price-col">
@@ -510,6 +525,128 @@ export function ProductForm({setShowProductCompareAlert, setShowProductCompareAl
               />
             </span>
           </div>
+        </div>
+      </div>
+      <div className="product-options-wrap border-t-[1px] border-[#E7EFFF] mt-[46px] pt-[37px] flex flex-row flex-wrap gap-y-[20px] gap-x-[52px]">
+        <div className="flex flex-col flex-wrap gap-[17px]">
+        {productSizeKeyValueData.length > 0 && (
+            <div className="relative w-full">
+            <Listbox>
+              {({open}) => (
+                <>
+                  <Listbox.Button
+                    ref={closeRef}
+                    className={clsx(
+                      'flex items-center justify-between w-full py-3 px-4 border border-primary',
+                      open
+                        ? 'rounded-b md:rounded-t md:rounded-b-none'
+                        : 'rounded',
+                    )}
+                  >
+                    <span>GROSSE</span>
+                    <IconCaret direction={open ? 'up' : 'down'} />
+                  </Listbox.Button>
+                  <Listbox.Options
+                    className={clsx(
+                      'border-primary bg-contrast absolute bottom-12 z-30 grid h-48 w-full overflow-y-scroll rounded-t border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b',
+                      open ? 'max-h-48' : 'max-h-0',
+                    )}
+                  >
+                    {productSizeKeyValueData.map((item, key) => {
+                      return (
+                        <Listbox.Option
+                          key={`option-${key}`}
+                          value={item.lable}
+                        >
+                          {({active}) => (
+                            <Link
+                              to={`/products/${item.handle}`}
+                              className={clsx(
+                                'text-primary w-full p-2 transition rounded flex justify-start items-center text-left cursor-pointer',
+                                active && 'bg-primary/10',
+                              )}
+                              onClick={() => {
+                                if (!closeRef?.current) return;
+                                closeRef.current.click();
+                              }}
+                            >
+                              {item.lable}
+                              {item.is_selected && (
+                                <span className="ml-2">
+                                  <IconCheck />
+                                </span>
+                              )}
+                            </Link>
+                          )}
+                        </Listbox.Option>
+                      );
+                    })}
+                  </Listbox.Options>
+                </>
+              )}
+            </Listbox>
+          </div>
+        )}
+{/*           
+          {productSizeKeyValueData.length > 0 && (
+            <>
+              <Heading
+                as="legend"
+                size="lead"
+                className="text-[14px] text-[#666666] uppercase font-bold font-['Open_Sans']"
+              >
+                GROSSE
+              </Heading>
+              <div className="flex flex-wrap gap-[6px]">
+                {productSizeKeyValueData.map((item, key) => {
+                  return (
+                    <Text className={'w-fit min-h-[52px]'} key={key}>
+                      <Link
+                        to={`/products/${item.handle}`}
+                        className={`border-[2px] border-[#18A1DC] flex items-center justify-center transition-all duration-500 text-[#18A1DC] text-[16px] leading-none h-full w-full rounded-[10px] font-bold font-["Open_Sans"] px-[15px] py-[10px] hover:opacity-100 min-w-[60px] ${
+                          item.is_selected
+                            ? 'opacity-100 bg-[#E7EFFF]'
+                            : 'opacity-70'
+                        }`}
+                      >
+                        {item.lable}
+                      </Link>
+                    </Text>
+                  );
+                })}
+              </div>
+            </>
+          )} */}
+
+          {productPackageKeyValueData.length > 0 && (
+            <>
+              <Heading
+                as="legend"
+                size="lead"
+                className="text-[14px] text-[#666666] uppercase font-bold font-['Open_Sans']"
+              >
+                ANZAHL
+              </Heading>
+              <div className="flex flex-wrap gap-[6px]">
+                {productPackageKeyValueData.map((item, key) => {
+                  return (
+                    <Text className={'w-fit min-h-[52px]'} key={key}>
+                      <Link
+                        to={`/products/${item.handle}`}
+                        className={`border-[2px] border-[#18A1DC] flex items-center justify-center transition-all duration-500 text-[#18A1DC] text-[16px] leading-none h-full w-full rounded-[10px] font-bold font-["Open_Sans"] px-[15px] py-[10px] hover:opacity-100 min-w-[60px] ${
+                          item.is_selected
+                            ? 'opacity-100 bg-[#E7EFFF]'
+                            : 'opacity-70'
+                        }`}
+                      >
+                        {item.lable}
+                      </Link>
+                    </Text>
+                  );
+                })}
+              </div>
+            </>
+          )}
         </div>
       </div>
       {filteredOption.length > 0 && (
