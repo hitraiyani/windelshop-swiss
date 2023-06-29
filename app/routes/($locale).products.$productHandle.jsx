@@ -568,7 +568,7 @@ export function ProductForm({
                       className={clsx(
                         'flex items-center justify-between w-full py-[3px] px-[10px] border-[2px] text-[16px] font-bold border-[#18a1dc] min-h-[52px] pl-[20px] text-[#18a1dc]',
                         open
-                          ? 'rounded-b md:rounded-t md:rounded-b-none'
+                          ? 'rounded-b-[10px] md:rounded-t-[10px] md:rounded-b-none'
                           : 'rounded-[10px]',
                       )}
                     >
@@ -577,7 +577,7 @@ export function ProductForm({
                     </Listbox.Button>
                     <Listbox.Options
                       className={clsx(
-                        'bg-white absolute bottom-12 z-30 grid h-48 w-full overflow-y-scroll rounded-t border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b border-[#cccc]',
+                        'bg-[#e7efff] absolute bottom-12 z-30 grid h-48 w-full overflow-y-scroll rounded-t border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b border-[#18a1dc]',
                         open ? 'max-h-48' : 'max-h-0',
                       )}
                     >
@@ -591,7 +591,7 @@ export function ProductForm({
                               <Link
                                 to={`/products/${item.handle}`}
                                 className={clsx(
-                                  'text-primary w-full p-2 transition rounded flex justify-start items-center text-left cursor-pointer',
+                                  'text-primary w-full p-2 transition rounded flex justify-start items-center text-left cursor-pointer font-semibold',
                                   active && 'bg-primary/10',
                                 )}
                                 onClick={() => {
