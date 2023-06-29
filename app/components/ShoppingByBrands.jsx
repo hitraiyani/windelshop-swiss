@@ -3,8 +3,9 @@ import {AICO_API_URL, AICO_API_TOKEN, STORE_LOCALE} from '~/lib/const';
 import {
   Link
 } from '~/components';
+import { translate } from '~/lib/utils';
 
-export function ShoppingByBrands({className}) {
+export function ShoppingByBrands({className,locale}) {
   const [brandData, setbrandData] = useState([]);
 
   const loadBrandData = async () => {
@@ -31,7 +32,7 @@ export function ShoppingByBrands({className}) {
       <div className="container">
         <div className="title-wrap mb-[20px] lg:mb-[40px] xl:mb-[50px] 2xl:mb-[70px]">
           <h2 className="text-black text-[24px] font-bold text-center">
-            Einkaufen nach Marken
+            {translate('shop_by_brand',locale)}
           </h2>
         </div>
         <div className="logo-lists-wrap">

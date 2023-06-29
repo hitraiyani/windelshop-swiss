@@ -4,5 +4,30 @@
   "cart" : "Bezahlen",
   "login" : "Anmelden",
   "search_box" : "Suche",
-  "cart_artikel" : "Artikel"
+  "cart_artikel" : "Artikel",
+  "add_to_cart" :"Jetzt kaufen",
+  "customer_satisfaction_text" : "Kundenzufriedenheit & Service stehen im Fokus",
+  "our_customer_text" : "Das sehen auch unsere Kunden so",
+  "shop_by_brand" : "Einkaufen nach Marken",
+  "quick_request" : "Schnellanfrage",
+  "name" : "Name",
+  "email" : "Emailadresse",
+  "message" : "Anfrage / Text",
+  "send" : "Senden",
+  "subscribe_heading1" : "Nichts mehr verpassen!",
+  "subscribe_heading2" : "Entdecken Sie die neusten Produkte, Aktionen und Rabatte,nur das Beste für Sie und Ihren kleinen Liebling.",
+  "email_send" : "E-Mail senden",
+  "phone_number" : "052 720 58 58",
+  "address":"Homerunner GmbH, Schulstrasse 13a, CH-9553 Bettwiesen",
+  "review_text":"Unsere Bewertungen auf Google!",
+  "footer_text" :"Ihr Partner für Babypflege, Damenhygiene und Textilpflege– im Privaten und Geschäftlichen",
+  "news_later" : "Newsletter abonnieren"
+
+  
+  
+
+
+
+  
+  
 }

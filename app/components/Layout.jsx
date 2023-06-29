@@ -115,7 +115,7 @@ export function Layout({children, layout, locale}) {
       <main role="main" id="mainContent" className="flex-grow">
         {children}
       </main>
-      <Footer menu={layout?.footerMenu} />
+      <Footer menu={layout?.footerMenu}  locale={locale} />
     </>
   );
 }
@@ -152,6 +152,7 @@ function Header({title, menu, aicoMenu, toBar, locale}) {
           onClose={closeMenu}
           menu={menu}
           aicoMenu={aicoMenu}
+          locale={locale}
         />
       )}
       <TopbarHeader toBar={toBar} />
@@ -189,17 +190,17 @@ function CartDrawer({isOpen, onClose}) {
   );
 }
 
-export function MenuDrawer({isOpen, onClose, menu, aicoMenu}) {
+export function MenuDrawer({isOpen, onClose, menu, aicoMenu,locale}) {
   return (
     <Drawer open={isOpen} onClose={onClose} openFrom="left" heading="Menu">
       <div className="grid">
-        <MenuMobileNav menu={menu} aicoMenu={aicoMenu} onClose={onClose} />
+        <MenuMobileNav menu={menu} aicoMenu={aicoMenu} onClose={onClose} locale={locale} />
       </div>
     </Drawer>
   );
 }
 
-function MenuMobileNav({menu, aicoMenu, onClose}) {
+function MenuMobileNav({menu, aicoMenu, onClose,locale}) {
   const megaMenuMobileClick = (event) => {
     const menuItems = document.querySelectorAll('.mobile-nav-sec .menu-item');
     event.currentTarget.parentNode.parentNode.classList.toggle('active');
@@ -234,7 +235,7 @@ function MenuMobileNav({menu, aicoMenu, onClose}) {
                 className="text-[14px] text-black"
                 onClick={onClose}
               >
-                {item.category.name}
+                { translate(item.category.name,locale?.language) }
               </Link>
               {item?.category?.subCategories?.length > 0 && (
                   <div
@@ -476,9 +477,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-function SubMegaMenu({subMenus, onClose}) {
+function SubMegaMenu({subMenus, onClose,locale}) {
   return (
-    <div className="mega-menu absolute bg-[#CCDDF1] rounded-[20px] z-[99]">
+    <div className="mega-menu absolute bg-[#CCDDF1] rounded-[20px] z-[99] ">
       <div className="mega-menu-inner container">
         <div className="mega-menu-lists flex flex-wrap py-[30px] lg:py-[40px] xl:py-[60px] 2xl:py-[70px] gap-y-[15px] lg:gap-y-[30px] xl:gap-y-[50px] 2xl:gap-y-[70px] -mx-[15px]">
           {subMenus.map((subItem, subIndex) => {
@@ -491,7 +492,7 @@ function SubMegaMenu({subMenus, onClose}) {
                   {/* <Link
                     to={getMenuHandle(subItem.subCategory)}
                   > */}
-                  {subItem?.subCategory?.name}
+                  { translate(subItem?.subCategory?.name,locale?.language)}
                   {/* </Link> */}
                 </div>
                 {subItem.subCategory.subSubCategories?.length > 0 && (
@@ -503,7 +504,7 @@ function SubMegaMenu({subMenus, onClose}) {
                             to={getMenuHandle(innerSubItem.subSubCategory)}
                             onClick={onClose}
                           >
-                            {innerSubItem?.subSubCategory?.name}
+                            { translate(innerSubItem?.subSubCategory?.name,locale?.language)}
                           </Link>
                         </li>
                       ),
@@ -528,6 +529,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
   );
 
   const [isSearchOpen, setSearchOpen] = useState(false);
+  const [activeMenuItem, setActiveMenuItem] = useState(null);
 
   useEffect(() => {
     const handleBodyClick = () => {
@@ -566,6 +568,28 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
         }, 200);
     }
   }
+
+  const menuCloseHandler = (e) =>{
+      //e.currentTarget.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display = "none";
+     setActiveMenuItem(null);
+  }
+
+  const handleMouseEnter = (e,id) => {
+    setTimeout(() => {
+      setActiveMenuItem(id);
+    }, 100);
+  }
+  const handleMouseLeave = (e,id) => {
+      setActiveMenuItem(null);
+  }
+
+  // useEffect(() => {
+  //   const menu = document.querySelector('.clean-hover-menu');
+  //   menu.addEventListener('mouseleave', handleMouseLeave);
+  //   return () => {
+  //     menu.removeEventListener('mouseleave', handleMouseLeave);
+  //   };
+  // }, []);
 
   return (
     <header
@@ -745,7 +769,8 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               {/* Top level menu items */}
               {aicoMenu.map((item, index) => {
                 return (
-                  <div className="menu-item flex-auto" key={index}>
+                  <div className="menu-item flex-auto" key={index}  onMouseEnter={(event) => handleMouseEnter(event,item.category.name)}
+                  onMouseLeave={(event) => handleMouseLeave(event,item.category.name)}>
                     <Link
                       to={`${
                         item.category.name == ' Home'
@@ -753,14 +778,21 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                           : getMenuHandle(item.category)
                       }`}
                       className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                     
+
                     >
-                      {item.category.name}
+                      { translate(item.category.name,locale?.language) }
                     </Link>
                     {item?.category?.subCategories?.length > 0 && (
+                      <div className={`mega-menu-div ${ activeMenuItem === item?.category?.name ? 'is-active' : ''
+                      }`}>
                       <SubMegaMenu
                         subMenus={item?.category?.subCategories}
                         key={index}
+                        onClose={menuCloseHandler}
+                        locale={locale}
                       />
+                      </div>
                     )}
                   </div>
                 );
@@ -1202,7 +1234,7 @@ function Badge({openCart, dark, count}) {
   );
 }
 
-function Footer({menu}) {
+function Footer({menu,locale}) {
   const isHome = useIsHomePath();
   const itemsCount = menu
     ? menu?.items?.length + 1 > 4
@@ -1232,8 +1264,7 @@ function Footer({menu}) {
                   </div>
                   <div className="desc text-[#CCCCCC] text-[12px]">
                     <p>
-                      Ihr Partner für Babypflege, Damenhygiene und Textilpflege
-                      – im Privaten und Geschäftlichen.
+                      {translate('footer_text',locale?.language)}
                     </p>
                   </div>
                   <div className="subscribe-form-footer mt-[33px]">
@@ -1242,7 +1273,7 @@ function Footer({menu}) {
                         <div className="form-control flex-1">
                           <input
                             type="email"
-                            placeholder="Newsletter abonnieren"
+                            placeholder={translate("news_later",locale?.language)}
                             className="w-full h-[50px] rounded-[100px] !bg-[#E7EFFF] text-[#1C5F7B] text-[16px] font-medium leading-none placeholder:!text-[#1C5F7B] placeholder:!opacity-100 focus:!border-white px-[20px] py-[16px] text-left !border-[#E7EFFF] focus:!ring-0"
                           />
                         </div>
@@ -1254,7 +1285,7 @@ function Footer({menu}) {
                             <span className="icon w-[40px] h-[40px]">
                               <IconArrowRight2 className={'w-full h-full'} />
                             </span>
-                          </button>
+                          </button> 
                         </div>
                       </div>
                     </form>
@@ -1267,7 +1298,7 @@ function Footer({menu}) {
                         </div>
                         <div className="flex flex-1 flex-col gap-[3px]">
                           <div className="desc text-[16px] text-white font-semibold">
-                            <p>Unsere Bewertungen auf Google!</p>
+                            <p>{translate("review_text",locale?.language)}</p>
                           </div>
                           <div className="rating-start flex gap-[5px] items-center flex-[0_0_auto]">
                             <span className="text-[16px] text-white leading-none font-semibold ">
@@ -1332,8 +1363,7 @@ function Footer({menu}) {
                             <IconMap className={'w-full h-full'} />
                           </span>
                           <span className="text flex-1">
-                            Homerunner GmbH, Schulstrasse 13a, CH-9553
-                            Bettwiesen
+                           { translate('address', locale?.language) }
                           </span>
                         </a>
                       </li>
@@ -1345,7 +1375,7 @@ function Footer({menu}) {
                           <span className="icon w-[31px] h-[31px] border-[2px] rounded-full border-[#E7EFFF] p-[7px] text-[#CCDDF1]">
                             <IconPhone className={'w-full h-full'} />
                           </span>
-                          <span className="text flex-1">052 720 58 58</span>
+                          <span className="text flex-1">{ translate('phone_number', locale?.language) }</span>
                         </a>
                       </li>
                       <li>
@@ -1356,7 +1386,7 @@ function Footer({menu}) {
                           <span className="icon w-[31px] h-[31px] border-[2px] rounded-full border-[#E7EFFF] p-[7px] text-[#CCDDF1]">
                             <IconMail className={'w-full h-full'} />
                           </span>
-                          <span className="text flex-1">E-Mail senden</span>
+                          <span className="text flex-1">{ translate('email_send', locale?.language) }</span>
                         </a>
                       </li>
                     </ul>

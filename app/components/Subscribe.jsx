@@ -1,6 +1,7 @@
 import {IconArrowRight2} from '~/components';
+import { translate } from '~/lib/utils';
 
-export function Subscribe({className}) {
+export function Subscribe({className,locale}) {
   return (
     <section className={`${className} subscribe-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
       <div className="container">
@@ -9,12 +10,11 @@ export function Subscribe({className}) {
             <div className="subscribe-form max-w-[486px] mx-auto">
               <div className="title-wrap">
                 <h2 className="text-black text-[24px] font-bold text-center mb-[20px]">
-                  Nichts mehr verpassen!
+                  {translate('subscribe_heading1',locale)}
                 </h2>
                 <div className="desc text-[16px] text-[#292929] mt-[34px] text-center">
                   <p>
-                    Entdecken Sie die neusten Produkte, Aktionen und Rabatte,
-                    nur das Beste für Sie und Ihren kleinen Liebling.
+                    {translate('subscribe_heading2',locale)}
                   </p>
                 </div>
               </div>
@@ -33,7 +33,7 @@ export function Subscribe({className}) {
                     type="submit"
                     className="bg-[#1C5F7B] rounded-[30px] py-[2px] pl-[19px] pr-[10px] px-[20px] min-h-[36px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center min-w-[114px] justify-center mx-auto"
                   >
-                    Senden
+                    {translate('send',locale)}
                     <span className="icon w-[24px] h-[24px]">
                       <IconArrowRight2 className={'w-full h-full'} />
                     </span>

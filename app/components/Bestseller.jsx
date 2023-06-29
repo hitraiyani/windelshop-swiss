@@ -10,9 +10,9 @@ import {
   CompareAtPrice,
 } from '~/components';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
-import {isDiscounted} from '~/lib/utils';
+import {isDiscounted, translate} from '~/lib/utils';
 
-export function Bestseller({products, title}) {
+export function Bestseller({products, title,locale}) {
   return (
     <section
       className={`bestseller-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}
@@ -139,7 +139,7 @@ export function Bestseller({products, title}) {
                               as="span"
                               className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
-                              Jetzt Kaufen
+                              {translate('add_to_cart',locale)}
                             </Text>
                           </AddToCartButton>
                         </div>
@@ -150,197 +150,7 @@ export function Bestseller({products, title}) {
               );
             })}
 
-            <SwiperSlide>
-              <div className="slide-item">
-                <div className="product-card">
-                  <div className="product-card-inner">
-                    <a href="#" className="img-link">
-                      <div className="img-wrap relative overflow-hidden pb-[100%] mb-[10px] rounded-[20px]">
-                        <img
-                          className="absolute inset-0 object-contain w-full h-full transition-all duration-500"
-                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/0-81782904-DE-EPI-360x360.webp_2.png?v=1685613193"
-                          alt=""
-                        />
-                      </div>
-                    </a>
-                    <h4 className="pro-name text-[14px] text-[#292929] font-normal">
-                      Pampers Baby-Dry Gr.5 Junior 11-16kg (90 STK) Maxi Pack
-                    </h4>
-                    <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                      <IconStar className={'w-[17px] h-[15px] fill-black'} />
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                    </div>
-                    <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                      <span>CHF 32.90</span>
-                    </div>
-                    <div className="buy-now-btn flex mt-[14px]">
-                      <a
-                        href="#"
-                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
-                      >
-                        Jetzt Kaufen
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="slide-item">
-                <div className="product-card">
-                  <div className="product-card-inner">
-                    <a href="#" className="img-link">
-                      <div className="img-wrap relative overflow-hidden pb-[100%] mb-[10px] rounded-[20px]">
-                        <img
-                          className="absolute inset-0 object-contain w-full h-full transition-all duration-500"
-                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/0-81782904-DE-EPI-360x360.webp_1.png?v=1685613193"
-                          alt=""
-                        />
-                      </div>
-                    </a>
-                    <h4 className="pro-name text-[14px] text-[#292929] font-normal">
-                      Pampers Premium Protection Gr.5 Junior 11-16kg (34 STK)
-                      Sparpack
-                    </h4>
-                    <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                      <IconStar className={'w-[17px] h-[15px] fill-black'} />
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                    </div>
-                    <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                      <span>CHF 16.90</span>
-                    </div>
-                    <div className="buy-now-btn flex mt-[14px]">
-                      <a
-                        href="#"
-                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
-                      >
-                        Jetzt Kaufen
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="slide-item">
-                <div className="product-card">
-                  <div className="product-card-inner">
-                    <a href="#" className="img-link">
-                      <div className="img-wrap relative overflow-hidden pb-[100%] mb-[10px] rounded-[20px]">
-                        <img
-                          className="absolute inset-0 object-contain w-full h-full transition-all duration-500"
-                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/0-81782904-DE-EPI-360x360.webp_3.png?v=1685613193"
-                          alt=""
-                        />
-                      </div>
-                    </a>
-                    <h4 className="pro-name text-[14px] text-[#292929] font-normal">
-                      Pampers Baby-Dry PANTS Gr. 7 XXL +17kg (126 STK) Monatsbox
-                    </h4>
-                    <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                      <IconStar className={'w-[17px] h-[15px] fill-black'} />
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                    </div>
-                    <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                      <span>CHF 58.90</span>
-                    </div>
-                    <div className="buy-now-btn flex mt-[14px]">
-                      <a
-                        href="#"
-                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
-                      >
-                        Jetzt Kaufen
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="slide-item">
-                <div className="product-card">
-                  <div className="product-card-inner">
-                    <a href="#" className="img-link">
-                      <div className="img-wrap relative overflow-hidden pb-[100%] mb-[10px] rounded-[20px]">
-                        <img
-                          className="absolute inset-0 object-contain w-full h-full transition-all duration-500"
-                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/0-81782904-DE-EPI-360x360_webp.png?v=1685613193"
-                          alt=""
-                        />
-                      </div>
-                    </a>
-                    <h4 className="pro-name text-[14px] text-[#292929] font-normal">
-                      Pampers Baby-Dry Gr.3 Midi 6- 10kg (52 STK) Sparpack1
-                    </h4>
-                    <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                      <IconStar className={'w-[17px] h-[15px] fill-black'} />
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                    </div>
-                    <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                      <span>CHF 15.90</span>
-                    </div>
-                    <div className="buy-now-btn flex mt-[14px]">
-                      <a
-                        href="#"
-                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
-                      >
-                        Jetzt Kaufen
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="slide-item">
-                <div className="product-card">
-                  <div className="product-card-inner">
-                    <a href="#" className="img-link">
-                      <div className="img-wrap relative overflow-hidden pb-[100%] mb-[10px] rounded-[20px]">
-                        <img
-                          className="absolute inset-0 object-contain w-full h-full transition-all duration-500"
-                          src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/0-81782904-DE-EPI-360x360_webp.png?v=1685613193"
-                          alt=""
-                        />
-                      </div>
-                    </a>
-                    <h4 className="pro-name text-[14px] text-[#292929] font-normal">
-                      Pampers Baby-Dry Gr.3 Midi 6- 10kg (52 STK) Sparpack2
-                    </h4>
-                    <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                      <IconStar className={'w-[17px] h-[15px] fill-black'} />
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                      <IconStar className={'w-[17px] h-[15px]'} />
-                    </div>
-                    <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                      <span>CHF 15.90</span>
-                    </div>
-                    <div className="buy-now-btn flex mt-[14px]">
-                      <a
-                        href="#"
-                        className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
-                      >
-                        Jetzt Kaufen
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
+             
           </Swiper>
           <div
             id="swiper-button-prev-bestseller"

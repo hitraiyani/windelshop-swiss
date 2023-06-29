@@ -10,6 +10,7 @@ import {IconPhone, IconMail, IconArrowRight2} from '~/components';
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { translate } from '~/lib/utils';
 
 const schema = yup
   .object({
@@ -22,7 +23,7 @@ const schema = yup
     inquiry: yup.string().required().min(5),
   })
   .required();
-export function QuickRequest({className}) {
+export function QuickRequest({className,locale}) {
   let formRef = useRef();
   const {
     register,
@@ -53,7 +54,7 @@ export function QuickRequest({className}) {
           <div className="content-col w-full lg:w-[270px]">
             <div className="col-inner">
               <h2 className="text-black text-[24px] font-bold text-left mb-[20px] lg:mb-[36px]">
-                Schnellanfrage
+                {translate('quick_request',locale)}
               </h2>
               <div className="comtent-info">
                 <ul className="flex flex-col gap-[23px]">
@@ -108,7 +109,7 @@ export function QuickRequest({className}) {
                         {...register('name')}
                         className="w-full h-[50px] rounded-[100px] !bg-white text-[#1C5F7B] text-[16px] font-medium leading-none placeholder:!text-[#1C5F7B] placeholder:!opacity-100 focus:!border-[#1C5F7B] px-[20px] py-[16px] text-left !border-white focus:!ring-0"
                         type="text"
-                        placeholder="Name*"
+                        placeholder={translate('name',locale)}
                       />
                       <p className="text-red-700">{errors.name?.message}</p>
                     </div>
@@ -118,7 +119,7 @@ export function QuickRequest({className}) {
                         {...register('email')}
                         className="w-full h-[50px] rounded-[100px] !bg-white text-[#1C5F7B] text-[16px] font-medium leading-none placeholder:!text-[#1C5F7B] placeholder:!opacity-100 focus:!border-[#1C5F7B] px-[20px] py-[16px] text-left !border-white focus:!ring-0"
                         type="email"
-                        placeholder="E-Mail*"
+                        placeholder={translate('email',locale)}
                       />
                       <p className="text-red-700">{errors.email?.message}</p>
                     </div>
@@ -132,7 +133,7 @@ export function QuickRequest({className}) {
                         id=""
                         cols="30"
                         rows="6"
-                        placeholder="Anfrage"
+                        placeholder={translate("message",locale)}
                       ></textarea>
                       <p className="text-red-700">{errors.inquiry?.message}</p>
                     </div>
@@ -143,7 +144,7 @@ export function QuickRequest({className}) {
                       className="bg-[#1C5F7B] rounded-[30px] py-[2px] pl-[19px] pr-[10px] px-[20px] min-h-[36px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center"
                       disabled={fetcher.state === 'submitting'}
                     >
-                      {fetcher.state === 'submitting' ? 'Submiting' : 'Senden'}
+                      {fetcher.state === 'submitting' ? 'Submiting' : translate('send',locale)}
                       <span className="icon w-[24px] h-[24px]">
                         <IconArrowRight2 className={'w-full h-full'} />
                       </span>

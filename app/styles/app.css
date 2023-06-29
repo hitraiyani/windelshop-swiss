@@ -315,13 +315,13 @@ strong {
   margin-right: -50vw;
   width: 100%;
   width: 100vw;
-  display: none;
+   /* display: none; */
 }
 .main-navbar {
   > .menu-item {
     &:hover {
       > .mega-menu {
-        display: block;
+        /* display: block; */
       }
       > a {
         background-color: #ccddf1;
@@ -658,5 +658,11 @@ input.appearance-none[type='number'] {
       display: none;
     }
   }
+}
+.mega-menu-div{
+  display: none;
+}
+.is-active{
+  display: block;
 }
 /* End top bar css */

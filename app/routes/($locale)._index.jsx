@@ -64,7 +64,7 @@ export async function action({request}) {
 }
 export async function loader({params, context}) {
   const {language, country} = context.storefront.i18n;
-
+ 
   if (
     params.locale &&
     params.locale.toLowerCase() !== `${language}`.toLowerCase()
@@ -153,6 +153,7 @@ export async function loader({params, context}) {
         pageType: AnalyticsPageType.home,
       },
       seo,
+      language,
     },
     {
       headers: {
@@ -175,6 +176,7 @@ export default function Homepage() {
     faqSets,
     latestProducts,
     sleepingChildBanner,
+    language,
   } = useLoaderData();
 
   // TODO: skeletons vs placeholders
@@ -194,14 +196,14 @@ export default function Homepage() {
         </Suspense>
       )}
 
-      <CustomerSatisfaction className={''} />
+      <CustomerSatisfaction className={''}  locale={language} />
       {latestProducts && (
         <Suspense>
           <Await resolve={latestProducts}>
             {({products}) => {
               if (!products?.nodes) return <></>;
               return (
-                <NewInTheShop products={products.nodes} title="Neu im Shop" />
+                <NewInTheShop products={products.nodes} title="Neu im Shop" locale={language} />
               );
             }}
           </Await>
@@ -242,13 +244,15 @@ export default function Homepage() {
                 <Bestseller
                   products={data?.products?.references?.edges}
                   title={data?.title?.value}
+                  locale={language}
                 />
               );
             }}
           </Await>
         </Suspense>
       )}
-      <ShoppingByBrands className={''} />
+      <ShoppingByBrands className={''} locale={language} />
+
       {productsByBrandsData && (
         <Suspense>
           <Await resolve={productsByBrandsData}>
@@ -263,6 +267,7 @@ export default function Homepage() {
                     ...data.brand_two_products,
                     brand_image_2: productsbyBrandMetaInfo.brand_image_2,
                   }}
+                  locale={language}
                 />
               );
             }}
@@ -280,7 +285,7 @@ export default function Homepage() {
       )}
 
       {/* <SeasonalSets className={''} /> */}
-      <QuickRequest className={''} />
+      <QuickRequest className={''} locale={language}/>
       <Reviews className={''} />
       {faqSets && (
         <Suspense>
@@ -292,7 +297,7 @@ export default function Homepage() {
         </Suspense>
       )}
 
-      <Subscribe className={''} />
+      <Subscribe className={''} locale={language} />
     </>
   );
 }

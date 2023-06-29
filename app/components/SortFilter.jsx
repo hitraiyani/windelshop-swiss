@@ -22,6 +22,7 @@ import {
   IconList,
 } from '~/components';
 import {Image} from '@shopify/hydrogen';
+import { getMenuHandle } from '~/lib/utils';
 
 export function SortFilter({
   filters,
@@ -193,6 +194,7 @@ export function FiltersDrawer({
                           <IconCaret direction={open ? 'up' : 'down'} />
                         </Disclosure.Button>
                         <Disclosure.Panel key={filter.category.handle}>
+                         
                           <ul
                             key={filter.category.handle}
                             className="py-[18px] flex flex-col gap-y-[18px] filter-sub-items"
@@ -200,15 +202,15 @@ export function FiltersDrawer({
                             {filter.category.subCategories?.map((submenu) =>
                               submenu.subCategory.subSubCategories?.map(
                                 (subcategory) => (
-                                  // console.log(subcategory.subSubCategory)
+                                  
                                   <li
-                                    key={subcategory.subSubCategory.handle}
+                                    key={subcategory.subSubCategory.name}
                                     className="text-[16px] text-[#292929] font-normal hover:text-[#0A627E] hover:font-bold"
                                   >
                                     <NavLink
                                       className="block"
                                       prefetch="intent"
-                                      to={`/collections/${subcategory.subSubCategory.handle}`}
+                                      to={  getMenuHandle(subcategory.subSubCategory.handle)}
                                     >
                                       {subcategory.subSubCategory.name}
                                     </NavLink>

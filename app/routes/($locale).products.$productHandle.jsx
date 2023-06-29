@@ -818,11 +818,17 @@ function ProductOptionLink({
   ...props
 }) {
   const {pathname} = useLocation();
-  const isLocalePathname = /\/[a-zA-Z]{2}-[a-zA-Z]{2}\//g.test(pathname);
+
+  //const isLocalePathname = /\/[a-zA-Z]{2}-[a-zA-Z]{2}\//g.test(pathname);
+  const isLocalePathname = pathname.includes("/fr/");
+
   // fixes internalized pathname
   const path = isLocalePathname
     ? `/${pathname.split('/').slice(2).join('/')}`
     : pathname;
+
+    //const path = `/${pathname.split('/').slice(2).join('/')}`;
+    
 
   const clonedSearchParams = new URLSearchParams(searchParams);
   clonedSearchParams.set(optionName, optionValue);

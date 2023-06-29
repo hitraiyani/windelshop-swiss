@@ -10,9 +10,9 @@ import {
   CompareAtPrice
 } from '~/components';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
-import {isDiscounted} from '~/lib/utils';
+import {isDiscounted, translate} from '~/lib/utils';
 
-export function NewInTheShop({products, title}) {
+export function NewInTheShop({products, title,locale}) {
 
   return (
     <section className={`new-in-Shop-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
@@ -137,7 +137,8 @@ export function NewInTheShop({products, title}) {
                               as="span"
                               className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
-                              Jetzt Kaufen
+                              { translate('add_to_cart', locale) }
+
                             </Text>
                           </AddToCartButton>
                         </div>
