@@ -59,5 +59,20 @@
   "newest":"neueste",
   "page":"Anzeige",
   "no_product_found":"In dieser Sammlung wurden keine Produkte gefunden",
-  "browse_catelog":"Katalog durchsuchen"
+  "browse_catelog":"Katalog durchsuchen",
+  "name_require":"Name ist ein Pflichtfeld",
+  "email_require":"E-Mail ist erforderlich",
+  "email_require_valid":"Muss eine gültige E-Mail-Adresse sein",
+  "inquiry_require":"Anfrage ist ein Pflichtfeld",
+  "sold_out":"ausverkauft",
+  "detail":"Einzelheiten",
+
+  "product" :"Produkt",
+  "Bild" :"Bild",
+  "price" :"Preis",
+  "summary" :"Zusammenfassung",
+  "remove":"Entfernen",
+  "no_product_compare" : "Keine Produkte zum Vergleich gewählt",
+  "procesed_compare":"Mit dem Einkaufen fortfahren"
+
 }

@@ -575,12 +575,18 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
   }
 
   const handleMouseEnter = (e,id) => {
-    setTimeout(() => {
-      setActiveMenuItem(id);
-    }, 100);
+     setActiveMenuItem(id);
+    // setTimeout(() => {
+    //   setActiveMenuItem(id);
+    // }, 200);
   }
   const handleMouseLeave = (e,id) => {
-      setActiveMenuItem(null);
+      //setActiveMenuItem(null);
+      setActiveMenuItem(Previous => {
+        // console.log(Previous);
+          Previous = null
+      });
+     
   }
 
   // useEffect(() => {
@@ -769,7 +775,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               {/* Top level menu items */}
               {aicoMenu.map((item, index) => {
                 return (
-                  <div className="menu-item flex-auto" key={index}  onMouseEnter={(event) => handleMouseEnter(event,item.category.name)}
+                  <div className="menu-item flex-auto clean-hover-menu" key={index}  onMouseEnter={(event) => handleMouseEnter(event,item.category.name)}
                   onMouseLeave={(event) => handleMouseLeave(event,item.category.name)}>
                     <Link
                       to={`${

@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useState} from 'react';
+import {useContext, useEffect, useMemo, useState} from 'react';
 import {Menu} from '@headlessui/react';
 import {
   Link,
@@ -23,6 +23,7 @@ import {
 } from '~/components';
 import {Image} from '@shopify/hydrogen';
 import { getMenuHandle, translate } from '~/lib/utils';
+import { WishlistContext } from '~/store/WishlistContext';
 
 export function SortFilter({
   filters,
@@ -441,7 +442,8 @@ export default function SortMenu({gridView, listView, isGrid, collection,locale}
   const activePagination = itemsPagination.find(
     (item) => item.key === params.get('pagination'),
   );
-
+  const {productCompareItems} = useContext(WishlistContext);
+  
   return (
     <>
       {collection.description && (
@@ -495,8 +497,10 @@ export default function SortMenu({gridView, listView, isGrid, collection,locale}
             </div>
             <div className="product-comparison-number">
               <div className='text-[#666666] text-[14px] font-["Open_Sans"] font-bold flex gap-[3px]'>
-                <span>{translate("product_compare",locale)}</span>
-                <span>(0)</span>
+              <Link to={`/product-compare/`}>
+                  <span>{translate("product_compare",locale)}</span>
+                </Link>
+                <span>({productCompareItems?.length})</span>
               </div>
             </div>
           </div>

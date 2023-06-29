@@ -109,6 +109,20 @@
   "newest":"le plus récent",
   "page":"Page",
   "no_product_found":"Aucun produit trouvé dans cette collection",
-  "browse_catelog":"Parcourir le catalogue"
+  "browse_catelog":"Parcourir le catalogue",
+  "name_require":"le nom est un champ obligatoire",
+  "email_require":"L'e-mail est requis",
+  "email_require_valid":"Doit être un email valide",
+  "inquiry_require":"la demande est un champ obligatoire",
+  "sold_out":"solder",
+  "detail":"détails",
+
+  "product" :"Produit",
+  "Bild" :"Image",
+  "price" :"Prix",
+  "summary" :"Sommaire",
+  "remove":"Retirer",
+  "no_product_compare" : "Vous n’avez choisi aucun produit à comparer.",
+  "procesed_compare":"Procéder aux achats"
 
 }

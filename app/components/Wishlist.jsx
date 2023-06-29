@@ -15,11 +15,12 @@ import {
   CartLoading,
   IconCart
 } from '~/components';
-import {isDiscounted} from '~/lib/utils';
+import {isDiscounted, translate} from '~/lib/utils';
 import {useFetcher} from '@remix-run/react';
 import {WishlistContext } from '~/store/WishlistContext';
 
-export function Wishlist(layout, onClose) {
+export function Wishlist({layout, onClose,locale}) {
+   
   const {load, data, state} = useFetcher();
 
   const {wishlistItems } = useContext(WishlistContext);
@@ -39,13 +40,14 @@ export function Wishlist(layout, onClose) {
           onClose={onClose}
           products={data?.products}
           layout={'page'}
+          locale={locale}
         />
       )}
     </>
   );
 }
 
-export function CartDetails({layout, products, onClose}) {
+export function CartDetails({layout, products, onClose,locale}) {
 
     if(!products) return <></>;
 
@@ -74,6 +76,8 @@ export function CartDetails({layout, products, onClose}) {
    
      return (
        <>
+        
+       
            {products.length == 0 ? <CartEmpty hidden={false} onClose={onClose} layout={layout} />: (
                <div className={container[layout]}>
                <section
@@ -124,7 +128,7 @@ export function CartDetails({layout, products, onClose}) {
                                      </Heading>
                                      <div className="grid items-stretch gap-4">
                                        {isOutOfStock ? (
-                                         <Text>Sold out</Text>
+                                         <Text>{translate("sold_out",locale)}</Text>
                                        ) : (
                                          <AddToCartButton
                                            lines={[
@@ -140,7 +144,7 @@ export function CartDetails({layout, products, onClose}) {
                                            <IconCart
                                              className={'w-[15px] h-[14px]'}
                                            />
-                                           + Jetzt kaufen
+                                           + {translate("add_to_cart",locale)}
                                          </AddToCartButton>
                                        )}
                                      </div>

@@ -229,6 +229,8 @@ export default function Homepage() {
                     right_section_title={data?.right_section_title?.value}
                     left_section_products={data?.left_section_products?.references?.edges}
                     right_section_products={data?.right_section_products?.references?.edges}
+                    locale={language}
+
                 />
                 )
             }}

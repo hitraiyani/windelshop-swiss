@@ -12,18 +12,20 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { translate } from '~/lib/utils';
 
-const schema = yup
+
+export function QuickRequest({className,locale}) {
+  const schema = yup
   .object({
-    name: yup.string().required().min(3).max(50),
+    name: yup.string().required(translate("name_require",locale)).min(3).max(50),
     email: yup
       .string()
-      .email('Must be a valid email')
+      .email(translate("email_require",locale))
       .max(255)
-      .required('Email is required'),
-    inquiry: yup.string().required().min(5),
+      .required(translate("email_require_valid",locale)),
+    inquiry: yup.string().required(translate("inquiry_require",locale) ).min(5),
   })
   .required();
-export function QuickRequest({className,locale}) {
+
   let formRef = useRef();
   const {
     register,
@@ -66,7 +68,7 @@ export function QuickRequest({className,locale}) {
                       <span className="icon w-[35px] h-[35px] border-[2px] rounded-full border-black p-[7px] text-[#1C5F7B]">
                         <IconPhone className={'w-full h-full'} />
                       </span>
-                      <span className="text flex-1">052 720 58 58</span>
+                      <span className="text flex-1">{translate("phone_number",locale)}</span>
                     </a>
                   </li>
                   <li>

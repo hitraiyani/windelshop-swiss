@@ -9,9 +9,10 @@ import {
   AddToCartButton,
   Text,
   Button,
+  
 } from '~/components';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
-import {isDiscounted} from '~/lib/utils';
+import {isDiscounted, translate} from '~/lib/utils';
 
 export function Popularproducts({
   className,
@@ -19,6 +20,7 @@ export function Popularproducts({
   right_section_title,
   left_section_products,
   right_section_products,
+  locale
 }) {
   return (
     <section
@@ -86,6 +88,7 @@ export function Popularproducts({
                           <ProductCardView
                             product={product?.node}
                             key={index}
+                            locale={locale}
                           />
                         </div>
                       </SwiperSlide>
@@ -155,6 +158,7 @@ export function Popularproducts({
                           <ProductCardView
                             product={product?.node}
                             key={index}
+                            locale={locale}
                           />
                         </div>
                       </SwiperSlide>
@@ -170,7 +174,7 @@ export function Popularproducts({
   );
 }
 
-export function ProductCardView({product}) {
+export function ProductCardView({product,locale}) {
   const firstVariant = flattenConnection(product?.variants)[0];
 
   if (!firstVariant) return null;
@@ -251,7 +255,7 @@ export function ProductCardView({product}) {
               disabled
               className='bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold'
             >
-              <Text>Sold out</Text>
+              <Text>{translate("sold_out",locale)}</Text>
             </Button>
           ) : (
             <AddToCartButton

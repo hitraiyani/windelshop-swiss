@@ -11,9 +11,9 @@ import {
     Link,
     Button
   } from '~/components';
-  import {isDiscounted, stringTruncate} from '~/lib/utils';
+  import {isDiscounted, stringTruncate, translate} from '~/lib/utils';
 
-export function ProductCompare() {
+export function ProductCompare({locale}) {
     const {load, data, state} = useFetcher();
 
   const {productCompareItems, removeFromProductCompare } = useContext(WishlistContext);
@@ -36,13 +36,13 @@ export function ProductCompare() {
             <thead>
               <tr>
                 <td colSpan="5" className="py-2 px-4 border-b border-gray-200">
-                  <strong>Einzelheiten</strong>
+                  <strong>{translate("product_compare",locale)}</strong>
                 </td>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th className="py-2 px-4 border-b border-gray-200">Produkt</th>
+                <th className="py-2 px-4 border-b border-gray-200">{translate("product",locale)}</th>
                 {data?.products.map((product) => (
                   <td
                     key={product.id}
@@ -53,7 +53,7 @@ export function ProductCompare() {
                 ))}
               </tr>
               <tr>
-                <th className="py-2 px-4 border-b border-gray-200">Bild</th>
+                <th className="py-2 px-4 border-b border-gray-200">{translate("Bild",locale)}</th>
                 {data?.products.map((product) => {
                   const cardProduct = product?.variants ? product : {};
                   if (!cardProduct?.variants?.nodes?.length) return null;
@@ -81,7 +81,7 @@ export function ProductCompare() {
                 })}
               </tr>
               <tr>
-                <th className="py-2 px-4 border-b border-gray-200">Preis</th>
+                <th className="py-2 px-4 border-b border-gray-200">{translate("price",locale)}</th>
                 {data?.products.map((product) => {
                   const cardProduct = product?.variants ? product : {};
                   if (!cardProduct?.variants?.nodes?.length) return null;
@@ -114,7 +114,7 @@ export function ProductCompare() {
               </tr>
               <tr>
                 <th className="py-2 px-4 border-b border-gray-200">
-                  Zusammenfassung
+                  {translate("summary",locale)}
                 </th>
                 {data?.products.map((product) => {
                   return (
@@ -152,7 +152,7 @@ export function ProductCompare() {
                           disabled
                           className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
                         >
-                          <Text>Sold out</Text>
+                          <Text>{translate("sold_out",locale)}</Text>
                         </Button>
                       ) : (
                         <AddToCartButton
@@ -165,8 +165,7 @@ export function ProductCompare() {
                           className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
                           data-test="add-to-cart"
                         >
-                          <IconCart className={'w-[15px] h-[14px]'} />+ Jetzt
-                          kaufen
+                          <IconCart className={'w-[15px] h-[14px]'} />+ {translate("add_to_cart",locale)}
                         </AddToCartButton>
                       )}
                       <button
@@ -175,7 +174,7 @@ export function ProductCompare() {
                         }}
                         className='bg-[#dc3545] rounded-[100px] mt-2 w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
                       >
-                        Entfernen
+                        {translate("remove",locale)}
                       </button>
                     </td>
                   );
@@ -187,10 +186,10 @@ export function ProductCompare() {
         {data?.products.length == 0 && (
           <section className="grid gap-6">
             <Text format>
-                Keine Produkte zum Vergleich gewählt
+                {translate("no_product_compare",locale)}
             </Text>
             <div>
-              <Link to={'/'}>Mit dem Einkaufen fortfahren</Link>
+              <Link to={'/'}>{translate("procesed_compare",locale)}</Link>
             </div>
           </section>
         )}
