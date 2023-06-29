@@ -572,7 +572,7 @@ export function ProductForm({
                           : 'rounded-[10px]',
                       )}
                     >
-                      <span>GROSSE</span>
+                      <span>GRÖSSE</span>
                       <IconCaret direction={open ? 'up' : 'down'} />
                     </Listbox.Button>
                     <Listbox.Options
