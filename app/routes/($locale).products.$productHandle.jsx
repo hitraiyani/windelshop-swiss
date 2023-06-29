@@ -1,4 +1,11 @@
-import {useRef, Suspense, useMemo, useContext, useEffect, useState} from 'react';
+import {
+  useRef,
+  Suspense,
+  useMemo,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import {Disclosure, Listbox} from '@headlessui/react';
 import {defer} from '@shopify/remix-oxygen';
 import {
@@ -7,7 +14,7 @@ import {
   useSearchParams,
   useLocation,
   useNavigation,
-  useFetcher
+  useFetcher,
 } from '@remix-run/react';
 import {AnalyticsPageType, Money, ShopPayButton} from '@shopify/hydrogen';
 import invariant from 'tiny-invariant';
@@ -43,13 +50,13 @@ import {
   IconOekoTex,
   YouMayAlsoLike,
   ProductCompareAlertBar,
-  ProductWishListAlertBar
+  ProductWishListAlertBar,
 } from '~/components';
 import {getExcerpt, isDiscounted} from '~/lib/utils';
 import {seoPayload} from '~/lib/seo.server';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {routeHeaders, CACHE_SHORT} from '~/data/cache';
-import {WishlistContext } from '~/store/WishlistContext';
+import {WishlistContext} from '~/store/WishlistContext';
 
 export const headers = routeHeaders;
 
@@ -77,7 +84,10 @@ export async function loader({params, request, context}) {
     throw new Response('product', {status: 404});
   }
 
-  const recommended = getRecommendedProducts(context.storefront, product.cross_selling);
+  const recommended = getRecommendedProducts(
+    context.storefront,
+    product.cross_selling,
+  );
   const firstVariant = product.variants.nodes[0];
   const selectedVariant = product.selectedVariant ?? firstVariant;
 
@@ -122,8 +132,7 @@ export default function Product() {
   const {product, shop, recommended} = useLoaderData();
   const {media, title, vendor, descriptionHtml} = product;
   const {shippingPolicy, refundPolicy} = shop;
-  const {load, data } = useFetcher();
-
+  const {load, data} = useFetcher();
 
   const firstVariant = product.variants.nodes[0];
   const selectedVariant = product.selectedVariant ?? firstVariant;
@@ -136,7 +145,8 @@ export default function Product() {
   let dicountedPr = 0;
   if (isOnSale) {
     dicountedPr = Math.round(
-      ((parseFloat(selectedVariant?.price?.amount) - parseFloat(selectedVariant?.compareAtPrice?.amount)) /
+      ((parseFloat(selectedVariant?.price?.amount) -
+        parseFloat(selectedVariant?.compareAtPrice?.amount)) /
         parseFloat(selectedVariant?.price?.amount)) *
         100,
     );
@@ -145,18 +155,22 @@ export default function Product() {
   const [bundleProdListSorted, setBundleProdListSorted] = useState([]);
   const [productBundleData, setProductBundleData] = useState([]);
   const [productSizeKeyValueData, setProductSizeKeyValueData] = useState([]);
-  const [productPackageKeyValueData, setProductPackageKeyValueData] = useState([]);
+  const [productPackageKeyValueData, setProductPackageKeyValueData] = useState(
+    [],
+  );
 
   useEffect(() => {
     setBundleProdListSorted([]);
     setProductBundleData([]);
-      load(`/api/productBundle?productHandle=${encodeURIComponent(product?.handle)}`);
+    load(
+      `/api/productBundle?productHandle=${encodeURIComponent(product?.handle)}`,
+    );
   }, [product?.handle]);
 
   useEffect(() => {
     if (data) {
       if (data?.bundleProdList) {
-       setBundleProdListSorted(data.bundleProdList);
+        setBundleProdListSorted(data.bundleProdList);
       }
       if (data?.productBundleData) {
         setProductBundleData(data.productBundleData);
@@ -170,11 +184,13 @@ export default function Product() {
     }
   }, [data]);
 
-
   const [showProductCompareAlert, setShowProductCompareAlert] = useState(false);
-  const [showProductWishlistAlert, setShowProductWishlistAlert] = useState(false);
-  const [showProductCompareAlertType, setShowProductCompareAlertType] = useState('added');
-  const [showProductWishlistAlertType, setShowProductWishlistAlertType] = useState('added');
+  const [showProductWishlistAlert, setShowProductWishlistAlert] =
+    useState(false);
+  const [showProductCompareAlertType, setShowProductCompareAlertType] =
+    useState('added');
+  const [showProductWishlistAlertType, setShowProductWishlistAlertType] =
+    useState('added');
 
   return (
     <>
@@ -242,15 +258,12 @@ export default function Product() {
                 <div className="tab-wrap border-t-[1px] border-[#E7EFFF] pt-[14px] lg:pt-[34px] mt-[35px]">
                   <Tabs>
                     <div label="Beschreibung">
-                      <div
-                        className="tab-content"
-                      >
+                      <div className="tab-content">
                         <div
-                            dangerouslySetInnerHTML={{
-                              __html: product.descriptionHtml,
-                            }}
-                        >
-                        </div>
+                          dangerouslySetInnerHTML={{
+                            __html: product.descriptionHtml,
+                          }}
+                        ></div>
                         {bundleProdListSorted.length > 0 && (
                           <>
                             <div className="set_enthalt">
@@ -369,18 +382,33 @@ export default function Product() {
   );
 }
 
-export function ProductForm({setShowProductCompareAlert, setShowProductCompareAlertType, setShowProductWishlistAlert, setShowProductWishlistAlertType, productSizeKeyValueData, productPackageKeyValueData}) {
+export function ProductForm({
+  setShowProductCompareAlert,
+  setShowProductCompareAlertType,
+  setShowProductWishlistAlert,
+  setShowProductWishlistAlertType,
+  productSizeKeyValueData,
+  productPackageKeyValueData,
+}) {
   const {product, analytics, storeDomain} = useLoaderData();
 
-  console.log("ProductFormproductSizeKeyValueData", productSizeKeyValueData);
-  console.log("ProductFormproductPackageKeyValueData", productPackageKeyValueData);
+  console.log('ProductFormproductSizeKeyValueData', productSizeKeyValueData);
+  console.log(
+    'ProductFormproductPackageKeyValueData',
+    productPackageKeyValueData,
+  );
 
   const [currentSearchParams] = useSearchParams();
   const {location} = useNavigation();
 
-  const { wishlistItems, productCompareItems, addToProductCompare, removeFromProductCompare,  addToWishlist, removeFromWishlist } = useContext(
-    WishlistContext
-  );
+  const {
+    wishlistItems,
+    productCompareItems,
+    addToProductCompare,
+    removeFromProductCompare,
+    addToWishlist,
+    removeFromWishlist,
+  } = useContext(WishlistContext);
 
   const [isWhishListAdded, setIsWhishListAdded] = useState(false);
   const [isProductCompareAdded, setIsProductCompareAdded] = useState(false);
@@ -410,20 +438,19 @@ export function ProductForm({setShowProductCompareAlert, setShowProductCompareAl
   };
 
   useEffect(() => {
-      if (wishlistItems.includes(product.id)) {
-        setIsWhishListAdded(true);
-      } else {
-        setIsWhishListAdded(false);
-      }
+    if (wishlistItems.includes(product.id)) {
+      setIsWhishListAdded(true);
+    } else {
+      setIsWhishListAdded(false);
+    }
   }, [wishlistItems]);
 
-
   useEffect(() => {
-      if (productCompareItems.includes(product.id)) {
-        setIsProductCompareAdded(true);
-      } else {
-        setIsProductCompareAdded(false);
-      }
+    if (productCompareItems.includes(product.id)) {
+      setIsProductCompareAdded(true);
+    } else {
+      setIsProductCompareAdded(false);
+    }
   }, [productCompareItems]);
   /**
    * We update `searchParams` with in-flight request data from `location` (if available)
@@ -472,7 +499,8 @@ export function ProductForm({setShowProductCompareAlert, setShowProductCompareAl
   let dicountedPr = 0;
   if (isOnSale) {
     dicountedPr = Math.round(
-      ((parseFloat(selectedVariant?.price?.amount) - parseFloat(selectedVariant?.compareAtPrice?.amount)) /
+      ((parseFloat(selectedVariant?.price?.amount) -
+        parseFloat(selectedVariant?.compareAtPrice?.amount)) /
         parseFloat(selectedVariant?.price?.amount)) *
         100,
     );
@@ -480,8 +508,9 @@ export function ProductForm({setShowProductCompareAlert, setShowProductCompareAl
 
   const [quantity, setQuantity] = useState(1);
 
-  const filteredOption =  product.options.filter((option) => option.values.length > 1);
-
+  const filteredOption = product.options.filter(
+    (option) => option.values.length > 1,
+  );
 
   const productAnalytics = {
     ...analytics.products[0],
@@ -528,66 +557,66 @@ export function ProductForm({setShowProductCompareAlert, setShowProductCompareAl
         </div>
       </div>
       <div className="product-options-wrap border-t-[1px] border-[#E7EFFF] mt-[46px] pt-[37px] flex flex-row flex-wrap gap-y-[20px] gap-x-[52px]">
-        <div className="flex flex-col flex-wrap gap-[17px]">
-        {productSizeKeyValueData.length > 0 && (
-            <div className="relative w-full">
-            <Listbox>
-              {({open}) => (
-                <>
-                  <Listbox.Button
-                    ref={closeRef}
-                    className={clsx(
-                      'flex items-center justify-between w-full py-3 px-4 border border-primary',
-                      open
-                        ? 'rounded-b md:rounded-t md:rounded-b-none'
-                        : 'rounded',
-                    )}
-                  >
-                    <span>GROSSE</span>
-                    <IconCaret direction={open ? 'up' : 'down'} />
-                  </Listbox.Button>
-                  <Listbox.Options
-                    className={clsx(
-                      'border-primary bg-contrast absolute bottom-12 z-30 grid h-48 w-full overflow-y-scroll rounded-t border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b',
-                      open ? 'max-h-48' : 'max-h-0',
-                    )}
-                  >
-                    {productSizeKeyValueData.map((item, key) => {
-                      return (
-                        <Listbox.Option
-                          key={`option-${key}`}
-                          value={item.lable}
-                        >
-                          {({active}) => (
-                            <Link
-                              to={`/products/${item.handle}`}
-                              className={clsx(
-                                'text-primary w-full p-2 transition rounded flex justify-start items-center text-left cursor-pointer',
-                                active && 'bg-primary/10',
-                              )}
-                              onClick={() => {
-                                if (!closeRef?.current) return;
-                                closeRef.current.click();
-                              }}
-                            >
-                              {item.lable}
-                              {item.is_selected && (
-                                <span className="ml-2">
-                                  <IconCheck />
-                                </span>
-                              )}
-                            </Link>
-                          )}
-                        </Listbox.Option>
-                      );
-                    })}
-                  </Listbox.Options>
-                </>
-              )}
-            </Listbox>
-          </div>
-        )}
-{/*           
+        <div className="flex flex-col xl:flex-row gap-[17px] w-full items-end">
+          {productSizeKeyValueData.length > 0 && (
+            <div className="relative w-full xl:w-[40%]">
+              <Listbox>
+                {({open}) => (
+                  <>
+                    <Listbox.Button
+                      ref={closeRef}
+                      className={clsx(
+                        'flex items-center justify-between w-full py-[3px] px-[10px] border-[2px] text-[16px] font-bold border-[#18a1dc] min-h-[52px] pl-[20px] text-[#18a1dc]',
+                        open
+                          ? 'rounded-b md:rounded-t md:rounded-b-none'
+                          : 'rounded-[10px]',
+                      )}
+                    >
+                      <span>GROSSE</span>
+                      <IconCaret direction={open ? 'up' : 'down'} />
+                    </Listbox.Button>
+                    <Listbox.Options
+                      className={clsx(
+                        'bg-white absolute bottom-12 z-30 grid h-48 w-full overflow-y-scroll rounded-t border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b border-[#cccc]',
+                        open ? 'max-h-48' : 'max-h-0',
+                      )}
+                    >
+                      {productSizeKeyValueData.map((item, key) => {
+                        return (
+                          <Listbox.Option
+                            key={`option-${key}`}
+                            value={item.lable}
+                          >
+                            {({active}) => (
+                              <Link
+                                to={`/products/${item.handle}`}
+                                className={clsx(
+                                  'text-primary w-full p-2 transition rounded flex justify-start items-center text-left cursor-pointer',
+                                  active && 'bg-primary/10',
+                                )}
+                                onClick={() => {
+                                  if (!closeRef?.current) return;
+                                  closeRef.current.click();
+                                }}
+                              >
+                                {item.lable}
+                                {item.is_selected && (
+                                  <span className="ml-2">
+                                    <IconCheck />
+                                  </span>
+                                )}
+                              </Link>
+                            )}
+                          </Listbox.Option>
+                        );
+                      })}
+                    </Listbox.Options>
+                  </>
+                )}
+              </Listbox>
+            </div>
+          )}
+          {/*           
           {productSizeKeyValueData.length > 0 && (
             <>
               <Heading
@@ -620,30 +649,32 @@ export function ProductForm({setShowProductCompareAlert, setShowProductCompareAl
 
           {productPackageKeyValueData.length > 0 && (
             <>
-              <Heading
-                as="legend"
-                size="lead"
-                className="text-[14px] text-[#666666] uppercase font-bold font-['Open_Sans']"
-              >
-                ANZAHL
-              </Heading>
-              <div className="flex flex-wrap gap-[6px]">
-                {productPackageKeyValueData.map((item, key) => {
-                  return (
-                    <Text className={'w-fit min-h-[52px]'} key={key}>
-                      <Link
-                        to={`/products/${item.handle}`}
-                        className={`border-[2px] border-[#18A1DC] flex items-center justify-center transition-all duration-500 text-[#18A1DC] text-[16px] leading-none h-full w-full rounded-[10px] font-bold font-["Open_Sans"] px-[15px] py-[10px] hover:opacity-100 min-w-[60px] ${
-                          item.is_selected
-                            ? 'opacity-100 bg-[#E7EFFF]'
-                            : 'opacity-70'
-                        }`}
-                      >
-                        {item.lable}
-                      </Link>
-                    </Text>
-                  );
-                })}
+              <div className="pro-productPackage w-full xl:flex-1">
+                <Heading
+                  as="legend"
+                  size="lead"
+                  className="text-[14px] text-[#666666] uppercase font-bold font-['Open_Sans'] mb-[10px]"
+                >
+                  ANZAHL
+                </Heading>
+                <div className="flex flex-wrap gap-[6px]">
+                  {productPackageKeyValueData.map((item, key) => {
+                    return (
+                      <Text className={'w-fit min-h-[52px]'} key={key}>
+                        <Link
+                          to={`/products/${item.handle}`}
+                          className={`border-[2px] border-[#18A1DC] flex items-center justify-center transition-all duration-500 text-[#18A1DC] text-[16px] leading-none h-full w-full rounded-[10px] font-bold font-["Open_Sans"] px-[15px] py-[10px] hover:opacity-100 min-w-[60px] ${
+                            item.is_selected
+                              ? 'opacity-100 bg-[#E7EFFF]'
+                              : 'opacity-70'
+                          }`}
+                        >
+                          {item.lable}
+                        </Link>
+                      </Text>
+                    );
+                  })}
+                </div>
               </div>
             </>
           )}
