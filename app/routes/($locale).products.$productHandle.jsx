@@ -393,11 +393,10 @@ export function ProductForm({
   const {product, analytics, storeDomain} = useLoaderData();
 
   console.log('ProductFormproductSizeKeyValueData', productSizeKeyValueData);
-  console.log(
-    'ProductFormproductPackageKeyValueData',
-    productPackageKeyValueData,
-  );
 
+  const selectedProductSize = productSizeKeyValueData?.find(item => item.is_selected === true);
+  console.log("selectedProductSize", selectedProductSize);
+  
   const [currentSearchParams] = useSearchParams();
   const {location} = useNavigation();
 
@@ -572,7 +571,7 @@ export function ProductForm({
                           : 'rounded-[10px]',
                       )}
                     >
-                      <span>GRÖSSE</span>
+                      <span>GRÖSSE {selectedProductSize?.lable}</span>
                       <IconCaret direction={open ? 'up' : 'down'} />
                     </Listbox.Button>
                     <Listbox.Options
