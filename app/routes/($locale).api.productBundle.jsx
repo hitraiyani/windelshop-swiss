@@ -17,6 +17,17 @@ export async function loader({request, context: {storefront}}) {
   const productHandleMain = searchParams.get('productHandle') ?? '';
 
 
+  
+  // Helper function to parse the numeric value from label
+  function parseLabel(label) {
+    const numericPart = label.split('.')[1];
+    if (numericPart.endsWith('+')) {
+      return parseInt(numericPart.slice(0, -1)) + 0.5;
+    }
+    return parseInt(numericPart);
+  }
+
+
   if (productHandleMain) {
     const {product} = await storefront.query(PRODUCT_QUERY, {
       variables: {
@@ -25,13 +36,85 @@ export async function loader({request, context: {storefront}}) {
         language: storefront.i18n.language,
       },
     });
-
+    
+    
+    const variantProducts = product?.variant_products?.value ? product?.variant_products?.value.split('|') : [];
+    const connectedProducts = product?.connected_products?.value ? product?.connected_products?.value.split('|') : [];
+  
     if (!product?.id) {
       return json({
         bundleProdList: [],
         productBundleData: [],
+        productSizeKeyValue: [],
       });
     }
+
+    const productSizeKeyValue = [];
+    await Promise.all(
+      connectedProducts.map(async (productHandle) => {
+        const {variant_products} = await storefront.query(VARIENT_PRODUCT_QUERY, {
+          variables: {
+            handle: productHandle,
+            country: storefront.i18n.country,
+            language: storefront.i18n.language,
+          },
+        });
+        if (variant_products?.id) {
+          const regex = /Gr\.\s?\d+\+?/;
+          const match = variant_products.title.match(regex);
+          if (match) {
+            const grValue = match[0];
+            productSizeKeyValue.push({'lable' : grValue, 'handle' : variant_products.handle, 'title' :  variant_products.title, 'is_selected' : false});
+          }
+        }
+      }),
+    );
+    if(productSizeKeyValue.length > 0) {
+      const regex = /Gr\.\s?\d+\+?/;
+      const match = product.title.match(regex);
+      if (match) {
+        const grValue = match[0];
+        productSizeKeyValue.push({'lable' : grValue, 'handle' : product.handle, 'title' :  product.title, 'is_selected' : true});
+      }
+    }
+    productSizeKeyValue.sort((a, b) => {
+      const labelA = parseLabel(a.lable);
+      const labelB = parseLabel(b.lable);
+      return labelA - labelB;
+    });
+
+    const productPackageKeyValue = [];
+    await Promise.all(
+      variantProducts.map(async (productHandle) => {
+        const {variant_products} = await storefront.query(VARIENT_PRODUCT_QUERY, {
+          variables: {
+            handle: productHandle,
+            country: storefront.i18n.country,
+            language: storefront.i18n.language,
+          },
+        });
+        if (variant_products?.id) {
+          const match = variant_products.title.match(/\((.*?)\)/);
+            if (match) {
+              const valueInBrackets = match[1];
+              productPackageKeyValue.push({'lable' : valueInBrackets, 'handle' : variant_products.handle, 'is_selected' : false});
+            }
+        }
+      }),
+    );
+
+    if (productPackageKeyValue.length > 0) {
+      const match = product.title.match(/\((.*?)\)/);
+      if (match) {
+        const valueInBrackets = match[1];
+        productPackageKeyValue.push({'lable' : valueInBrackets, 'handle' : product.handle, 'is_selected' : true});
+      }
+    }
+    productPackageKeyValue.sort((a, b) => {
+      const labelA = parseInt(a.lable);
+      const labelB = parseInt(b.lable);
+      return labelA - labelB;
+    });
 
     const bundle_product_quantities = product?.bundle_product_quantities?.value
       ? JSON.parse(product?.bundle_product_quantities?.value)
@@ -144,6 +227,8 @@ export async function loader({request, context: {storefront}}) {
         (a, b) => (a.href == '' - b.href) | (a.href - b.href),
       ),
       productBundleData: productBundleData,
+      productPackageKeyValue,
+      productSizeKeyValue
     });
   }
 }
@@ -221,6 +306,12 @@ const PRODUCT_QUERY = `#graphql
       bundle_products : metafield(namespace: "custom_fields", key: "bundle_products") {
         value
       }
+      variant_products : metafield(namespace: "custom_fields", key: "variant_products") {
+        value
+      }
+      connected_products : metafield(namespace: "custom_fields", key: "connected_products") {
+        value
+      }
     }
   }
 `;
@@ -243,6 +334,21 @@ const BUNDLE_PRODUCT_QUERY = `#graphql
           handle
         }
       }
+    }
+  }
+`;
+
+
+const VARIENT_PRODUCT_QUERY = `#graphql
+  query Product(
+    $country: CountryCode
+    $language: LanguageCode
+    $handle: String!
+  ) @inContext(country: $country, language: $language) {
+    variant_products : product(handle: $handle) {
+      id
+      title
+      handle
     }
   }
 `;

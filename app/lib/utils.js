@@ -267,7 +267,6 @@ export function getLocaleFromRequestNew(request) {
   const languageCookie = cookieValue ? cookieValue.split(';').find(cookie => cookie.trim().startsWith('language=')) : null;
   const language = languageCookie ? languageCookie.split('=')[1] : null;
 
-  console.log("language", language);
 
   const url = new URL(request.url);
   const firstPathPart =

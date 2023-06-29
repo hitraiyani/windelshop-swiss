@@ -1,17 +1,19 @@
 import {json, redirect} from '@shopify/remix-oxygen';
-import {Form, useActionData} from '@remix-run/react';
+import {Form, useActionData, useLoaderData} from '@remix-run/react';
 import {useState} from 'react';
 
 import {Link} from '~/components';
-import {getInputStyleClasses} from '~/lib/utils';
+import {getInputStyleClasses, translate} from '~/lib/utils';
+import {seoPayload} from '~/lib/seo.server';
 
-export async function loader({context, params}) {
+export async function loader({context, params, request}) {
   const customerAccessToken = await context.session.get('customerAccessToken');
 
   if (customerAccessToken) {
     return redirect(params.locale ? `${params.locale}/account` : '/account');
   }
-
+  const seo = seoPayload.customPage({title : translate('forgot_password_title', context.storefront.i18n.language), url: request.url});
+  return json({locale : context.storefront.i18n.language, seo});
   return new Response(null);
 }
 
@@ -23,7 +25,7 @@ export const action = async ({request, context}) => {
 
   if (!email || typeof email !== 'string') {
     return badRequest({
-      formError: 'Please provide an email.',
+      formError: translate('forgot_password_empty_error', context.storefront.i18n.language),
     });
   }
 
@@ -40,11 +42,8 @@ export const action = async ({request, context}) => {
   }
 };
 
-export const meta = () => {
-  return [{title: 'Recover Password'}];
-};
-
 export default function Recover() {
+  const {locale} = useLoaderData();
   const actionData = useActionData();
   const [nativeEmailError, setNativeEmailError] = useState(null);
   const isSubmitted = actionData?.resetRequested;
@@ -54,19 +53,16 @@ export default function Recover() {
       <div className="max-w-md w-full">
         {isSubmitted ? (
           <>
-            <h1 className="text-4xl">Request Sent.</h1>
+            <h1 className="text-4xl">{translate('forgot_request_send', locale)}</h1>
             <p className="mt-4">
-              If that email address is in our system, you will receive an email
-              with instructions about how to reset your password in a few
-              minutes.
+              {translate('forgot_request_send_desc', locale)}
             </p>
           </>
         ) : (
           <>
-            <h1 className="text-4xl">Forgot Password.</h1>
+            <h1 className="text-4xl">{translate('forgot_password_title', locale)}</h1>
             <p className="mt-4">
-              Enter the email address associated with your account to receive a
-              link to reset your password.
+              {translate('forgot_password_sub_desc', locale)}
             </p>
             {/* TODO: Add onSubmit to validate _before_ submission with native? */}
             <Form
@@ -89,7 +85,7 @@ export default function Recover() {
                   type="email"
                   autoComplete="email"
                   required
-                  placeholder="Email address"
+                  placeholder={translate('email_placeholder', locale)}
                   aria-label="Email address"
                   // eslint-disable-next-line jsx-a11y/no-autofocus
                   autoFocus
@@ -97,7 +93,7 @@ export default function Recover() {
                     setNativeEmailError(
                       event.currentTarget.value.length &&
                         !event.currentTarget.validity.valid
-                        ? 'Invalid email address'
+                        ? translate('invalid_email', locale)
                         : null,
                     );
                   }}
@@ -113,14 +109,13 @@ export default function Recover() {
                   className="bg-primary text-contrast rounded py-2 px-4 focus:shadow-outline block w-full"
                   type="submit"
                 >
-                  Request Reset Link
+                  {translate('forgot_submit_btn', locale)}
                 </button>
               </div>
               <div className="flex items-center mt-8 border-t border-gray-300">
                 <p className="align-baseline text-sm mt-6">
-                  Return to &nbsp;
                   <Link className="inline underline" to="/account/login">
-                    Login
+                    {translate('return_to_login', locale) }
                   </Link>
                 </p>
               </div>
