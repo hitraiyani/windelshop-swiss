@@ -4,7 +4,7 @@ import {json, redirect} from '@shopify/remix-oxygen';
 import {useLoaderData} from '@remix-run/react';
 import {Money, Image, flattenConnection} from '@shopify/hydrogen';
 
-import {statusMessage} from '~/lib/utils';
+import {statusMessage, translate} from '~/lib/utils';
 import {Link, Heading, PageHeader, Text} from '~/components';
 
 export const meta = ({data}) => {
@@ -37,6 +37,8 @@ export async function loader({request, context, params}) {
 
   const order = data?.node;
 
+  console.log("order", order);
+
   if (!order) {
     throw new Response('Order not found', {status: 404});
   }
@@ -47,37 +49,36 @@ export async function loader({request, context, params}) {
 
   const firstDiscount = discountApplications[0]?.value;
 
-  const discountValue =
-    firstDiscount?.__typename === 'MoneyV2' && firstDiscount;
+  const discountValue = '';
 
-  const discountPercentage =
-    firstDiscount?.__typename === 'PricingPercentageValue' &&
-    firstDiscount?.percentage;
+  const discountPercentage = '';
 
   return json({
     order,
     lineItems,
     discountValue,
     discountPercentage,
+    locale : context.storefront.i18n.language
   });
 }
 
 export default function OrderRoute() {
-  const {order, lineItems, discountValue, discountPercentage} = useLoaderData();
+  const {order, lineItems, discountValue, discountPercentage, locale} = useLoaderData();
+
   return (
     <div>
-      <PageHeader heading="Order detail">
+      <PageHeader heading={translate('account_order_details_txt', locale)}>
         <Link to="/account">
-          <Text color="subtle">Return to Account Overview</Text>
+          <Text color="subtle"> {translate('account_back_to_overview', locale)}</Text>
         </Link>
       </PageHeader>
       <div className="w-full p-6 sm:grid-cols-1 md:p-8 lg:p-12 lg:py-6">
         <div>
           <Text as="h3" size="lead">
-            Order No. {order.name}
+            {translate('account_order_no', locale)}. {order.name}
           </Text>
           <Text className="mt-2" as="p">
-            Placed on {new Date(order.processedAt).toDateString()}
+           {translate('account_order_date',locale)} {new Date(order.processedAt).toDateString()}
           </Text>
           <div className="grid items-start gap-12 sm:grid-cols-1 md:grid-cols-4 md:gap-16 sm:divide-y sm:divide-gray-200">
             <table className="min-w-full my-8 divide-y divide-gray-300 md:col-span-3">
@@ -87,25 +88,25 @@ export default function OrderRoute() {
                     scope="col"
                     className="pb-4 pl-0 pr-3 font-semibold text-left"
                   >
-                    Product
+                    {translate('account_order_product_title', locale)}
                   </th>
                   <th
                     scope="col"
                     className="hidden px-4 pb-4 font-semibold text-right sm:table-cell md:table-cell"
                   >
-                    Price
+                    {translate('account_order_price_title', locale)}
                   </th>
                   <th
                     scope="col"
                     className="hidden px-4 pb-4 font-semibold text-right sm:table-cell md:table-cell"
                   >
-                    Quantity
+                    {translate('account_order_qty_title', locale)}
                   </th>
                   <th
                     scope="col"
                     className="px-4 pb-4 font-semibold text-right"
                   >
-                    Total
+                    {translate('account_order_total_title', locale)}
                   </th>
                 </tr>
               </thead>
@@ -121,9 +122,16 @@ export default function OrderRoute() {
                           {lineItem?.variant?.image && (
                             <div className="w-24 card-image aspect-square">
                               <Image
-                                data={lineItem.variant.image}
-                                width={96}
-                                height={96}
+                                data={{
+                                  url: lineItem.variant.image.src,
+                                }}
+                                width={lineItem.variant.image.width}
+                                height={lineItem.variant.image.height}
+                                alt={lineItem.variant.image.altText}
+                                loaderOptions={{
+                                  scale: 2,
+                                  crop: 'center',
+                                }}
                               />
                             </div>
                           )}
@@ -135,7 +143,7 @@ export default function OrderRoute() {
                           </Text>
                         </div>
                         <dl className="grid">
-                          <dt className="sr-only">Product</dt>
+                          <dt className="sr-only">{translate('account_order_product_title', locale)}</dt>
                           <dd className="truncate lg:hidden">
                             <Heading size="copy" format as="h3">
                               {lineItem.title}
@@ -144,13 +152,13 @@ export default function OrderRoute() {
                               {lineItem.variant.title}
                             </Text>
                           </dd>
-                          <dt className="sr-only">Price</dt>
+                          <dt className="sr-only">{translate('account_order_price_title', locale)}</dt>
                           <dd className="truncate sm:hidden">
                             <Text size="fine" className="mt-4">
                               <Money data={lineItem.variant.price} />
                             </Text>
                           </dd>
-                          <dt className="sr-only">Quantity</dt>
+                          <dt className="sr-only">{translate('account_order_qty_title', locale)}</dt>
                           <dd className="truncate sm:hidden">
                             <Text className="mt-1" size="fine">
                               Qty: {lineItem.quantity}
@@ -182,13 +190,13 @@ export default function OrderRoute() {
                       colSpan={3}
                       className="hidden pt-6 pl-6 pr-3 font-normal text-right sm:table-cell md:pl-0"
                     >
-                      <Text>Discounts</Text>
+                      <Text>Rabatte</Text>
                     </th>
                     <th
                       scope="row"
                       className="pt-6 pr-3 font-normal text-left sm:hidden"
                     >
-                      <Text>Discounts</Text>
+                      <Text>Rabatte</Text>
                     </th>
                     <td className="pt-6 pl-3 pr-4 font-medium text-right text-green-700 md:pr-3">
                       {discountPercentage ? (
@@ -196,7 +204,7 @@ export default function OrderRoute() {
                           -{discountPercentage}% OFF
                         </span>
                       ) : (
-                        discountValue && <Money data={discountValue} />
+                        <></>
                       )}
                     </td>
                   </tr>
@@ -207,16 +215,16 @@ export default function OrderRoute() {
                     colSpan={3}
                     className="hidden pt-6 pl-6 pr-3 font-normal text-right sm:table-cell md:pl-0"
                   >
-                    <Text>Subtotal</Text>
+                    <Text>{translate('account_order_subtotal', locale)}</Text>
                   </th>
                   <th
                     scope="row"
                     className="pt-6 pr-3 font-normal text-left sm:hidden"
                   >
-                    <Text>Subtotal</Text>
+                    <Text>{translate('account_order_subtotal', locale)}</Text>
                   </th>
                   <td className="pt-6 pl-3 pr-4 text-right md:pr-3">
-                    <Money data={order.subtotalPriceV2} />
+                    <Money data={order.subtotalPrice} />
                   </td>
                 </tr>
                 <tr>
@@ -234,7 +242,7 @@ export default function OrderRoute() {
                     <Text>Tax</Text>
                   </th>
                   <td className="pt-4 pl-3 pr-4 text-right md:pr-3">
-                    <Money data={order.totalTaxV2} />
+                    <Money data={order.totalTax} />
                   </td>
                 </tr>
                 <tr>
@@ -243,23 +251,23 @@ export default function OrderRoute() {
                     colSpan={3}
                     className="hidden pt-4 pl-6 pr-3 font-semibold text-right sm:table-cell md:pl-0"
                   >
-                    Total
+                    {translate('account_order_total_title', locale)}
                   </th>
                   <th
                     scope="row"
                     className="pt-4 pr-3 font-semibold text-left sm:hidden"
                   >
-                    <Text>Total</Text>
+                    <Text>{translate('account_order_total_title', locale)}</Text>
                   </th>
                   <td className="pt-4 pl-3 pr-4 font-semibold text-right md:pr-3">
-                    <Money data={order.totalPriceV2} />
+                    <Money data={order.totalPrice} />
                   </td>
                 </tr>
               </tfoot>
             </table>
             <div className="sticky border-none top-nav md:my-8">
               <Heading size="copy" className="font-semibold" as="h3">
-                Shipping Address
+                {translate('account_order_shipping_address_txt', locale)}
               </Heading>
               {order?.shippingAddress ? (
                 <ul className="mt-6">
@@ -281,10 +289,10 @@ export default function OrderRoute() {
                   )}
                 </ul>
               ) : (
-                <p className="mt-3">No shipping address defined</p>
+                <p className="mt-3">{translate('account_order_no_shipping_address_txt', locale)}</p>
               )}
               <Heading size="copy" className="mt-8 font-semibold" as="h3">
-                Status
+                  {translate('account_order_status', locale)}
               </Heading>
               <div
                 className={clsx(

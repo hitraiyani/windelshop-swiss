@@ -1,9 +1,9 @@
 import {flattenConnection, Image} from '@shopify/hydrogen';
 
 import {Heading, Text, Link} from '~/components';
-import {statusMessage} from '~/lib/utils';
+import {statusMessage, translate} from '~/lib/utils';
 
-export function OrderCard({order}) {
+export function OrderCard({order, locale}) {
   if (!order?.id) return null;
   const [legacyOrderId, key] = order.id.split('/').pop().split('?');
   const lineItems = flattenConnection(order?.lineItems);
@@ -40,16 +40,16 @@ export function OrderCard({order}) {
             <dt className="sr-only">Order ID</dt>
             <dd>
               <Text size="fine" color="subtle">
-                Order No. {order.orderNumber}
+                {translate('account_order_no', locale)}. {order.orderNumber}
               </Text>
             </dd>
-            <dt className="sr-only">Order Date</dt>
+            <dt className="sr-only">{translate('account_order_date', locale)}</dt>
             <dd>
               <Text size="fine" color="subtle">
                 {new Date(order.processedAt).toDateString()}
               </Text>
             </dd>
-            <dt className="sr-only">Fulfillment Status</dt>
+            <dt className="sr-only">{translate('account_order_status', locale)}</dt>
             <dd className="mt-2">
               <span
                 className={`px-3 py-1 text-xs font-medium rounded-full ${
@@ -73,7 +73,7 @@ export function OrderCard({order}) {
           prefetch="intent"
         >
           <Text color="subtle" className="ml-3">
-            View Details
+             {translate('account_order_detail', locale)}
           </Text>
         </Link>
       </div>

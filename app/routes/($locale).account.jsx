@@ -109,7 +109,7 @@ export default function Authenticated() {
 }
 
 function Account({customer, orders, heading, addresses, featuredData, locale}) {
-  console.log("locale", locale);
+
   return (
     <>
     <section className="container mx-auto py-10">
@@ -122,12 +122,12 @@ function Account({customer, orders, heading, addresses, featuredData, locale}) {
           </div>
           <div className="px-4 w-full md:w-1/3">
             <div className="h-full flex items-start">
-              {orders && <AccountOrderHistory orders={orders} />}
+              {orders && <AccountOrderHistory orders={orders} locale={locale}/>}
             </div>
           </div>
           <div className="px-4 w-full md:w-1/3">
             <div className="h-full flex items-start">
-              <AccountAddressBook addresses={addresses} customer={customer} />
+              <AccountAddressBook addresses={addresses} customer={customer} locale={locale}/>
             </div>
           </div>
         </div>
@@ -146,24 +146,24 @@ function Account({customer, orders, heading, addresses, featuredData, locale}) {
   );
 }
 
-function AccountOrderHistory({orders}) {
+function AccountOrderHistory({orders, locale}) {
   return (
-    <div className="mt-6">
-      <div className="grid w-full gap-4 p-4 py-6 md:gap-8 md:p-8 lg:p-12">
-        <h2 className="font-bold text-lead">Order History</h2>
-        {orders?.length ? <Orders orders={orders} /> : <EmptyOrders />}
+    <div className="">
+      <div className="">
+        <h2 className="font-bold text-lead">{translate('account_order_history', locale)}</h2>
+        {orders?.length ? <Orders orders={orders} locale={locale} /> : <EmptyOrders locale={locale}/>}
       </div>
     </div>
   );
 }
 
-function EmptyOrders() {
+function EmptyOrders({locale}) {
   return (
     <div>
       <Text className="mb-1" size="fine" width="narrow" as="p">
-        You haven&apos;t placed any orders yet.
+          {translate('account_empty_order', locale)}
       </Text>
-      <div className="w-48">
+      {/* <div className="w-48">
         <Button
           className="w-full mt-2 text-sm"
           variant="secondary"
@@ -171,16 +171,16 @@ function EmptyOrders() {
         >
           Start Shopping
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }
 
-function Orders({orders}) {
+function Orders({orders, locale}) {
   return (
-    <ul className="grid grid-flow-row grid-cols-1 gap-2 gap-y-6 md:gap-4 lg:gap-6 false sm:grid-cols-3">
+    <ul className="grid grid-flow-row grid-cols-1 gap-2 gap-y-6 md:gap-4 lg:gap-6 false my-5">
       {orders.map((order) => (
-        <OrderCard order={order} key={order.id} />
+        <OrderCard order={order} key={order.id} locale={locale} />
       ))}
     </ul>
   );

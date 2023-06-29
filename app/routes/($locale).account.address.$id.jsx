@@ -1,8 +1,9 @@
-import {json, redirect} from '@shopify/remix-oxygen';
+import {json, defer, redirect} from '@shopify/remix-oxygen';
 import {
   Form,
   useActionData,
   useOutletContext,
+  useLoaderData,
   useParams,
   useNavigation,
 } from '@remix-run/react';
@@ -10,13 +11,22 @@ import {flattenConnection} from '@shopify/hydrogen';
 import invariant from 'tiny-invariant';
 
 import {Button, Text} from '~/components';
-import {assertApiErrors, getInputStyleClasses} from '~/lib/utils';
+import {assertApiErrors, getInputStyleClasses, translate} from '~/lib/utils';
 
 const badRequest = (data) => json(data, {status: 400});
 
 export const handle = {
   renderInModal: true,
 };
+
+export async function loader({request, context, params}) {
+  
+  return defer(
+    {
+      locale : context.storefront.i18n.language
+    }
+  );
+}
 
 export const action = async ({request, context, params}) => {
   const {storefront, session} = context;
@@ -120,6 +130,7 @@ export const action = async ({request, context, params}) => {
 };
 
 export default function EditAddress() {
+  const {locale} = useLoaderData();
   const {id: addressId} = useParams();
   const isNewAddress = addressId === 'add';
   const actionData = useActionData();
@@ -127,6 +138,8 @@ export default function EditAddress() {
   const {customer} = useOutletContext();
   const addresses = flattenConnection(customer.addresses);
   const defaultAddress = customer.defaultAddress;
+
+  console.log("locale", locale);
   /**
    * When a refresh happens (or a user visits this link directly), the URL
    * is actually stale because it contains a special token. This means the data
@@ -142,7 +155,7 @@ export default function EditAddress() {
   return (
     <>
       <Text className="mt-4 mb-6" as="h3" size="lead">
-        {isNewAddress ? 'Add address' : 'Edit address'}
+        {isNewAddress ? translate('account_add_address', locale) : translate('account_edit_address', locale)}
       </Text>
       <div className="max-w-lg">
         <Form method="post">
@@ -164,7 +177,7 @@ export default function EditAddress() {
               required
               type="text"
               autoComplete="given-name"
-              placeholder="First name"
+              placeholder={translate('account_first_name', locale)}
               aria-label="First name"
               defaultValue={address?.firstName ?? ''}
             />
@@ -177,7 +190,7 @@ export default function EditAddress() {
               required
               type="text"
               autoComplete="family-name"
-              placeholder="Last name"
+              placeholder={translate('account_last_name', locale)}
               aria-label="Last name"
               defaultValue={address?.lastName ?? ''}
             />
@@ -189,7 +202,7 @@ export default function EditAddress() {
               name="company"
               type="text"
               autoComplete="organization"
-              placeholder="Company"
+              placeholder={translate('account_company', locale)}
               aria-label="Company"
               defaultValue={address?.company ?? ''}
             />
@@ -201,7 +214,7 @@ export default function EditAddress() {
               name="address1"
               type="text"
               autoComplete="address-line1"
-              placeholder="Address line 1*"
+              placeholder={translate('account_address_line_1', locale)}
               required
               aria-label="Address line 1"
               defaultValue={address?.address1 ?? ''}
@@ -214,7 +227,7 @@ export default function EditAddress() {
               name="address2"
               type="text"
               autoComplete="address-line2"
-              placeholder="Address line 2"
+              placeholder={translate('account_address_line_2', locale)}
               aria-label="Address line 2"
               defaultValue={address?.address2 ?? ''}
             />
@@ -227,7 +240,7 @@ export default function EditAddress() {
               type="text"
               required
               autoComplete="address-level2"
-              placeholder="City"
+              placeholder={translate('account_city', locale)}
               aria-label="City"
               defaultValue={address?.city ?? ''}
             />
@@ -239,7 +252,7 @@ export default function EditAddress() {
               name="province"
               type="text"
               autoComplete="address-level1"
-              placeholder="State / Province"
+              placeholder={translate('account_state_province', locale)}
               required
               aria-label="State"
               defaultValue={address?.province ?? ''}
@@ -252,7 +265,7 @@ export default function EditAddress() {
               name="zip"
               type="text"
               autoComplete="postal-code"
-              placeholder="Zip / Postal Code"
+              placeholder={translate('account_zip_postal_code', locale)}
               required
               aria-label="Zip"
               defaultValue={address?.zip ?? ''}
@@ -265,7 +278,7 @@ export default function EditAddress() {
               name="country"
               type="text"
               autoComplete="country-name"
-              placeholder="Country"
+              placeholder={translate('account_country', locale)}
               required
               aria-label="Country"
               defaultValue={address?.country ?? ''}
@@ -278,7 +291,7 @@ export default function EditAddress() {
               name="phone"
               type="tel"
               autoComplete="tel"
-              placeholder="Phone"
+              placeholder={translate('account_phone', locale)}
               aria-label="Phone"
               defaultValue={address?.phone ?? ''}
             />
@@ -295,7 +308,7 @@ export default function EditAddress() {
               className="inline-block ml-2 text-sm cursor-pointer"
               htmlFor="defaultAddress"
             >
-              Set as default address
+              {translate('account_set_as_default', locale)}
             </label>
           </div>
           <div className="mt-8">
@@ -305,7 +318,7 @@ export default function EditAddress() {
               variant="primary"
               disabled={state !== 'idle'}
             >
-              {state !== 'idle' ? 'Saving' : 'Save'}
+              {state !== 'idle' ? 'Saving' : translate('account_save', locale)}
             </Button>
           </div>
           <div>
@@ -314,7 +327,7 @@ export default function EditAddress() {
               className="w-full mt-2 rounded focus:shadow-outline"
               variant="secondary"
             >
-              Cancel
+              { translate('account_cancel', locale) }
             </Button>
           </div>
         </Form>

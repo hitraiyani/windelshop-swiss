@@ -1,7 +1,8 @@
-import {json, redirect} from '@shopify/remix-oxygen';
+import {json, defer, redirect} from '@shopify/remix-oxygen';
 import {
   useActionData,
   Form,
+  useLoaderData,
   useOutletContext,
   useNavigation,
 } from '@remix-run/react';
@@ -9,7 +10,7 @@ import clsx from 'clsx';
 import invariant from 'tiny-invariant';
 
 import {Button, Text} from '~/components';
-import {getInputStyleClasses, assertApiErrors} from '~/lib/utils';
+import {getInputStyleClasses, assertApiErrors, translate} from '~/lib/utils';
 
 import {getCustomer} from './($locale).account';
 
@@ -25,6 +26,15 @@ const formDataHas = (formData, key) => {
 export const handle = {
   renderInModal: true,
 };
+
+export async function loader({request, context, params}) {
+  
+  return defer(
+    {
+      locale : context.storefront.i18n.language
+    }
+  );
+}
 
 export const action = async ({request, context, params}) => {
   const formData = await request.formData();
@@ -101,14 +111,17 @@ export const action = async ({request, context, params}) => {
  * - use the presence of outlet data (in `account.tsx`) to open/close the modal (no useState)
  */
 export default function AccountDetailsEdit() {
+  const {locale} = useLoaderData();
   const actionData = useActionData();
   const {customer} = useOutletContext();
   const {state} = useNavigation();
 
+  console.log("AccountDetailsEdit", locale);
+
   return (
     <>
       <Text className="mt-4 mb-6" as="h3" size="lead">
-        Update your profile
+        {translate('account_update_profile', locale)}
       </Text>
       <Form method="post">
         {actionData?.formError && (
@@ -123,7 +136,7 @@ export default function AccountDetailsEdit() {
             name="firstName"
             type="text"
             autoComplete="given-name"
-            placeholder="First name"
+            placeholder={translate('account_first_name', locale)}
             aria-label="First name"
             defaultValue={customer.firstName ?? ''}
           />
@@ -135,7 +148,7 @@ export default function AccountDetailsEdit() {
             name="lastName"
             type="text"
             autoComplete="family-name"
-            placeholder="Last name"
+            placeholder={translate('account_last_name', locale)}
             aria-label="Last name"
             defaultValue={customer.lastName ?? ''}
           />
@@ -147,7 +160,7 @@ export default function AccountDetailsEdit() {
             name="phone"
             type="tel"
             autoComplete="tel"
-            placeholder="Mobile"
+            placeholder={translate('account_phone', locale)}
             aria-label="Mobile"
             defaultValue={customer.phone ?? ''}
           />
@@ -160,7 +173,7 @@ export default function AccountDetailsEdit() {
             type="email"
             autoComplete="email"
             required
-            placeholder="Email address"
+            placeholder={translate('email_placeholder', locale)}
             aria-label="Email address"
             defaultValue={customer.email ?? ''}
           />
@@ -171,11 +184,11 @@ export default function AccountDetailsEdit() {
           )}
         </div>
         <Text className="mb-6 mt-6" as="h3" size="lead">
-          Change your password
+          {translate('account_change_password_text', locale)}
         </Text>
         <Password
           name="currentPassword"
-          label="Current password"
+          label={translate('account_current_password', locale)}
           passwordError={actionData?.fieldErrors?.currentPassword}
         />
         {actionData?.fieldErrors?.currentPassword && (
@@ -185,12 +198,12 @@ export default function AccountDetailsEdit() {
         )}
         <Password
           name="newPassword"
-          label="New password"
+          label={translate('account_new_password', locale)}
           passwordError={actionData?.fieldErrors?.newPassword}
         />
         <Password
           name="newPassword2"
-          label="Re-enter new password"
+          label={translate('account_confirm_new_password', locale)}
           passwordError={actionData?.fieldErrors?.newPassword2}
         />
         <Text
@@ -201,7 +214,7 @@ export default function AccountDetailsEdit() {
             actionData?.fieldErrors?.newPassword && 'text-red-500',
           )}
         >
-          Passwords must be at least 8 characters.
+          {translate('empty_password_length_error_message', locale)}.
         </Text>
         {actionData?.fieldErrors?.newPassword2 ? <br /> : null}
         {actionData?.fieldErrors?.newPassword2 && (
@@ -217,12 +230,12 @@ export default function AccountDetailsEdit() {
             type="submit"
             disabled={state !== 'idle'}
           >
-            {state !== 'idle' ? 'Saving' : 'Save'}
+            {state !== 'idle' ? 'Saving' : translate('account_save', locale)}
           </Button>
         </div>
         <div className="mb-4">
           <Button to=".." className="text-sm" variant="secondary" width="full">
-            Cancel
+            {translate('account_cancel', locale)}
           </Button>
         </div>
       </Form>
