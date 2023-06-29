@@ -9,12 +9,14 @@ import {useEffect, useState} from 'react';
 import {getImageLoadingPriority} from '~/lib/const';
 import {Button, Grid, ProductCard, Link} from '~/components';
 import {redirect} from '@shopify/remix-oxygen';
+import { translate } from '~/lib/utils';
 
 export function ProductGrid({
   url,
   collection,
   collections,
   className,
+  locale,
   ...props
 }) {
   const navigate = useNavigate();
@@ -106,9 +108,9 @@ export function ProductGrid({
   if (!haveProducts) {
     return (
       <>
-        <p>No products found on this collection</p>
+        <p>{translate("no_product_found",locale)}</p>
         <Link to="/products">
-          <p className="underline">Browse catalog</p>
+          <p className="underline">{translate("browse_catelog",locale)}</p>
         </Link>
       </>
     );
@@ -123,6 +125,7 @@ export function ProductGrid({
             product={product}
             loading={getImageLoadingPriority(i)}
             quickAdd
+            locale={locale}
           />
         ))}
       </div>

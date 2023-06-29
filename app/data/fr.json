@@ -97,5 +97,18 @@
   "is_alredy_customer": "Déjà client ?",
   "back_to_login": "connexion",
   "acount_page_heading": "Détails du compte",
-  "account_edit": "Modifier"
+  "account_edit": "Modifier",
+  "product_compare": "Comparatif produit",
+  "category" :"CATÉGORIES",
+  "sorting":"Classement",
+
+  "specification":"spécification",
+  "price_low_high":"Prix du plus faible au plus fort",
+  "price_high_low":"Prix du plus fort au plus faible",
+  "best_selling":"meilleure vente",
+  "newest":"le plus récent",
+  "page":"Page",
+  "no_product_found":"Aucun produit trouvé dans cette collection",
+  "browse_catelog":"Parcourir le catalogue"
+
 }

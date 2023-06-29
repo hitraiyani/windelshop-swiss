@@ -22,7 +22,7 @@ import {
   IconList,
 } from '~/components';
 import {Image} from '@shopify/hydrogen';
-import { getMenuHandle } from '~/lib/utils';
+import { getMenuHandle, translate } from '~/lib/utils';
 
 export function SortFilter({
   filters,
@@ -34,6 +34,7 @@ export function SortFilter({
   listView,
   menudata = [],
   collection,
+  locale
 }) {
   const [isOpen, setIsOpen] = useState(false);
   
@@ -59,6 +60,7 @@ export function SortFilter({
             filters={filters}
             appliedFilters={appliedFilters}
             menudata={menudata}
+            locale={locale}
            
           />
         </div>
@@ -68,6 +70,7 @@ export function SortFilter({
             listView={listView}
             isGrid={isGrid}
             collection={collection}
+            locale={locale}
           />
           {children}
         </div>
@@ -82,6 +85,7 @@ export function FiltersDrawer({
   collections = [],
   menudata = [],
   categoryname,
+  locale
 }) {
   const [params] = useSearchParams();
   const location = useLocation();
@@ -99,10 +103,8 @@ export function FiltersDrawer({
         if (submenu.subCategory.subSubCategories.length > 0) {
           submenu.subCategory.subSubCategories.map((subsubMenu) => {
             if (
-              location.pathname ==
-              '/collections/' + subsubMenu.subSubCategory.handle
+              location.pathname == '/collections/' + subsubMenu.subSubCategory.handle || location.pathname == '/fr/collections/' + subsubMenu.subSubCategory.handle
             ) {
-              console.log("fsfsf");
               //categoryname = filter.category.handle;
                setCategoryName(filter.category.handle);
             }
@@ -164,7 +166,7 @@ export function FiltersDrawer({
           size="lead"
           className="text-[#1C5F7B] text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[48px]"
         >
-          Kategorien
+          {translate('category',locale)}
         </Heading>
         <div className="px-[48px] py-[27px] hidden">
           {appliedFilters.length > 0 ? (
@@ -190,7 +192,7 @@ export function FiltersDrawer({
                     {({open}) => (
                       <>
                         <Disclosure.Button className="flex justify-between items-center w-full text-[20px] text-[#292929] font-medium outline-none">
-                          <Text size="lead">{filter.category.name}</Text>
+                          <Text size="lead">{translate(filter.category.name,locale)} </Text>
                           <IconCaret direction={open ? 'up' : 'down'} />
                         </Disclosure.Button>
                         <Disclosure.Panel key={filter.category.handle}>
@@ -210,9 +212,9 @@ export function FiltersDrawer({
                                     <NavLink
                                       className="block"
                                       prefetch="intent"
-                                      to={  getMenuHandle(subcategory.subSubCategory.handle)}
+                                      to={  getMenuHandle(subcategory.subSubCategory)}
                                     >
-                                      {subcategory.subSubCategory.name}
+                                      {translate(subcategory.subSubCategory.name,locale)}
                                     </NavLink>
                                   </li>
                                 ),
@@ -393,23 +395,23 @@ function filterInputToParams(type, rawInput, params) {
   return params;
 }
 
-export default function SortMenu({gridView, listView, isGrid, collection}) {
+export default function SortMenu({gridView, listView, isGrid, collection,locale}) {
   const items = [
-    {label: 'Featured', key: 'featured'},
+    {label: translate("specification",locale), key: 'featured'},
     {
-      label: 'Price: Low - High',
+      label: translate("price_low_high",locale),
       key: 'price-low-high',
     },
     {
-      label: 'Price: High - Low',
+      label: translate("price_high_low",locale),
       key: 'price-high-low',
     },
     {
-      label: 'Best Selling',
+      label: translate("best_selling",locale),
       key: 'best-selling',
     },
     {
-      label: 'Newest',
+      label: translate("newest",locale),
       key: 'newest',
     },
   ];
@@ -493,7 +495,7 @@ export default function SortMenu({gridView, listView, isGrid, collection}) {
             </div>
             <div className="product-comparison-number">
               <div className='text-[#666666] text-[14px] font-["Open_Sans"] font-bold flex gap-[3px]'>
-                <span>Produktvergleich</span>
+                <span>{translate("product_compare",locale)}</span>
                 <span>(0)</span>
               </div>
             </div>
@@ -503,7 +505,7 @@ export default function SortMenu({gridView, listView, isGrid, collection}) {
               <Menu.Button className="flex items-center">
                 <span className="flex items-center">
                   <span className="text-[#666666] text-[14px] font-['Open_Sans'] font-bold pr-[7px]">
-                    Sortieren nach
+                    {translate("sorting",locale)}
                   </span>
                   <span className='px-[13px] py-[7px] bg-white border-[1px] border-[#E7EFFF] min-w-[187px] text-[14px] font-semibold text-[#495057] font-["Open_Sans"] flex justify-between gap-[10px] items-center'>
                     {(activeItem || items[0]).label}
@@ -537,7 +539,7 @@ export default function SortMenu({gridView, listView, isGrid, collection}) {
               <Menu.Button className="flex items-center">
                 <span className="flex items-center">
                   <span className="text-[#666666] text-[14px] font-bold pr-[7px]">
-                    Anzeige
+                    {translate("page",locale)}
                   </span>
                   <span className='px-[13px] py-[7px] bg-white border-[1px] border-[#E7EFFF] min-w-[65px] text-[14px] font-semibold text-[#495057] font-["Open_Sans"] flex justify-between gap-[10px] items-center'>
                     {(activePagination || itemsPagination[0]).label}

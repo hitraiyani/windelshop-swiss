@@ -47,5 +47,17 @@
   "is_alredy_customer": "Bereits Kunde?",
   "back_to_login": "Einloggen",
   "acount_page_heading": "Konto-Details",
-  "account_edit": "Bearbeiten"
+  "account_edit": "Bearbeiten",
+  
+  "product_compare": "Produktvergleich",
+  "category" :"KATEGORIEN",
+  "specification":"Vorgabe",
+  "sorting":"Sortieren nach",
+  "price_low_high":"Preis (Niedrig > Hoch)",
+  "price_high_low":"Preis (Hoch > Niedrig)",
+  "best_selling":"Meistverkauft",
+  "newest":"neueste",
+  "page":"Anzeige",
+  "no_product_found":"In dieser Sammlung wurden keine Produkte gefunden",
+  "browse_catelog":"Katalog durchsuchen"
 }

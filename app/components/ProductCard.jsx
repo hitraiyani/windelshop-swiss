@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
 
 import {Text, Link, AddToCartButton, IconStar} from '~/components';
-import {isDiscounted, isNewArrival} from '~/lib/utils';
+import {isDiscounted, isNewArrival, translate} from '~/lib/utils';
 import {getProductPlaceholder} from '~/lib/placeholders';
 
 export function ProductCard({
@@ -12,6 +12,7 @@ export function ProductCard({
   loading,
   onClick,
   quickAdd,
+  locale
 }) {
   let cardLabel;
 
@@ -55,7 +56,7 @@ export function ProductCard({
               <Image
                 className="absolute inset-0 object-contain w-full h-full transition-all duration-500"
                 sizes="(min-width: 64em) 25vw, (min-width: 48em) 30vw, 45vw"
-                aspectRatio="4/5"
+                //aspectRatio="4/5"
                 data={image}
                 alt={image.altText || `Picture of ${product.title}`}
                 loading={loading}
@@ -108,7 +109,7 @@ export function ProductCard({
               as="span"
               className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
             >
-              Jetzt Kaufen
+              {translate("add_to_cart",locale)}
             </Text>
           </AddToCartButton>
         )}
