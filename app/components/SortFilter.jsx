@@ -50,9 +50,9 @@ export function SortFilter({
           <IconFilters />
         </button>
       </div>
-      <div className="flex flex-col flex-wrap md:flex-row gap-[45px]">
+      <div className="flex flex-col flex-wrap lg:flex-row gap-[45px]">
         <div
-          className={`transition-all duration-200 w-[30%] ${isOpen ? '' : ''}`}
+          className={`transition-all duration-200 w-full lg:w-[30%] ${isOpen ? '' : ''}`}
         >
           <FiltersDrawer
             collections={collections}
@@ -162,18 +162,18 @@ export function FiltersDrawer({
         <Heading
           as="h4"
           size="lead"
-          className="text-[#1C5F7B] text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[48px]"
+          className="text-[#1C5F7B] text-[24px] xl:text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[30px] xl:px-[48px]"
         >
           Kategorien
         </Heading>
-        <div className="px-[48px] py-[27px] hidden">
+        <div className="px-[30px] xl:px-[48px] py-[27px] hidden">
           {appliedFilters.length > 0 ? (
             <div className="">
               <AppliedFilters filters={appliedFilters} />
             </div>
           ) : null}
         </div>
-        <div className="px-[48px] py-[25px] flex flex-col gap-y-[10px]">
+        <div className="px-[30px] xl:px-[48px] py-[25px] flex flex-col gap-y-[10px]">
           {menudata?.map(
             (filter) =>
               filter.category.name !== 'Home' && (
@@ -189,8 +189,8 @@ export function FiltersDrawer({
                     >
                     {({open}) => (
                       <>
-                        <Disclosure.Button className="flex justify-between items-center w-full text-[20px] text-[#292929] font-medium outline-none">
-                          <Text size="lead">{filter.category.name}</Text>
+                        <Disclosure.Button className="flex justify-between items-center w-full text-[20px] text-[#292929] font-medium outline-none text-left">
+                          <Text size="lead" className={'flex-1'}>{filter.category.name}</Text>
                           <IconCaret direction={open ? 'up' : 'down'} />
                         </Disclosure.Button>
                         <Disclosure.Panel key={filter.category.handle}>
@@ -208,7 +208,7 @@ export function FiltersDrawer({
                                     className="text-[16px] text-[#292929] font-normal hover:text-[#0A627E] hover:font-bold"
                                   >
                                     <NavLink
-                                      className="block"
+                                      className="block border-none"
                                       prefetch="intent"
                                       to={  getMenuHandle(subcategory.subSubCategory.handle)}
                                     >
@@ -467,8 +467,8 @@ export default function SortMenu({gridView, listView, isGrid, collection}) {
       )}
 
       <div className="top-filter-wrap">
-        <div className="filter-inner flex flex-wrap gap-[25px]">
-          <div className="col-left flex-1 gap-[25px] items-center flex">
+        <div className="filter-inner flex flex-col min-[992px]:flex-row flex-wrap gap-[25px]">
+          <div className="col-left gap-[25px] items-center flex">
             <div className="pro-view-filter flex gap-[3px]">
               <div
                 className={`grid-filter w-[35px] h-[35px] p-[10px] ${
@@ -498,7 +498,7 @@ export default function SortMenu({gridView, listView, isGrid, collection}) {
               </div>
             </div>
           </div>
-          <div className="col-right flex-1 flex gap-[25px] items-center justify-end">
+          <div className="col-right flex-1 flex-wrap flex lg:flex-nowrap lg:flex-row gap-[25px] items-center justify-start xl:justify-end">
             <Menu as="div" className="relative z-[40] w-fit">
               <Menu.Button className="flex items-center">
                 <span className="flex items-center">
