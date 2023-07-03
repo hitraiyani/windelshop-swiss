@@ -62,13 +62,14 @@ export function ProductCard({
                 loading={loading}
               />
             )}
-            <Text
+            
+            {cardLabel &&  <Text
               as="label"
               size="fine"
               className="lable flex absolute top-[10px] left-[10px] bg-[#CC3F13] text-white uppercase w-fit px-[10px] py-[7px] rounded-[89px] leading-none items-center justify-center text-center min-h-[40px]"
             >
               <span>{cardLabel}</span>
-            </Text>
+            </Text>}
           </div>
         </Link>
         <Text
