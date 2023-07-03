@@ -26,6 +26,7 @@ import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {getHeroPlaceholder} from '~/lib/placeholders';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders, CACHE_SHORT} from '~/data/cache';
+import { translate } from '~/lib/utils';
 
 export const headers = routeHeaders;
 function isValidEmail(email) {
@@ -203,7 +204,7 @@ export default function Homepage() {
             {({products}) => {
               if (!products?.nodes) return <></>;
               return (
-                <NewInTheShop products={products.nodes} title="Neu im Shop" locale={language} />
+                <NewInTheShop products={products.nodes} title={translate("new_in_shop",language)} locale={language} />
               );
             }}
           </Await>
@@ -219,9 +220,12 @@ export default function Homepage() {
         </Suspense>
       )}
       {popularProducts && (
+        
         <Suspense>
           <Await resolve={popularProducts}>
+            
             {({data}) => {
+               
                 return (
                 <Popularproducts 
                     className={''}

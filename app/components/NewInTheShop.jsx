@@ -10,7 +10,7 @@ import {
   CompareAtPrice
 } from '~/components';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
-import {isDiscounted, translate} from '~/lib/utils';
+import {isDiscounted, productTranslate, translate} from '~/lib/utils';
 
 export function NewInTheShop({products, title,locale}) {
 
@@ -61,7 +61,7 @@ export function NewInTheShop({products, title,locale}) {
             className="myswiper2"
           >
             {products.map((product, index) => {
-
+             
               const firstVariant = flattenConnection(product?.variants)[0];
 
               if (!firstVariant) return null;
@@ -70,7 +70,7 @@ export function NewInTheShop({products, title,locale}) {
               const productAnalytics = {
                 productGid: product.id,
                 variantGid: firstVariant.id,
-                name: product.title,
+                name: productTranslate(product,'title',locale) ,
                 variantName: firstVariant.title,
                 brand: product.vendor,
                 price: firstVariant.price.amount,

@@ -42,6 +42,20 @@ export const PRODUCT_CARD_FRAGMENT = `#graphql
     title
     publishedAt
     handle
+    title_de_ch: metafield(namespace: "custom_fields", key: "title_de_ch") {
+      value
+     }
+     title_fr: metafield(namespace: "custom_fields", key: "title_fr") {
+      value
+     }
+     description_de_ch: metafield(namespace: "custom_fields", key: "description_de_ch") {
+      value
+     }
+     description_fr: metafield(namespace: "custom_fields", key: "description_fr") {
+      value
+     }
+    
+    
     variants(first: 1) {
       nodes {
         id
@@ -66,6 +80,18 @@ export const PRODUCT_CARD_FRAGMENT = `#graphql
         product {
           handle
           title
+          title_de_ch: metafield(namespace: "custom_fields", key: "title_de_ch") {
+            value
+           }
+           title_fr: metafield(namespace: "custom_fields", key: "title_fr") {
+            value
+           }
+           description_de_ch: metafield(namespace: "custom_fields", key: "description_de_ch") {
+            value
+           }
+           description_fr: metafield(namespace: "custom_fields", key: "description_fr") {
+            value
+           }
         }
       }
     }

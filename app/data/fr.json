@@ -166,5 +166,18 @@
   "account_order_subtotal": "Total",
   "account_order_shipping_address_txt": "Adresse de livraison",
   "account_order_no_shipping_address_txt": "Aucune adresse de livraison définie",
-  "account_order_details_txt": "Détails de la commande"
+  "account_order_details_txt": "Détails de la commande",
+  "qnt": "QUANTITÉ",
+  "compare": "Ajouter au comparatif",
+
+  "review":"avis",
+  "evaluation": "Écrire un avis",
+  "descriptionn":"Description",
+  "quick_search":"Schnellsuche",
+  "successfull_to" :"réussi à",
+  "added" :"ajoutée",
+  "successfuly_from_the" :"avec succès depuis le",
+  "removed" :"supprimé",
+  "new_in_shop" :"Nouveau dans la boutique"
+
 }

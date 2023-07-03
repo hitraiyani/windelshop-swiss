@@ -3,7 +3,7 @@ import {Autoplay, Navigation, Pagination, Scrollbar, A11y} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {IconChevronRight, IconStar, ProductCardView} from '~/components';
 
-export function YouMayAlsoLike({products, title, className}) {
+export function YouMayAlsoLike({products, title,locale, className}) {
   
   return (
     <>
@@ -58,7 +58,7 @@ export function YouMayAlsoLike({products, title, className}) {
                       return (
                         <SwiperSlide key={index}>
                           <div className="slide-item">
-                                <ProductCardView product={product} />
+                                <ProductCardView product={product} locale={locale} />
                           </div>
                         </SwiperSlide>
                       );

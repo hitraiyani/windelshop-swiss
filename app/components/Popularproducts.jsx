@@ -12,7 +12,7 @@ import {
   
 } from '~/components';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
-import {isDiscounted, translate} from '~/lib/utils';
+import {isDiscounted, productTranslate, translate} from '~/lib/utils';
 
 export function Popularproducts({
   className,
@@ -223,7 +223,7 @@ export function ProductCardView({product,locale}) {
           </div>
         </Link>
         <h4 className="pro-name text-[14px] text-[#292929] font-normal">
-          {product?.title}
+          {productTranslate(product,'title',locale) }
         </h4>
         {/* <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
             <IconStar className={'w-[17px] h-[15px]'} />

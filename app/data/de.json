@@ -116,5 +116,18 @@
   "account_order_subtotal": "Zwischensumme",
   "account_order_shipping_address_txt": "Lieferanschrift",
   "account_order_no_shipping_address_txt": "Keine Lieferadresse definiert",
-  "account_order_details_txt": "Bestelldetails"
+  "account_order_details_txt": "Bestelldetails",
+
+  "qnt": "MENGE",
+  "compare": "Vergleich",
+  "review":"Bewertungen",
+  "evaluation": "Bewertung",
+  "descriptionn":"Beschreibung",
+  "quick_search":"Schnellsuche",
+  "successfull_to" :"erfolgreich zum",
+  "added" :"hinzugefügt",
+  "successfuly_from_the" :"erfolgreich aus dem",
+  "removed" :"entfernt",
+  "new_in_shop" :"Neu im Shop"
+  
 }

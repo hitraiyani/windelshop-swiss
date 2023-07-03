@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
 
 import {Text, Link, AddToCartButton, IconStar} from '~/components';
-import {isDiscounted, isNewArrival, translate} from '~/lib/utils';
+import {isDiscounted, isNewArrival, productTranslate, translate} from '~/lib/utils';
 import {getProductPlaceholder} from '~/lib/placeholders';
 
 export function ProductCard({
@@ -75,7 +75,8 @@ export function ProductCard({
           className="pro-name text-[14px] text-[#292929] font-normal"
           as="h4"
         >
-          {product.title}
+          {/* {product.title} */}
+          {productTranslate(product,'title',locale)}
         </Text>
         <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
           <IconStar className={'w-[17px] h-[15px]'} />

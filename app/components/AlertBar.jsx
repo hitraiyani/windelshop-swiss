@@ -2,8 +2,9 @@ import React from 'react'
 import {
   Link
 } from '~/components';
+import { translate } from '~/lib/utils';
 
-export function ProductCompareAlertBar({setShowProductCompareAlert, product, alertType = 'added' }) {
+export function ProductCompareAlertBar({setShowProductCompareAlert, product, alertType = 'added',locale="" }) {
   return (
     <>
       {
@@ -35,15 +36,15 @@ export function ProductCompareAlertBar({setShowProductCompareAlert, product, ale
                 >
                   {product.title}
                 </Link>{' '}
-                erfolgreich zum{' '}
+                {translate("successfull_to",locale)}{' '}
                 <Link
                   to={`/product-compare/`}
                   className="font-semibold underline hover:no-underline"
                 >
                   {' '}
-                  Produktvergleich
+                  {translate("product_compare",locale)}
                 </Link>{' '}
-                hinzugefügt
+                {translate("added",locale)}
               </>
             ) : (
               <>
@@ -53,15 +54,15 @@ export function ProductCompareAlertBar({setShowProductCompareAlert, product, ale
                 >
                   {product.title}
                 </Link>{' '}
-                erfolgreich aus dem{' '}
+                {translate("successfuly_from_the",locale)}{' '}
                 <Link
                   to={`/product-compare/`}
                   className="font-semibold underline hover:no-underline"
                 >
                   {' '}
-                  Produktvergleich
+                {translate("product_compare",locale)}
                 </Link>{' '}
-                entfernt
+                {translate("removed",locale)}
               </>
             )}
           </div>
@@ -95,7 +96,7 @@ export function ProductCompareAlertBar({setShowProductCompareAlert, product, ale
   );
 }
 
-export function ProductWishListAlertBar({setShowProductWishlistAlert, product, alertType = 'added' }) {
+export function ProductWishListAlertBar({setShowProductWishlistAlert, product, alertType = 'added' ,locale=""}) {
   return (
     <>
       {
@@ -133,9 +134,9 @@ export function ProductWishListAlertBar({setShowProductWishlistAlert, product, a
                   className="font-semibold underline hover:no-underline"
                 >
                   {' '}
-                  Wunschliste
+                  {translate("wishlist",locale)}
                 </Link>{' '}
-                hinzugefügt
+                {translate("added",locale)}
               </>
             ) : (
               <>
@@ -145,15 +146,15 @@ export function ProductWishListAlertBar({setShowProductWishlistAlert, product, a
                 >
                   {product.title}
                 </Link>{' '}
-                erfolgreich aus dem{' '}
+                 {translate("successfuly_from_the",locale)}{' '}
                 <Link
                   to={`/wishlist/`}
                   className="font-semibold underline hover:no-underline"
                 >
                   {' '}
-                  Wunschliste
+                  {translate("wishlist",locale)}
                 </Link>{' '}
-                entfernt
+                {translate("removed",locale)}
               </>
             )}
           </div>

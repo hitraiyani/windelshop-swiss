@@ -52,7 +52,7 @@ import {
   ProductCompareAlertBar,
   ProductWishListAlertBar,
 } from '~/components';
-import {getExcerpt, isDiscounted} from '~/lib/utils';
+import {getExcerpt, isDiscounted, productTranslate, translate} from '~/lib/utils';
 import {seoPayload} from '~/lib/seo.server';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {routeHeaders, CACHE_SHORT} from '~/data/cache';
@@ -62,6 +62,7 @@ export const headers = routeHeaders;
 
 export async function loader({params, request, context}) {
   const {productHandle} = params;
+  const {language, country} = context.storefront.i18n;
   invariant(productHandle, 'Missing productHandle param, check route filename');
 
   const searchParams = new URL(request.url).searchParams;
@@ -119,6 +120,7 @@ export async function loader({params, request, context}) {
         totalValue: parseFloat(selectedVariant.price.amount),
       },
       seo,
+      language,
     },
     {
       headers: {
@@ -129,7 +131,7 @@ export async function loader({params, request, context}) {
 }
 
 export default function Product() {
-  const {product, shop, recommended} = useLoaderData();
+  const {product, shop, recommended,language} = useLoaderData();
   const {media, title, vendor, descriptionHtml} = product;
   const {shippingPolicy, refundPolicy} = shop;
   const {load, data} = useFetcher();
@@ -201,6 +203,7 @@ export default function Product() {
               setShowProductCompareAlert={setShowProductCompareAlert}
               alertType={showProductCompareAlertType}
               product={product}
+              locale={language}
             />
           )}
           {showProductWishlistAlert && (
@@ -208,6 +211,7 @@ export default function Product() {
               setShowProductWishlistAlert={setShowProductWishlistAlert}
               alertType={showProductWishlistAlertType}
               product={product}
+              locale={language}
             />
           )}
           <div className="flex flex-col min-[992px]:flex-row gap-[33px]">
@@ -237,7 +241,8 @@ export default function Product() {
                     as="h1"
                     className="text-[28px] text-[#0A627E] font-bold"
                   >
-                    {title}
+                    {/* {title} */}
+                    {productTranslate(product,'title',language)}
                   </Heading>
                   {/* {vendor && (
                   <Text className={'opacity-50 font-medium'}>{vendor}</Text>
@@ -254,14 +259,16 @@ export default function Product() {
                   setShowProductWishlistAlertType={
                     setShowProductWishlistAlertType
                   }
+                  locale={language}
                 />
                 <div className="tab-wrap border-t-[1px] border-[#E7EFFF] pt-[14px] lg:pt-[34px] mt-[35px]">
                   <Tabs>
-                    <div label="Beschreibung">
+                   
+                    <div label={translate("descriptionn",language)}>
                       <div className="tab-content">
                         <div
                           dangerouslySetInnerHTML={{
-                            __html: product.descriptionHtml,
+                            __html: productTranslate(product,'description',language),
                           }}
                         ></div>
                         {bundleProdListSorted.length > 0 && (
@@ -350,7 +357,7 @@ export default function Product() {
                         </div> */}
                       </div>
                     </div>
-                    <div label="Bewertungen (0)">
+                    <div label={`${(translate("review",language))} (0)`} >
                       <p>Bewertungen tab</p>
                     </div>
                   </Tabs>
@@ -370,6 +377,7 @@ export default function Product() {
               <YouMayAlsoLike
                 products={products}
                 title={'Das könnte Ihnen auch gefallen'}
+                locale={language}
                 className={
                   'bg-[#E7EFFF] bg-opacity-30 mb-[-20px] md:mb-[-30px] xl:mb-[-40px] 2xl:mb-[-50px] !py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px]'
                 }
@@ -389,6 +397,7 @@ export function ProductForm({
   setShowProductWishlistAlertType,
   productSizeKeyValueData,
   productPackageKeyValueData,
+  locale
 }) {
   const {product, analytics, storeDomain} = useLoaderData();
 
@@ -689,11 +698,11 @@ export function ProductForm({
       )}
       <div className="product-crowd pt-[50px]">
         <h2 className='title mb-[17px] text-[14px] text-[#666666] uppercase font-bold font-["Open_Sans"]'>
-          Menge
+          {translate('qnt',locale)}
         </h2>
         <div className="col-inner flex justify-between gap-[20px] flex-wrap">
           <div className="flex w-[60%] flex-wrap gap-[20px]">
-            <QuantityComponent quantity={quantity} setQuantity={setQuantity} />
+            <QuantityComponent quantity={quantity} setQuantity={setQuantity} locale={locale}/>
             <div className="pro-btns flex flex-col flex-1">
               {isOutOfStock ? (
                 <Button
@@ -718,7 +727,7 @@ export function ProductForm({
                     totalValue: parseFloat(productAnalytics.price),
                   }}
                 >
-                  <IconCart className={'w-[15px] h-[14px]'} /> + Jetzt kaufen
+                  <IconCart className={'w-[15px] h-[14px]'} /> + {translate('add_to_cart',locale)}
                 </AddToCartButton>
               )}
               <div className="btn-group flex items-center justify-center gap-[30px] mt-[11px]">
@@ -730,7 +739,7 @@ export function ProductForm({
                     isWhishListAdded ? 'text-[#0A627E]' : 'text-black'
                   } uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]`}
                 >
-                  <IconWhishlist className={'w-[11px] h-[10px]'} />+ Wunschliste
+                  <IconWhishlist className={'w-[11px] h-[10px]'} />+ {translate('wishlist',locale)}
                 </button>
                 <button
                   onClick={
@@ -742,7 +751,7 @@ export function ProductForm({
                     isProductCompareAdded ? 'text-[#0A627E]' : 'text-black'
                   } uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]`}
                 >
-                  <IconCompar className={'w-[14px] h-[11px]'} />+ Vergleich
+                  <IconCompar className={'w-[14px] h-[11px]'} />+ {translate('compare',locale)}
                 </button>
               </div>
             </div>
@@ -756,7 +765,7 @@ export function ProductForm({
                 <IconStar className={'w-[17px] h-[15px]'} />
                 <IconStar className={'w-[17px] h-[15px]'} />
               </div>
-              <span>0 Bewertungen / + Bewertung</span>
+              <span>0 {translate("review",locale)} / + {translate('evaluation',locale)}</span>
             </div>
           </div>
         </div>
@@ -816,7 +825,7 @@ export function ProductForm({
   );
 }
 
-function QuantityComponent({quantity, setQuantity}) {
+function QuantityComponent({quantity, setQuantity,locale}) {
   const decreaseQuantity = () => {
     if (quantity > 0) {
       setQuantity((prevQuantity) => prevQuantity - 1);
@@ -1105,6 +1114,18 @@ const PRODUCT_QUERY = `#graphql
       handle
       descriptionHtml
       description
+      title_de_ch: metafield(namespace: "custom_fields", key: "title_de_ch") {
+        value
+       }
+       title_fr: metafield(namespace: "custom_fields", key: "title_fr") {
+        value
+       }
+       description_de_ch: metafield(namespace: "custom_fields", key: "description_de_ch") {
+        value
+       }
+       description_fr: metafield(namespace: "custom_fields", key: "description_fr") {
+        value
+       }
       options {
         name
         values

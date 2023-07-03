@@ -14,6 +14,16 @@ export const translate = (key, language) => {
   return translations[key] || key;
 };
 
+export const productTranslate = (product,key, language) => {
+  
+  
+  const translation = language?.toLowerCase() === 'fr' ? (product[key+'_fr']["value"]) ? product[key+'_fr']["value"] : product?.[key] :  (product[key+'_de_ch']["value"]) ? product[key+'_de_ch']["value"] : product?.[key];
+  //console.log("translation fuction"+language);
+  // console.log(product[key+'_fr']["value"] );
+  return translation;
+  //return translations[key] || key;
+};
+
 export function missingClass(string, prefix) {
   if (!string) {
     return true;
