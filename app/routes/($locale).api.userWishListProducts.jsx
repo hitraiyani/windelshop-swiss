@@ -43,6 +43,18 @@ export const USER_WHISHLIST_PRODUCT_QUERY = `#graphql
         title
         handle
         description
+        title_de_ch: metafield(namespace: "custom_fields", key: "title_de_ch") {
+          value
+         }
+         title_fr: metafield(namespace: "custom_fields", key: "title_fr") {
+          value
+         }
+         description_de_ch: metafield(namespace: "custom_fields", key: "description_de_ch") {
+          value
+         }
+         description_fr: metafield(namespace: "custom_fields", key: "description_fr") {
+          value
+         }
         variants(first: 1) {
           nodes {
             id

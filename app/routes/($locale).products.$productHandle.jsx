@@ -401,10 +401,8 @@ export function ProductForm({
 }) {
   const {product, analytics, storeDomain} = useLoaderData();
 
-  console.log('ProductFormproductSizeKeyValueData', productSizeKeyValueData);
-
+  
   const selectedProductSize = productSizeKeyValueData?.find(item => item.is_selected === true);
-  console.log("selectedProductSize", selectedProductSize);
   
   const [currentSearchParams] = useSearchParams();
   const {location} = useNavigation();

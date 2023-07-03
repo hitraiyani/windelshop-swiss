@@ -128,6 +128,8 @@
   "added" :"hinzugefügt",
   "successfuly_from_the" :"erfolgreich aus dem",
   "removed" :"entfernt",
-  "new_in_shop" :"Neu im Shop"
+  "new_in_shop" :"Neu im Shop",
   
+  "search_page_no_product_message": "Keine Produkte vorhanden, die den Suchkriterien entsprechen",
+  "search_page_search_placeholder": "Suchbegriff(e)"
 }

@@ -11,7 +11,7 @@ import {
     Link,
     Button
   } from '~/components';
-  import {isDiscounted, stringTruncate, translate} from '~/lib/utils';
+  import {isDiscounted, stringTruncate, translate, productTranslate} from '~/lib/utils';
 
 export function ProductCompare({locale}) {
     const {load, data, state} = useFetcher();
@@ -48,7 +48,7 @@ export function ProductCompare({locale}) {
                     key={product.id}
                     className="py-2 px-4 border-b border-gray-200"
                   >
-                    <Link to={`/products/${product.handle}`} className="font-bold">{product.title}</Link>
+                    <Link to={`/products/${product.handle}`} className="font-bold">{ productTranslate(product,'title',locale) }</Link>
                   </td>
                 ))}
               </tr>
@@ -122,7 +122,7 @@ export function ProductCompare({locale}) {
                       key={product.id}
                       className="py-2 px-4 border-b border-gray-200"
                     >
-                      {stringTruncate(product.description, 150)}
+                      {stringTruncate(productTranslate(product,'description',locale).replaceAll(/<\/?[^>]+(>|$)/gi, ""), 150)}
                     </td>
                   );
                 })}

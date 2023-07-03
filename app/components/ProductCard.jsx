@@ -42,6 +42,8 @@ export function ProductCard({
     quantity: 1,
   };
 
+  console.log("cardLabel", cardLabel);
+
   return (
     <div className="product-card">
       <div className="product-card-inner">
@@ -62,14 +64,15 @@ export function ProductCard({
                 loading={loading}
               />
             )}
-            
-            {cardLabel &&  <Text
-              as="label"
-              size="fine"
-              className="lable flex absolute top-[10px] left-[10px] bg-[#CC3F13] text-white uppercase w-fit px-[10px] py-[7px] rounded-[89px] leading-none items-center justify-center text-center min-h-[40px]"
-            >
-              <span>{cardLabel}</span>
-            </Text>}
+            {cardLabel && (
+              <Text
+                as="label"
+                size="fine"
+                className="lable flex absolute top-[10px] left-[10px] bg-[#CC3F13] text-white uppercase w-fit px-[10px] py-[7px] rounded-[89px] leading-none items-center justify-center text-center min-h-[40px]"
+              >
+                <span>{cardLabel}</span>
+              </Text>
+            )}
           </div>
         </Link>
         <Text

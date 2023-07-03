@@ -178,6 +178,8 @@
   "added" :"ajoutée",
   "successfuly_from_the" :"avec succès depuis le",
   "removed" :"supprimé",
-  "new_in_shop" :"Nouveau dans la boutique"
+  "new_in_shop" :"Nouveau dans la boutique",
 
+  "search_page_no_product_message": "Il n’y a aucun produit correspondant aux critères de recherche.",
+  "search_page_search_placeholder": "Mots-clés"
 }

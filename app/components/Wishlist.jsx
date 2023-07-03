@@ -15,7 +15,7 @@ import {
   CartLoading,
   IconCart
 } from '~/components';
-import {isDiscounted, translate} from '~/lib/utils';
+import {isDiscounted, translate, productTranslate} from '~/lib/utils';
 import {useFetcher} from '@remix-run/react';
 import {WishlistContext } from '~/store/WishlistContext';
 
@@ -120,10 +120,10 @@ export function CartDetails({layout, products, onClose,locale}) {
                                          <Link
                                            to={`/products/${product.handle}`}
                                          >
-                                           {product?.title || ''}
+                                           {productTranslate(product,'title',locale) || ''}
                                          </Link>
                                        ) : (
-                                         <Text>{product?.title || ''}</Text>
+                                         <Text>{productTranslate(product,'title',locale) || ''}</Text>
                                        )}
                                      </Heading>
                                      <div className="grid items-stretch gap-4">
