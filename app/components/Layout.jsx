@@ -39,7 +39,7 @@ import {
   IconCart,
   IconLogin2
 } from '~/components';
-import {useIsHomePath, toHTML, getMenuHandle, translate, isDiscounted} from '~/lib/utils';
+import {useIsHomePath, toHTML, getMenuHandle, translate, isDiscounted, productTranslate} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {Helmet} from 'react-helmet';
@@ -578,6 +578,7 @@ function MobileHeader({title, isHome, openCart, openMenu,locale}) {
               {searchString.length > 2 && (
                   <ProductSearchLi
                     products={data?.products}
+                    locale={locale?.language}
                   />
               )}
               <button
@@ -610,7 +611,7 @@ function MobileHeader({title, isHome, openCart, openMenu,locale}) {
   );
 }
 
-export function ProductSearchLi({products,searchOpen}) {
+export function ProductSearchLi({products, searchOpen, locale}) {
   return (
     
     <ul className={`searchDropDown ${(searchOpen) ? "is-active" : ''} bg-white shadow-lg w-full p-[20px] productSearchList absolute top-[100%] mt-[10px] rounded-[20px] z-[111] last:border-none max-h-[50vh] overflow-auto`}>
@@ -640,7 +641,7 @@ export function ProductSearchLi({products,searchOpen}) {
                     />
                   )}
                   <div className='flex-1'>
-                    <h4 className="font-semibold mb-1 text-[14px]">{product.title}</h4>
+                    <h4 className="font-semibold mb-1 text-[14px]">{productTranslate(product,'title', locale)}</h4>
                     <Text className="flex gap-1 text-[14px]">
                       <Money
                         withoutTrailingZeros
@@ -661,7 +662,7 @@ export function ProductSearchLi({products,searchOpen}) {
           );
         })}
       {products?.length == 0 && (
-        <li className="py-3 block">Keine Ergebnisse gefunden.</li>
+        <li className="py-3 block">{translate('empty_product_search_txt',locale)}.</li>
       )}
     </ul>
     
@@ -1084,6 +1085,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                   <ProductSearchLi
                     products={data?.products}
                     searchOpen={isSearchOpen}
+                    locale={locale?.language}
                   />
                 )}
             </Form>

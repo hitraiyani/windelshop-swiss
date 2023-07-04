@@ -134,9 +134,12 @@
   "search_page_search_placeholder": "Suchbegriff(e)",
   "you_may_like":"Das könnte Ihnen auch gefallen",
   "number":"ANZAHL",
+  "size":"GRÖSSE",
   "my_favorite" : "Meine Favoriten",
   "sub_total" : "Zwischensumme",
   "apply_code":"Rabattcode einlösen",
   "enter_code" :"Bitte Gutscheincode hier angeben",
-  "continue_checkout":"Weiter zur Kasse"
+  "continue_checkout":"Weiter zur Kasse",
+  "empty_cart_text": "Warenkorb ist noch leer",
+  "empty_product_search_txt": "Keine Ergebnisse gefunden"
 }

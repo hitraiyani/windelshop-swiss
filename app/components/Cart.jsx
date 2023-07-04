@@ -21,7 +21,7 @@ export function Cart({layout, onClose, cart,locale=""}) {
 
   return (
     <>
-      <CartEmpty hidden={linesCount} onClose={onClose} layout={layout} />
+      <CartEmpty hidden={linesCount} onClose={onClose} layout={layout} locale={locale}/>
       <CartDetails cart={cart} layout={layout} locale={locale} />
     </>
   );
@@ -335,7 +335,7 @@ function CartLinePrice({line, priceType = 'regular', ...passthroughProps}) {
   return <Money withoutTrailingZeros {...passthroughProps} data={moneyV2} />;
 }
 
-export function CartEmpty({hidden = false, layout = 'drawer', onClose}) {
+export function CartEmpty({hidden = false, layout = 'drawer', onClose, locale}) {
   const scrollRef = useRef(null);
   const {y} = useScroll(scrollRef);
 
@@ -354,14 +354,14 @@ export function CartEmpty({hidden = false, layout = 'drawer', onClose}) {
     <div ref={scrollRef} className={container[layout]} hidden={hidden}>
       <section className="grid gap-6">
         <Text format>
-          Looks like you haven&rsquo;t added anything yet, let&rsquo;s get you
-          started!
+          {translate('empty_cart_text', locale)}
         </Text>
         <div>
-          <Button onClick={onClose}>Continue shopping</Button>
+        
+          <Button onClick={onClose}>{translate('procesed_compare', locale)}</Button>
         </div>
       </section>
-      <section className="grid gap-8 pt-16">
+      {/* <section className="grid gap-8 pt-16">
         <FeaturedProducts
           count={4}
           heading="Shop Best Sellers"
@@ -369,7 +369,7 @@ export function CartEmpty({hidden = false, layout = 'drawer', onClose}) {
           onClose={onClose}
           sortKey="BEST_SELLING"
         />
-      </section>
+      </section> */}
     </div>
   );
 }

@@ -184,10 +184,13 @@
   "search_page_search_placeholder": "Mots-clés",
   "you_may_like":"Tu pourrais aussi aimer",
   "number":"NOMBRE",
+  "size":"TAILLE",
   "my_favorite" : "Mes favoris",
   "sub_total" : "Total",
   "apply_code":"Appliquer le bon",
   "enter_code" :"Entrer le code du chèque-cadeau ici",
-  "continue_checkout": "Continuer vers la caisse"
+  "continue_checkout": "Continuer vers la caisse",
+  "empty_cart_text": "Votre panier est vide !",
+  "empty_product_search_txt": "Aucun résultat trouvé"
 
 }
