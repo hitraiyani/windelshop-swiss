@@ -107,10 +107,12 @@ function productJsonLd({product, selectedVariant, url}) {
   ];
 }
 
-function product({product, url, selectedVariant}) {
+function product({product, url, selectedVariant,language= ""}) {
+  
   const description = truncate(
     product?.seo?.description ?? product?.description ?? '',
   );
+
   return {
     title: product?.seo?.title ?? product?.title,
     description,

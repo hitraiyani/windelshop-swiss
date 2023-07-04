@@ -174,6 +174,8 @@ function Header({title, menu, aicoMenu, toBar, locale}) {
         title={title}
         openCart={openCart}
         openMenu={openMenu}
+        locale={locale} 
+         
       />
     </>
   );
@@ -275,6 +277,7 @@ function MenuMobileNav({menu, aicoMenu, onClose, locale}) {
               <SubMegaMenu
                 subMenus={item?.category?.subCategories}
                 key={index}
+                locale={locale}
                 onClose={onClose}
               />
             )}
