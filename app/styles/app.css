@@ -694,4 +694,10 @@ input.appearance-none[type='number'] {
 .is-active {
   display: block;
 }
+.searchDropDown {
+  display: none;
+}
+.is-active {
+  display: block;
+}
 /* End top bar css */

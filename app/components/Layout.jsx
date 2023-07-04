@@ -1,4 +1,4 @@
-import {useParams, Form, Await, useMatches, useFetcher} from '@remix-run/react';
+import {useParams, Form, Await, useMatches, useFetcher, NavLink} from '@remix-run/react';
 import {useWindowScroll} from 'react-use';
 import {Disclosure, Menu, Transition} from '@headlessui/react';
 import {Suspense, useEffect, useMemo, useState, useRef} from 'react';
@@ -433,9 +433,10 @@ function MobileHeader({title, isHome, openCart, openMenu}) {
   );
 }
 
-export function ProductSearchLi({products}) {
+export function ProductSearchLi({products,searchOpen}) {
   return (
-    <ul className="bg-white shadow-lg w-full p-[20px] productSearchList absolute top-[100%] mt-[10px] rounded-[20px] z-[111] last:border-none max-h-[50vh] overflow-auto">
+    
+    <ul className={`searchDropDown ${(searchOpen) ? "is-active" : ''} bg-white shadow-lg w-full p-[20px] productSearchList absolute top-[100%] mt-[10px] rounded-[20px] z-[111] last:border-none max-h-[50vh] overflow-auto`}>
       {products?.length > 0 &&
         products.map((product) => {
           const firstVariant = flattenConnection(product?.variants)[0];
@@ -444,7 +445,7 @@ export function ProductSearchLi({products}) {
           const inDisc = isDiscounted(price, compareAtPrice);
           return (
             <li key={product.id} className='pb-[15px] mb-[15px] border-b-[1px] border-[#eee]'>
-              <Link
+              <NavLink
                 className="block"
                 to={`/products/${product.handle}`}
                 prefetch="intent"
@@ -478,7 +479,7 @@ export function ProductSearchLi({products}) {
                     </Text>
                   </div>
                 </div>
-              </Link>
+              </NavLink>
             </li>
           );
         })}
@@ -486,6 +487,7 @@ export function ProductSearchLi({products}) {
         <li className="py-3 block">Keine Ergebnisse gefunden.</li>
       )}
     </ul>
+    
   );
 }
 
@@ -624,8 +626,9 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
   const [searchString, setsearchString] = useState('');
 
   useEffect(() => {
-    const handleBodyClick = () => {
-      setSearchOpen(false);
+    const handleBodyClick = (e) => {
+       setSearchOpen(false);
+      console.log("Out CLik");
     };
 
     document.body.addEventListener('click', handleBodyClick);
@@ -638,7 +641,16 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
   const handleSearchClick = (e) => {
     e.stopPropagation();
     setSearchOpen(true);
+    
   };
+
+  const handleLinkClick = (e) => {
+    e.stopPropagation();
+    console.log("LInk Click");
+    //setSearchOpen(true);
+    
+  };
+
 
   const handleLanguageChange = (e) => {
     e.stopPropagation();
@@ -873,7 +885,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
             >
               <Input
                 className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[12px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] ${
-                  isSearchOpen ? '!text-left' : '!text-center'
+                  (searchString.length > 0 || isSearchOpen) ? '!text-left' : '!text-center'
                 }`}
                 type="search"
                 variant="minisearch"
@@ -886,14 +898,15 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               <button
                 type="submit"
                 className={`${
-                  isSearchOpen ? 'left-[30px]' : 'left-[45%]'
+                  (searchString.length > 0 || isSearchOpen) ? 'left-[30px]' : 'left-[45%]'
                 } absolute flex items-center justify-center w-8 h-8 focus:ring-primary/5 top-1/2  -translate-x-1/2 -translate-y-1/2`}
               >
                 <IconSearch2 />
               </button>
-              {searchString.length > 2 && (
+              {(searchString.length > 2 )  && (
                   <ProductSearchLi
                     products={data?.products}
+                    searchOpen={isSearchOpen}
                   />
                 )}
             </Form>
