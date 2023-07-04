@@ -429,13 +429,13 @@ function MobileHeader({title, isHome, openCart, openMenu}) {
           </div>
         </div>
       </div>
-    </header> 
+    </header>
   );
 }
 
 export function ProductSearchLi({products}) {
   return (
-    <ul className="bg-white shadow-lg w-full p-[20px] productSearchList absolute top-[100%] mt-[10px] rounded-[20px] z-[111] last:border-none max-h-[50vh] overflow-auto">
+    <ul className="bg-white shadow-lg w-full px-5 productSearchList">
       {products?.length > 0 &&
         products.map((product) => {
           const firstVariant = flattenConnection(product?.variants)[0];
@@ -443,9 +443,9 @@ export function ProductSearchLi({products}) {
           const {image, price, compareAtPrice} = firstVariant;
           const inDisc = isDiscounted(price, compareAtPrice);
           return (
-            <li key={product.id} className='pb-[15px] mb-[15px] border-b-[1px] border-[#eee]'>
+            <li key={product.id}>
               <Link
-                className="block"
+                className="py-3 block"
                 to={`/products/${product.handle}`}
                 prefetch="intent"
               >
@@ -458,12 +458,11 @@ export function ProductSearchLi({products}) {
                       data={image}
                       alt={image.altText || `Picture of ${product.title}`}
                       loading={'eager'}
-                      className={'!w-[60px] md:!w-[100px] md:!h-[100px] !h-[60px] object-contain p-[5px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)] rounded-[10px]'}
                     />
                   )}
-                  <div className='flex-1'>
-                    <h4 className="font-semibold mb-1 text-[14px]">{product.title}</h4>
-                    <Text className="flex gap-1 text-[14px]">
+                  <div>
+                    <h4 className="font-semibold mb-1">{product.title}</h4>
+                    <Text className="flex gap-1 text-sm">
                       <Money
                         withoutTrailingZeros
                         data={price}
@@ -880,8 +879,6 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                 placeholder={translate('search_box', locale?.language)}
                 name="q"
                 onChange={handleSearchBox}
-                onClick={handleSearchClick}
-                autoComplete="off"
               />
               <button
                 type="submit"
