@@ -6,6 +6,11 @@ import {json} from '@shopify/remix-oxygen';
 import {CartLoading, Cart} from '~/components';
 import {isLocalPath, getCartId} from '~/lib/utils';
 import {CartAction} from '~/lib/type';
+import {seoPayload} from '~/lib/seo.server';
+
+import { useLoaderData } from '@remix-run/react';
+
+import { translate} from '~/lib/utils';
 
 export async function action({request, context}) {
   const {session, storefront} = context;
@@ -155,14 +160,30 @@ export async function action({request, context}) {
   );
 }
 
+export const loader = async ({request, context: {storefront}}) => {
+  const {language, country} = storefront.i18n;
+
+  const seo = seoPayload.customPage({title : translate('cart', storefront.i18n.language), url: request.url});
+
+  return json(
+    { seo,language},
+    { 
+    },
+  );
+};
+
 export default function CartRoute() {
   const [root] = useMatches();
+  const {
+    seo,
+    language,
+  } = useLoaderData();
   // @todo: finish on a separate PR
   return (
     <div className="grid w-full gap-8 p-6 py-8 md:p-8 lg:p-12 justify-items-start">
       <Suspense fallback={<CartLoading />}>
         <Await resolve={root.data?.cart}>
-          {(cart) => <Cart layout="page" cart={cart} />}
+          {(cart) => <Cart layout="page" cart={cart} locale={language} />}
         </Await>
       </Suspense>
     </div>

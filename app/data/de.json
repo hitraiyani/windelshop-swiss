@@ -133,5 +133,10 @@
   "search_page_no_product_message": "Keine Produkte vorhanden, die den Suchkriterien entsprechen",
   "search_page_search_placeholder": "Suchbegriff(e)",
   "you_may_like":"Das könnte Ihnen auch gefallen",
-  "number":"ANZAHL"
+  "number":"ANZAHL",
+  "my_favorite" : "Meine Favoriten",
+  "sub_total" : "Zwischensumme",
+  "apply_code":"Rabattcode einlösen",
+  "enter_code" :"Bitte Gutscheincode hier angeben",
+  "continue_checkout":"Weiter zur Kasse"
 }

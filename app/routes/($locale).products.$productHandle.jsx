@@ -105,6 +105,7 @@ export async function loader({params, request, context}) {
     product,
     selectedVariant,
     url: request.url,
+    language: context.storefront.i18n.language,
   });
 
   return defer(

@@ -3,6 +3,7 @@ import {useRef} from 'react';
 import {useScroll} from 'react-use';
 import {flattenConnection, Image, Money} from '@shopify/hydrogen';
 import {useFetcher} from '@remix-run/react';
+import { translate} from '~/lib/utils';
 
 import {
   Button,
@@ -15,18 +16,18 @@ import {
 import {getInputStyleClasses} from '~/lib/utils';
 import {CartAction} from '~/lib/type';
 
-export function Cart({layout, onClose, cart}) {
+export function Cart({layout, onClose, cart,locale=""}) {
   const linesCount = Boolean(cart?.lines?.edges?.length || 0);
 
   return (
     <>
       <CartEmpty hidden={linesCount} onClose={onClose} layout={layout} />
-      <CartDetails cart={cart} layout={layout} />
+      <CartDetails cart={cart} layout={layout} locale={locale} />
     </>
   );
 }
 
-export function CartDetails({layout, cart}) {
+export function CartDetails({layout, cart ,locale}) {
   // @todo: get optimistic cart cost
   const cartHasItems = !!cart && cart.totalQuantity > 0;
   const container = {
@@ -38,9 +39,9 @@ export function CartDetails({layout, cart}) {
     <div className={container[layout]}>
       <CartLines lines={cart?.lines} layout={layout} />
       {cartHasItems && (
-        <CartSummary cost={cart.cost} layout={layout}>
-          <CartDiscounts discountCodes={cart.discountCodes} />
-          <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
+        <CartSummary cost={cart.cost} layout={layout} locale={locale}>
+          <CartDiscounts discountCodes={cart.discountCodes} locale={locale} />
+          <CartCheckoutActions checkoutUrl={cart.checkoutUrl} locale={locale} />
         </CartSummary>
       )}
     </div>
@@ -52,7 +53,7 @@ export function CartDetails({layout, cart}) {
  * @param discountCodes the current discount codes applied to the cart
  * @todo rework when a design is ready
  */
-function CartDiscounts({discountCodes}) {
+function CartDiscounts({discountCodes,locale}) {
   const codes = discountCodes?.map(({code}) => code).join(', ') || null;
 
   return (
@@ -87,10 +88,11 @@ function CartDiscounts({discountCodes}) {
             className={getInputStyleClasses()}
             type="text"
             name="discountCode"
-            placeholder="Discount code"
+            placeholder={translate("enter_code",locale)}
           />
           <button className="flex justify-end font-medium whitespace-nowrap">
-            Apply Discount
+            
+            {translate("apply_code",locale)}
           </button>
         </div>
       </UpdateDiscountForm>
@@ -139,14 +141,16 @@ function CartLines({layout = 'drawer', lines: cartLines}) {
   );
 }
 
-function CartCheckoutActions({checkoutUrl}) {
+function CartCheckoutActions({checkoutUrl,locale}) {
   if (!checkoutUrl) return null;
 
   return (
     <div className="flex flex-col mt-2">
       <a href={checkoutUrl} target="_self">
         <Button as="span" width="full">
-          Continue to Checkout
+          {/* Continue to Checkout */}
+          {translate("continue_checkout",locale)}
+          
         </Button>
       </a>
       {/* @todo: <CartShopPayButton cart={cart} /> */}
@@ -154,7 +158,7 @@ function CartCheckoutActions({checkoutUrl}) {
   );
 }
 
-function CartSummary({cost, layout, children = null}) {
+function CartSummary({cost, layout, children = null,locale}) {
   const summary = {
     drawer: 'grid gap-4 p-6 border-t md:px-12',
     page: 'sticky top-nav grid gap-6 p-4 md:px-6 md:translate-y-4 bg-primary/5 rounded w-full',
@@ -167,7 +171,7 @@ function CartSummary({cost, layout, children = null}) {
       </h2>
       <dl className="grid">
         <div className="flex items-center justify-between font-medium">
-          <Text as="dt">Subtotal</Text>
+          <Text as="dt">{translate("sub_total",locale)}</Text>
           <Text as="dd" data-test="subtotal">
             {cost?.subtotalAmount?.amount ? (
               <Money data={cost?.subtotalAmount} />
@@ -206,12 +210,13 @@ function CartLineItem({line}) {
       <div className="flex justify-between flex-grow">
         <div className="grid gap-2">
           <Heading as="h3" size="copy">
+            {/* { console.log("product cart") } { console.log(merchandise?.product) } */}
             {merchandise?.product?.handle ? (
               <Link to={`/products/${merchandise.product.handle}`}>
                 {merchandise?.product?.title || ''}
               </Link>
             ) : (
-              <Text>{merchandise?.product?.title || ''}</Text>
+              <Text>{merchandise?.product?.title || '' }  </Text>
             )}
           </Heading>
 

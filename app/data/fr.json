@@ -183,6 +183,11 @@
   "search_page_no_product_message": "Il n’y a aucun produit correspondant aux critères de recherche.",
   "search_page_search_placeholder": "Mots-clés",
   "you_may_like":"Tu pourrais aussi aimer",
-  "number":"NOMBRE"
+  "number":"NOMBRE",
+  "my_favorite" : "Mes favoris",
+  "sub_total" : "Zwischensumme",
+  "apply_code":"Appliquer le bon",
+  "enter_code" :"Entrer le code du chèque-cadeau ici",
+  "continue_checkout": "Continuer vers la caisse"
 
 }
