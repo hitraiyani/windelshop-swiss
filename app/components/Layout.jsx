@@ -468,7 +468,7 @@ export function ProductSearchLi({products}) {
                     <Text className="flex gap-1 text-sm">
                       <Money
                         withoutTrailingZeros
-                        data={price}
+                        data={price} 
                         className={`${inDisc ? 'sale-price' : ''}`}
                       />
                       {inDisc && (
