@@ -1,3 +1,5 @@
+import { stringTruncate, productTranslate} from '~/lib/utils';
+
 function root({shop, url}) {
   return {
     title: shop?.name,
@@ -108,13 +110,11 @@ function productJsonLd({product, selectedVariant, url}) {
 }
 
 function product({product, url, selectedVariant,language= ""}) {
-  
-  const description = truncate(
-    product?.seo?.description ?? product?.description ?? '',
-  );
+ 
+  const description = stringTruncate(productTranslate(product,'description',language).replaceAll(/<\/?[^>]+(>|$)/gi, ""), 150);
 
   return {
-    title: product?.seo?.title ?? product?.title,
+    title: productTranslate(product,'title',language),
     description,
     media: selectedVariant?.image,
     jsonLd: productJsonLd({product, selectedVariant, url}),

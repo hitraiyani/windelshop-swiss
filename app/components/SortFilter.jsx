@@ -470,7 +470,7 @@ export default function SortMenu({gridView, listView, isGrid, collection,locale}
         </div>
       )}
 
-      <div className="top-filter-wrap">
+      <div className="top-filter-wrap mb-[30px]">
         <div className="filter-inner flex flex-col min-[992px]:flex-row flex-wrap gap-[25px]">
           <div className="col-left gap-[25px] items-center flex">
             <div className="pro-view-filter flex gap-[3px]">

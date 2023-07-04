@@ -701,3 +701,7 @@ input.appearance-none[type='number'] {
   display: block;
 }
 /* End top bar css */
+[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

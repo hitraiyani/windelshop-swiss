@@ -149,17 +149,17 @@ function NoResults({noResults, recommendations, locale}) {
           </Text>
         </Section>
       )}
-      <Suspense>
+      {/* <Suspense>
         <Await
           errorElement="There was a problem loading related products"
           resolve={recommendations}
         >
           {({featuredCollections, featuredProducts}) => (
             <>
-              {/* <FeaturedCollections
+              <FeaturedCollections
                 title="Trending Collections"
                 collections={featuredCollections}
-              /> */}
+              />
               <ProductSwimlane
                 title="Trending Products"
                 products={featuredProducts}
@@ -167,7 +167,7 @@ function NoResults({noResults, recommendations, locale}) {
             </>
           )}
         </Await>
-      </Suspense>
+      </Suspense> */}
     </>
   );
 }

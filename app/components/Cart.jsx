@@ -3,7 +3,7 @@ import {useRef} from 'react';
 import {useScroll} from 'react-use';
 import {flattenConnection, Image, Money} from '@shopify/hydrogen';
 import {useFetcher} from '@remix-run/react';
-import { translate} from '~/lib/utils';
+import { translate, productTranslate} from '~/lib/utils';
 
 import {
   Button,
@@ -37,7 +37,7 @@ export function CartDetails({layout, cart ,locale}) {
 
   return (
     <div className={container[layout]}>
-      <CartLines lines={cart?.lines} layout={layout} />
+      <CartLines lines={cart?.lines} layout={layout} locale={locale} />
       {cartHasItems && (
         <CartSummary cost={cart.cost} layout={layout} locale={locale}>
           <CartDiscounts discountCodes={cart.discountCodes} locale={locale} />
@@ -114,7 +114,7 @@ function UpdateDiscountForm({children}) {
   );
 }
 
-function CartLines({layout = 'drawer', lines: cartLines}) {
+function CartLines({layout = 'drawer', lines: cartLines, locale}) {
   const currentLines = cartLines ? flattenConnection(cartLines) : [];
   const scrollRef = useRef(null);
   const {y} = useScroll(scrollRef);
@@ -134,7 +134,7 @@ function CartLines({layout = 'drawer', lines: cartLines}) {
     >
       <ul className="grid gap-6 md:gap-10">
         {currentLines.map((line) => (
-          <CartLineItem key={line.id} line={line} />
+          <CartLineItem key={line.id} line={line} locale={locale} />
         ))}
       </ul>
     </section>
@@ -186,7 +186,7 @@ function CartSummary({cost, layout, children = null,locale}) {
   );
 }
 
-function CartLineItem({line}) {
+function CartLineItem({line, locale}) {
   if (!line?.id) return null;
 
   const {id, quantity, merchandise} = line;
@@ -213,20 +213,20 @@ function CartLineItem({line}) {
             {/* { console.log("product cart") } { console.log(merchandise?.product) } */}
             {merchandise?.product?.handle ? (
               <Link to={`/products/${merchandise.product.handle}`}>
-                {merchandise?.product?.title || ''}
+                {productTranslate(merchandise?.product,'title',locale) || ''}
               </Link>
             ) : (
-              <Text>{merchandise?.product?.title || '' }  </Text>
+              <Text>{ productTranslate(merchandise?.product,'title',locale) || '' }  </Text>
             )}
           </Heading>
 
-          <div className="grid pb-2">
+          {/* <div className="grid pb-2">
             {(merchandise?.selectedOptions || []).map((option) => (
               <Text color="subtle" key={option.name}>
                 {option.name}: {option.value}
               </Text>
             ))}
-          </div>
+          </div> */}
 
           <div className="flex items-center gap-2">
             <div className="flex justify-start text-copy">

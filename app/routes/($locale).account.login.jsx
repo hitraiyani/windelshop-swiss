@@ -74,7 +74,7 @@ export const action = async ({request, context, params}) => {
 
 export default function Login() {
   const {shopName, locale} = useLoaderData();
-  console.log("locale", locale);
+  
   const actionData = useActionData();
   const [nativeEmailError, setNativeEmailError] = useState(null);
   const [nativePasswordError, setNativePasswordError] = useState(null);

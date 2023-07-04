@@ -884,8 +884,8 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               className="flex flex-auto max-w-[575px] relative"
             >
               <Input
-                className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[12px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] ${
-                  (searchString.length > 0 || isSearchOpen) ? '!text-left' : '!text-center'
+                className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[12px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] border-none ${
+                  (isSearchOpen || searchString.length > 0) ? '!text-left' : '!text-center'
                 }`}
                 type="search"
                 variant="minisearch"
@@ -898,7 +898,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               <button
                 type="submit"
                 className={`${
-                  (searchString.length > 0 || isSearchOpen) ? 'left-[30px]' : 'left-[45%]'
+                  (isSearchOpen || searchString.length > 0) ? 'left-[30px]' : 'left-[43%]'
                 } absolute flex items-center justify-center w-8 h-8 focus:ring-primary/5 top-1/2  -translate-x-1/2 -translate-y-1/2`}
               >
                 <IconSearch2 />
@@ -1347,6 +1347,7 @@ function CartCount({isHome, openCart}) {
             dark={isHome}
             openCart={openCart}
             count={cart?.totalQuantity || 0}
+            cart={cart}
           />
         )}
       </Await>
@@ -1354,9 +1355,10 @@ function CartCount({isHome, openCart}) {
   );
 }
 
-function Badge({openCart, dark, count}) {
+function Badge({openCart, dark, count, cart}) {
   const isHydrated = useIsHydrated();
   const [root] = useMatches();
+
 
   const BadgeCounter = useMemo(
     () => (
@@ -1373,7 +1375,7 @@ function Badge({openCart, dark, count}) {
             {translate('cart_artikel', root?.data?.selectedLocale?.language)}{' '}
             -&nbsp;
           </span>
-          <span>CHF 0.00</span>
+          {cart?.cost ? <Money as='span' data={cart.cost?.subtotalAmount} /> : <span>CHF 0.00</span>}
         </div>
       </>
     ),
@@ -1390,7 +1392,7 @@ function Badge({openCart, dark, count}) {
   ) : (
     <Link
       to="/cart"
-      className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
+      className="relative flex items-center justify-center bg-[#CCDDF1] rounded-[100px] max-w-[215px] p-[15px] h-auto lg:h-[50px] flex-1 transition-all duration-500 hover:opacity-70"
     >
       {BadgeCounter}
     </Link>
