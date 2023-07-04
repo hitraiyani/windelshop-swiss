@@ -298,6 +298,29 @@ function MobileHeader({title, isHome, openCart, openMenu,locale}) {
   const [isActiveSearchMobile, setActiveSearchMobile] = useState(false);
   const {load, data} = useFetcher();
   const [searchString, setsearchString] = useState('');
+  const [isSearchOpen, setSearchOpen] = useState(false);
+
+  useEffect(() => {
+    const handleBodyClick = (e) => {
+       setSearchOpen(false);
+      
+      // console.log("Out CLik");
+    };
+
+    document.body.addEventListener('click', handleBodyClick);
+
+    return () => {
+      document.body.removeEventListener('click', handleBodyClick);
+    };
+  }, []);
+  
+  
+ const handleSearchClick = (e) => {
+  e.stopPropagation();
+  setSearchOpen(true);
+  
+  
+};
   const handleSearchBox = (event) => {
     setsearchString(event.target.value);
     const count = 12;
@@ -574,10 +597,13 @@ function MobileHeader({title, isHome, openCart, openMenu,locale}) {
                 placeholder="Suche"
                 name="q"
                 onChange={handleSearchBox}
+                onClick={handleSearchClick}
               />
+             
               {searchString.length > 2 && (
                   <ProductSearchLi
                     products={data?.products}
+                    searchOpen={isSearchOpen}
                     locale={locale?.language}
                   />
               )}
