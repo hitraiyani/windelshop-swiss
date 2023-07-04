@@ -700,7 +700,7 @@ export function ProductForm({
           {translate('qnt',locale)}
         </h2>
         <div className="col-inner flex justify-between gap-[20px] flex-wrap">
-          <div className="flex w-[60%] flex-wrap gap-[20px]">
+          <div className="flex flex-1 flex-wrap gap-[20px] min-w-[60%]">
             <QuantityComponent quantity={quantity} setQuantity={setQuantity} locale={locale}/>
             <div className="pro-btns flex flex-col flex-1">
               {isOutOfStock ? (

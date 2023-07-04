@@ -34,7 +34,10 @@ import {
   IconMail,
   IconMap,
   IconFacebook,
-  CompareAtPrice
+  CompareAtPrice,
+  IconWhishlist,
+  IconCart,
+  IconLogin2
 } from '~/components';
 import {useIsHomePath, toHTML, getMenuHandle, translate, isDiscounted} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
@@ -176,6 +179,7 @@ function Header({title, menu, aicoMenu, toBar, locale}) {
         title={title}
         openCart={openCart}
         openMenu={openMenu}
+        locale={locale}
       />
     </>
   );
@@ -287,10 +291,10 @@ function MenuMobileNav({menu, aicoMenu, onClose, locale}) {
   );
 }
 
-function MobileHeader({title, isHome, openCart, openMenu}) {
+function MobileHeader({title, isHome, openCart, openMenu,locale}) {
   // useHeaderStyleFix(containerStyle, setContainerStyle, isHome);
-
   const params = useParams();
+  const wishlistContextData = useContext(WishlistContext);
   const [isActiveSearchMobile, setActiveSearchMobile] = useState(false);
   const {load, data} = useFetcher();
   const [searchString, setsearchString] = useState('');
@@ -311,11 +315,184 @@ function MobileHeader({title, isHome, openCart, openMenu}) {
   const toggleSearchClassMobile = () => {
     setActiveSearchMobile(!isActiveSearchMobile);
   };
+  const handleLanguageChange = (e) => {
+    e.stopPropagation();
+    let selectedLang = e.currentTarget.getAttribute('data-lang');
+    if (selectedLang) {
+      Cookies.set('language', selectedLang, {expires: 30});
+      setTimeout(() => {
+        var selectedLanguage = selectedLang;
+        const currentUrl = window.location.href;
+        let newUrl = currentUrl;
+        const firstPathPart = location.pathname
+          .substring(1)
+          .split('/')[0]
+          .toLowerCase();
+        if (firstPathPart == 'fr' && selectedLanguage != 'fr') {
+          newUrl = currentUrl.replace('/fr', '');
+        }
+        if (firstPathPart != 'fr' && selectedLanguage == 'fr') {
+          newUrl =
+            location.origin +
+            '/fr/' +
+            (location.pathname + location.search).substr(1);
+        }
+        window.location.href = newUrl;
+      }, 200);
+    }
+  };
   return (
     <header
       role="banner"
       className={`${isHome ? '' : ''} bg-[#E7EFFF] relative lg:hidden`}
     >
+      <div className="top flex bg-[#CCDDF1] py-[10px] px-[10px] md:px-[40px]">
+            <div className="lang flex-1">
+              <Menu as="div" className="relative inline-block text-left">
+                <div>
+                  <Menu.Button className="flex gap-[6px] items-center">
+                    <span className="flag w-[16px] h-[16px] overflow-hidden relative">
+                      <img
+                        className="inset-0 w-full h-full object-contain"
+                        src={
+                          locale?.language == STORE_LANG_FR
+                            ? 'https://cdn.shopify.com/s/files/1/0763/5307/7525/files/fr.png?v=1687766463'
+                            : 'https://cdn.shopify.com/s/files/1/0763/5307/7525/files/de_png.svg?v=1685425346'
+                        }
+                        alt=""
+                      />
+                    </span>
+                    <span className="name text-[16px] text-black leading-[1.1] font-medium">
+                      {locale?.language == STORE_LANG_FR
+                        ? 'Français'
+                        : 'Deutsch'}
+                    </span>
+                    <ChevronDownIcon className={'w-[10px] h-[7px]'} />
+                  </Menu.Button>
+                </div>
+
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Menu.Items className="absolute left-0 z-10 mt-2 w-[120px] origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div className="py-1">
+                      <Menu.Item>
+                        {({active}) => (
+                          <button
+                            onClick={handleLanguageChange}
+                            data-lang="de"
+                            className={classNames(
+                              active
+                                ? 'bg-gray-100 text-gray-900'
+                                : 'text-gray-700',
+                              'px-4 py-2 text-sm flex gap-[6px] items-center ',
+                            )}
+                          >
+                            <span className="flag  w-[16px] h-[16px] overflow-hidden relative">
+                              <img
+                                className="inset-0 w-full h-full object-contain"
+                                src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/de_png.svg?v=1685425346"
+                                alt=""
+                              />
+                            </span>
+                            <span className="name text-[16px] text-black leading-[1.1] font-medium">
+                              Deutsch
+                            </span>
+                          </button>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({active}) => (
+                          <button
+                            data-lang="fr"
+                            onClick={handleLanguageChange}
+                            className={classNames(
+                              active
+                                ? 'bg-gray-100 text-gray-900'
+                                : 'text-gray-700',
+                              'px-4 py-2 text-sm flex gap-[6px] items-center',
+                            )}
+                          >
+                            <span className="flag  w-[16px] h-[16px] overflow-hidden relative">
+                              <img
+                                className="inset-0 w-full h-full object-contain"
+                                src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/fr.png?v=1687766463"
+                                alt=""
+                              />
+                            </span>
+                            <span className="name text-[16px] text-black leading-[1.1] font-medium">
+                              Français
+                            </span>
+                          </button>
+                        )}
+                      </Menu.Item>
+                    </div>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+            </div>
+            <div className="login-menu flex-1">
+              <ul className="flex gap-[20px] justify-end">
+                <li>
+                  <Link
+                    to={'/account'}
+                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
+                  >
+                    {/* {translate('account', locale?.language)} */}
+                    <div className='icon w-[20px] h-[20px]'>
+                      <IconAccount className={'w-full h-full'} />
+                    </div>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={'/wishlist'}
+                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500 flex gap-[2px] items-center"
+                  >
+                    {/* {translate('wishlist', locale?.language)} */}
+                    <div className='icon w-[20px] h-[20px]'>
+                    <IconWhishlist className={'w-full h-full'} />
+                    </div>
+                    <span>
+                      (
+                      {wishlistContextData?.wishlistItems
+                        ? wishlistContextData?.wishlistItems.length
+                        : 0}
+                      )
+                    </span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={'/cart'}
+                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
+                  >
+                    {/* {translate('cart', locale?.language)} */}
+                    <div className='icon w-[20px] h-[20px]'>
+                     <IconCart className={'w-full h-full'} />
+                    </div>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={'/account/login'}
+                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
+                  >
+                    {/* {translate('login', locale?.language)} */}
+                    <div className='icon w-[20px] h-[20px]'>
+                      <IconLogin2 className={'w-full h-full'} />
+                    </div>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
       <div className="container py-[10px] !px-[10px] md:!px-[40px]">
         <div className="row flex justify-between">
           <div className="logo-col w-[140px] sm:w-[230px] flex items-center">
@@ -491,7 +668,7 @@ export function ProductSearchLi({products}) {
 
 function TopbarHeader({toBar}) {
   return (
-    <div className="top-bar-sec bg-[#CCDDF1] py-[10px]">
+    <div className="top-bar-sec bg-[#CCDDF1] py-[10px] hidden lg:block ">
       <div className="container !max-w-[1420px]">
         <div className="top-bar-inner">
           <ul className="topbar-list flex justify-between flex-nowrap overflow-auto gap-[15px]">
