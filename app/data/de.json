@@ -141,5 +141,6 @@
   "enter_code" :"Bitte Gutscheincode hier angeben",
   "continue_checkout":"Weiter zur Kasse",
   "empty_cart_text": "Warenkorb ist noch leer",
-  "empty_product_search_txt": "Keine Ergebnisse gefunden"
+  "empty_product_search_txt": "Keine Ergebnisse gefunden",
+  "trending_product": "Trendprodukte"
 }

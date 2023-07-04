@@ -256,7 +256,7 @@ function NoResults({noResults, recommendations, locale}) {
     <>
       {noResults && (
         <Section padding="x" className={'!p-0'}>
-          <Text className="text-black">
+          <Text className="text-black mb-5">
             {translate('search_page_no_product_message', locale)}
           </Text>
         </Section>
@@ -273,7 +273,8 @@ function NoResults({noResults, recommendations, locale}) {
                 collections={featuredCollections}
               /> */}
               <ProductSwimlane
-                title="Trending Products"
+                title={translate('trending_product', locale)}
+                locale={locale}
                 products={featuredProducts}
               />
             </>
