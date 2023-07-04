@@ -18,6 +18,7 @@ import {
   ProductSwimlane,
   Section,
   Text,
+  IconSearch2,
 } from '~/components';
 import {PAGINATION_SIZE} from '~/lib/const';
 import {PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
@@ -77,22 +78,24 @@ export default function Search() {
 
   return (
     <>
-    <Section className="collections-product-list-sec !px-0 !py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px]">
+    <Section className="collections-product-list-sec !px-0 !py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px] mb-[-20px] md:mb-[-30px] xl:mb-[-40px] 2xl:mb-[-50px]">
         <div className="container">
-        <PageHeader>
-        <Heading as="h1" size="copy">
+        <PageHeader className={'!p-0 mb-[40px] !gap-[20px]'}>
+        <Heading as="h1" size="copy" className='text-[#1C5F7B] text-[24px] xl:text-[28px] font-bold leading-none'>
           {translate('search_box', locale)}
         </Heading>
-        <Form method="get" className="relative flex w-full text-heading">
+        <Form method="get" className="flex w-full relative">
           <Input
             defaultValue={searchTerm}
             name="q"
             placeholder={translate('search_page_search_placeholder', locale)}
             type="search"
             variant="search"
+            className='w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[12px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] !ring-0 border-none'
           />
-          <button className="absolute right-0 py-2" type="submit">
-              {translate('search_box', locale)}
+          <button className="absolute flex items-center justify-center w-8 h-8 focus:ring-primary/5 top-1/2  -translate-x-1/2 -translate-y-1/2 left-[30px]" type="submit">
+          <IconSearch2 />
+              {/* {translate('search_box', locale)} */}
           </button>
         </Form>
       </PageHeader>
@@ -103,7 +106,7 @@ export default function Search() {
           locale={locale}
         />
       ) : (
-        <Section>
+        <Section className={'!p-0'}>
           <Pagination connection={products}>
             {({nodes, isLoading, NextLink, PreviousLink}) => {
               const itemsMarkup = nodes.map((product, i) => (
@@ -121,7 +124,7 @@ export default function Search() {
                       {isLoading ? 'Loading...' : 'Previous'}
                     </PreviousLink>
                   </div> */}
-                  <Grid data-test="product-grid">{itemsMarkup}</Grid>
+                  <Grid data-test="product-grid" className={'product-grid grid grid-cols-2  md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-4 gap-x-[15px] lg:gap-x-[30px] gap-y-[20px] lg:gap-y-[30px] xl:gap-y-[60px]'}>{itemsMarkup}</Grid>
                   {/* <div className="flex items-center justify-center mt-6">
                     <NextLink className="inline-block rounded font-medium text-center py-3 px-6 border border-primary/10 bg-contrast text-primary w-full">
                       {isLoading ? 'Loading...' : 'Next'}
@@ -143,23 +146,23 @@ function NoResults({noResults, recommendations, locale}) {
   return (
     <>
       {noResults && (
-        <Section padding="x">
-          <Text className="opacity-50">
+        <Section padding="x" className={'!p-0'}>
+          <Text className="text-black">
             {translate('search_page_no_product_message', locale)}
           </Text>
         </Section>
       )}
-      {/* <Suspense>
+      <Suspense>
         <Await
           errorElement="There was a problem loading related products"
           resolve={recommendations}
         >
           {({featuredCollections, featuredProducts}) => (
             <>
-              <FeaturedCollections
+              {/* <FeaturedCollections
                 title="Trending Collections"
                 collections={featuredCollections}
-              />
+              /> */}
               <ProductSwimlane
                 title="Trending Products"
                 products={featuredProducts}
@@ -167,7 +170,7 @@ function NoResults({noResults, recommendations, locale}) {
             </>
           )}
         </Await>
-      </Suspense> */}
+      </Suspense>
     </>
   );
 }

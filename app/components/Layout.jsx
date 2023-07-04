@@ -872,7 +872,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               className="flex flex-auto max-w-[575px] relative"
             >
               <Input
-                className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[12px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] ${
+                className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[12px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] border-none ${
                   isSearchOpen ? '!text-left' : '!text-center'
                 }`}
                 type="search"
@@ -886,7 +886,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               <button
                 type="submit"
                 className={`${
-                  isSearchOpen ? 'left-[30px]' : 'left-[45%]'
+                  isSearchOpen ? 'left-[30px]' : 'left-[43%]'
                 } absolute flex items-center justify-center w-8 h-8 focus:ring-primary/5 top-1/2  -translate-x-1/2 -translate-y-1/2`}
               >
                 <IconSearch2 />
