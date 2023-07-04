@@ -15,7 +15,7 @@ import {
 
 export function ProductCompare({locale}) {
     const {load, data, state} = useFetcher();
-
+ 
   const {productCompareItems, removeFromProductCompare } = useContext(WishlistContext);
 
   useEffect(() => {
@@ -23,8 +23,7 @@ export function ProductCompare({locale}) {
       `/api/userWishListProducts?products=${JSON.stringify(productCompareItems)}`,
     );
   }, [productCompareItems]);
-
-
+ 
   return (
      <>
         {!data ? (

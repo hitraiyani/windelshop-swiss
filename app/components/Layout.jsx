@@ -2,8 +2,8 @@ import {useParams, Form, Await, useMatches} from '@remix-run/react';
 import {useWindowScroll} from 'react-use';
 import {Disclosure, Menu, Transition} from '@headlessui/react';
 import {Suspense, useEffect, useMemo, useState, useRef} from 'react';
-import {Fragment, useContext } from 'react';
-import {WishlistContext } from '~/store/WishlistContext';
+import {Fragment, useContext} from 'react';
+import {WishlistContext} from '~/store/WishlistContext';
 import Cookies from 'js-cookie';
 
 import {
@@ -38,10 +38,15 @@ import {useIsHomePath, toHTML, getMenuHandle, translate} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {Helmet} from 'react-helmet';
-import {COOKIEBOT_KEY, AICO_API_URL, AICO_API_TOKEN, STORE_LANG_FR, STORE_LANG_DE} from '~/lib/const';
+import {
+  COOKIEBOT_KEY,
+  AICO_API_URL,
+  AICO_API_TOKEN,
+  STORE_LANG_FR,
+  STORE_LANG_DE,
+} from '~/lib/const';
 
 export function Layout({children, layout, locale}) {
-
   const [isCookieAccepted, setisCookieAccepted] = useState(false);
 
   const [brandData, setbrandData] = useState([]);
@@ -66,7 +71,7 @@ export function Layout({children, layout, locale}) {
     // if (firstPathPart == 'fr' && lang != 'fr') {
     //     Cookies.set('language', 'fr', { expires: 30 });
     // }
-  }
+  };
 
   useEffect(() => {
     //loadBrandData();
@@ -115,7 +120,7 @@ export function Layout({children, layout, locale}) {
       <main role="main" id="mainContent" className="flex-grow">
         {children}
       </main>
-      <Footer menu={layout?.footerMenu}  locale={locale} />
+      <Footer menu={layout?.footerMenu} locale={locale} />
     </>
   );
 }
@@ -190,17 +195,22 @@ function CartDrawer({isOpen, onClose}) {
   );
 }
 
-export function MenuDrawer({isOpen, onClose, menu, aicoMenu,locale}) {
+export function MenuDrawer({isOpen, onClose, menu, aicoMenu, locale}) {
   return (
     <Drawer open={isOpen} onClose={onClose} openFrom="left" heading="Menu">
       <div className="grid">
-        <MenuMobileNav menu={menu} aicoMenu={aicoMenu} onClose={onClose} locale={locale} />
+        <MenuMobileNav
+          menu={menu}
+          aicoMenu={aicoMenu}
+          onClose={onClose}
+          locale={locale}
+        />
       </div>
     </Drawer>
   );
 }
 
-function MenuMobileNav({menu, aicoMenu, onClose,locale}) {
+function MenuMobileNav({menu, aicoMenu, onClose, locale}) {
   const megaMenuMobileClick = (event) => {
     const menuItems = document.querySelectorAll('.mobile-nav-sec .menu-item');
     event.currentTarget.parentNode.parentNode.classList.toggle('active');
@@ -235,30 +245,30 @@ function MenuMobileNav({menu, aicoMenu, onClose,locale}) {
                 className="text-[14px] text-black"
                 onClick={onClose}
               >
-                { translate(item.category.name,locale?.language) }
+                {translate(item.category.name, locale?.language)}
               </Link>
               {item?.category?.subCategories?.length > 0 && (
-                  <div
-                    onClick={megaMenuMobileClick}
-                    className="flex-1 flex justify-end"
+                <div
+                  onClick={megaMenuMobileClick}
+                  className="flex-1 flex justify-end"
+                >
+                  <svg
+                    className="icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={20}
+                    height={20}
+                    viewBox="0 0 32 32"
                   >
-                    <svg
-                      className="icon"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={20}
-                      height={20}
-                      viewBox="0 0 32 32"
-                    >
-                      <path
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="m6 12l10 10l10-10"
-                      />
-                    </svg>
-                  </div>
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="m6 12l10 10l10-10"
+                    />
+                  </svg>
+                </div>
               )}
             </div>
             {item?.category?.subCategories?.length > 0 && (
@@ -477,7 +487,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-function SubMegaMenu({subMenus, onClose,locale}) {
+function SubMegaMenu({subMenus, onClose, locale}) {
   return (
     <div className="mega-menu absolute bg-[#CCDDF1] rounded-[20px] z-[99] ">
       <div className="mega-menu-inner container">
@@ -492,7 +502,7 @@ function SubMegaMenu({subMenus, onClose,locale}) {
                   {/* <Link
                     to={getMenuHandle(subItem.subCategory)}
                   > */}
-                  { translate(subItem?.subCategory?.name,locale?.language)}
+                  {translate(subItem?.subCategory?.name, locale?.language)}
                   {/* </Link> */}
                 </div>
                 {subItem.subCategory.subSubCategories?.length > 0 && (
@@ -504,7 +514,10 @@ function SubMegaMenu({subMenus, onClose,locale}) {
                             to={getMenuHandle(innerSubItem.subSubCategory)}
                             onClick={onClose}
                           >
-                            { translate(innerSubItem?.subSubCategory?.name,locale?.language)}
+                            {translate(
+                              innerSubItem?.subSubCategory?.name,
+                              locale?.language,
+                            )}
                           </Link>
                         </li>
                       ),
@@ -524,9 +537,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
   const params = useParams();
   const {y} = useWindowScroll();
 
-  const wishlistContextData = useContext(
-    WishlistContext
-  );
+  const wishlistContextData = useContext(WishlistContext);
 
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState(null);
@@ -550,44 +561,49 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
 
   const handleLanguageChange = (e) => {
     e.stopPropagation();
-    let selectedLang =  e.currentTarget.getAttribute('data-lang');
+    let selectedLang = e.currentTarget.getAttribute('data-lang');
     if (selectedLang) {
-        Cookies.set('language', selectedLang, { expires: 30 });
-        setTimeout(() => {
-          var selectedLanguage = selectedLang;
-          const currentUrl = window.location.href;
-          let newUrl = currentUrl;
-          const firstPathPart = location.pathname.substring(1).split('/')[0].toLowerCase();
-          if (firstPathPart == 'fr' && selectedLanguage != 'fr') {
-            newUrl = currentUrl.replace('/fr', '');
-          }
-          if (firstPathPart != 'fr' && selectedLanguage == 'fr') {
-            newUrl = location.origin+'/fr/'+(location.pathname+location.search).substr(1);
-          }
-          window.location.href = newUrl;
-        }, 200);
+      Cookies.set('language', selectedLang, {expires: 30});
+      setTimeout(() => {
+        var selectedLanguage = selectedLang;
+        const currentUrl = window.location.href;
+        let newUrl = currentUrl;
+        const firstPathPart = location.pathname
+          .substring(1)
+          .split('/')[0]
+          .toLowerCase();
+        if (firstPathPart == 'fr' && selectedLanguage != 'fr') {
+          newUrl = currentUrl.replace('/fr', '');
+        }
+        if (firstPathPart != 'fr' && selectedLanguage == 'fr') {
+          newUrl =
+            location.origin +
+            '/fr/' +
+            (location.pathname + location.search).substr(1);
+        }
+        window.location.href = newUrl;
+      }, 200);
     }
-  }
+  };
 
-  const menuCloseHandler = (e) =>{
-      //e.currentTarget.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display = "none";
-     setActiveMenuItem(null);
-  }
+  const menuCloseHandler = (e) => {
+    //e.currentTarget.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display = "none";
+    setActiveMenuItem(null);
+  };
 
-  const handleMouseEnter = (e,id) => {
-     setActiveMenuItem(id);
+  const handleMouseEnter = (e, id) => {
+    setActiveMenuItem(id);
     // setTimeout(() => {
     //   setActiveMenuItem(id);
     // }, 200);
-  }
-  const handleMouseLeave = (e,id) => {
-      //setActiveMenuItem(null);
-      setActiveMenuItem(Previous => {
-        // console.log(Previous);
-          Previous = null
-      });
-     
-  }
+  };
+  const handleMouseLeave = (e, id) => {
+    //setActiveMenuItem(null);
+    setActiveMenuItem((Previous) => {
+      // console.log(Previous);
+      Previous = null;
+    });
+  };
 
   // useEffect(() => {
   //   const menu = document.querySelector('.clean-hover-menu');
@@ -601,7 +617,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
     <header
       role="banner"
       className={`${isHome ? '' : ''} ${
-        !isHome && y > 50 && ''
+        !isHome && y > 50 && '' ? '' : ''
       } relative top-0 bg-[#E7EFFF] py-[20px]  rounded-[0_0_20px_20px] hidden lg:block`}
     >
       <div className="container">
@@ -614,12 +630,18 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                     <span className="flag w-[16px] h-[16px] overflow-hidden relative">
                       <img
                         className="inset-0 w-full h-full object-contain"
-                        src={locale?.language == STORE_LANG_FR ? 'https://cdn.shopify.com/s/files/1/0763/5307/7525/files/fr.png?v=1687766463' : 'https://cdn.shopify.com/s/files/1/0763/5307/7525/files/de_png.svg?v=1685425346'}
+                        src={
+                          locale?.language == STORE_LANG_FR
+                            ? 'https://cdn.shopify.com/s/files/1/0763/5307/7525/files/fr.png?v=1687766463'
+                            : 'https://cdn.shopify.com/s/files/1/0763/5307/7525/files/de_png.svg?v=1685425346'
+                        }
                         alt=""
                       />
                     </span>
                     <span className="name text-[16px] text-black leading-[1.1] font-medium">
-                        {locale?.language == STORE_LANG_FR ? 'Français' : 'Deutsch'}
+                      {locale?.language == STORE_LANG_FR
+                        ? 'Français'
+                        : 'Deutsch'}
                     </span>
                     <ChevronDownIcon className={'w-[10px] h-[7px]'} />
                   </Menu.Button>
@@ -639,9 +661,8 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                       <Menu.Item>
                         {({active}) => (
                           <button
-                            
                             onClick={handleLanguageChange}
-                            data-lang='de'
+                            data-lang="de"
                             className={classNames(
                               active
                                 ? 'bg-gray-100 text-gray-900'
@@ -665,7 +686,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                       <Menu.Item>
                         {({active}) => (
                           <button
-                            data-lang='fr'
+                            data-lang="fr"
                             onClick={handleLanguageChange}
                             className={classNames(
                               active
@@ -699,7 +720,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                     to={'/account'}
                     className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
-                    { translate('account', locale?.language) }
+                    {translate('account', locale?.language)}
                   </Link>
                 </li>
                 <li>
@@ -707,7 +728,14 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                     to={'/wishlist'}
                     className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
-                    {translate('wishlist', locale?.language)} <span>({wishlistContextData?.wishlistItems ? wishlistContextData?.wishlistItems.length : 0})</span>
+                    {translate('wishlist', locale?.language)}{' '}
+                    <span>
+                      (
+                      {wishlistContextData?.wishlistItems
+                        ? wishlistContextData?.wishlistItems.length
+                        : 0}
+                      )
+                    </span>
                   </Link>
                 </li>
                 <li>
@@ -716,7 +744,6 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                     className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
                     {translate('cart', locale?.language)}
-                    
                   </Link>
                 </li>
                 <li>
@@ -775,8 +802,16 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               {/* Top level menu items */}
               {aicoMenu.map((item, index) => {
                 return (
-                  <div className="menu-item flex-auto clean-hover-menu" key={index}  onMouseEnter={(event) => handleMouseEnter(event,item.category.name)}
-                  onMouseLeave={(event) => handleMouseLeave(event,item.category.name)}>
+                  <div
+                    className="menu-item flex-auto clean-hover-menu"
+                    key={index}
+                    onMouseEnter={(event) =>
+                      handleMouseEnter(event, item.category.name)
+                    }
+                    onMouseLeave={(event) =>
+                      handleMouseLeave(event, item.category.name)
+                    }
+                  >
                     <Link
                       to={`${
                         item.category.name == ' Home'
@@ -784,20 +819,23 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                           : getMenuHandle(item.category)
                       }`}
                       className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
-                     
-
                     >
-                      { translate(item.category.name,locale?.language) }
+                      {translate(item.category.name, locale?.language)}
                     </Link>
                     {item?.category?.subCategories?.length > 0 && (
-                      <div className={`mega-menu-div ${ activeMenuItem === item?.category?.name ? 'is-active' : ''
-                      }`}>
-                      <SubMegaMenu
-                        subMenus={item?.category?.subCategories}
-                        key={index}
-                        onClose={menuCloseHandler}
-                        locale={locale}
-                      />
+                      <div
+                        className={`mega-menu-div ${
+                          activeMenuItem === item?.category?.name
+                            ? 'is-active'
+                            : ''
+                        }`}
+                      >
+                        <SubMegaMenu
+                          subMenus={item?.category?.subCategories}
+                          key={index}
+                          onClose={menuCloseHandler}
+                          locale={locale}
+                        />
                       </div>
                     )}
                   </div>
@@ -1215,7 +1253,11 @@ function Badge({openCart, dark, count}) {
           } text-black text-[12px] leading-none font-medium  flex items-center justify-center text-center`}
         >
           <span>{count || 0}</span>
-          <span>&nbsp;{translate('cart_artikel',root?.data?.selectedLocale?.language)} -&nbsp;</span>
+          <span>
+            &nbsp;
+            {translate('cart_artikel', root?.data?.selectedLocale?.language)}{' '}
+            -&nbsp;
+          </span>
           <span>CHF 0.00</span>
         </div>
       </>
@@ -1240,7 +1282,7 @@ function Badge({openCart, dark, count}) {
   );
 }
 
-function Footer({menu,locale}) {
+function Footer({menu, locale}) {
   const isHome = useIsHomePath();
   const itemsCount = menu
     ? menu?.items?.length + 1 > 4
@@ -1269,9 +1311,7 @@ function Footer({menu,locale}) {
                     />
                   </div>
                   <div className="desc text-[#CCCCCC] text-[12px]">
-                    <p>
-                      {translate('footer_text',locale?.language)}
-                    </p>
+                    <p>{translate('footer_text', locale?.language)}</p>
                   </div>
                   <div className="subscribe-form-footer mt-[33px]">
                     <form action="" className="">
@@ -1279,7 +1319,10 @@ function Footer({menu,locale}) {
                         <div className="form-control flex-1">
                           <input
                             type="email"
-                            placeholder={translate("news_later",locale?.language)}
+                            placeholder={translate(
+                              'news_later',
+                              locale?.language,
+                            )}
                             className="w-full h-[50px] rounded-[100px] !bg-[#E7EFFF] text-[#1C5F7B] text-[16px] font-medium leading-none placeholder:!text-[#1C5F7B] placeholder:!opacity-100 focus:!border-white px-[20px] py-[16px] text-left !border-[#E7EFFF] focus:!ring-0"
                           />
                         </div>
@@ -1291,7 +1334,7 @@ function Footer({menu,locale}) {
                             <span className="icon w-[40px] h-[40px]">
                               <IconArrowRight2 className={'w-full h-full'} />
                             </span>
-                          </button> 
+                          </button>
                         </div>
                       </div>
                     </form>
@@ -1304,7 +1347,7 @@ function Footer({menu,locale}) {
                         </div>
                         <div className="flex flex-1 flex-col gap-[3px]">
                           <div className="desc text-[16px] text-white font-semibold">
-                            <p>{translate("review_text",locale?.language)}</p>
+                            <p>{translate('review_text', locale?.language)}</p>
                           </div>
                           <div className="rating-start flex gap-[5px] items-center flex-[0_0_auto]">
                             <span className="text-[16px] text-white leading-none font-semibold ">
@@ -1369,7 +1412,7 @@ function Footer({menu,locale}) {
                             <IconMap className={'w-full h-full'} />
                           </span>
                           <span className="text flex-1">
-                           { translate('address', locale?.language) }
+                            {translate('address', locale?.language)}
                           </span>
                         </a>
                       </li>
@@ -1381,7 +1424,9 @@ function Footer({menu,locale}) {
                           <span className="icon w-[31px] h-[31px] border-[2px] rounded-full border-[#E7EFFF] p-[7px] text-[#CCDDF1]">
                             <IconPhone className={'w-full h-full'} />
                           </span>
-                          <span className="text flex-1">{ translate('phone_number', locale?.language) }</span>
+                          <span className="text flex-1">
+                            {translate('phone_number', locale?.language)}
+                          </span>
                         </a>
                       </li>
                       <li>
@@ -1392,7 +1437,9 @@ function Footer({menu,locale}) {
                           <span className="icon w-[31px] h-[31px] border-[2px] rounded-full border-[#E7EFFF] p-[7px] text-[#CCDDF1]">
                             <IconMail className={'w-full h-full'} />
                           </span>
-                          <span className="text flex-1">{ translate('email_send', locale?.language) }</span>
+                          <span className="text flex-1">
+                            {translate('email_send', locale?.language)}
+                          </span>
                         </a>
                       </li>
                     </ul>

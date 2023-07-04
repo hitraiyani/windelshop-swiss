@@ -376,7 +376,7 @@ export default function Product() {
             return (
               <YouMayAlsoLike
                 products={products}
-                title={'Das könnte Ihnen auch gefallen'}
+                title={translate('you_may_like',language)}
                 locale={language}
                 className={
                   'bg-[#E7EFFF] bg-opacity-30 mb-[-20px] md:mb-[-30px] xl:mb-[-40px] 2xl:mb-[-50px] !py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px]'
@@ -661,7 +661,7 @@ export function ProductForm({
                   size="lead"
                   className="text-[14px] text-[#666666] uppercase font-bold font-['Open_Sans'] mb-[10px]"
                 >
-                  ANZAHL
+                  {translate("number",locale)}
                 </Heading>
                 <div className="flex flex-wrap gap-[6px]">
                   {productPackageKeyValueData.map((item, key) => {
@@ -708,7 +708,7 @@ export function ProductForm({
                   disabled
                   className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
                 >
-                  <Text>Sold out</Text>
+                  <Text>{translate("sold_out",locale)} </Text>
                 </Button>
               ) : (
                 <AddToCartButton
@@ -768,57 +768,7 @@ export function ProductForm({
           </div>
         </div>
       </div>
-      {/* {selectedVariant && (
-          <div className="grid items-stretch gap-4">
-            {isOutOfStock ? (
-              <Button variant="secondary" disabled>
-                <Text>Sold out</Text>
-              </Button>
-            ) : (
-              <AddToCartButton
-                lines={[
-                  {
-                    merchandiseId: selectedVariant.id,
-                    quantity: 1,
-                  },
-                ]}
-                variant="primary"
-                data-test="add-to-cart"
-                analytics={{
-                  products: [productAnalytics],
-                  totalValue: parseFloat(productAnalytics.price),
-                }}
-              >
-                <Text
-                  as="span"
-                  className="flex items-center justify-center gap-2"
-                >
-                  <span>Add to Cart</span> <span>·</span>{' '}
-                  <Money
-                    withoutTrailingZeros
-                    data={selectedVariant?.price}
-                    as="span"
-                  />
-                  {isOnSale && (
-                    <Money
-                      withoutTrailingZeros
-                      data={selectedVariant?.compareAtPrice}
-                      as="span"
-                      className="opacity-50 strike"
-                    />
-                  )}
-                </Text>
-              </AddToCartButton>
-            )}
-            {!isOutOfStock && (
-              <ShopPayButton
-                width="100%"
-                variantIds={[selectedVariant?.id]}
-                storeDomain={storeDomain}
-              />
-            )}
-          </div>
-        )} */}
+      
     </div>
   );
 }
@@ -1180,6 +1130,18 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
       id
       title
       handle
+      title_de_ch: metafield(namespace: "custom_fields", key: "title_de_ch") {
+        value
+       }
+       title_fr: metafield(namespace: "custom_fields", key: "title_fr") {
+        value
+       }
+       description_de_ch: metafield(namespace: "custom_fields", key: "description_de_ch") {
+        value
+       }
+       description_fr: metafield(namespace: "custom_fields", key: "description_fr") {
+        value
+       }
       options {
         name
         values

@@ -181,5 +181,8 @@
   "new_in_shop" :"Nouveau dans la boutique",
 
   "search_page_no_product_message": "Il n’y a aucun produit correspondant aux critères de recherche.",
-  "search_page_search_placeholder": "Mots-clés"
+  "search_page_search_placeholder": "Mots-clés",
+  "you_may_like":"Tu pourrais aussi aimer",
+  "number":"NOMBRE"
+
 }
