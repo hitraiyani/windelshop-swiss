@@ -1,4 +1,4 @@
-import {useParams, Form, Await, useMatches, useFetcher, NavLink} from '@remix-run/react';
+import {useParams, Form, Await, useMatches, useFetcher, NavLink, useLocation} from '@remix-run/react';
 import {useWindowScroll} from 'react-use';
 import {Disclosure, Menu, Transition} from '@headlessui/react';
 import {Suspense, useEffect, useMemo, useState, useRef} from 'react';
@@ -300,6 +300,14 @@ function MobileHeader({title, isHome, openCart, openMenu,locale}) {
   const [searchString, setsearchString] = useState('');
   const [isSearchOpen, setSearchOpen] = useState(false);
 
+  const location = useLocation();
+
+  useEffect(() => {
+     console.log("path chagne");
+      setActiveSearchMobile(false);
+
+  },[location.pathname])
+
   useEffect(() => {
     const handleBodyClick = (e) => {
        setSearchOpen(false);
@@ -308,7 +316,7 @@ function MobileHeader({title, isHome, openCart, openMenu,locale}) {
     };
 
     document.body.addEventListener('click', handleBodyClick);
-
+//mainContent
     return () => {
       document.body.removeEventListener('click', handleBodyClick);
     };
@@ -318,6 +326,7 @@ function MobileHeader({title, isHome, openCart, openMenu,locale}) {
  const handleSearchClick = (e) => {
   e.stopPropagation();
   setSearchOpen(true);
+  // setActiveSearchMobile(true);
   
   
 };
