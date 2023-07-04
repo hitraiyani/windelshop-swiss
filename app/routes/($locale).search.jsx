@@ -68,7 +68,7 @@ export async function loader({request, context: {storefront}}) {
     locale: storefront.i18n.language,
   });
 }
-
+ 
 export default function Search() {
   const {searchTerm, products, noResultRecommendations, locale} = useLoaderData();
   console.log("locale", locale);
