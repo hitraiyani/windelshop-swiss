@@ -317,6 +317,12 @@ const CART_QUERY = `#graphql
               product {
                 handle
                 title
+                title_de_ch: metafield(namespace: "custom_fields", key: "title_de_ch") {
+                  value
+                 }
+                 title_fr: metafield(namespace: "custom_fields", key: "title_fr") {
+                  value
+                 }
                 id
               }
               selectedOptions {

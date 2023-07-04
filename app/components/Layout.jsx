@@ -1334,6 +1334,7 @@ function CartCount({isHome, openCart}) {
             dark={isHome}
             openCart={openCart}
             count={cart?.totalQuantity || 0}
+            cart={cart}
           />
         )}
       </Await>
@@ -1341,9 +1342,10 @@ function CartCount({isHome, openCart}) {
   );
 }
 
-function Badge({openCart, dark, count}) {
+function Badge({openCart, dark, count, cart}) {
   const isHydrated = useIsHydrated();
   const [root] = useMatches();
+
 
   const BadgeCounter = useMemo(
     () => (
@@ -1360,7 +1362,7 @@ function Badge({openCart, dark, count}) {
             {translate('cart_artikel', root?.data?.selectedLocale?.language)}{' '}
             -&nbsp;
           </span>
-          <span>CHF 0.00</span>
+          {cart?.cost ? <Money as='span' data={cart.cost?.subtotalAmount} /> : <span>CHF 0.00</span>}
         </div>
       </>
     ),
@@ -1377,7 +1379,7 @@ function Badge({openCart, dark, count}) {
   ) : (
     <Link
       to="/cart"
-      className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
+      className="relative flex items-center justify-center bg-[#CCDDF1] rounded-[100px] max-w-[215px] p-[15px] h-auto lg:h-[50px] flex-1 transition-all duration-500 hover:opacity-70"
     >
       {BadgeCounter}
     </Link>
