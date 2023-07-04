@@ -1,10 +1,11 @@
-import {useParams, Form, Await, useMatches} from '@remix-run/react';
+import {useParams, Form, Await, useMatches, useFetcher} from '@remix-run/react';
 import {useWindowScroll} from 'react-use';
 import {Disclosure, Menu, Transition} from '@headlessui/react';
 import {Suspense, useEffect, useMemo, useState, useRef} from 'react';
 import {Fragment, useContext} from 'react';
 import {WishlistContext} from '~/store/WishlistContext';
 import Cookies from 'js-cookie';
+import {flattenConnection, Image, Money} from '@shopify/hydrogen';
 
 import {
   Drawer,
@@ -33,8 +34,9 @@ import {
   IconMail,
   IconMap,
   IconFacebook,
+  CompareAtPrice
 } from '~/components';
-import {useIsHomePath, toHTML, getMenuHandle, translate} from '~/lib/utils';
+import {useIsHomePath, toHTML, getMenuHandle, translate, isDiscounted} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {Helmet} from 'react-helmet';
@@ -290,6 +292,21 @@ function MobileHeader({title, isHome, openCart, openMenu}) {
 
   const params = useParams();
   const [isActiveSearchMobile, setActiveSearchMobile] = useState(false);
+  const {load, data} = useFetcher();
+  const [searchString, setsearchString] = useState('');
+  const handleSearchBox = (event) => {
+    setsearchString(event.target.value);
+    const count = 12;
+    const reverse = true;
+    const query = event.target.value;
+    if (query.length > 2) {
+      const queryString = Object.entries({count, query, reverse})
+        .map(([key, val]) => (val ? `${key}=${val}` : null))
+        .filter(Boolean)
+        .join('&');
+      load(`/api/products?${queryString}`);
+    }
+  };
 
   const toggleSearchClassMobile = () => {
     setActiveSearchMobile(!isActiveSearchMobile);
@@ -379,7 +396,13 @@ function MobileHeader({title, isHome, openCart, openMenu}) {
                 variant="minisearch"
                 placeholder="Suche"
                 name="q"
+                onChange={handleSearchBox}
               />
+              {searchString.length > 2 && (
+                  <ProductSearchLi
+                    products={data?.products}
+                  />
+              )}
               <button
                 type="submit"
                 className={`left-[30px] absolute flex items-center justify-center w-8 h-8 focus:ring-primary/5 top-1/2  -translate-x-1/2 -translate-y-1/2`}
@@ -407,6 +430,61 @@ function MobileHeader({title, isHome, openCart, openMenu}) {
         </div>
       </div>
     </header>
+  );
+}
+
+export function ProductSearchLi({products}) {
+  return (
+    <ul className="bg-white shadow-lg w-full px-5 productSearchList">
+      {products?.length > 0 &&
+        products.map((product) => {
+          const firstVariant = flattenConnection(product?.variants)[0];
+          if (!firstVariant) return null;
+          const {image, price, compareAtPrice} = firstVariant;
+          const inDisc = isDiscounted(price, compareAtPrice);
+          return (
+            <li key={product.id}>
+              <Link
+                className="py-3 block"
+                to={`/products/${product.handle}`}
+                prefetch="intent"
+              >
+                <div className="flex gap-5 items-center">
+                  {image && (
+                    <Image
+                      widths={[100]}
+                      height={[100]}
+                      sizes="138px"
+                      data={image}
+                      alt={image.altText || `Picture of ${product.title}`}
+                      loading={'eager'}
+                    />
+                  )}
+                  <div>
+                    <h4 className="font-semibold mb-1">{product.title}</h4>
+                    <Text className="flex gap-1 text-sm">
+                      <Money
+                        withoutTrailingZeros
+                        data={price}
+                        className={`${inDisc ? 'sale-price' : ''}`}
+                      />
+                      {inDisc && (
+                        <CompareAtPrice
+                          className={'text-gray-400 line-through'}
+                          data={compareAtPrice}
+                        />
+                      )}
+                    </Text>
+                  </div>
+                </div>
+              </Link>
+            </li>
+          );
+        })}
+      {products?.length == 0 && (
+        <li className="py-3 block">Keine Ergebnisse gefunden.</li>
+      )}
+    </ul>
   );
 }
 
@@ -536,11 +614,13 @@ function SubMegaMenu({subMenus, onClose, locale}) {
 function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
   const params = useParams();
   const {y} = useWindowScroll();
+  const {load, data} = useFetcher();
 
   const wishlistContextData = useContext(WishlistContext);
 
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState(null);
+  const [searchString, setsearchString] = useState('');
 
   useEffect(() => {
     const handleBodyClick = () => {
@@ -586,10 +666,24 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
     }
   };
 
-  const menuCloseHandler = (e) => {
-    //e.currentTarget.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display = "none";
-    setActiveMenuItem(null);
+  const handleSearchBox = (event) => {
+    setsearchString(event.target.value);
+    const count = 12;
+    const reverse = true;
+    const query = event.target.value;
+    if (query.length > 2) {
+      const queryString = Object.entries({count, query, reverse})
+        .map(([key, val]) => (val ? `${key}=${val}` : null))
+        .filter(Boolean)
+        .join('&');
+      load(`/api/products?${queryString}`);
+    }
   };
+
+  const menuCloseHandler = (e) =>{
+      //e.currentTarget.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display = "none";
+     setActiveMenuItem(null);
+  }
 
   const handleMouseEnter = (e, id) => {
     setActiveMenuItem(id);
@@ -784,7 +878,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                 variant="minisearch"
                 placeholder={translate('search_box', locale?.language)}
                 name="q"
-                onClick={handleSearchClick}
+                onChange={handleSearchBox}
               />
               <button
                 type="submit"
@@ -794,6 +888,11 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               >
                 <IconSearch2 />
               </button>
+              {searchString.length > 2 && (
+                  <ProductSearchLi
+                    products={data?.products}
+                  />
+                )}
             </Form>
             <CartCount isHome={isHome} openCart={openCart} />
           </div>
