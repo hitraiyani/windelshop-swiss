@@ -1,4 +1,12 @@
-import {useParams, Form, Await, useMatches, useFetcher, NavLink, useLocation} from '@remix-run/react';
+import {
+  useParams,
+  Form,
+  Await,
+  useMatches,
+  useFetcher,
+  NavLink,
+  useLocation,
+} from '@remix-run/react';
 import {useWindowScroll} from 'react-use';
 import {Disclosure, Menu, Transition} from '@headlessui/react';
 import {Suspense, useEffect, useMemo, useState, useRef} from 'react';
@@ -37,9 +45,16 @@ import {
   CompareAtPrice,
   IconWhishlist,
   IconCart,
-  IconLogin2
+  IconLogin2,
 } from '~/components';
-import {useIsHomePath, toHTML, getMenuHandle, translate, isDiscounted, productTranslate} from '~/lib/utils';
+import {
+  useIsHomePath,
+  toHTML,
+  getMenuHandle,
+  translate,
+  isDiscounted,
+  productTranslate,
+} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 import {Helmet} from 'react-helmet';
@@ -50,6 +65,7 @@ import {
   STORE_LANG_FR,
   STORE_LANG_DE,
 } from '~/lib/const';
+import { IconCart2 } from './Icon';
 
 export function Layout({children, layout, locale}) {
   const [isCookieAccepted, setisCookieAccepted] = useState(false);
@@ -241,14 +257,14 @@ function MenuMobileNav({menu, aicoMenu, onClose, locale}) {
       {aicoMenu.map((item, index) => {
         return (
           <div className="menu-item flex-auto" key={index}>
-            <div className="flex flex-wrap items-center w-full sticky top-0 z-[92] py-[10px] bg-gray-50">
+            <div className="flex flex-wrap items-center w-full sticky top-0 z-[92] py-[15px] bg-gray-50">
               <Link
                 to={`${
                   item.category.name == ' Home'
                     ? '/'
                     : getMenuHandle(item.category)
                 }`}
-                className="text-[14px] text-black"
+                className="text-[18px] text-black font-medium"
                 onClick={onClose}
               >
                 {translate(item.category.name, locale?.language)}
@@ -291,7 +307,7 @@ function MenuMobileNav({menu, aicoMenu, onClose, locale}) {
   );
 }
 
-function MobileHeader({title, isHome, openCart, openMenu,locale}) {
+function MobileHeader({title, isHome, openCart, openMenu, locale}) {
   // useHeaderStyleFix(containerStyle, setContainerStyle, isHome);
   const params = useParams();
   const wishlistContextData = useContext(WishlistContext);
@@ -303,33 +319,29 @@ function MobileHeader({title, isHome, openCart, openMenu,locale}) {
   const location = useLocation();
 
   useEffect(() => {
-     console.log("path chagne");
-      setActiveSearchMobile(false);
-
-  },[location.pathname])
+    console.log('path chagne');
+    setActiveSearchMobile(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleBodyClick = (e) => {
-       setSearchOpen(false);
-      
+      setSearchOpen(false);
+
       // console.log("Out CLik");
     };
 
     document.body.addEventListener('click', handleBodyClick);
-//mainContent
+    //mainContent
     return () => {
       document.body.removeEventListener('click', handleBodyClick);
     };
   }, []);
-  
-  
- const handleSearchClick = (e) => {
-  e.stopPropagation();
-  setSearchOpen(true);
-  // setActiveSearchMobile(true);
-  
-  
-};
+
+  const handleSearchClick = (e) => {
+    e.stopPropagation();
+    setSearchOpen(true);
+    // setActiveSearchMobile(true);
+  };
   const handleSearchBox = (event) => {
     setsearchString(event.target.value);
     const count = 12;
@@ -379,155 +391,153 @@ function MobileHeader({title, isHome, openCart, openMenu,locale}) {
       className={`${isHome ? '' : ''} bg-[#E7EFFF] relative lg:hidden`}
     >
       <div className="top flex bg-[#CCDDF1] py-[10px] px-[10px] md:px-[40px]">
-            <div className="lang flex-1">
-              <Menu as="div" className="relative inline-block text-left">
-                <div>
-                  <Menu.Button className="flex gap-[6px] items-center">
-                    <span className="flag w-[16px] h-[16px] overflow-hidden relative">
-                      <img
-                        className="inset-0 w-full h-full object-contain"
-                        src={
-                          locale?.language == STORE_LANG_FR
-                            ? 'https://cdn.shopify.com/s/files/1/0763/5307/7525/files/fr.png?v=1687766463'
-                            : 'https://cdn.shopify.com/s/files/1/0763/5307/7525/files/de_png.svg?v=1685425346'
-                        }
-                        alt=""
-                      />
-                    </span>
-                    <span className="name text-[16px] text-black leading-[1.1] font-medium">
-                      {locale?.language == STORE_LANG_FR
-                        ? 'Français'
-                        : 'Deutsch'}
-                    </span>
-                    <ChevronDownIcon className={'w-[10px] h-[7px]'} />
-                  </Menu.Button>
-                </div>
+        <div className="lang flex-1">
+          <Menu as="div" className="relative inline-block text-left">
+            <div>
+              <Menu.Button className="flex gap-[6px] items-center">
+                <span className="flag w-[16px] h-[16px] overflow-hidden relative">
+                  <img
+                    className="inset-0 w-full h-full object-contain"
+                    src={
+                      locale?.language == STORE_LANG_FR
+                        ? 'https://cdn.shopify.com/s/files/1/0763/5307/7525/files/fr.png?v=1687766463'
+                        : 'https://cdn.shopify.com/s/files/1/0763/5307/7525/files/de_png.svg?v=1685425346'
+                    }
+                    alt=""
+                  />
+                </span>
+                <span className="name text-[16px] text-black leading-[1.1] font-medium">
+                  {locale?.language == STORE_LANG_FR ? 'Français' : 'Deutsch'}
+                </span>
+                <ChevronDownIcon className={'w-[10px] h-[7px]'} />
+              </Menu.Button>
+            </div>
 
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
-                >
-                  <Menu.Items className="absolute left-0 z-10 mt-2 w-[120px] origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <div className="py-1">
-                      <Menu.Item>
-                        {({active}) => (
-                          <button
-                            onClick={handleLanguageChange}
-                            data-lang="de"
-                            className={classNames(
-                              active
-                                ? 'bg-gray-100 text-gray-900'
-                                : 'text-gray-700',
-                              'px-4 py-2 text-sm flex gap-[6px] items-center ',
-                            )}
-                          >
-                            <span className="flag  w-[16px] h-[16px] overflow-hidden relative">
-                              <img
-                                className="inset-0 w-full h-full object-contain"
-                                src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/de_png.svg?v=1685425346"
-                                alt=""
-                              />
-                            </span>
-                            <span className="name text-[16px] text-black leading-[1.1] font-medium">
-                              Deutsch
-                            </span>
-                          </button>
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-100"
+              enterFrom="transform opacity-0 scale-95"
+              enterTo="transform opacity-100 scale-100"
+              leave="transition ease-in duration-75"
+              leaveFrom="transform opacity-100 scale-100"
+              leaveTo="transform opacity-0 scale-95"
+            >
+              <Menu.Items className="absolute left-0 z-10 mt-2 w-[120px] origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div className="py-1">
+                  <Menu.Item>
+                    {({active}) => (
+                      <button
+                        onClick={handleLanguageChange}
+                        data-lang="de"
+                        className={classNames(
+                          active
+                            ? 'bg-gray-100 text-gray-900'
+                            : 'text-gray-700',
+                          'px-4 py-2 text-sm flex gap-[6px] items-center ',
                         )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({active}) => (
-                          <button
-                            data-lang="fr"
-                            onClick={handleLanguageChange}
-                            className={classNames(
-                              active
-                                ? 'bg-gray-100 text-gray-900'
-                                : 'text-gray-700',
-                              'px-4 py-2 text-sm flex gap-[6px] items-center',
-                            )}
-                          >
-                            <span className="flag  w-[16px] h-[16px] overflow-hidden relative">
-                              <img
-                                className="inset-0 w-full h-full object-contain"
-                                src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/fr.png?v=1687766463"
-                                alt=""
-                              />
-                            </span>
-                            <span className="name text-[16px] text-black leading-[1.1] font-medium">
-                              Français
-                            </span>
-                          </button>
+                      >
+                        <span className="flag  w-[16px] h-[16px] overflow-hidden relative">
+                          <img
+                            className="inset-0 w-full h-full object-contain"
+                            src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/de_png.svg?v=1685425346"
+                            alt=""
+                          />
+                        </span>
+                        <span className="name text-[16px] text-black leading-[1.1] font-medium">
+                          Deutsch
+                        </span>
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({active}) => (
+                      <button
+                        data-lang="fr"
+                        onClick={handleLanguageChange}
+                        className={classNames(
+                          active
+                            ? 'bg-gray-100 text-gray-900'
+                            : 'text-gray-700',
+                          'px-4 py-2 text-sm flex gap-[6px] items-center',
                         )}
-                      </Menu.Item>
-                    </div>
-                  </Menu.Items>
-                </Transition>
-              </Menu>
-            </div>
-            <div className="login-menu flex-1">
-              <ul className="flex gap-[20px] justify-end">
-                <li>
-                  <Link
-                    to={'/account'}
-                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
-                  >
-                    {/* {translate('account', locale?.language)} */}
-                    <div className='icon w-[20px] h-[20px]'>
-                      <IconAccount className={'w-full h-full'} />
-                    </div>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={'/wishlist'}
-                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500 flex gap-[2px] items-center"
-                  >
-                    {/* {translate('wishlist', locale?.language)} */}
-                    <div className='icon w-[20px] h-[20px]'>
-                    <IconWhishlist className={'w-full h-full'} />
-                    </div>
-                    <span>
-                      (
-                      {wishlistContextData?.wishlistItems
-                        ? wishlistContextData?.wishlistItems.length
-                        : 0}
-                      )
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={'/cart'}
-                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
-                  >
-                    {/* {translate('cart', locale?.language)} */}
-                    <div className='icon w-[20px] h-[20px]'>
-                     <IconCart className={'w-full h-full'} />
-                    </div>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={'/account/login'}
-                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
-                  >
-                    {/* {translate('login', locale?.language)} */}
-                    <div className='icon w-[20px] h-[20px]'>
-                      <IconLogin2 className={'w-full h-full'} />
-                    </div>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
+                      >
+                        <span className="flag  w-[16px] h-[16px] overflow-hidden relative">
+                          <img
+                            className="inset-0 w-full h-full object-contain"
+                            src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/fr.png?v=1687766463"
+                            alt=""
+                          />
+                        </span>
+                        <span className="name text-[16px] text-black leading-[1.1] font-medium">
+                          Français
+                        </span>
+                      </button>
+                    )}
+                  </Menu.Item>
+                </div>
+              </Menu.Items>
+            </Transition>
+          </Menu>
+        </div>
+        <div className="login-menu flex-1">
+          <ul className="flex gap-[20px] justify-end">
+            <li>
+              <Link
+                to={'/account'}
+                className="text-black text-[16px] leading-none font-medium hover:opacity-70 transition-all duration-500"
+              >
+                {/* {translate('account', locale?.language)} */}
+                <div className="icon w-[20px] h-[20px]">
+                  <IconAccount className={'w-full h-full'} />
+                </div>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={'/wishlist'}
+                className="text-black text-[16px] leading-none font-medium hover:opacity-70 transition-all duration-500 flex gap-[2px] items-center"
+              >
+                {/* {translate('wishlist', locale?.language)} */}
+                <div className="icon w-[20px] h-[20px]">
+                  <IconWhishlist className={'w-full h-full'} />
+                </div>
+                <span>
+                  (
+                  {wishlistContextData?.wishlistItems
+                    ? wishlistContextData?.wishlistItems.length
+                    : 0}
+                  )
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={'/cart'}
+                className="text-black text-[16px] leading-none font-medium hover:opacity-70 transition-all duration-500"
+              >
+                {/* {translate('cart', locale?.language)} */}
+                <div className="icon w-[20px] h-[20px]">
+                  <IconCart className={'w-full h-full'} />
+                </div>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={'/account/login'}
+                className="text-black text-[16px] leading-none font-medium hover:opacity-70 transition-all duration-500"
+              >
+                {/* {translate('login', locale?.language)} */}
+                <div className="icon w-[20px] h-[20px]">
+                  <IconLogin2 className={'w-full h-full'} />
+                </div>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
       <div className="container py-[10px] !px-[10px] md:!px-[40px]">
         <div className="row flex justify-between">
-          <div className="logo-col w-[140px] sm:w-[230px] flex items-center">
+          <div className="logo-col w-[190px] sm:w-[230px] flex items-center">
             <Link className="block" to="/">
               {/* <Heading
                 className="font-bold text-center leading-none"
@@ -600,7 +610,7 @@ function MobileHeader({title, isHome, openCart, openMenu,locale}) {
               className="flex flex-auto relative"
             >
               <Input
-                className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[12px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] !text-left !block`}
+                className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[16px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] !text-left !block`}
                 type="search"
                 variant="minisearch"
                 placeholder="Suche"
@@ -608,13 +618,13 @@ function MobileHeader({title, isHome, openCart, openMenu,locale}) {
                 onChange={handleSearchBox}
                 onClick={handleSearchClick}
               />
-             
+
               {searchString.length > 2 && (
-                  <ProductSearchLi
-                    products={data?.products}
-                    searchOpen={isSearchOpen}
-                    locale={locale?.language}
-                  />
+                <ProductSearchLi
+                  products={data?.products}
+                  searchOpen={isSearchOpen}
+                  locale={locale?.language}
+                />
               )}
               <button
                 type="submit"
@@ -642,14 +652,17 @@ function MobileHeader({title, isHome, openCart, openMenu,locale}) {
           </div>
         </div>
       </div>
-    </header> 
+    </header>
   );
 }
 
 export function ProductSearchLi({products, searchOpen, locale}) {
   return (
-    
-    <ul className={`searchDropDown ${(searchOpen) ? "is-active" : ''} bg-white shadow-lg w-full p-[20px] productSearchList absolute top-[100%] mt-[10px] rounded-[20px] z-[111] last:border-none max-h-[50vh] overflow-auto`}>
+    <ul
+      className={`searchDropDown ${
+        searchOpen ? 'is-active' : ''
+      } bg-white shadow-lg w-full p-[20px] productSearchList absolute top-[100%] mt-[10px] rounded-[20px] z-[111] last:border-none max-h-[50vh] overflow-auto`}
+    >
       {products?.length > 0 &&
         products.map((product) => {
           const firstVariant = flattenConnection(product?.variants)[0];
@@ -657,7 +670,10 @@ export function ProductSearchLi({products, searchOpen, locale}) {
           const {image, price, compareAtPrice} = firstVariant;
           const inDisc = isDiscounted(price, compareAtPrice);
           return (
-            <li key={product.id} className='pb-[15px] mb-[15px] border-b-[1px] border-[#eee]'>
+            <li
+              key={product.id}
+              className="pb-[15px] mb-[15px] border-b-[1px] border-[#eee]"
+            >
               <NavLink
                 className="block"
                 to={`/products/${product.handle}`}
@@ -672,11 +688,15 @@ export function ProductSearchLi({products, searchOpen, locale}) {
                       data={image}
                       alt={image.altText || `Picture of ${product.title}`}
                       loading={'eager'}
-                      className={'!w-[60px] md:!w-[100px] md:!h-[100px] !h-[60px] object-contain p-[5px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)] rounded-[10px]'}
+                      className={
+                        '!w-[60px] md:!w-[100px] md:!h-[100px] !h-[60px] object-contain p-[5px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)] rounded-[10px]'
+                      }
                     />
                   )}
-                  <div className='flex-1'>
-                    <h4 className="font-semibold mb-1 text-[14px]">{productTranslate(product,'title', locale)}</h4>
+                  <div className="flex-1">
+                    <h4 className="font-semibold mb-1 text-[16px]">
+                      {productTranslate(product, 'title', locale)}
+                    </h4>
                     <Text className="flex gap-1 text-[14px]">
                       <Money
                         withoutTrailingZeros
@@ -697,10 +717,11 @@ export function ProductSearchLi({products, searchOpen, locale}) {
           );
         })}
       {products?.length == 0 && (
-        <li className="py-3 block">{translate('empty_product_search_txt',locale)}.</li>
+        <li className="py-3 block text-[16px]">
+          {translate('empty_product_search_txt', locale)}.
+        </li>
       )}
     </ul>
-    
   );
 }
 
@@ -719,7 +740,7 @@ function TopbarHeader({toBar}) {
                 />
               </span>
               <span
-                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
+                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[14px] text-black"
                 dangerouslySetInnerHTML={{
                   __html: toHTML(toBar?.section_1?.value),
                 }}
@@ -734,7 +755,7 @@ function TopbarHeader({toBar}) {
                 />
               </span>
               <span
-                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
+                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[14px] text-black"
                 dangerouslySetInnerHTML={{
                   __html: toHTML(toBar?.section_2?.value),
                 }}
@@ -749,7 +770,7 @@ function TopbarHeader({toBar}) {
                 />
               </span>
               <span
-                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
+                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[14px] text-black"
                 dangerouslySetInnerHTML={{
                   __html: toHTML(toBar?.section_3?.value),
                 }}
@@ -764,7 +785,7 @@ function TopbarHeader({toBar}) {
                 />
               </span>
               <span
-                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[12px] text-black"
+                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[14px] text-black"
                 dangerouslySetInnerHTML={{
                   __html: toHTML(toBar?.section_4?.value),
                 }}
@@ -792,7 +813,7 @@ function SubMegaMenu({subMenus, onClose, locale}) {
                 className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]"
                 key={subIndex}
               >
-                <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                <div className="sub-menu-title text-[18px] leading-[1.1] font-bold mb-[12px] text-black">
                   {/* <Link
                     to={getMenuHandle(subItem.subCategory)}
                   > */}
@@ -840,8 +861,8 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
 
   useEffect(() => {
     const handleBodyClick = (e) => {
-       setSearchOpen(false);
-      console.log("Out CLik");
+      setSearchOpen(false);
+      console.log('Out CLik');
     };
 
     document.body.addEventListener('click', handleBodyClick);
@@ -854,16 +875,13 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
   const handleSearchClick = (e) => {
     e.stopPropagation();
     setSearchOpen(true);
-    
   };
 
   const handleLinkClick = (e) => {
     e.stopPropagation();
-    console.log("LInk Click");
+    console.log('LInk Click');
     //setSearchOpen(true);
-    
   };
-
 
   const handleLanguageChange = (e) => {
     e.stopPropagation();
@@ -906,10 +924,10 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
     }
   };
 
-  const menuCloseHandler = (e) =>{
-      //e.currentTarget.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display = "none";
-     setActiveMenuItem(null);
-  }
+  const menuCloseHandler = (e) => {
+    //e.currentTarget.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display = "none";
+    setActiveMenuItem(null);
+  };
 
   const handleMouseEnter = (e, id) => {
     setActiveMenuItem(id);
@@ -947,7 +965,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               <Menu as="div" className="relative inline-block text-left">
                 <div>
                   <Menu.Button className="flex gap-[6px] items-center">
-                    <span className="flag w-[16px] h-[16px] overflow-hidden relative">
+                    <span className="flag w-[16px] h-[11px] overflow-hidden relative">
                       <img
                         className="inset-0 w-full h-full object-contain"
                         src={
@@ -1038,7 +1056,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                 <li>
                   <Link
                     to={'/account'}
-                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
+                    className="text-black text-[16px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
                     {translate('account', locale?.language)}
                   </Link>
@@ -1046,7 +1064,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                 <li>
                   <Link
                     to={'/wishlist'}
-                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
+                    className="text-black text-[16px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
                     {translate('wishlist', locale?.language)}{' '}
                     <span>
@@ -1061,7 +1079,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                 <li>
                   <Link
                     to={'/cart'}
-                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
+                    className="text-black text-[16px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
                     {translate('cart', locale?.language)}
                   </Link>
@@ -1069,7 +1087,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                 <li>
                   <Link
                     to={'/account/login'}
-                    className="text-black text-[12px] leading-none font-medium hover:opacity-70 transition-all duration-500"
+                    className="text-black text-[16px] leading-none font-medium hover:opacity-70 transition-all duration-500"
                   >
                     {translate('login', locale?.language)}
                   </Link>
@@ -1097,8 +1115,10 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               className="flex flex-auto max-w-[575px] relative"
             >
               <Input
-                className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[12px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] border-none ${
-                  (isSearchOpen || searchString.length > 0) ? '!text-left' : '!text-center'
+                className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[16px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] border-none ${
+                  isSearchOpen || searchString.length > 0
+                    ? '!text-left'
+                    : '!text-center'
                 }`}
                 type="search"
                 variant="minisearch"
@@ -1111,18 +1131,20 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               <button
                 type="submit"
                 className={`${
-                  (isSearchOpen || searchString.length > 0) ? 'left-[30px]' : 'left-[43%]'
+                  isSearchOpen || searchString.length > 0
+                    ? 'left-[30px]'
+                    : 'left-[43%]'
                 } absolute flex items-center justify-center w-8 h-8 focus:ring-primary/5 top-1/2  -translate-x-1/2 -translate-y-1/2`}
               >
                 <IconSearch2 />
               </button>
-              {(searchString.length > 2 )  && (
-                  <ProductSearchLi
-                    products={data?.products}
-                    searchOpen={isSearchOpen}
-                    locale={locale?.language}
-                  />
-                )}
+              {searchString.length > 2 && (
+                <ProductSearchLi
+                  products={data?.products}
+                  searchOpen={isSearchOpen}
+                  locale={locale?.language}
+                />
+              )}
             </Form>
             <CartCount isHome={isHome} openCart={openCart} />
           </div>
@@ -1147,7 +1169,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                           ? '/'
                           : getMenuHandle(item.category)
                       }`}
-                      className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                      className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                     >
                       {translate(item.category.name, locale?.language)}
                     </Link>
@@ -1174,7 +1196,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               {/* <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Home
                 </a>
@@ -1182,7 +1204,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Windeln & Feuchttücher
                 </a>
@@ -1191,7 +1213,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                     <div className="mega-menu-lists flex flex-wrap py-[70px] gap-y-[30px] -mx-[15px]">
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] px-[15px]">
                         <div className="mega-menu-list-inner bg-white p-[50px] rounded-[30px] h-full">
-                          <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                          <div className="sub-menu-title text-[16px] leading-[1.1] font-bold mb-[12px] text-black">
                             Kategorien
                           </div>
                           <ul>
@@ -1212,7 +1234,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] px-[15px]">
                         <div className="mega-menu-list-inner bg-white p-[50px] rounded-[30px] h-full">
-                          <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                          <div className="sub-menu-title text-[16px] leading-[1.1] font-bold mb-[12px] text-black">
                             Kollektionen
                           </div>
                           <ul>
@@ -1303,7 +1325,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Damenhygiene & Inkontinenz
                 </a>
@@ -1311,7 +1333,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Waschmittel & Weichspüler
                 </a>
@@ -1319,7 +1341,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Pflege & Hygiene
                 </a>
@@ -1327,7 +1349,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                   <div className="mega-menu-inner container">
                     <div className="mega-menu-lists flex flex-wrap py-[30px] lg:py-[40px] xl:py-[60px] 2xl:py-[70px] gap-y-[15px] lg:gap-y-[30px] xl:gap-y-[50px] 2xl:gap-y-[70px] -mx-[15px]">
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                        <div className="sub-menu-title text-[16px] leading-[1.1] font-bold mb-[12px] text-black">
                           Absfallentsorgung
                         </div>
                         <ul>
@@ -1340,7 +1362,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                        <div className="sub-menu-title text-[16px] leading-[1.1] font-bold mb-[12px] text-black">
                           Bett- & Wickelunterlagen
                         </div>
                         <ul>
@@ -1353,7 +1375,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                        <div className="sub-menu-title text-[16px] leading-[1.1] font-bold mb-[12px] text-black">
                           Bocoton Bio
                         </div>
                         <ul>
@@ -1366,7 +1388,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                        <div className="sub-menu-title text-[16px] leading-[1.1] font-bold mb-[12px] text-black">
                           Hautpflege
                         </div>
                         <ul>
@@ -1376,7 +1398,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                        <div className="sub-menu-title text-[16px] leading-[1.1] font-bold mb-[12px] text-black">
                           Sonnenschutzpflege
                         </div>
                         <ul>
@@ -1389,7 +1411,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                        <div className="sub-menu-title text-[16px] leading-[1.1] font-bold mb-[12px] text-black">
                           Desinfektion
                         </div>
                         <ul>
@@ -1402,7 +1424,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                        <div className="sub-menu-title text-[16px] leading-[1.1] font-bold mb-[12px] text-black">
                           Reinigen & Waschen
                         </div>
                         <ul>
@@ -1418,7 +1440,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                        <div className="sub-menu-title text-[16px] leading-[1.1] font-bold mb-[12px] text-black">
                           Papierwaren
                         </div>
                         <ul>
@@ -1440,7 +1462,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                        <div className="sub-menu-title text-[16px] leading-[1.1] font-bold mb-[12px] text-black">
                           Untersuchungshandschuhe
                         </div>
                         <ul>
@@ -1450,7 +1472,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                        <div className="sub-menu-title text-[16px] leading-[1.1] font-bold mb-[12px] text-black">
                           Zahnhygiene
                         </div>
                         <ul>
@@ -1463,7 +1485,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                        <div className="sub-menu-title text-[16px] leading-[1.1] font-bold mb-[12px] text-black">
                           Zubehör
                         </div>
                         <ul>
@@ -1479,7 +1501,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
                         </ul>
                       </div>
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
-                        <div className="sub-menu-title text-[14px] leading-[1.1] font-bold mb-[12px] text-black">
+                        <div className="sub-menu-title text-[16px] leading-[1.1] font-bold mb-[12px] text-black">
                           Feuchttücher
                         </div>
                         <ul>
@@ -1507,7 +1529,7 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[12px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Abos & Gutscheine
                 </a>
@@ -1573,23 +1595,24 @@ function Badge({openCart, dark, count, cart}) {
   const isHydrated = useIsHydrated();
   const [root] = useMatches();
 
-
   const BadgeCounter = useMemo(
     () => (
       <>
-        {/* <IconBag /> */}
+        <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#1c5f7b] hover:text-black transition-all duration-500'} />
         <div
           className={`${
             dark ? '' : ''
-          } text-black text-[12px] leading-none font-medium  flex items-center justify-center text-center`}
+          } relative flex flex-col items-center header-cart`}
         >
-          <span>{count || 0}</span>
-          <span>
+          <div className="bg-[#ccddf1] absolute counter w-[15px] lg:w-[20px] h-[15px] lg:h-[20px] left-[50%] -translate-x-1/2 rounded-full flex items-center justify-center leading-none text-[12px] lg:text-[14px] bottom-[18px] lg:bottom-[23px] text-[#1c5f7b] font-bold">
+            <span>{count || 0}</span>
+          </div>
+          {/* <span>
             &nbsp;
             {translate('cart_artikel', root?.data?.selectedLocale?.language)}{' '}
             -&nbsp;
           </span>
-          {cart?.cost ? <Money as='span' data={cart.cost?.subtotalAmount} /> : <span>CHF 0.00</span>}
+          {cart?.cost ? <Money as='span' data={cart.cost?.subtotalAmount} /> : <span>CHF 0.00</span>} */}
         </div>
       </>
     ),
@@ -1597,17 +1620,11 @@ function Badge({openCart, dark, count, cart}) {
   );
 
   return isHydrated ? (
-    <button
-      onClick={openCart}
-      className="relative flex items-center justify-center bg-[#CCDDF1] rounded-[100px] max-w-[215px] p-[15px] h-auto lg:h-[50px] flex-1 transition-all duration-500 hover:opacity-70"
-    >
+    <button onClick={openCart} className="">
       {BadgeCounter}
     </button>
   ) : (
-    <Link
-      to="/cart"
-      className="relative flex items-center justify-center bg-[#CCDDF1] rounded-[100px] max-w-[215px] p-[15px] h-auto lg:h-[50px] flex-1 transition-all duration-500 hover:opacity-70"
-    >
+    <Link to="/cart" className="">
       {BadgeCounter}
     </Link>
   );

@@ -133,7 +133,7 @@ export default function Search() {
             placeholder={translate('search_page_search_placeholder', locale)}
             type="search"
             variant="search"
-            className='w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[12px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] !ring-0 border-none'
+            className='w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[16px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] !ring-0 border-none'
           />
           <button className="absolute flex items-center justify-center w-8 h-8 focus:ring-primary/5 top-1/2  -translate-x-1/2 -translate-y-1/2 left-[30px]" type="submit">
           <IconSearch2 />
@@ -223,7 +223,7 @@ export function ProductSearchLi({products,searchOpen}) {
                     />
                   )}
                   <div className='flex-1'>
-                    <h4 className="font-semibold mb-1 text-[14px]">{product.title}</h4>
+                    <h4 className="font-semibold mb-1 text-[16px]">{product.title}</h4>
                     <Text className="flex gap-1 text-[14px]">
                       <Money
                         withoutTrailingZeros
@@ -244,7 +244,7 @@ export function ProductSearchLi({products,searchOpen}) {
           );
         })}
       {products?.length == 0 && (
-        <li className="py-3 block">Keine Ergebnisse gefunden.</li>
+        <li className="py-3 block text-[16px]">Keine Ergebnisse gefunden.</li>
       )}
     </ul>
     
