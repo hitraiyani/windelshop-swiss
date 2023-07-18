@@ -39,7 +39,7 @@ export function SortFilter({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   
-
+   
   return (
     <>
       <div className="flex items-center justify-between w-full hidden">
@@ -93,29 +93,29 @@ export function FiltersDrawer({
   var categoryname = '';
   const [categoryName,setCategoryName] = useState('null')
   const [isOpen, setOpen] = useState(false);
-  useEffect(() => {
+  //useEffect(() => {
 
     
-  menudata.map(
-    (filter) =>
-      filter.category.subCategories.length > 1 &&
-      //console.log(filter.category.subCategories);
-      filter.category.subCategories.map((submenu) => {
-        if (submenu.subCategory.subSubCategories.length > 0) {
-          submenu.subCategory.subSubCategories.map((subsubMenu) => {
-            if (
-              location.pathname == '/collections/' + subsubMenu.subSubCategory.handle || location.pathname == '/fr/collections/' + subsubMenu.subSubCategory.handle
-            ) {
-              //categoryname = filter.category.handle;
-               setCategoryName(filter.category.handle);
-            }
-          });
-        }
-      }),
-  );
+  // menudata.map(
+  //   (filter) =>
+  //     filter.category.subCategories.length > 1 &&
+  //     //console.log(filter.category.subCategories);
+  //     filter.category.subCategories.map((submenu) => {
+  //       if (submenu.subCategory.subSubCategories.length > 0) {
+  //         submenu.subCategory.subSubCategories.map((subsubMenu) => {
+  //           if (
+  //             location.pathname == '/collections/' + subsubMenu.subSubCategory.handle || location.pathname == '/fr/collections/' + subsubMenu.subSubCategory.handle
+  //           ) {
+  //             //categoryname = filter.category.handle;
+  //              setCategoryName(filter.category.handle);
+  //           }
+  //         });
+  //       }
+  //     }),
+  // );
 
    
-  },[location.pathname])
+  // },[location.pathname])
   
   
 
@@ -162,12 +162,15 @@ export function FiltersDrawer({
   return (
     <>
       <nav className="filter-list-wrap bg-[#E7EFFF] rounded-[30px] overflow-hidden">
+          
         <Heading
           as="h4"
           size="lead"
           className="text-[#1C5F7B] text-[24px] xl:text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[30px] xl:px-[48px]"
         >
-          {translate('category',locale)}
+          {/* {translate('category',locale)} */}
+          Filter By
+
         </Heading>
         <div className="px-[30px] xl:px-[48px] py-[27px] hidden">
           {appliedFilters.length > 0 ? (
@@ -177,7 +180,7 @@ export function FiltersDrawer({
           ) : null}
         </div>
         <div className="px-[30px] xl:px-[48px] py-[25px] flex flex-col gap-y-[10px]">
-          {menudata?.map(
+          {/* {menudata?.map(
             (filter) =>
               filter.category.name !== 'Home' && (
                 <div key={filter?.category?.handle}>
@@ -228,6 +231,43 @@ export function FiltersDrawer({
                     )}
                   </Disclosure>
                 </div>
+              ),
+          )} */}
+          {filters.map(
+            (filter) => {
+              console.log("filter");
+                console.log(filter);
+                console.log(filter.values.length )
+            })
+            }
+
+        {filters.map(
+            (filter) =>
+              filter.values.length >= 1 && (
+                
+                <Disclosure as="div" key={filter.id} className="w-full">
+                  
+                  {({open}) => (
+                    <>
+
+                      <Disclosure.Button className="flex justify-between w-full py-4">
+                        <Text size="lead">{filter.label}</Text>
+                        <IconCaret direction={open ? 'up' : 'down'} />
+                      </Disclosure.Button>
+                      <Disclosure.Panel key={filter.id}>
+                        <ul key={filter.id} className="py-2">
+                          {filter.values?.map((option) => {
+                            return (
+                              <li key={option.id} className="pb-4">
+                                {filterMarkup(filter, option)}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
               ),
           )}
         </div>
