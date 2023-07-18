@@ -172,7 +172,7 @@ export function FiltersDrawer({
           Filter By
 
         </Heading>
-        <div className="px-[30px] xl:px-[48px] py-[27px] hidden">
+        <div className="px-[30px] xl:px-[48px] py-[27px] ">
           {appliedFilters.length > 0 ? (
             <div className="">
               <AppliedFilters filters={appliedFilters} />
