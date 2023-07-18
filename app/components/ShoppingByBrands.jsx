@@ -28,9 +28,9 @@ export function ShoppingByBrands({className,locale}) {
 
 
   return (
-    <section className={`${className} shopping-by-brands-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
+    <section className={`${className} shopping-by-brands-section py-[15px] md:py-[30px]`}>
       <div className="container">
-        <div className="title-wrap mb-[20px] lg:mb-[40px] xl:mb-[50px] 2xl:mb-[70px]">
+        <div className="title-wrap mb-[22px]">
           <h2 className="text-black text-[24px] font-bold text-center">
             {translate('shop_by_brand',locale)}
           </h2>

@@ -3,7 +3,7 @@ import { translate } from '~/lib/utils';
 
 export function Subscribe({className,locale}) {
   return (
-    <section className={`${className} subscribe-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
+    <section className={`${className} subscribe-section py-[15px] md:py-[30px]`}>
       <div className="container">
         <div className="subscribe-wrap">
           <div className="subscribe-inner bg-[#CCDDF1] py-[63px] px-[30px] rounded-[30px]">

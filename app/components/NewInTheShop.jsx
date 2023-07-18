@@ -15,7 +15,7 @@ import {isDiscounted, productTranslate, translate} from '~/lib/utils';
 export function NewInTheShop({products, title,locale}) {
 
   return (
-    <section className={`new-in-Shop-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
+    <section className={`new-in-Shop-section py-[15px] md:py-[30px]`}>
       <div className="container">
         <div className="title-wrap mb-[22px]">
           <h2 className="text-[#1C5F7B] text-[24px] font-bold text-left">

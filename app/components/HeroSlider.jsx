@@ -9,7 +9,7 @@ export function HeroSlider({slides}) {
   const slideTwo = slides[1] ? slides[1] : {};
  
   return (
-    <section className="heroslider-section pt-[20px] md:pt-[30px] pb-[20px] md:pb-[30px] xl:pb-[40px] 2xl:pb-[50px]">
+    <section className="heroslider-section pt-[20px] md:pt-[30px] pb-[10px]">
       <div className="container">
         <div className="heroslider-wrap relative">
           <Swiper
@@ -21,10 +21,10 @@ export function HeroSlider({slides}) {
               prevEl: '#swiper-button-prev-heroslider',
             }}
             loop={true}
-            // autoplay={{
-            //   delay: 5000,
-            //   disableOnInteraction: false,
-            // }}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
             className='myswiper1'
           >
             {slideOne && (

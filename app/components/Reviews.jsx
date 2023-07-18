@@ -4,7 +4,7 @@ import {IconStar2} from '~/components';
 
 export function Reviews({className}) {
   return (
-    <section className={`${className} reviews-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px] overflow-hidden`}>
+    <section className={`${className} reviews-section py-[15px] md:py-[30px] overflow-hidden`}>
       <div className="container container-fluid-right">
         <div className="title-wrap mb-[22px]">
           <h2 className="text-black text-[24px] font-bold text-left">

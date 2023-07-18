@@ -153,7 +153,7 @@ export default function Collection() {
 
   return (
     <>
-      <Section className="collections-product-list-sec !px-0 !py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px]">
+      <Section className="collections-product-list-sec !px-0 !py-[25px] md:!py-[40px]">
         <div className="container">
           <PageHeader heading={collection.title} className={'hidden'}>
             {collection?.description && (
@@ -194,7 +194,7 @@ export default function Collection() {
                         url={`/collections/${collection.handle}`}
                         locale={language}
                         data-test="product-grid"
-                        className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-x-[15px] lg:gap-x-[30px] gap-y-[20px] lg:gap-y-[30px] xl:gap-y-[60px]  ${
+                        className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-4 gap-x-[15px] gap-y-[20px] xl:gap-y-[30px]  ${
                           isGrid == true ? 'product-grid' : 'product-list'
                         }`}
                       />

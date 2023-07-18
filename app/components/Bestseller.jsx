@@ -15,7 +15,7 @@ import {isDiscounted, productTranslate, translate} from '~/lib/utils';
 export function Bestseller({products, title,locale}) {
   return (
     <section
-      className={`bestseller-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}
+      className={`bestseller-section py-[15px] md:py-[30px]`}
     >
       <div className="container">
         <div className="title-wrap mb-[22px]">

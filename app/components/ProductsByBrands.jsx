@@ -15,7 +15,7 @@ import {isDiscounted, productTranslate, translate} from '~/lib/utils';
 export function ProductsByBrands({brand_one_products, brand_two_products,locale}) {
   
   return (
-    <section className={` popularproduct-sec py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
+    <section className={` popularproduct-sec py-[15px] md:py-[30px]`}>
       <div className="container">
         <div className="flex flex-col lg:flex-row gap-[30px]">
           <div className="col relative w-full lg:w-[50%]">

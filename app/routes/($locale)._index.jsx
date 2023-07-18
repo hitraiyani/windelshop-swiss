@@ -259,7 +259,7 @@ export default function Homepage() {
       )}
       <ShoppingByBrands className={''} locale={language} />
 
-      {productsByBrandsData && (
+      {/* {productsByBrandsData && (
         <Suspense>
           <Await resolve={productsByBrandsData}>
             {(data) => {
@@ -279,7 +279,7 @@ export default function Homepage() {
             }}
           </Await>
         </Suspense>
-      )}
+      )} */}
       {seasonalSets && (
         <Suspense>
           <Await resolve={seasonalSets}>
@@ -291,8 +291,8 @@ export default function Homepage() {
       )}
 
       {/* <SeasonalSets className={''} /> */}
-      <QuickRequest className={''} locale={language}/>
       <Reviews className={''} />
+      <QuickRequest className={''} locale={language}/>
       {faqSets && (
         <Suspense>
           <Await resolve={faqSets}>
@@ -303,7 +303,7 @@ export default function Homepage() {
         </Suspense>
       )}
 
-      <Subscribe className={''} locale={language} />
+      {/* <Subscribe className={''} locale={language} /> */}
     </>
   );
 }
