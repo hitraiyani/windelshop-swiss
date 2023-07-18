@@ -1,8 +1,13 @@
 import clsx from 'clsx';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
 
-import {Text, Link, AddToCartButton, IconStar} from '~/components';
-import {isDiscounted, isNewArrival, productTranslate, translate} from '~/lib/utils';
+import {Text, Link, AddToCartButton, IconStar, IconCart2, IconWhishlist} from '~/components';
+import {
+  isDiscounted,
+  isNewArrival,
+  productTranslate,
+  translate,
+} from '~/lib/utils';
 import {getProductPlaceholder} from '~/lib/placeholders';
 
 export function ProductCard({
@@ -12,7 +17,7 @@ export function ProductCard({
   loading,
   onClick,
   quickAdd,
-  locale
+  locale,
 }) {
   let cardLabel;
 
@@ -42,10 +47,10 @@ export function ProductCard({
     quantity: 1,
   };
 
-  console.log("cardLabel", cardLabel);
+  console.log('cardLabel', cardLabel);
 
   return (
-    <div className="product-card">
+    <div className="product-card relative">
       <div className="product-card-inner">
         <Link
           onClick={onClick}
@@ -80,7 +85,7 @@ export function ProductCard({
           as="h4"
         >
           {/* {product.title} */}
-          {productTranslate(product,'title',locale)}
+          {productTranslate(product, 'title', locale)}
         </Text>
         <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
           <IconStar className={'w-[17px] h-[15px]'} />
@@ -95,29 +100,35 @@ export function ProductCard({
             <CompareAtPrice className={'opacity-50'} data={compareAtPrice} />
           )}
         </Text>
-        {quickAdd && (
-          <AddToCartButton
-            lines={[
-              {
-                quantity: 1,
-                merchandiseId: firstVariant.id,
-              },
-            ]}
-            variant="secondary"
-            className="buy-now-btn flex mt-[14px]"
-            analytics={{
-              products: [productAnalytics],
-              totalValue: parseFloat(productAnalytics.price),
-            }}
-          >
-            <Text
+        <div className='btn-wrap flex justify-center w-full items-center gap-[20px] absolute bottom-0 bg-[#e7efff] rounded-[10px] p-[15px] opacity-0'>
+          {quickAdd && (
+            <AddToCartButton
+              lines={[
+                {
+                  quantity: 1,
+                  merchandiseId: firstVariant.id,
+                },
+              ]}
+              variant="secondary"
+              className="buy-now-btn flex mt-0"
+              analytics={{
+                products: [productAnalytics],
+                totalValue: parseFloat(productAnalytics.price),
+              }}
+            >
+              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#1c5f7b] hover:text-black transition-all duration-500'} />
+              {/* <Text
               as="span"
               className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
             >
               {translate("add_to_cart",locale)}
-            </Text>
-          </AddToCartButton>
-        )}
+            </Text> */}
+            </AddToCartButton>
+          )}
+          <button>
+            <IconWhishlist className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#1c5f7b] hover:text-black transition-all duration-500'} />
+          </button>
+        </div>
       </div>
     </div>
   );

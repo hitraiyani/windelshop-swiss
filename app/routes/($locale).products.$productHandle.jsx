@@ -197,7 +197,7 @@ export default function Product() {
 
   return (
     <>
-      <Section className="!py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px] product-summary !px-0 !block">
+      <Section className="!py-[25px] md:!py-[40px] product-summary !px-0 !block">
         <div className="container">
           {showProductCompareAlert && (
             <ProductCompareAlertBar
@@ -380,7 +380,7 @@ export default function Product() {
                 title={translate('you_may_like',language)}
                 locale={language}
                 className={
-                  'bg-[#E7EFFF] bg-opacity-30 mb-[-20px] md:mb-[-30px] xl:mb-[-40px] 2xl:mb-[-50px] !py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px]'
+                  'bg-[#E7EFFF] bg-opacity-30 mb-[-20px] md:mb-[-30px] xl:mb-[-40px] 2xl:mb-[-50px] !py-[25px] md:!py-[40px]'
                 }
               />
             );

@@ -49,7 +49,7 @@ export function QuickRequest({className,locale}) {
 
   return (
     <section
-      className={`${className} quick-request-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}
+      className={`${className} quick-request-section py-[15px] md:py-[30px]`}
     >
       <div className="container">
         <div className="quick-request-row flex flex-col lg:flex-row gap-[30px]">

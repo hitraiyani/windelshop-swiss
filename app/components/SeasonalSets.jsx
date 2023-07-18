@@ -6,7 +6,7 @@ export function SeasonalSets({className, data}) {
 
   return (
     <section
-      className={`${className} seasonalsets-categories-section bestseller-categories-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}
+      className={`${className} seasonalsets-categories-section bestseller-categories-section py-[15px] md:py-[30px]`}
     >
       <div className="container">
         <div className="title-wrap mb-[22px]">

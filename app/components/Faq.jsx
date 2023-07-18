@@ -3,7 +3,7 @@ import {toHTML} from '~/lib/utils';
 
 export function Faq({className, data}) {
   return (
-    <section className={`${className} faq-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
+    <section className={`${className} faq-section py-[15px] md:py-[30px]`}>
       <div className="container">
         <div className="title-wrap mb-[22px]">
           <h2 className="text-[#1C5F7B] text-[24px] font-bold text-left mb-[20px]">

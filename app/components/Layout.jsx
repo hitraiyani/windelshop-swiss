@@ -813,12 +813,12 @@ function SubMegaMenu({subMenus, onClose, locale}) {
                 className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]"
                 key={subIndex}
               >
-                <div className="sub-menu-title text-[18px] leading-[1.1] font-bold mb-[12px] text-black">
-                  {/* <Link
+                <div className="sub-menu-title text-[18px] leading-[1.1] font-bold mb-[12px] text-black hover:opacity-70 transition-all duration-500">
+                  <Link
                     to={getMenuHandle(subItem.subCategory)}
-                  > */}
+                  >
                   {translate(subItem?.subCategory?.name, locale?.language)}
-                  {/* </Link> */}
+                  </Link>
                 </div>
                 {subItem.subCategory.subSubCategories?.length > 0 && (
                   <ul>
