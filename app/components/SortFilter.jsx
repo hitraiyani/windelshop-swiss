@@ -20,10 +20,11 @@ import {
   IconShortby,
   IconGrid,
   IconList,
+  IconArrowRight2,
 } from '~/components';
 import {Image} from '@shopify/hydrogen';
-import { getMenuHandle, translate } from '~/lib/utils';
-import { WishlistContext } from '~/store/WishlistContext';
+import {getMenuHandle, translate} from '~/lib/utils';
+import {WishlistContext} from '~/store/WishlistContext';
 
 export function SortFilter({
   filters,
@@ -35,11 +36,10 @@ export function SortFilter({
   listView,
   menudata = [],
   collection,
-  locale
+  locale,
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  
-   
+
   return (
     <>
       <div className="flex items-center justify-between w-full hidden">
@@ -54,7 +54,9 @@ export function SortFilter({
       </div>
       <div className="flex flex-col flex-wrap lg:flex-row gap-[45px]">
         <div
-          className={`transition-all duration-200 w-full lg:w-[30%] ${isOpen ? '' : ''}`}
+          className={`transition-all duration-200 w-full lg:w-[30%] ${
+            isOpen ? '' : ''
+          }`}
         >
           <FiltersDrawer
             collections={collections}
@@ -62,7 +64,6 @@ export function SortFilter({
             appliedFilters={appliedFilters}
             menudata={menudata}
             locale={locale}
-           
           />
         </div>
         <div className="flex-1">
@@ -86,16 +87,15 @@ export function FiltersDrawer({
   collections = [],
   menudata = [],
   categoryname,
-  locale
+  locale,
 }) {
   const [params] = useSearchParams();
   const location = useLocation();
   var categoryname = '';
-  const [categoryName,setCategoryName] = useState('null')
+  const [categoryName, setCategoryName] = useState('null');
   const [isOpen, setOpen] = useState(false);
   //useEffect(() => {
 
-    
   // menudata.map(
   //   (filter) =>
   //     filter.category.subCategories.length > 1 &&
@@ -114,10 +114,7 @@ export function FiltersDrawer({
   //     }),
   // );
 
-   
   // },[location.pathname])
-  
-  
 
   const filterMarkup = (filter, option) => {
     switch (filter.type) {
@@ -161,25 +158,24 @@ export function FiltersDrawer({
 
   return (
     <>
-      <nav className="filter-list-wrap bg-[#E7EFFF] rounded-[30px] overflow-hidden">
-          
+      <nav className="filter-list-wrap overflow-hidden">
         <Heading
           as="h4"
           size="lead"
-          className="text-[#1C5F7B] text-[24px] xl:text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[30px] xl:px-[48px]"
+          className="text-[#1C5F7B] text-[24px] xl:text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[30px] xl:px-[48px] hidden"
         >
           {/* {translate('category',locale)} */}
           Filter By
-
         </Heading>
-        <div className="px-[30px] xl:px-[48px] py-[27px] ">
+        <div className="">
           {appliedFilters.length > 0 ? (
-            <div className="">
+            <div className="mb-[30px]">
               <AppliedFilters filters={appliedFilters} />
             </div>
           ) : null}
         </div>
-        <div className="px-[30px] xl:px-[48px] py-[25px] flex flex-col gap-y-[10px]">
+        {/* <div className="px-[30px] xl:px-[48px] py-[25px] flex flex-col gap-y-[10px]"> */}
+        <div className="flex flex-col gap-[20px]">
           {/* {menudata?.map(
             (filter) =>
               filter.category.name !== 'Home' && (
@@ -233,32 +229,34 @@ export function FiltersDrawer({
                 </div>
               ),
           )} */}
-          {filters.map(
-            (filter) => {
-              console.log("filter");
-                console.log(filter);
-                console.log(filter.values.length )
-            })
-            }
+          {filters.map((filter) => {
+            console.log('filter');
+            console.log(filter);
+            console.log(filter.values.length);
+          })}
 
-        {filters.map(
+          {filters.map(
             (filter) =>
               filter.values.length >= 1 && (
-                
-                <Disclosure as="div" key={filter.id} className="w-full">
-                  
+                <Disclosure
+                  as="div"
+                  key={filter.id}
+                  className="w-full border-[1px] border-[#1c5f7b] p-[15px] rounded-[5px]"
+                >
                   {({open}) => (
                     <>
-
-                      <Disclosure.Button className="flex justify-between w-full py-4">
-                        <Text size="lead">{filter.label}</Text>
-                        <IconCaret direction={open ? 'up' : 'down'} />
+                      <Disclosure.Button className="flex justify-between w-full relative">
+                        <Text className={'font-bold text-[18px]'}>{filter.label}</Text>
+                        <IconArrowRight2
+                          direction={open ? 'up' : 'down'}
+                          className={`absolute right-0 top-0 transition-all duration-500 ${open ? '-rotate-90' : ' rotate-90'}`}
+                        />
                       </Disclosure.Button>
                       <Disclosure.Panel key={filter.id}>
-                        <ul key={filter.id} className="py-2">
+                        <ul key={filter.id} className="py-[20px] pb-0 flex flex-col gap-[10px]">
                           {filter.values?.map((option) => {
                             return (
-                              <li key={option.id} className="pb-4">
+                              <li key={option.id} className="text-[16px] text-black">
                                 {filterMarkup(filter, option)}
                               </li>
                             );
@@ -289,12 +287,12 @@ function AppliedFilters({filters = []}) {
           return (
             <Link
               to={getAppliedFilterLink(filter, params, location)}
-              className="flex px-[15px] py-[10px] border-[1px] border-[#292929] rounded-full gap"
+              className="flex px-[15px] py-[10px] border-[1px] border-[#292929] rounded-full gap items-center hover:border-[#1c5f7b] hover:text-[#1c5f7b] text-[16px] font-medium"
               key={`${filter.label}-${filter.urlParam}`}
             >
               <span className="flex-grow">{filter.label}</span>
               <span>
-                <IconXMark />
+                <IconXMark className={'relative top-[-2px]'} />
               </span>
             </Link>
           );
@@ -382,22 +380,22 @@ function PriceRangeFilter({max, min}) {
 
   return (
     <div className="flex flex-col">
-      <label className="mb-4">
-        <span>from</span>
+      <label className="mb-4 flex flex-wrap gap-[5px] items-center">
+        <span className='block min-w-[50px]'>from</span>
         <input
           name="maxPrice"
-          className="text-black"
+          className="text-black flex-1"
           type="text"
           defaultValue={min}
           placeholder={'$'}
           onChange={onChangeMin}
         />
       </label>
-      <label>
-        <span>to</span>
+      <label className='flex flex-wrap gap-[5px] items-center'>
+        <span className='block min-w-[50px]'>to</span>
         <input
           name="minPrice"
-          className="text-black"
+          className="text-black flex-1"
           type="number"
           defaultValue={max}
           placeholder={'$'}
@@ -436,23 +434,29 @@ function filterInputToParams(type, rawInput, params) {
   return params;
 }
 
-export default function SortMenu({gridView, listView, isGrid, collection,locale}) {
+export default function SortMenu({
+  gridView,
+  listView,
+  isGrid,
+  collection,
+  locale,
+}) {
   const items = [
-    {label: translate("specification",locale), key: 'featured'},
+    {label: translate('specification', locale), key: 'featured'},
     {
-      label: translate("price_low_high",locale),
+      label: translate('price_low_high', locale),
       key: 'price-low-high',
     },
     {
-      label: translate("price_high_low",locale),
+      label: translate('price_high_low', locale),
       key: 'price-high-low',
     },
     {
-      label: translate("best_selling",locale),
+      label: translate('best_selling', locale),
       key: 'best-selling',
     },
     {
-      label: translate("newest",locale),
+      label: translate('newest', locale),
       key: 'newest',
     },
   ];
@@ -483,7 +487,7 @@ export default function SortMenu({gridView, listView, isGrid, collection,locale}
     (item) => item.key === params.get('pagination'),
   );
   const {productCompareItems} = useContext(WishlistContext);
-  
+
   return (
     <>
       {collection.description && (
@@ -537,8 +541,8 @@ export default function SortMenu({gridView, listView, isGrid, collection,locale}
             </div>
             <div className="product-comparison-number">
               <div className='text-[#666666] text-[14px] font-["Open_Sans"] font-bold flex gap-[3px]'>
-              <Link to={`/product-compare/`}>
-                  <span>{translate("product_compare",locale)}</span>
+                <Link to={`/product-compare/`}>
+                  <span>{translate('product_compare', locale)}</span>
                 </Link>
                 <span>({productCompareItems?.length})</span>
               </div>
@@ -549,7 +553,7 @@ export default function SortMenu({gridView, listView, isGrid, collection,locale}
               <Menu.Button className="flex items-center">
                 <span className="flex items-center">
                   <span className="text-[#666666] text-[14px] font-['Open_Sans'] font-bold pr-[7px]">
-                    {translate("sorting",locale)}
+                    {translate('sorting', locale)}
                   </span>
                   <span className='px-[13px] py-[7px] bg-white border-[1px] border-[#E7EFFF] min-w-[187px] text-[14px] font-semibold text-[#495057] font-["Open_Sans"] flex justify-between gap-[10px] items-center'>
                     {(activeItem || items[0]).label}
@@ -583,7 +587,7 @@ export default function SortMenu({gridView, listView, isGrid, collection,locale}
               <Menu.Button className="flex items-center">
                 <span className="flex items-center">
                   <span className="text-[#666666] text-[14px] font-bold pr-[7px]">
-                    {translate("page",locale)}
+                    {translate('page', locale)}
                   </span>
                   <span className='px-[13px] py-[7px] bg-white border-[1px] border-[#E7EFFF] min-w-[65px] text-[14px] font-semibold text-[#495057] font-["Open_Sans"] flex justify-between gap-[10px] items-center'>
                     {(activePagination || itemsPagination[0]).label}
