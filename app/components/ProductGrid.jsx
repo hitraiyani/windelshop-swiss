@@ -17,6 +17,8 @@ export function ProductGrid({
   collections,
   className,
   locale,
+  handleAddWishlist,
+  handleRemoveWishlist,
   ...props
 }) {
   const navigate = useNavigate();
@@ -122,6 +124,8 @@ export function ProductGrid({
         {products.map((product, i) => (
           <ProductCard
             key={product.id}
+            handleAddWishlistMain={handleAddWishlist}
+            handleRemoveWishlistMain={handleRemoveWishlist}
             product={product}
             loading={getImageLoadingPriority(i)}
             quickAdd

@@ -9,6 +9,7 @@ import {
   Text,
   SortFilter,
   ExpandingCard,
+  ProductWishListAlertBar,
 } from '~/components';
 import {ProductGrid} from '~/components/ProductGrid';
 import {PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
@@ -141,6 +142,13 @@ export async function loader({params, request, context}) {
 }
 
 export default function Collection() {
+  const [showProductWishlistAlert, setShowProductWishlistAlert] =
+    useState(false);
+    const [product, setProduct] =
+    useState(null);
+    const [showProductWishlistAlertType, setShowProductWishlistAlertType] =
+    useState('added');
+
   const {collection, collections, appliedFilters, shop,language} = useLoaderData();
   const [isGrid, setIsGrid] = useState(true);
 
@@ -150,11 +158,38 @@ export default function Collection() {
   const gridView = () => {
     setIsGrid(true);
   };
+  const handleAddWishlist = (product) => {
+      console.log(product);
+
+    console.log("main collection page function add");
+   
+    //addToWishlist(product.id);
+    setProduct(product);
+      setShowProductWishlistAlert(true);
+      setShowProductWishlistAlertType('added');
+  };
+
+  const handleRemoveWishlist = (product) => {
+    //console.log("main collection page function");
+    //removeFromWishlist(product.id);
+       setProduct(product);
+      setShowProductWishlistAlert(true);
+      setShowProductWishlistAlertType('removed');
+  };
 
   return (
     <>
-      <Section className="collections-product-list-sec !px-0 !py-[25px] md:!py-[40px]">
+      <Section className="collections-product-list-sec !px-0 !py-[40px] md:!py-[60px] xl:!py-[80px] 2xl:!py-[100px]">
         <div className="container">
+
+        {showProductWishlistAlert && (
+            <ProductWishListAlertBar
+              setShowProductWishlistAlert={setShowProductWishlistAlert}
+              alertType={showProductWishlistAlertType}
+              product={product}
+              locale={language}
+            />
+          )}
           <PageHeader heading={collection.title} className={'hidden'}>
             {collection?.description && (
               <div className="flex items-baseline justify-between w-full">
@@ -191,10 +226,12 @@ export default function Collection() {
                         key={collection.id}
                         collection={collection}
                         collections={collections}
+                        handleAddWishlist={handleAddWishlist}
+                        handleRemoveWishlist={handleRemoveWishlist}
                         url={`/collections/${collection.handle}`}
                         locale={language}
                         data-test="product-grid"
-                        className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-4 gap-x-[15px] gap-y-[20px] xl:gap-y-[30px]  ${
+                        className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-x-[15px] lg:gap-x-[30px] gap-y-[20px] lg:gap-y-[30px] xl:gap-y-[60px]  ${
                           isGrid == true ? 'product-grid' : 'product-list'
                         }`}
                       />

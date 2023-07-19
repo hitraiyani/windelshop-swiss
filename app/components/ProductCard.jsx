@@ -9,6 +9,8 @@ import {
   translate,
 } from '~/lib/utils';
 import {getProductPlaceholder} from '~/lib/placeholders';
+import { WishlistContext } from '~/store/WishlistContext';
+import { useContext, useEffect, useState } from 'react';
 
 export function ProductCard({
   product,
@@ -17,10 +19,21 @@ export function ProductCard({
   loading,
   onClick,
   quickAdd,
+  handleAddWishlistMain,
+  handleRemoveWishlistMain,
   locale,
 }) {
   let cardLabel;
+  const {
+    wishlistItems,
+    productCompareItems,
+    addToProductCompare,
+    removeFromProductCompare,
+    addToWishlist,
+    removeFromWishlist,
+  } = useContext(WishlistContext);
 
+  const [isWhishListAdded, setIsWhishListAdded] = useState(false);
   const cardProduct = product?.variants ? product : getProductPlaceholder();
   if (!cardProduct?.variants?.nodes?.length) return null;
 
@@ -28,6 +41,30 @@ export function ProductCard({
 
   if (!firstVariant) return null;
   const {image, price, compareAtPrice} = firstVariant;
+
+  const handleAddWishlist = () => {
+    
+    addToWishlist(product.id);
+     handleAddWishlistMain(product);
+    //setShowProductWishlistAlert(true);
+    //setShowProductWishlistAlertType('added');
+  };
+
+  const handleRemoveWishlist = () => {
+    
+    removeFromWishlist(product.id);
+    handleRemoveWishlistMain(product);
+    //setShowProductWishlistAlert(true);
+    //setShowProductWishlistAlertType('removed');
+  };
+
+  useEffect(() => {
+    if (wishlistItems.includes(product.id)) {
+      setIsWhishListAdded(true);
+    } else {
+      setIsWhishListAdded(false);
+    }
+  }, [wishlistItems]);
 
   if (label) {
     cardLabel = label;
@@ -125,8 +162,12 @@ export function ProductCard({
             </Text> */}
             </AddToCartButton>
           )}
-          <button>
-            <IconWhishlist className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#1c5f7b] hover:text-black transition-all duration-500'} />
+          <button onClick={
+                    isWhishListAdded ? handleRemoveWishlist : handleAddWishlist
+                  }>
+            <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px]   ${
+                    isWhishListAdded ?  'text-black' : 'text-[#1c5f7b]'
+                  }  text-[#1c5f7b] hover:text-black transition-all duration-500`} />
           </button>
         </div>
       </div>

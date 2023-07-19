@@ -241,6 +241,7 @@ export function FiltersDrawer({
                 <Disclosure
                   as="div"
                   key={filter.id}
+                  defaultOpen={true}
                   className="w-full border-[1px] border-[#1c5f7b] p-[15px] rounded-[5px]"
                 >
                   {({open}) => (

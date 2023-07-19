@@ -1604,9 +1604,9 @@ function Badge({openCart, dark, count, cart}) {
             dark ? '' : ''
           } relative flex flex-col items-center header-cart`}
         >
-          <div className="bg-[#ccddf1] absolute counter w-[15px] lg:w-[20px] h-[15px] lg:h-[20px] left-[50%] -translate-x-1/2 rounded-full flex items-center justify-center leading-none text-[12px] lg:text-[14px] bottom-[18px] lg:bottom-[23px] text-[#1c5f7b] font-bold">
+          {count>0 && <div className="bg-[#ccddf1] absolute counter w-[15px] lg:w-[20px] h-[15px] lg:h-[20px] left-[50%] -translate-x-1/2 rounded-full flex items-center justify-center leading-none text-[12px] lg:text-[14px] bottom-[18px] lg:bottom-[23px] text-[#1c5f7b] font-bold">
             <span>{count || 0}</span>
-          </div>
+          </div>}
           {/* <span>
             &nbsp;
             {translate('cart_artikel', root?.data?.selectedLocale?.language)}{' '}
