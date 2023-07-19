@@ -208,9 +208,9 @@ function CartLineItem({line, locale}) {
             alt={merchandise.title}
           />
         )}
-        <div className="lable flex absolute top-[0] left-[0] bg-[#CC3F13] text-white uppercase w-fit px-[8px] py-[5px] rounded-[0px_0px_5px_0px] leading-none items-center justify-center text-center min-h-[25px] text-[12px]">
+        {/* <div className="lable flex absolute top-[0] left-[0] bg-[#CC3F13] text-white uppercase w-fit px-[8px] py-[5px] rounded-[0px_0px_5px_0px] leading-none items-center justify-center text-center min-h-[25px] text-[12px]">
           <span>SOLD OUT</span>
-        </div>
+        </div> */}
       </div>
 
       <div className="flex justify-between flex-grow flex-1">

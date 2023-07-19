@@ -41,7 +41,9 @@ export function ProductCard({
 
   if (!firstVariant) return null;
   const {image, price, compareAtPrice} = firstVariant;
-
+    const isOutOfStock = !firstVariant?.availableForSale; 
+    console.log(isOutOfStock);
+    console.log("isOutOfStock");
   const handleAddWishlist = () => {
     
     addToWishlist(product.id);
@@ -112,7 +114,9 @@ export function ProductCard({
                 size="fine"
                 className="lable flex absolute top-[10px] left-[10px] bg-[#CC3F13] text-white uppercase w-fit px-[10px] py-[7px] rounded-[89px] leading-none items-center justify-center text-center min-h-[40px]"
               >
-                <span>{cardLabel}</span>
+                <span>
+                  {isOutOfStock ? translate("sold_out",locale) : cardLabel }
+                  </span>
               </Text>
             )}
           </div>
@@ -137,8 +141,18 @@ export function ProductCard({
             <CompareAtPrice className={'opacity-50'} data={compareAtPrice} />
           )}
         </Text>
+        
         <div className='btn-wrap flex justify-center w-full items-center gap-[20px] absolute bottom-0 bg-[#e7efff] rounded-[10px] p-[15px] opacity-0'>
-          {quickAdd && (
+         
+        {isOutOfStock && (
+                            <button disabled>
+                            <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#1c5f7b] hover:text-black transition-all duration-500'} />
+                          </button>
+                          )
+                          }
+          
+          {quickAdd && (isOutOfStock === false) && (
+            
             <AddToCartButton
               lines={[
                 {

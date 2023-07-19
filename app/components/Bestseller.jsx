@@ -8,6 +8,7 @@ import {
   Text,
   Link,
   CompareAtPrice,
+  Button,
 } from '~/components';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
 import {isDiscounted, productTranslate, translate} from '~/lib/utils';
@@ -68,6 +69,10 @@ export function Bestseller({products, title,locale}) {
               if (!firstVariant) return null;
               const {image, price, compareAtPrice} = firstVariant;
 
+              const isOutOfStock = !firstVariant?.availableForSale;
+              //  console.log(firstVariant);
+              //  console.log("isOutOfStock");
+
               const productAnalytics = {
                 productGid: product.id,
                 variantGid: firstVariant.id,
@@ -123,6 +128,15 @@ export function Bestseller({products, title,locale}) {
                           )}
                         </div>
                         <div className="buy-now-btn flex mt-[14px]">
+                        {isOutOfStock ? (
+                            <Button
+                              variant="secondary"
+                              disabled
+                              className='bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold'
+                            >
+                              <Text>{translate("sold_out",locale)}</Text>
+                            </Button>
+                          ) : (
                           <AddToCartButton
                             lines={[
                               {
@@ -142,7 +156,7 @@ export function Bestseller({products, title,locale}) {
                             >
                               {translate('add_to_cart',locale)}
                             </Text>
-                          </AddToCartButton>
+                          </AddToCartButton>)}
                         </div>
                       </div>
                     </div>
