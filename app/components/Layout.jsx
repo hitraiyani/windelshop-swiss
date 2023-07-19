@@ -858,32 +858,45 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState(null);
   const [searchString, setsearchString] = useState('');
+  const delayTimerRef = useRef(null);
 
-  const handleMouseEnter = (e, id) => {
-    //setActiveMenuItem(id);
-    setTimeout(() => {
+  const handleMouseEnter = (e,id) => {
+    // Clear any previous timeout to prevent conflicting state updates
+    clearTimeout(delayTimerRef.current);
+
+    // Set a new timeout for 500ms
+    delayTimerRef.current = setTimeout(() => {
       setActiveMenuItem(id);
-       console.log("Enter");
+    }, 500);
+};
 
-    }, 500);
-  };
-  const handleMouseLeave = (e, id) => {
+const handleMouseLeave = () => {
+    // Clear the timeout when leaving
+    clearTimeout(delayTimerRef.current);
     setActiveMenuItem(null);
-   
-    setTimeout(() => {
-     // setActiveMenuItem(null);
-      setActiveMenuItem((Previous) => {
-         console.log(Previous);
-         console.log("remove");
-        Previous = null;
-      });
-    }, 500);
-   
-    // setActiveMenuItem((Previous) => {
-    //   // console.log(Previous);
-    //   Previous = null;
-    // });
-  };
+};
+
+//   let delayTimeout;
+
+ 
+  
+// const handleMouseEnter = (e,id) => {
+//   // Set a timeout for 500ms
+//   delayTimeout = setTimeout(() => {
+//     setActiveMenuItem(id);
+//     console.log("enter");
+//   }, 500);
+// };
+
+// const handleMouseLeave = () => {
+//   // Clear the timeout if the user leaves before 500ms
+//   console.log("clear time");
+//    clearTimeout(delayTimeout);
+//    setActiveMenuItem(null);
+  
+// };
+
+
 
   //  useEffect(() => {
   //   const menu = document.querySelector('.clean-hover-menu');
