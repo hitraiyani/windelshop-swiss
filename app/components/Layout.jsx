@@ -859,6 +859,34 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
   const [activeMenuItem, setActiveMenuItem] = useState(null);
   const [searchString, setsearchString] = useState('');
 
+  const handleMouseEnter = (e, id) => {
+    //setActiveMenuItem(id);
+    setTimeout(() => {
+      setActiveMenuItem(id);
+    }, 500);
+  };
+  const handleMouseLeave = (e, id) => {
+    //setActiveMenuItem(null);
+   
+    setTimeout(() => {
+      setActiveMenuItem(null);
+    }, 501);
+   
+    // setActiveMenuItem((Previous) => {
+    //   // console.log(Previous);
+    //   Previous = null;
+    // });
+  };
+
+  //  useEffect(() => {
+  //   const menu = document.querySelector('.clean-hover-menu');
+  //   menu.addEventListener('mouseleave', handleMouseLeave);
+  //   return () => {
+  //     menu.removeEventListener('mouseleave', handleMouseLeave);
+  //   };
+  // }, []);
+
+
   useEffect(() => {
     const handleBodyClick = (e) => {
       setSearchOpen(false);
@@ -929,27 +957,9 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
     setActiveMenuItem(null);
   };
 
-  const handleMouseEnter = (e, id) => {
-    //setActiveMenuItem(id);
-    setTimeout(() => {
-      setActiveMenuItem(id);
-    }, 500);
-  };
-  const handleMouseLeave = (e, id) => {
-    setActiveMenuItem(null);
-    // setActiveMenuItem((Previous) => {
-    //   // console.log(Previous);
-    //   Previous = null;
-    // });
-  };
+  
 
-  // useEffect(() => {
-  //   const menu = document.querySelector('.clean-hover-menu');
-  //   menu.addEventListener('mouseleave', handleMouseLeave);
-  //   return () => {
-  //     menu.removeEventListener('mouseleave', handleMouseLeave);
-  //   };
-  // }, []);
+ 
 
   return (
     <header
@@ -1149,12 +1159,12 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
             <CartCount isHome={isHome} openCart={openCart} />
           </div>
           <div className="bottom">
-            <nav className="flex gap-[5px] relative main-navbar">
+            <nav className="flex gap-[5px] relative main-navbar clean-hover-menu">
               {/* Top level menu items */}
               {aicoMenu.map((item, index) => {
                 return (
                   <div
-                    className="menu-item flex-auto clean-hover-menu"
+                    className="menu-item flex-auto "
                     key={index}
                     onMouseEnter={(event) =>
                       handleMouseEnter(event, item.category.name)
