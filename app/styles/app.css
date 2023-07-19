@@ -658,6 +658,16 @@ input.appearance-none[type='number'] {
             min-height: auto;
           }
         }
+        .btn-wrap {
+          position: relative;
+          width: auto;
+          margin-top: 20px;
+          justify-content: flex-start;
+          background: transparent;
+          padding: 0;
+          opacity: 1;
+          inset: auto;
+        }
       }
     }
   }

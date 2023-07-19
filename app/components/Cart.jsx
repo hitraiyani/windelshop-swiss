@@ -3,7 +3,7 @@ import {useRef} from 'react';
 import {useScroll} from 'react-use';
 import {flattenConnection, Image, Money} from '@shopify/hydrogen';
 import {useFetcher} from '@remix-run/react';
-import { translate, productTranslate} from '~/lib/utils';
+import {translate, productTranslate} from '~/lib/utils';
 
 import {
   Button,
@@ -16,18 +16,23 @@ import {
 import {getInputStyleClasses} from '~/lib/utils';
 import {CartAction} from '~/lib/type';
 
-export function Cart({layout, onClose, cart,locale=""}) {
+export function Cart({layout, onClose, cart, locale = ''}) {
   const linesCount = Boolean(cart?.lines?.edges?.length || 0);
 
   return (
     <>
-      <CartEmpty hidden={linesCount} onClose={onClose} layout={layout} locale={locale}/>
+      <CartEmpty
+        hidden={linesCount}
+        onClose={onClose}
+        layout={layout}
+        locale={locale}
+      />
       <CartDetails cart={cart} layout={layout} locale={locale} />
     </>
   );
 }
 
-export function CartDetails({layout, cart ,locale}) {
+export function CartDetails({layout, cart, locale}) {
   // @todo: get optimistic cart cost
   const cartHasItems = !!cart && cart.totalQuantity > 0;
   const container = {
@@ -53,7 +58,7 @@ export function CartDetails({layout, cart ,locale}) {
  * @param discountCodes the current discount codes applied to the cart
  * @todo rework when a design is ready
  */
-function CartDiscounts({discountCodes,locale}) {
+function CartDiscounts({discountCodes, locale}) {
   const codes = discountCodes?.map(({code}) => code).join(', ') || null;
 
   return (
@@ -88,11 +93,10 @@ function CartDiscounts({discountCodes,locale}) {
             className={getInputStyleClasses()}
             type="text"
             name="discountCode"
-            placeholder={translate("enter_code",locale)}
+            placeholder={translate('enter_code', locale)}
           />
           <button className="flex justify-end font-medium whitespace-nowrap">
-            
-            {translate("apply_code",locale)}
+            {translate('apply_code', locale)}
           </button>
         </div>
       </UpdateDiscountForm>
@@ -141,7 +145,7 @@ function CartLines({layout = 'drawer', lines: cartLines, locale}) {
   );
 }
 
-function CartCheckoutActions({checkoutUrl,locale}) {
+function CartCheckoutActions({checkoutUrl, locale}) {
   if (!checkoutUrl) return null;
 
   return (
@@ -149,8 +153,7 @@ function CartCheckoutActions({checkoutUrl,locale}) {
       <a href={checkoutUrl} target="_self">
         <Button as="span" width="full">
           {/* Continue to Checkout */}
-          {translate("continue_checkout",locale)}
-          
+          {translate('continue_checkout', locale)}
         </Button>
       </a>
       {/* @todo: <CartShopPayButton cart={cart} /> */}
@@ -158,7 +161,7 @@ function CartCheckoutActions({checkoutUrl,locale}) {
   );
 }
 
-function CartSummary({cost, layout, children = null,locale}) {
+function CartSummary({cost, layout, children = null, locale}) {
   const summary = {
     drawer: 'grid gap-4 p-6 border-t md:px-12',
     page: 'sticky top-nav grid gap-6 p-4 md:px-6 md:translate-y-4 bg-primary/5 rounded w-full',
@@ -171,7 +174,7 @@ function CartSummary({cost, layout, children = null,locale}) {
       </h2>
       <dl className="grid">
         <div className="flex items-center justify-between font-medium">
-          <Text as="dt">{translate("sub_total",locale)}</Text>
+          <Text as="dt">{translate('sub_total', locale)}</Text>
           <Text as="dd" data-test="subtotal">
             {cost?.subtotalAmount?.amount ? (
               <Money data={cost?.subtotalAmount} />
@@ -195,28 +198,33 @@ function CartLineItem({line, locale}) {
 
   return (
     <li key={id} className="flex gap-4">
-      <div className="flex-shrink">
+      <div className="flex-shrink relative w-[110px] h-[110px]">
         {merchandise.image && (
           <Image
             width={110}
             height={110}
             data={merchandise.image}
-            className="object-cover object-center w-24 h-24 border rounded md:w-28 md:h-28"
+            className="object-contain object-center w-24 h-24 border rounded md:w-28 md:h-28"
             alt={merchandise.title}
           />
         )}
+        <div className="lable flex absolute top-[0] left-[0] bg-[#CC3F13] text-white uppercase w-fit px-[8px] py-[5px] rounded-[0px_0px_5px_0px] leading-none items-center justify-center text-center min-h-[25px] text-[12px]">
+          <span>SOLD OUT</span>
+        </div>
       </div>
 
-      <div className="flex justify-between flex-grow">
+      <div className="flex justify-between flex-grow flex-1">
         <div className="grid gap-2">
           <Heading as="h3" size="copy">
             {/* { console.log("product cart") } { console.log(merchandise?.product) } */}
             {merchandise?.product?.handle ? (
               <Link to={`/products/${merchandise.product.handle}`}>
-                {productTranslate(merchandise?.product,'title',locale) || ''}
+                {productTranslate(merchandise?.product, 'title', locale) || ''}
               </Link>
             ) : (
-              <Text>{ productTranslate(merchandise?.product,'title',locale) || '' }  </Text>
+              <Text>
+                {productTranslate(merchandise?.product, 'title', locale) || ''}{' '}
+              </Text>
             )}
           </Heading>
 
@@ -335,7 +343,12 @@ function CartLinePrice({line, priceType = 'regular', ...passthroughProps}) {
   return <Money withoutTrailingZeros {...passthroughProps} data={moneyV2} />;
 }
 
-export function CartEmpty({hidden = false, layout = 'drawer', onClose, locale}) {
+export function CartEmpty({
+  hidden = false,
+  layout = 'drawer',
+  onClose,
+  locale,
+}) {
   const scrollRef = useRef(null);
   const {y} = useScroll(scrollRef);
 
@@ -353,12 +366,11 @@ export function CartEmpty({hidden = false, layout = 'drawer', onClose, locale}) 
   return (
     <div ref={scrollRef} className={container[layout]} hidden={hidden}>
       <section className="grid gap-6">
-        <Text format>
-          {translate('empty_cart_text', locale)}
-        </Text>
+        <Text format>{translate('empty_cart_text', locale)}</Text>
         <div>
-        
-          <Button onClick={onClose}>{translate('procesed_compare', locale)}</Button>
+          <Button onClick={onClose}>
+            {translate('procesed_compare', locale)}
+          </Button>
         </div>
       </section>
       {/* <section className="grid gap-8 pt-16">
