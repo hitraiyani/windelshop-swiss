@@ -53,6 +53,7 @@ export function SortFilter({
         </button>
       </div>
       <div className="flex flex-col flex-wrap lg:flex-row gap-[45px]">
+        {filters.length > 0 && (
         <div
           className={`transition-all duration-200 w-full lg:w-[30%] ${
             isOpen ? '' : ''
@@ -66,6 +67,7 @@ export function SortFilter({
             locale={locale}
           />
         </div>
+        )}
         <div className="flex-1">
           <SortMenu
             gridView={gridView}
@@ -158,7 +160,9 @@ export function FiltersDrawer({
 
   return (
     <>
+      
       <nav className="filter-list-wrap overflow-hidden">
+        
         <Heading
           as="h4"
           size="lead"
@@ -229,12 +233,7 @@ export function FiltersDrawer({
                 </div>
               ),
           )} */}
-          {filters.map((filter) => {
-            console.log('filter');
-            console.log(filter);
-            console.log(filter.values.length);
-          })}
-
+         
           {filters.map(
             (filter) =>
               filter.values.length >= 1 && (

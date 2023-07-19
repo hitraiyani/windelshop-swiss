@@ -930,17 +930,17 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
   };
 
   const handleMouseEnter = (e, id) => {
-    setActiveMenuItem(id);
-    // setTimeout(() => {
-    //   setActiveMenuItem(id);
-    // }, 200);
+    //setActiveMenuItem(id);
+    setTimeout(() => {
+      setActiveMenuItem(id);
+    }, 500);
   };
   const handleMouseLeave = (e, id) => {
-    //setActiveMenuItem(null);
-    setActiveMenuItem((Previous) => {
-      // console.log(Previous);
-      Previous = null;
-    });
+    setActiveMenuItem(null);
+    // setActiveMenuItem((Previous) => {
+    //   // console.log(Previous);
+    //   Previous = null;
+    // });
   };
 
   // useEffect(() => {
