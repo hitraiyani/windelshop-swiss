@@ -863,14 +863,21 @@ function DesktopHeader({isHome, menu, aicoMenu, openCart, title, locale}) {
     //setActiveMenuItem(id);
     setTimeout(() => {
       setActiveMenuItem(id);
+       console.log("Enter");
+
     }, 500);
   };
   const handleMouseLeave = (e, id) => {
-    //setActiveMenuItem(null);
+    setActiveMenuItem(null);
    
     setTimeout(() => {
-      setActiveMenuItem(null);
-    }, 501);
+     // setActiveMenuItem(null);
+      setActiveMenuItem((Previous) => {
+         console.log(Previous);
+         console.log("remove");
+        Previous = null;
+      });
+    }, 500);
    
     // setActiveMenuItem((Previous) => {
     //   // console.log(Previous);
