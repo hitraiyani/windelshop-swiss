@@ -486,12 +486,14 @@ strong {
   .btn-wrap {
     opacity: 0;
     transition: all 0.5s;
-    bottom: -50px;
+    top: 0;
   }
   &:hover {
     .btn-wrap {
       opacity: 1;
-      bottom: 0px;
+      bottom: auto;
+      transform: translateY(-50%);
+      margin-top: 92.5%;
     }
   }
 }

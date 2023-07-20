@@ -9,6 +9,8 @@ import {
   Link,
   CompareAtPrice,
   Button,
+  IconCart2,
+  IconWhishlist,
 } from '~/components';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
 import {isDiscounted, productTranslate, translate} from '~/lib/utils';
@@ -86,7 +88,7 @@ export function Bestseller({products, title,locale}) {
               return (
                 <SwiperSlide key={index}>
                   <div className="slide-item">
-                    <div className="product-card">
+                    <div className="product-card relative">
                       <div className="product-card-inner">
                         <Link
                           to={`/products/${product.handle}`}
@@ -127,14 +129,15 @@ export function Bestseller({products, title,locale}) {
                             />
                           )}
                         </div>
-                        <div className="buy-now-btn flex mt-[14px]">
+                        <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#e7efff] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
                         {isOutOfStock ? (
                             <Button
                               variant="secondary"
                               disabled
-                              className='bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold'
+                              className=''
                             >
-                              <Text>{translate("sold_out",locale)}</Text>
+                              {/* <Text>{translate("sold_out",locale)}</Text> */}
+                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#1c5f7b] hover:text-black transition-all duration-500'}  />
                             </Button>
                           ) : (
                           <AddToCartButton
@@ -150,13 +153,17 @@ export function Bestseller({products, title,locale}) {
                               totalValue: parseFloat(productAnalytics.price),
                             }}
                           >
-                            <Text
+                            <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#1c5f7b] hover:text-black transition-all duration-500'} />
+                            {/* <Text
                               as="span"
                               className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
                               {translate('add_to_cart',locale)}
-                            </Text>
+                            </Text> */}
                           </AddToCartButton>)}
+                          <button>
+                          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#1c5f7b] hover:text-black transition-all duration-500`} />
+                        </button>
                         </div>
                       </div>
                     </div>

@@ -142,7 +142,7 @@ export function ProductCard({
           )}
         </Text>
         
-        <div className='btn-wrap flex justify-center w-full items-center gap-[20px] absolute bottom-0 bg-[#e7efff] rounded-[10px] p-[15px] opacity-0'>
+        <div className='btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#e7efff] rounded-[0px_0px_20px_20px] p-[15px] opacity-0'>
          
         {isOutOfStock && (
                             <button disabled>
