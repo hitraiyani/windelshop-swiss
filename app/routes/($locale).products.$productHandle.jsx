@@ -757,7 +757,7 @@ export function ProductForm({
               </div>
             </div>
           </div>
-          <div className="w-auto rating-wrap">
+          {/* <div className="w-auto rating-wrap">
             <div className="flex gap-[7px] items-center text-black font-semibold font-['Open_Sans'] py-[17px] justify-end">
               <div className="rating flex gap-[3px] text-[#18A1DC]">
                 <IconStar className={'w-[17px] h-[15px]'} />
@@ -768,7 +768,7 @@ export function ProductForm({
               </div>
               <span>0 {translate("review",locale)} / + {translate('evaluation',locale)}</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       

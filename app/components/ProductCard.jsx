@@ -128,13 +128,13 @@ export function ProductCard({
           {/* {product.title} */}
           {productTranslate(product, 'title', locale)}
         </Text>
-        <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
+        {/* <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
           <IconStar className={'w-[17px] h-[15px]'} />
           <IconStar className={'w-[17px] h-[15px]'} />
           <IconStar className={'w-[17px] h-[15px] fill-black'} />
           <IconStar className={'w-[17px] h-[15px]'} />
           <IconStar className={'w-[17px] h-[15px]'} />
-        </div>
+        </div> */}
         <Text className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
           <Money withoutTrailingZeros data={price} />
           {isDiscounted(price, compareAtPrice) && (

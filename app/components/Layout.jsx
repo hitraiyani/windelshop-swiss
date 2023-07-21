@@ -258,9 +258,10 @@ function MenuMobileNav({menu, aicoMenu, onClose, locale}) {
         return (
           <div className="menu-item flex-auto" key={index}>
             <div className="flex flex-wrap items-center w-full sticky top-0 z-[92] py-[15px] bg-gray-50">
-              <Link
+              {item.category.name !== "Home" && (
+                <Link
                 to={`${
-                  item.category.name == ' Home'
+                  item.category.name == 'Home'
                     ? '/'
                     : getMenuHandle(item.category)
                 }`}
@@ -269,6 +270,8 @@ function MenuMobileNav({menu, aicoMenu, onClose, locale}) {
               >
                 {translate(item.category.name, locale?.language)}
               </Link>
+              ) }
+              
               {item?.category?.subCategories?.length > 0 && (
                 <div
                   onClick={megaMenuMobileClick}
@@ -1193,16 +1196,20 @@ const handleMouseLeave = () => {
                       handleMouseLeave(event, item.category.name)
                     }
                   >
+                    {item.category.name !==  'Home' && (
                     <Link
                       to={`${
-                        item.category.name == ' Home'
-                          ? '/'
+                        item.category.name == 'Home'
+                          ? '/ts'
                           : getMenuHandle(item.category)
                       }`}
                       className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                     >
                       {translate(item.category.name, locale?.language)}
-                    </Link>
+                    </Link>)}
+
+
+
                     {item?.category?.subCategories?.length > 0 && (
                       <div
                         className={`mega-menu-div ${
