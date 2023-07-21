@@ -55,7 +55,7 @@ export function SortFilter({
       <div className="flex flex-col flex-wrap lg:flex-row gap-[45px]">
         {filters.length > 0 && (
         <div
-          className={`transition-all duration-200 w-full lg:w-[30%] ${
+          className={`transition-all duration-200 w-full lg:w-[300px] ${
             isOpen ? '' : ''
           }`}
         >

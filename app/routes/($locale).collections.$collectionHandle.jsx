@@ -231,7 +231,7 @@ export default function Collection() {
                         url={`/collections/${collection.handle}`}
                         locale={language}
                         data-test="product-grid"
-                        className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-x-[15px] lg:gap-x-[30px] gap-y-[20px] lg:gap-y-[30px] xl:gap-y-[60px]  ${
+                        className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-x-[15px] lg:gap-x-[30px] gap-y-[20px] lg:gap-y-[30px] xl:gap-y-[60px]  ${
                           isGrid == true ? 'product-grid' : 'product-list'
                         }`}
                       />
