@@ -10,6 +10,7 @@ import {
 } from '@remix-run/react';
 import {useDebounce} from 'react-use';
 import {Disclosure} from '@headlessui/react';
+import { Range } from 'react-range';
 
 import {
   Heading,
@@ -119,6 +120,7 @@ export function FiltersDrawer({
   // },[location.pathname])
 
   const filterMarkup = (filter, option) => {
+     
     switch (filter.type) {
       case 'PRICE_RANGE':
         const min =
@@ -130,14 +132,19 @@ export function FiltersDrawer({
           params.has('maxPrice') && !isNaN(Number(params.get('maxPrice')))
             ? Number(params.get('maxPrice'))
             : undefined;
+                      
+            
 
-        return <PriceRangeFilter min={min} max={max} />;
+        return <PriceRangeFilter min={min} max={max}  />;
 
       default:
         const to = getFilterLink(filter, option.input, params, location);
+        console.log(filter)
         return (
           <Link className="block" prefetch="intent" to={to}>
-            {option.label}
+            {option.label} 
+            {filter.label == "Marke" && <>{ "("+option.count+")"}</>}
+             
           </Link>
         );
     }
@@ -313,7 +320,9 @@ function getAppliedFilterLink(filter, params, location) {
     for (const filteredVariantOption of filteredVariantOptions) {
       paramsClone.append(filter.urlParam.key, filteredVariantOption);
     }
-  } else {
+  }
+  
+  else {
     paramsClone.delete(filter.urlParam.key);
   }
   return `${location.pathname}?${paramsClone.toString()}`;
@@ -336,9 +345,88 @@ function getFilterLink(filter, rawInput, params, location) {
   return `${location.pathname}?${newParams.toString()}`;
 }
 
+const PriceRangeSlider = ({ min, max, onChangeMin, onChangeMax }) => {
+  const [values, setValues] = useState([min, max]);
+
+  const handleChange = (values) => {
+    setValues(values);
+    onChangeMin(values[0]);
+    onChangeMax(values[1]);
+  };
+
+  return (
+    <div className="flex flex-col">
+      <div className="mb-4 flex flex-wrap gap-[5px] items-center">
+        <span className="block min-w-[50px]">from</span>
+        <input
+          name="maxPrice"
+          className="text-black flex-1"
+          type="text"
+          value={values[0]} // Use value instead of defaultValue
+          placeholder={'$'}
+          onChange={(e) => handleChange([parseFloat(e.target.value), values[1]])}
+        />
+      </div>
+      <div className="flex flex-wrap gap-[5px] items-center">
+        <span className="block min-w-[50px]">to</span>
+        <input
+          name="minPrice"
+          className="text-black flex-1"
+          type="number"
+          value={values[1]} // Use value instead of defaultValue
+          placeholder={'$'}
+          onChange={(e) => handleChange([values[0], parseFloat(e.target.value)])}
+        />
+      </div>
+      {/* Range Slider */}
+      <div className="mt-4" style={{ overflow: 'hidden' }}>
+        <Range
+          values={values}
+          step={1}
+          min={min}
+          max={max}
+          onChange={(values) => handleChange(values)}
+          renderTrack={({ props, children }) => (
+            <div
+              {...props}
+              style={{
+                ...props.style,
+                height: '6px',
+                background: '#ccc',
+                borderRadius: '4px',
+              }}
+            >
+              {children}
+            </div>
+          )}
+          renderThumb={({ props }) => (
+            <div
+              {...props}
+              style={{
+                ...props.style,
+                height: '18px',
+                width: '18px',
+                borderRadius: '50%',
+                background: '#fff',
+                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+              }}
+            />
+          )}
+        />
+      </div>
+      {/* Display Min and Max values */}
+      <div className="flex justify-between mt-2">
+        <span>{`Min: ${values[0]}`}</span>
+        <span>{`Max: ${values[1]}`}</span>
+      </div>
+    </div>
+  );
+};
+
 const PRICE_RANGE_FILTER_DEBOUNCE = 500;
 
 function PriceRangeFilter({max, min}) {
+  
   const location = useLocation();
   const params = useMemo(
     () => new URLSearchParams(location.search),
@@ -377,9 +465,18 @@ function PriceRangeFilter({max, min}) {
     const newMinPrice = event.target.value;
     setMinPrice(newMinPrice);
   };
+  const handleChangeMinPrice = (min) => {
+    setMinPrice(min);
+  };
+
+  // Function to handle changes in max price
+  const handleChangeMaxPrice = (max) => {
+    setMaxPrice(max);
+  };
 
   return (
-    <div className="flex flex-col">
+    <>
+    {/* <div className="flex flex-col">
       <label className="mb-4 flex flex-wrap gap-[5px] items-center">
         <span className='block min-w-[50px]'>from</span>
         <input
@@ -402,7 +499,16 @@ function PriceRangeFilter({max, min}) {
           onChange={onChangeMax}
         />
       </label>
-    </div>
+    </div> */}
+    
+    
+    <PriceRangeSlider
+        min={0} // Set the minimum price value
+        max={10000} // Set the maximum price value to 10000
+        onChangeMin={handleChangeMinPrice} // Pass the function to update min price
+        onChangeMax={handleChangeMaxPrice} // Pass the function to update max price
+      />
+    </>
   );
 }
 
