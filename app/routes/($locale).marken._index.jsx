@@ -31,10 +31,13 @@ export default function Marken() {
   const {seo, language} = useLoaderData();
 
   const [brandData, setbrandData] = useState([]);
+  const [isloading, setIsLoading] = useState(true);
+
 
   const loadBrandData = async () => {
+    //?filter[isTopBrand]=1
     const brandResponse = await fetch(
-      `${AICO_API_URL}brands?filter[isTopBrand]=1`,
+      `${AICO_API_URL}brands`,
       {
         method: 'GET',
         headers: {
@@ -43,13 +46,20 @@ export default function Marken() {
       },
     );
     const brandResponseData = await brandResponse.json();
-    setbrandData(brandResponseData.data);
+
+    //console.log(brandResponseData.data);
+
+    const brandResponseNew =  brandResponseData.data.sort((a, b) => b.attributes.isTopBrand - a.attributes.isTopBrand);
+     console.log(brandResponseNew);
+     console.log("brandResponseNew");
+   // setbrandData(brandResponseData.data);
+   setbrandData(brandResponseNew);
+    setIsLoading(false);
   };
   useEffect(() => {
     loadBrandData();
   }, []);
-  console.log(brandData);
-  console.log('brandData');
+  
 
   return (
     <>
@@ -61,6 +71,7 @@ export default function Marken() {
               {translate('shop_by_brand', language)}
             </h2>
           </div>
+          {isloading && <><h2>Loading...</h2></>}
           <div className="logo-lists-wrap">
             <div className="logo-list">
               <ul className="flex flex-wrap gap-x-[14px] gap-y-[12px] max-w-[910px] items-center justify-center mx-auto">
@@ -84,11 +95,14 @@ export default function Marken() {
                     }
                   }
                   return (
-                    <li
+                    <div   key={index}>
+                    {brandImage != null && (
+                      <li
                       key={index}
                       className=" w-[117px] md:w-[197px] lg:w-[217px] h-[92px] md:h-[132px] lg:h-[152px] flex items-center justify-center bg-[#E7EFFF] bg-opacity-[0.4] rounded-[10px] relative overflow-hidden"
                     >
-                      <Link
+                     
+                        <Link
                         to={'/'}
                         className="block w-full h-full absolute inset-0"
                       >
@@ -98,8 +112,15 @@ export default function Marken() {
                           alt=""
                         />
                       </Link>
+                      
+                      
+                      
                     </li>
+                    )}
+                    
+                    </div>
                   );
+
                 })}
               </ul>
             </div>
