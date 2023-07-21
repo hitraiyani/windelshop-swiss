@@ -143,7 +143,7 @@ export function FiltersDrawer({
         return (
           <Link className="block" prefetch="intent" to={to}>
             {option.label} 
-            {filter.label == "Marke" && <>{ "("+option.count+")"}</>}
+            {(filter.label == "Marke" || filter.label == "Marque")  && <>{ "("+option.count+")"}</>}
              
           </Link>
         );
