@@ -249,7 +249,11 @@ async function getLayoutData({storefront}) {
     ? parseMenu(data.footerMenu, customPrefixes)
     : undefined;
 
-  return {shop: data.shop, aicoHeaderMenu : data?.shop?.aico_navigation_menu?.value ? JSON.parse(data?.shop?.aico_navigation_menu?.value) : [] , headerMenu, footerMenu, hederTopBar : data?.hederTopBar};
+    const aicomenu = data?.shop?.aico_navigation_menu?.value ? JSON.parse(data?.shop?.aico_navigation_menu?.value) : [];
+     const aicomenuNew = aicomenu.filter((element) => element.category.name !== "Home");
+  
+
+  return {shop: data.shop, aicoHeaderMenu : aicomenuNew , headerMenu, footerMenu, hederTopBar : data?.hederTopBar};
 }
 
 const CART_QUERY = `#graphql

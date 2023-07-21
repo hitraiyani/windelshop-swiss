@@ -388,12 +388,15 @@ export function toHTML(content) {
 }
 
 export function getMenuHandle(menuItem) {
+ 
   if (menuItem?.id && menuItem?.handle && menuItem.id.includes('Collection')) {
       return `/collections/${menuItem?.handle}`;
   } else if (menuItem?.id && menuItem?.handle && menuItem.id.includes('Product')) {
     return `/products/${menuItem?.handle}`;
-  } else {
+  } else if(menuItem?.id) {
     return menuItem?.id ? `/${menuItem?.handle}` : `#`;
+  }else{
+    return menuItem?.handle ? `/${menuItem?.handle}` : `#`;
   }
 }
 

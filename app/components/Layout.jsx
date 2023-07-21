@@ -258,8 +258,8 @@ function MenuMobileNav({menu, aicoMenu, onClose, locale}) {
         return (
           <div className="menu-item flex-auto" key={index}>
             <div className="flex flex-wrap items-center w-full sticky top-0 z-[92] py-[15px] bg-gray-50">
-              {item.category.name !== "Home" && (
-                <Link
+              {item.category.name !== "Home" }
+              <Link
                 to={`${
                   item.category.name == 'Home'
                     ? '/'
@@ -270,8 +270,6 @@ function MenuMobileNav({menu, aicoMenu, onClose, locale}) {
               >
                 {translate(item.category.name, locale?.language)}
               </Link>
-              ) }
-              
               {item?.category?.subCategories?.length > 0 && (
                 <div
                   onClick={megaMenuMobileClick}
