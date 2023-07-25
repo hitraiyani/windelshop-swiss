@@ -139,13 +139,21 @@ export function FiltersDrawer({
 
       default:
         const to = getFilterLink(filter, option.input, params, location);
-        console.log(filter)
+        
+        const productVendor = params.getAll(`productVendor`);
         return (
-          <Link className="block" prefetch="intent" to={to}>
-            {option.label} 
-            {(filter.label == "Marke" || filter.label == "Marque")  && <>{ "("+option.count+")"}</>}
-             
-          </Link>
+          <>
+           {(filter.label == "Marke" || filter.label == "Marque")  && (
+             <Link className="block" prefetch="intent" to={to}>
+             <input value = {option.label}  type = "checkbox" checked={(productVendor.includes(option.label)) ? "checked" :"" }  />
+              {option.label} 
+             {(filter.label == "Marke" || filter.label == "Marque")  && <>{ "("+option.count+")"}</>}
+              
+           </Link>
+           )}
+          
+          </>
+         
         );
     }
   };
@@ -313,6 +321,15 @@ function getAppliedFilterLink(filter, params, location) {
   const paramsClone = new URLSearchParams(params);
   if (filter.urlParam.key === 'variantOption') {
     const variantOptions = paramsClone.getAll('variantOption');
+    const filteredVariantOptions = variantOptions.filter(
+      (options) => !options.includes(filter.urlParam.value),
+    );
+    paramsClone.delete(filter.urlParam.key);
+    for (const filteredVariantOption of filteredVariantOptions) {
+      paramsClone.append(filter.urlParam.key, filteredVariantOption);
+    }
+  }else if (filter.urlParam.key === 'productVendor') {
+    const variantOptions = paramsClone.getAll('productVendor');
     const filteredVariantOptions = variantOptions.filter(
       (options) => !options.includes(filter.urlParam.value),
     );
@@ -520,12 +537,24 @@ function filterInputToParams(type, rawInput, params) {
       if (input.price.max) params.set('maxPrice', input.price.max);
       break;
     case 'LIST':
+      
       Object.entries(input).forEach(([key, value]) => {
-        if (typeof value === 'string') {
+        if(key == "productVendor"){
+          const name=key;
+          const values= value; 
+          const allVariants = params.getAll(`productVendor`);
+          const newVariant = `${values}`;
+          if (!allVariants.includes(newVariant)) {
+            params.append('productVendor', newVariant);
+          }
+        }else if (typeof value === 'string') {
           params.set(key, value);
         } else if (typeof value === 'boolean') {
+          console.log("bbbb");
           params.set(key, value.toString());
         } else {
+          
+         
           const {name, value: val} = value;
           const allVariants = params.getAll(`variantOption`);
           const newVariant = `${name}:${val}`;
