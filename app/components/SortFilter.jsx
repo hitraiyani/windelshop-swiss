@@ -22,6 +22,7 @@ import {
   IconGrid,
   IconList,
   IconArrowRight2,
+  IconCheckMark,
 } from '~/components';
 import {Image} from '@shopify/hydrogen';
 import {getMenuHandle, translate} from '~/lib/utils';
@@ -141,10 +142,16 @@ export function FiltersDrawer({
         const to = getFilterLink(filter, option.input, params, location);
         console.log(filter)
         return (
-          <Link className="block" prefetch="intent" to={to}>
+          <Link className="flex gap-[5px] items-center" prefetch="intent" to={to}>
+            <div className='checkbox w-[20px] h-[20px] border-[1px] border-gray-500'>
+              <IconCheckMark className="w-full h-full" />
+           </div> 
+           <span>
             {option.label} 
+           </span>
+           <span className="ml-auto">
             {(filter.label == "Marke" || filter.label == "Marque")  && <>{ "("+option.count+")"}</>}
-             
+           </span>
           </Link>
         );
     }
@@ -356,7 +363,7 @@ const PriceRangeSlider = ({ min, max, onChangeMin, onChangeMax }) => {
 
   return (
     <div className="flex flex-col">
-      <div className="mb-4 flex flex-wrap gap-[5px] items-center">
+      <div className="mb-4 flex flex-wrap gap-[5px] items-center !hidden">
         <span className="block min-w-[50px]">from</span>
         <input
           name="maxPrice"
@@ -367,7 +374,7 @@ const PriceRangeSlider = ({ min, max, onChangeMin, onChangeMax }) => {
           onChange={(e) => handleChange([parseFloat(e.target.value), values[1]])}
         />
       </div>
-      <div className="flex flex-wrap gap-[5px] items-center">
+      <div className="flex flex-wrap gap-[5px] items-center !hidden">
         <span className="block min-w-[50px]">to</span>
         <input
           name="minPrice"
@@ -379,7 +386,7 @@ const PriceRangeSlider = ({ min, max, onChangeMin, onChangeMax }) => {
         />
       </div>
       {/* Range Slider */}
-      <div className="mt-4" style={{ overflow: 'hidden' }}>
+      <div className="p-[10px]">
         <Range
           values={values}
           step={1}
@@ -392,7 +399,7 @@ const PriceRangeSlider = ({ min, max, onChangeMin, onChangeMax }) => {
               style={{
                 ...props.style,
                 height: '6px',
-                background: '#ccc',
+                background: '#ccddf1',
                 borderRadius: '4px',
               }}
             >
@@ -407,7 +414,7 @@ const PriceRangeSlider = ({ min, max, onChangeMin, onChangeMax }) => {
                 height: '18px',
                 width: '18px',
                 borderRadius: '50%',
-                background: '#fff',
+                background: '#1C5F7B',
                 boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
               }}
             />
