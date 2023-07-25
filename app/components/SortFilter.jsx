@@ -22,6 +22,7 @@ import {
   IconGrid,
   IconList,
   IconArrowRight2,
+  IconCheckMark,
 } from '~/components';
 import {Image} from '@shopify/hydrogen';
 import {getMenuHandle, translate} from '~/lib/utils';
@@ -138,22 +139,31 @@ export function FiltersDrawer({
         return <PriceRangeFilter min={min} max={max}  />;
 
       default:
-        const to = getFilterLink(filter, option.input, params, location);
-        
+        var to = getFilterLink(filter, option.input, params, location);
+       
         const productVendor = params.getAll(`productVendor`);
+        
+        const availabeStock = params.getAll(`available`);
+        
+        // if (productVendor.includes(option.label)){
+        //   to = getAppliedFilterLink(filter, params, location);
+        // }
         return (
-          <>
-           {(filter.label == "Marke" || filter.label == "Marque")  && (
-             <Link className="block" prefetch="intent" to={to}>
-             <input value = {option.label}  type = "checkbox" checked={(productVendor.includes(option.label)) ? "checked" :"" }  />
-              {option.label} 
-             {(filter.label == "Marke" || filter.label == "Marque")  && <>{ "("+option.count+")"}</>}
+          <Link className="flex gap-[5px] items-center" prefetch="intent" to={to}>
+            <div className='checkbox w-[20px] h-[20px] border-[1px] border-gray-500'>
               
-           </Link>
-           )}
-          
-          </>
-         
+            {(productVendor.includes(option.label)) ?  <IconCheckMark className="w-full h-full" />  :""}
+              
+              {(option.id == "filter.v.availability.1") && availabeStock.includes("true") && (<IconCheckMark className="w-full h-full" />) }
+              {(option.id == "filter.v.availability.0") && availabeStock.includes("false") && (<IconCheckMark className="w-full h-full" />) }
+           </div> 
+           <span>
+            {option.label} 
+           </span>
+           <span className="ml-auto">
+            {(filter.label == "Marke" || filter.label == "Marque")  && <>{ "("+option.count+")"}</>}
+           </span>
+          </Link>
         );
     }
   };
@@ -363,7 +373,7 @@ function getFilterLink(filter, rawInput, params, location) {
 }
 
 const PriceRangeSlider = ({ min, max, onChangeMin, onChangeMax }) => {
-  const [values, setValues] = useState([min, max]);
+  const [values, setValues] = useState(["0", max]);
 
   const handleChange = (values) => {
     setValues(values);
@@ -373,7 +383,7 @@ const PriceRangeSlider = ({ min, max, onChangeMin, onChangeMax }) => {
 
   return (
     <div className="flex flex-col">
-      <div className="mb-4 flex flex-wrap gap-[5px] items-center">
+      <div className="mb-4 flex flex-wrap gap-[5px] items-center !hidden">
         <span className="block min-w-[50px]">from</span>
         <input
           name="maxPrice"
@@ -384,7 +394,7 @@ const PriceRangeSlider = ({ min, max, onChangeMin, onChangeMax }) => {
           onChange={(e) => handleChange([parseFloat(e.target.value), values[1]])}
         />
       </div>
-      <div className="flex flex-wrap gap-[5px] items-center">
+      <div className="flex flex-wrap gap-[5px] items-center !hidden">
         <span className="block min-w-[50px]">to</span>
         <input
           name="minPrice"
@@ -396,10 +406,10 @@ const PriceRangeSlider = ({ min, max, onChangeMin, onChangeMax }) => {
         />
       </div>
       {/* Range Slider */}
-      <div className="mt-4" style={{ overflow: 'hidden' }}>
+      <div className="p-[10px]">
         <Range
           values={values}
-          step={1}
+          step={50}
           min={min}
           max={max}
           onChange={(values) => handleChange(values)}
@@ -409,7 +419,7 @@ const PriceRangeSlider = ({ min, max, onChangeMin, onChangeMax }) => {
               style={{
                 ...props.style,
                 height: '6px',
-                background: '#ccc',
+                background: '#ccddf1',
                 borderRadius: '4px',
               }}
             >
@@ -424,7 +434,7 @@ const PriceRangeSlider = ({ min, max, onChangeMin, onChangeMax }) => {
                 height: '18px',
                 width: '18px',
                 borderRadius: '50%',
-                background: '#fff',
+                background: '#1C5F7B',
                 boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
               }}
             />
@@ -483,7 +493,12 @@ function PriceRangeFilter({max, min}) {
     setMinPrice(newMinPrice);
   };
   const handleChangeMinPrice = (min) => {
-    setMinPrice(min);
+    if(min === 0){
+      setMinPrice(1); 
+    }else{
+      setMinPrice(min);
+    }
+     
   };
 
   // Function to handle changes in max price
@@ -543,14 +558,21 @@ function filterInputToParams(type, rawInput, params) {
           const name=key;
           const values= value; 
           const allVariants = params.getAll(`productVendor`);
+         // const paramsClone = new URLSearchParams(params);
+           var filteredArray = allVariants.filter(function(e) { return e !== values })
+          
           const newVariant = `${values}`;
           if (!allVariants.includes(newVariant)) {
             params.append('productVendor', newVariant);
+          }else{
+            params.delete('productVendor');
+            filteredArray.forEach(function (item, index) {
+              params.append('productVendor', item);
+            });
           }
         }else if (typeof value === 'string') {
           params.set(key, value);
         } else if (typeof value === 'boolean') {
-          console.log("bbbb");
           params.set(key, value.toString());
         } else {
           
