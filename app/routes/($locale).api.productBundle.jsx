@@ -59,29 +59,30 @@ export async function loader({request, context: {storefront}}) {
             language: storefront.i18n.language,
           },
         });
+        //console.log(variant_products);
         if (variant_products?.id) {
-          const regex = /Gr\.\s?\d+\+?/;
-          const match = variant_products.title.match(regex);
-          if (match) {
-            const grValue = match[0];
-            productSizeKeyValue.push({'lable' : grValue, 'handle' : variant_products.handle, 'title' :  variant_products.title, 'is_selected' : false});
-          }
+          // const regex = /Gr\.\s?\d+\+?/;
+          // const match = variant_products.title.match(regex);
+          // if (match) {
+            //const grValue = match[0];
+            productSizeKeyValue.push({'lable' : variant_products?.title, 'handle' : variant_products.handle, 'title' :  variant_products.title, 'is_selected' : false});
+          // }
         }
       }),
     );
     if(productSizeKeyValue.length > 0) {
-      const regex = /Gr\.\s?\d+\+?/;
-      const match = product.title.match(regex);
-      if (match) {
-        const grValue = match[0];
-        productSizeKeyValue.push({'lable' : grValue, 'handle' : product.handle, 'title' :  product.title, 'is_selected' : true});
-      }
+      // const regex = /Gr\.\s?\d+\+?/;
+      // const match = product.title.match(regex);
+      // if (match) {
+      //   const grValue = match[0];
+        productSizeKeyValue.push({'lable' : product?.title, 'handle' : product.handle, 'title' :  product.title, 'is_selected' : true});
+      // }
     }
-    productSizeKeyValue.sort((a, b) => {
-      const labelA = parseLabel(a.lable);
-      const labelB = parseLabel(b.lable);
-      return labelA - labelB;
-    });
+    // productSizeKeyValue.sort((a, b) => {
+    //   const labelA = parseLabel(a.lable);
+    //   const labelB = parseLabel(b.lable);
+    //   return labelA - labelB;
+    // });
 
     const productPackageKeyValue = [];
     await Promise.all(
