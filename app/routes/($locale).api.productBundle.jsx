@@ -36,10 +36,10 @@ export async function loader({request, context: {storefront}}) {
         language: storefront.i18n.language,
       },
     });
+
     
-    
-    const variantProducts = product?.variant_products?.value ? product?.variant_products?.value.split('|') : [];
-    const connectedProducts = product?.connected_products?.value ? product?.connected_products?.value.split('|') : [];
+    const variantProducts = product?.first_cross_reference_tab?.value ? product?.first_cross_reference_tab?.value.split('|') : [];
+    const connectedProducts = product?.second_cross_reference_tab?.value ? product?.second_cross_reference_tab?.value.split('|') : [];
   
     if (!product?.id) {
       return json({
@@ -307,6 +307,12 @@ const PRODUCT_QUERY = `#graphql
         value
       }
       variant_products : metafield(namespace: "custom_fields", key: "variant_products") {
+        value
+      }
+      second_cross_reference_tab : metafield(namespace: "custom_fields", key: "second_cross_reference_tab") {
+        value
+      }
+      first_cross_reference_tab : metafield(namespace: "custom_fields", key: "first_cross_reference_tab") {
         value
       }
       connected_products : metafield(namespace: "custom_fields", key: "connected_products") {

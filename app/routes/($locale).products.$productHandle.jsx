@@ -568,6 +568,13 @@ export function ProductForm({
           <div className="flex flex-col xl:flex-row gap-[17px] w-full items-end">
             {productSizeKeyValueData.length > 0 && (
               <div className="relative w-full xl:w-[40%]">
+                <Heading
+                    as="legend"
+                    size="lead"
+                    className="text-[14px] text-[#666666] uppercase font-bold font-['Open_Sans'] mb-[10px]"
+                  >
+                    {translate("cros_sell",locale)}
+                  </Heading>
                 <Listbox>
                   {({open}) => (
                     <>
