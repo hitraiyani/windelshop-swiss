@@ -93,7 +93,7 @@ export function ProductGallery({media, dicountedPr,  className}) {
 
               return (
                 <SwiperSlide key={i}>
-                  <div className='relative p-[38px] bg-[#E7EFFF4D] bg-opacity-30 rounded-[10px]'
+                  <div className='relative p-[38px] bg-[#E5EFD44D] bg-opacity-30 rounded-[10px]'
                     // @ts-ignore
                     key={med.id || med.image.id}
                   >

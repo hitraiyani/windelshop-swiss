@@ -32,7 +32,7 @@ export function HeroSlider({slides}) {
                 <div className="slide-item h-full">
                   <div className="slide-item-inner flex flex-col-reverse lg:flex-row overflow-hidden rounded-[30px] h-full">
                     <div className="content-left w-full lg:w-[40%]">
-                      <div className="col-inner bg-[#E7EFFF] pt-[20px] lg:pt-[29px] pb-[20px] lg:pb-[37px] px-[30px] lg:px-[70px] flex flex-col h-full">
+                      <div className="col-inner bg-[#E5EFD4] pt-[20px] lg:pt-[29px] pb-[20px] lg:pb-[37px] px-[30px] lg:px-[70px] flex flex-col h-full">
                         <div className="brand-logo w-full pb-[50px] xl:pb-[95px] relative overflow-hidden">
                           <img
                             className="w-full h-full block object-contain absolute inset-0 object-left-top"
@@ -124,11 +124,11 @@ export function HeroSlider({slides}) {
           </Swiper>
           <div
             id="swiper-button-prev-heroslider"
-            className="absolute left-[-20px] md:left-[-36px] top-1/2 translate-y-[-130%] md:translate-y-[-30%] min-[992px]:translate-y-[20%] lg:-translate-y-1/2 w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+            className="absolute left-[-20px] md:left-[-36px] top-1/2 translate-y-[-130%] md:translate-y-[-30%] min-[992px]:translate-y-[20%] lg:-translate-y-1/2 w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#5E8127] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
           ><IconChevronRight className={'w-[20px] h-[20px] xl:w-[14px] xl:h-[27px] rotate-[180deg] relative left-[-1px]'} /></div>
           <div
             id="swiper-button-next-heroslider"
-            className="absolute right-[-20px] md:right-[-36px] top-1/2 translate-y-[-130%] md:translate-y-[-30%] min-[992px]:translate-y-[20%] lg:-translate-y-1/2 w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+            className="absolute right-[-20px] md:right-[-36px] top-1/2 translate-y-[-130%] md:translate-y-[-30%] min-[992px]:translate-y-[20%] lg:-translate-y-1/2 w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#5E8127] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
           ><IconChevronRight className={'w-[20px] h-[20px] xl:w-[14px] xl:h-[27px] relative left-[3px]'} /></div>
         </div>
       </div>

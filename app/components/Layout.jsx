@@ -389,9 +389,9 @@ function MobileHeader({title, isHome, openCart, openMenu, locale}) {
   return (
     <header
       role="banner"
-      className={`${isHome ? '' : ''} bg-[#E7EFFF] relative lg:hidden`}
+      className={`${isHome ? '' : ''} bg-[#F0F4E6] relative lg:hidden`}
     >
-      <div className="top flex bg-[#CCDDF1] py-[10px] px-[10px] md:px-[40px]">
+      <div className="top flex bg-[#E5EFD4] py-[10px] px-[10px] md:px-[40px]">
         <div className="lang flex-1">
           <Menu as="div" className="relative inline-block text-left">
             <div>
@@ -601,7 +601,7 @@ function MobileHeader({title, isHome, openCart, openMenu, locale}) {
       <div
         className={`${
           isActiveSearchMobile ? 'block' : 'hidden'
-        } search-box absolute top-full left-0 right-0 w-full bg-[#E7EFFF] py-[20px] z-[10] border-t-[2px] border-[#ccddf1]`}
+        } search-box absolute top-full left-0 right-0 w-full bg-[#F0F4E6] py-[20px] z-[10] border-t-[2px] border-[#E5EFD4]`}
       >
         <div className="container">
           <div className="flex items-center gap-[10px]">
@@ -611,7 +611,7 @@ function MobileHeader({title, isHome, openCart, openMenu, locale}) {
               className="flex flex-auto relative"
             >
               <Input
-                className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[16px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] !text-left !block`}
+                className={`w-full h-[50px] rounded-[100px] !bg-[#E5EFD4] text-black text-[16px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] !text-left !block`}
                 type="search"
                 variant="minisearch"
                 placeholder="Suche"
@@ -728,7 +728,7 @@ export function ProductSearchLi({products, searchOpen, locale}) {
 
 function TopbarHeader({toBar}) {
   return (
-    <div className="top-bar-sec bg-[#CCDDF1] py-[10px] hidden lg:block ">
+    <div className="top-bar-sec bg-[#284181] py-[10px] hidden lg:block ">
       <div className="container !max-w-[1420px]">
         <div className="top-bar-inner">
           <ul className="topbar-list flex justify-between flex-nowrap overflow-auto gap-[15px]">
@@ -741,7 +741,7 @@ function TopbarHeader({toBar}) {
                 />
               </span>
               <span
-                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[14px] text-black"
+                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[14px] text-white"
                 dangerouslySetInnerHTML={{
                   __html: toHTML(toBar?.section_1?.value),
                 }}
@@ -756,7 +756,7 @@ function TopbarHeader({toBar}) {
                 />
               </span>
               <span
-                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[14px] text-black"
+                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[14px] text-white"
                 dangerouslySetInnerHTML={{
                   __html: toHTML(toBar?.section_2?.value),
                 }}
@@ -771,7 +771,7 @@ function TopbarHeader({toBar}) {
                 />
               </span>
               <span
-                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[14px] text-black"
+                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[14px] text-white"
                 dangerouslySetInnerHTML={{
                   __html: toHTML(toBar?.section_3?.value),
                 }}
@@ -786,7 +786,7 @@ function TopbarHeader({toBar}) {
                 />
               </span>
               <span
-                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[14px] text-black"
+                className="name uppercase font-medium text-[11px] tracking-[0.5px] xl:text-[14px] text-white"
                 dangerouslySetInnerHTML={{
                   __html: toHTML(toBar?.section_4?.value),
                 }}
@@ -805,7 +805,7 @@ function classNames(...classes) {
 
 function SubMegaMenu({subMenus, onClose, locale}) {
   return (
-    <div className="mega-menu absolute bg-[#CCDDF1] rounded-[20px] z-[99] ">
+    <div className="mega-menu absolute bg-[#E5EFD4] rounded-[20px] z-[99] ">
       <div className="mega-menu-inner container">
         <div className="mega-menu-lists flex flex-wrap py-[30px] lg:py-[40px] xl:py-[60px] 2xl:py-[70px] gap-y-[15px] lg:gap-y-[30px] xl:gap-y-[50px] 2xl:gap-y-[70px] -mx-[15px]">
           {subMenus.map((subItem, subIndex) => {
@@ -987,7 +987,7 @@ const handleMouseLeave = () => {
       role="banner"
       className={`${isHome ? '' : ''} ${
         !isHome && y > 50 && '' ? '' : ''
-      } relative top-0 bg-[#E7EFFF] py-[20px]  rounded-[0_0_20px_20px] hidden lg:block`}
+      } relative top-0 bg-[#F0F4E6] py-[20px]  rounded-[0_0_20px_20px] hidden lg:block`}
     >
       <div className="container">
         <div className="header-row gap-[33px] flex flex-col">
@@ -1136,7 +1136,7 @@ const handleMouseLeave = () => {
               {/* {title} */}
               <img
                 className="w-full h-auto"
-                src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/windelshop-2022-de_png.png?v=1685435114"
+                src="https://cdn.shopify.com/s/files/1/0763/5307/7525/files/windelshop-2022-de.png?v=1690445424"
                 alt=""
               />
             </Link>
@@ -1146,7 +1146,7 @@ const handleMouseLeave = () => {
               className="flex flex-auto max-w-[575px] relative"
             >
               <Input
-                className={`w-full h-[50px] rounded-[100px] !bg-[#CCDDF1] text-black text-[16px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] border-none ${
+                className={`w-full h-[50px] rounded-[100px] !bg-[#E5EFD4] text-black text-[16px] font-medium leading-none placeholder:!text-black placeholder:!opacity-100 focus:!border-none !pl-[50px] !pr-[20px] focus:!ring-0 focus:!border-[#5391d9] border-none ${
                   isSearchOpen || searchString.length > 0
                     ? '!text-left'
                     : '!text-center'
@@ -1201,7 +1201,7 @@ const handleMouseLeave = () => {
                           ? '/ts'
                           : getMenuHandle(item.category)
                       }`}
-                      className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                      className="bg-transparent hover:bg-[#5E8127] hover:text-white rounded-[10px] text-[14px] xl:text-[16px] text-[#5E8127] border-[1px] border-[#5E8127] font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                     >
                       {translate(item.category.name, locale?.language)}
                     </Link>)}
@@ -1231,7 +1231,7 @@ const handleMouseLeave = () => {
               {/* <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#5E8127] hover:bg-[#E5EFD4] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Home
                 </a>
@@ -1239,11 +1239,11 @@ const handleMouseLeave = () => {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#5E8127] hover:bg-[#E5EFD4] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Windeln & Feuchttücher
                 </a>
-                <div className="mega-menu absolute bg-[#CCDDF1] rounded-[20px] z-[99]">
+                <div className="mega-menu absolute bg-[#E5EFD4] rounded-[20px] z-[99]">
                   <div className="mega-menu-inner container">
                     <div className="mega-menu-lists flex flex-wrap py-[70px] gap-y-[30px] -mx-[15px]">
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] px-[15px]">
@@ -1360,7 +1360,7 @@ const handleMouseLeave = () => {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#5E8127] hover:bg-[#E5EFD4] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Damenhygiene & Inkontinenz
                 </a>
@@ -1368,7 +1368,7 @@ const handleMouseLeave = () => {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#5E8127] hover:bg-[#E5EFD4] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Waschmittel & Weichspüler
                 </a>
@@ -1376,11 +1376,11 @@ const handleMouseLeave = () => {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#5E8127] hover:bg-[#E5EFD4] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Pflege & Hygiene
                 </a>
-                <div className="mega-menu absolute bg-[#CCDDF1] rounded-[20px] z-[99]">
+                <div className="mega-menu absolute bg-[#E5EFD4] rounded-[20px] z-[99]">
                   <div className="mega-menu-inner container">
                     <div className="mega-menu-lists flex flex-wrap py-[30px] lg:py-[40px] xl:py-[60px] 2xl:py-[70px] gap-y-[15px] lg:gap-y-[30px] xl:gap-y-[50px] 2xl:gap-y-[70px] -mx-[15px]">
                       <div className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]">
@@ -1564,7 +1564,7 @@ const handleMouseLeave = () => {
               <div className="menu-item flex-auto">
                 <a
                   href="#"
-                  className="bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                  className="bg-[#5E8127] hover:bg-[#E5EFD4] hover:text-black rounded-[10px] text-[14px] xl:text-[16px] text-white font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
                 >
                   Abos & Gutscheine
                 </a>
@@ -1576,7 +1576,7 @@ const handleMouseLeave = () => {
                   target={item.target}
                   prefetch="intent"
                   className={({isActive}) =>
-                    isActive ? 'bg-[#CCDDF1] rounded-[10px] text-[16px] text-black font-bold leading-[1.2] h-[53px] flex items-center justify-center text-center p-[15px] flex-auto' : 'bg-[#1C5F7B] hover:bg-[#CCDDF1] hover:text-black rounded-[10px] text-[16px] text-white font-bold leading-[1.2] h-[53px] flex items-center justify-center text-center p-[15px] transition-all duration-500'
+                    isActive ? 'bg-[#E5EFD4] rounded-[10px] text-[16px] text-black font-bold leading-[1.2] h-[53px] flex items-center justify-center text-center p-[15px] flex-auto' : 'bg-[#5E8127] hover:bg-[#E5EFD4] hover:text-black rounded-[10px] text-[16px] text-white font-bold leading-[1.2] h-[53px] flex items-center justify-center text-center p-[15px] transition-all duration-500'
                   }
                 >
                   {item.title}
@@ -1633,13 +1633,13 @@ function Badge({openCart, dark, count, cart}) {
   const BadgeCounter = useMemo(
     () => (
       <>
-        <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#1c5f7b] hover:text-black transition-all duration-500'} />
+        <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'} />
         <div
           className={`${
             dark ? '' : ''
           } relative flex flex-col items-center header-cart`}
         >
-          {count>0 && <div className="bg-[#ccddf1] absolute counter w-[15px] lg:w-[20px] h-[15px] lg:h-[20px] left-[50%] -translate-x-1/2 rounded-full flex items-center justify-center leading-none text-[12px] lg:text-[14px] bottom-[18px] lg:bottom-[23px] text-[#1c5f7b] font-bold">
+          {count>0 && <div className="bg-[#E5EFD4] absolute counter w-[15px] lg:w-[20px] h-[15px] lg:h-[20px] left-[50%] -translate-x-1/2 rounded-full flex items-center justify-center leading-none text-[12px] lg:text-[14px] bottom-[18px] lg:bottom-[23px] text-[#5E8127] font-bold">
             <span>{count || 0}</span>
           </div>}
           {/* <span>
@@ -1680,7 +1680,7 @@ function Footer({menu, locale}) {
       role="contentinfo"
       className={`site-footer !p-0 !gap-0 mt-[20px] md:mt-[30px] xl:mt-[40px] 2xl:mt-[50px] border-none`}
     >
-      <div className="footer-top bg-[#1C5F7B] rounded-[30px_30px_0px_0px] pt-[52px] pb-[40px]">
+      <div className="footer-top bg-[#5E8127] rounded-[30px_30px_0px_0px] pt-[52px] pb-[40px]">
         <div className="container">
           <div className="footer-row-wrap">
             <div className="footer-row flex flex-row flex-wrap xl:flex-nowrap mx-[-15px] gap-y-[30px] md:gap-y-[40px] xl:gap-x-[20px] 2xl:gap-x-[70px]">
@@ -1706,13 +1706,13 @@ function Footer({menu, locale}) {
                               'news_later',
                               locale?.language,
                             )}
-                            className="w-full h-[50px] rounded-[100px] !bg-[#E7EFFF] text-[#1C5F7B] text-[16px] font-medium leading-none placeholder:!text-[#1C5F7B] placeholder:!opacity-100 focus:!border-white px-[20px] py-[16px] text-left !border-[#E7EFFF] focus:!ring-0"
+                            className="w-full h-[50px] rounded-[100px] !bg-[#F0F4E6] text-[#5E8127] text-[16px] font-medium leading-none placeholder:!text-[#5E8127] placeholder:!opacity-100 focus:!border-white px-[20px] py-[16px] text-left !border-[#F0F4E6] focus:!ring-0"
                           />
                         </div>
                         <div className="form-control">
                           <button
                             type="submit"
-                            className="bg-[#E7EFFF] rounded-full w-[50px] h-[50px] leading-none text-[12px] text-[#1C5F7B] text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center mx-auto"
+                            className="bg-[#F0F4E6] rounded-full w-[50px] h-[50px] leading-none text-[12px] text-[#5E8127] text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center mx-auto"
                           >
                             <span className="icon w-[40px] h-[40px]">
                               <IconArrowRight2 className={'w-full h-full'} />
@@ -1736,7 +1736,7 @@ function Footer({menu, locale}) {
                             <span className="text-[16px] text-white leading-none font-semibold ">
                               4.7
                             </span>
-                            <div className="star flex text-[#CCDDF1]">
+                            <div className="star flex text-[#E5EFD4]">
                               <IconStar2 className="w-[16px] h-[16px]" />
                               <IconStar2 className="w-[16px] h-[16px]" />
                               <IconStar2 className="w-[16px] h-[16px]" />
@@ -1791,7 +1791,7 @@ function Footer({menu, locale}) {
                           href="#"
                           className="text-[12px] flex gap-[10px] text-[#CCCCCC] font-normal items-center hover:text-white transition-all duration-500"
                         >
-                          <span className="icon w-[31px] h-[31px] border-[2px] rounded-full border-[#E7EFFF] p-[7px] text-[#CCDDF1]">
+                          <span className="icon w-[31px] h-[31px] border-[2px] rounded-full border-[#F0F4E6] p-[7px] text-[#E5EFD4]">
                             <IconMap className={'w-full h-full'} />
                           </span>
                           <span className="text flex-1">
@@ -1804,7 +1804,7 @@ function Footer({menu, locale}) {
                           href="#"
                           className="text-[12px] flex gap-[10px] text-[#CCCCCC] font-normal items-center hover:text-white transition-all duration-500"
                         >
-                          <span className="icon w-[31px] h-[31px] border-[2px] rounded-full border-[#E7EFFF] p-[7px] text-[#CCDDF1]">
+                          <span className="icon w-[31px] h-[31px] border-[2px] rounded-full border-[#F0F4E6] p-[7px] text-[#E5EFD4]">
                             <IconPhone className={'w-full h-full'} />
                           </span>
                           <span className="text flex-1">
@@ -1817,7 +1817,7 @@ function Footer({menu, locale}) {
                           href="#"
                           className="text-[12px] flex gap-[10px] text-[#CCCCCC] font-normal items-center hover:text-white transition-all duration-500"
                         >
-                          <span className="icon w-[31px] h-[31px] border-[2px] rounded-full border-[#E7EFFF] p-[7px] text-[#CCDDF1]">
+                          <span className="icon w-[31px] h-[31px] border-[2px] rounded-full border-[#F0F4E6] p-[7px] text-[#E5EFD4]">
                             <IconMail className={'w-full h-full'} />
                           </span>
                           <span className="text flex-1">
@@ -1830,7 +1830,7 @@ function Footer({menu, locale}) {
                   <div className="social-links flex flex-wrap gap-[10px] mt-[30px]">
                     <a
                       href="#"
-                      className="w-[36px] text-[#E7EFFF] hover:text-white transition-all duration-500"
+                      className="w-[36px] text-[#F0F4E6] hover:text-white transition-all duration-500"
                     >
                       <IconFacebook className={'w-full h-full'} />
                     </a>
@@ -1843,9 +1843,9 @@ function Footer({menu, locale}) {
       </div>
       {/* <FooterMenu menu={menu} /> */}
       {/* <CountrySelector /> */}
-      <div className={`footer-bottom bg-[#CCDDF1] py-[15px]`}>
+      <div className={`footer-bottom bg-[#E5EFD4] py-[15px]`}>
         <div className="container">
-          <p className="text-[12px] text-[#1C5F7B] font-normal text-center">
+          <p className="text-[12px] text-[#5E8127] font-normal text-center">
             {new Date().getFullYear()} Copyright &copy; Homerunner GmbH,
             Windelshop & Swilet – All Rights Reserved
           </p>

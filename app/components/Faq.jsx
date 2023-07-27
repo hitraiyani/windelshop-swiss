@@ -6,7 +6,7 @@ export function Faq({className, data}) {
     <section className={`${className} faq-section py-[15px] md:py-[30px]`}>
       <div className="container">
         <div className="title-wrap mb-[22px]">
-          <h2 className="text-[#1C5F7B] text-[24px] font-bold text-left mb-[20px]">
+          <h2 className="text-[#5E8127] text-[24px] font-bold text-left mb-[20px]">
             {data?.title?.value}
           </h2>
           <div

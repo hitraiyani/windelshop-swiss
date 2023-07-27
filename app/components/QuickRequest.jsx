@@ -62,10 +62,10 @@ export function QuickRequest({className,locale}) {
                 <ul className="flex flex-col gap-[23px]">
                   <li>
                     <a
-                      href="#"
-                      className="text-[18px] flex gap-[14px] text-black font-normal items-center hover:text-[#1C5F7B]"
+                      href="tel:052 720 58 58"
+                      className="text-[18px] flex gap-[14px] text-black font-normal items-center hover:text-[#5E8127]"
                     >
-                      <span className="icon w-[35px] h-[35px] border-[2px] rounded-full border-black p-[7px] text-[#1C5F7B]">
+                      <span className="icon w-[35px] h-[35px] border-[2px] rounded-full border-[#5E8127] p-[7px] text-[#5E8127]">
                         <IconPhone className={'w-full h-full'} />
                       </span>
                       <span className="text flex-1">{translate("phone_number",locale)}</span>
@@ -73,10 +73,10 @@ export function QuickRequest({className,locale}) {
                   </li>
                   <li>
                     <a
-                      href="#"
-                      className="text-[18px] flex gap-[14px] text-black font-normal items-center hover:text-[#1C5F7B]"
+                      href="mailto:abc@gmail.com"
+                      className="text-[18px] flex gap-[14px] text-black font-normal items-center hover:text-[#5E8127]"
                     >
-                      <span className="icon w-[35px] h-[35px] border-[2px] rounded-full border-black p-[7px] text-[#1C5F7B]">
+                      <span className="icon w-[35px] h-[35px] border-[2px] rounded-full border-[#5E8127] p-[7px] text-[#5E8127]">
                         <IconMail className={'w-full h-full'} />
                       </span>
                       <span className="text flex-1">Email senden</span>
@@ -87,7 +87,7 @@ export function QuickRequest({className,locale}) {
             </div>
           </div>
           <div className="form-col w-full lg:flex-1">
-            <div className="col-inner bg-[#CCDDF1] rounded-[30px] px-[30px] md:px-[30px] py-[30px] md:py-[30px] lg:py-[40px] 2xl:py-[61px]">
+            <div className="col-inner bg-[#E5EFD4] rounded-[30px] px-[30px] md:px-[30px] py-[30px] md:py-[30px] lg:py-[40px] 2xl:py-[61px]">
               <div className="form-wrap max-w-[795px] mx-auto">
                 {fetcher?.data?.status == true && (
                   <span className="text-green-700">
@@ -109,7 +109,7 @@ export function QuickRequest({className,locale}) {
                       <input
                         name="name"
                         {...register('name')}
-                        className="w-full h-[50px] rounded-[100px] !bg-white text-[#1C5F7B] text-[16px] font-medium leading-none placeholder:!text-[#1C5F7B] placeholder:!opacity-100 focus:!border-[#1C5F7B] px-[20px] py-[16px] text-left !border-white focus:!ring-0"
+                        className="w-full h-[50px] rounded-[100px] !bg-white text-[#5E8127] text-[16px] font-medium leading-none placeholder:!text-[#5E8127] placeholder:!opacity-100 focus:!border-[#5E8127] px-[20px] py-[16px] text-left !border-white focus:!ring-0"
                         type="text"
                         placeholder={translate('name',locale)}
                       />
@@ -119,7 +119,7 @@ export function QuickRequest({className,locale}) {
                       <input
                         name="email"
                         {...register('email')}
-                        className="w-full h-[50px] rounded-[100px] !bg-white text-[#1C5F7B] text-[16px] font-medium leading-none placeholder:!text-[#1C5F7B] placeholder:!opacity-100 focus:!border-[#1C5F7B] px-[20px] py-[16px] text-left !border-white focus:!ring-0"
+                        className="w-full h-[50px] rounded-[100px] !bg-white text-[#5E8127] text-[16px] font-medium leading-none placeholder:!text-[#5E8127] placeholder:!opacity-100 focus:!border-[#5E8127] px-[20px] py-[16px] text-left !border-white focus:!ring-0"
                         type="email"
                         placeholder={translate('email',locale)}
                       />
@@ -129,7 +129,7 @@ export function QuickRequest({className,locale}) {
                   <div className="form-group flex flex-col md:flex-row gap-[11px]">
                     <div className="form-control flex-1">
                       <textarea
-                        className="w-full rounded-[20px] !bg-white text-[#1C5F7B] text-[16px] font-medium leading-none placeholder:!text-[#1C5F7B] placeholder:!opacity-100 focus:!border-[#1C5F7B] px-[20px] py-[16px] text-left !border-white focus:!ring-0"
+                        className="w-full rounded-[20px] !bg-white text-[#5E8127] text-[16px] font-medium leading-none placeholder:!text-[#5E8127] placeholder:!opacity-100 focus:!border-[#5E8127] px-[20px] py-[16px] text-left !border-white focus:!ring-0"
                         name="inquiry"
                         {...register('inquiry')}
                         id=""
@@ -143,7 +143,7 @@ export function QuickRequest({className,locale}) {
                   <div className="submit-btn xl:mt-[15px]">
                     <button
                       type="submit"
-                      className="bg-[#1C5F7B] rounded-[30px] py-[2px] pl-[19px] pr-[10px] px-[20px] min-h-[36px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center"
+                      className="bg-[#5E8127] rounded-[30px] py-[2px] pl-[19px] pr-[10px] px-[20px] min-h-[36px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center"
                       disabled={fetcher.state === 'submitting'}
                     >
                       {fetcher.state === 'submitting' ? 'Submiting' : translate('send',locale)}

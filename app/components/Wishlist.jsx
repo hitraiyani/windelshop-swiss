@@ -138,7 +138,7 @@ export function CartDetails({layout, products, onClose,locale}) {
                                                quantity: 1,
                                              },
                                            ]}
-                                           className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
+                                           className='bg-[#5E8127] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
                                            data-test="add-to-cart"
                                          >
                                            <IconCart

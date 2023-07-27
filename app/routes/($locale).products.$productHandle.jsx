@@ -240,7 +240,7 @@ export default function Product() {
                 <div className="grid gap-2 mt-[7px] mb-[38px]">
                   <Heading
                     as="h1"
-                    className="text-[28px] text-[#0A627E] font-bold"
+                    className="text-[28px] text-[#5E8127] font-bold"
                   >
                     {/* {title} */}
                     {productTranslate(product,'title',language)}
@@ -262,7 +262,7 @@ export default function Product() {
                   }
                   locale={language}
                 />
-                <div className="tab-wrap border-t-[1px] border-[#E7EFFF] pt-[14px] lg:pt-[34px] mt-[35px]">
+                <div className="tab-wrap border-t-[1px] border-[#E5EFD4] pt-[14px] lg:pt-[34px] mt-[35px]">
                   <Tabs>
                    
                     <div label={translate("descriptionn",language)}>
@@ -301,7 +301,7 @@ export default function Product() {
                             </div>
                           </>
                         )}
-                        {/* <h4 className="text-[19px] text-[#0A627E] font-bold mb-[15px]">
+                        {/* <h4 className="text-[19px] text-[#5E8127] font-bold mb-[15px]">
                           Pampers Baby-Dry Gr.3 Midi 6-10kg (52 STK) Sparpack
                         </h4>
                         <div className="desc text-[#666666] text-[14px] font-normal mb-[24px] pro-detail-desc">
@@ -380,7 +380,7 @@ export default function Product() {
                 title={translate('you_may_like',language)}
                 locale={language}
                 className={
-                  'bg-[#E7EFFF] bg-opacity-30 mb-[-20px] md:mb-[-30px] xl:mb-[-40px] 2xl:mb-[-50px] !py-[25px] md:!py-[40px]'
+                  'bg-[#E5EFD4] bg-opacity-30 mb-[-20px] md:mb-[-30px] xl:mb-[-40px] 2xl:mb-[-50px] !py-[25px] md:!py-[40px]'
                 }
               />
             );
@@ -564,7 +564,7 @@ export function ProductForm({
         </div>
       </div>
       {(productSizeKeyValueData.length > 0 || productPackageKeyValueData.length > 0) && (
-        <div className="product-options-wrap border-t-[1px] border-[#E7EFFF] mt-[46px] pt-[37px] flex flex-row flex-wrap gap-y-[20px] gap-x-[52px]">
+        <div className="product-options-wrap border-t-[1px] border-[#E5EFD4] mt-[46px] pt-[37px] flex flex-row flex-wrap gap-y-[20px] gap-x-[52px]">
           <div className="flex flex-col xl:flex-row gap-[17px] w-full items-end">
             {productSizeKeyValueData.length > 0 && (
               <div className="relative w-full xl:w-[40%]">
@@ -592,7 +592,7 @@ export function ProductForm({
                       </Listbox.Button>
                       <Listbox.Options
                         className={clsx(
-                          'bg-[#e7efff] absolute bottom-12 z-30 grid h-48 w-full overflow-y-scroll rounded-t border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b border-[#18a1dc]',
+                          'bg-[#E5EFD4] absolute bottom-12 z-30 grid h-48 w-full overflow-y-scroll rounded-t border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b border-[#18a1dc]',
                           open ? 'max-h-48' : 'max-h-0',
                         )}
                       >
@@ -649,7 +649,7 @@ export function ProductForm({
                           to={`/products/${item.handle}`}
                           className={`border-[2px] border-[#18A1DC] flex items-center justify-center transition-all duration-500 text-[#18A1DC] text-[16px] leading-none h-full w-full rounded-[10px] font-bold font-["Open_Sans"] px-[15px] py-[10px] hover:opacity-100 min-w-[60px] ${
                             item.is_selected
-                              ? 'opacity-100 bg-[#E7EFFF]'
+                              ? 'opacity-100 bg-[#E5EFD4]'
                               : 'opacity-70'
                           }`}
                         >
@@ -680,7 +680,7 @@ export function ProductForm({
                             to={`/products/${item.handle}`}
                             className={`border-[2px] border-[#18A1DC] flex items-center justify-center transition-all duration-500 text-[#18A1DC] text-[16px] leading-none h-full w-full rounded-[10px] font-bold font-["Open_Sans"] px-[15px] py-[10px] hover:opacity-100 min-w-[60px] ${
                               item.is_selected
-                                ? 'opacity-100 bg-[#E7EFFF]'
+                                ? 'opacity-100 bg-[#E5EFD4]'
                                 : 'opacity-70'
                             }`}
                           >
@@ -697,7 +697,7 @@ export function ProductForm({
         </div>
       )}
       {filteredOption.length > 0 && (
-        <div className="product-options-wrap border-t-[1px] border-[#E7EFFF] mt-[46px] pt-[37px] flex flex-row flex-wrap gap-y-[20px] gap-x-[52px]">
+        <div className="product-options-wrap border-t-[1px] border-[#E5EFD4] mt-[46px] pt-[37px] flex flex-row flex-wrap gap-y-[20px] gap-x-[52px]">
           <ProductOptions
             options={product.options}
             searchParamsWithDefaults={searchParamsWithDefaults}
@@ -716,7 +716,7 @@ export function ProductForm({
                 <Button
                   variant="secondary"
                   disabled
-                  className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
+                  className='bg-[#5E8127] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
                 >
                   <Text>{translate("sold_out",locale)} </Text>
                 </Button>
@@ -728,7 +728,7 @@ export function ProductForm({
                       quantity: quantity,
                     },
                   ]}
-                  className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
+                  className='bg-[#5E8127] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
                   data-test="add-to-cart"
                   analytics={{
                     products: [productAnalytics],
@@ -744,8 +744,8 @@ export function ProductForm({
                     isWhishListAdded ? handleRemoveWishlist : handleAddWishlist
                   }
                   className={`flex items-center gap-[3px] ${
-                    isWhishListAdded ? 'text-[#0A627E]' : 'text-black'
-                  } uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]`}
+                    isWhishListAdded ? 'text-[#5E8127]' : 'text-black'
+                  } uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#5E8127]`}
                 >
                   <IconWhishlist className={'w-[11px] h-[10px]'} />+ {translate('wishlist',locale)}
                 </button>
@@ -756,8 +756,8 @@ export function ProductForm({
                       : handleaddToProductCompare
                   }
                   className={`flex items-center gap-[3px] ${
-                    isProductCompareAdded ? 'text-[#0A627E]' : 'text-black'
-                  } uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#0A627E]`}
+                    isProductCompareAdded ? 'text-[#5E8127]' : 'text-black'
+                  } uppercase leading-none text-[11px] font-semibold font-["Open_Sans"] transition-all duration-500 hover:text-[#5E8127]`}
                 >
                   <IconCompar className={'w-[14px] h-[11px]'} />+ {translate('compare',locale)}
                 </button>
@@ -815,7 +815,7 @@ function QuantityComponent({quantity, setQuantity,locale}) {
         onClick={decreaseQuantity}
         disabled={quantity === 0}
         className={`${
-          quantity === 0 ? '!bg-[#E7EFFF]' : ''
+          quantity === 0 ? '!bg-[#E5EFD4]' : ''
         } w-[37px] h-[37px] flex items-center justify-center text-[14px] text-[#18A1DC] bg-[#CCDDF1] rounded-[100px] mr-[2px]`}
       >
         <IconMinus />
@@ -929,7 +929,7 @@ function ProductOptions({options, searchParamsWithDefaults}) {
                           searchParams={searchParamsWithDefaults}
                           className={clsx(
                             'border-[2px] border-[#18A1DC] flex items-center justify-center transition-all duration-500 text-[#18A1DC] text-[16px] leading-none h-full w-full rounded-[10px] font-bold font-["Open_Sans"] px-[15px] py-[10px] hover:opacity-100 min-w-[60px]',
-                            checked ? 'opacity-100 bg-[#E7EFFF]' : 'opacity-70',
+                            checked ? 'opacity-100 bg-[#E5EFD4]' : 'opacity-70',
                           )}
                         />
                       </Text>

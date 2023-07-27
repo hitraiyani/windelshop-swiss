@@ -5,7 +5,7 @@ export function CustomerSatisfaction({className,locale}) {
   return (
     <section className={`${className} customer-satisfaction-section py-[15px] md:py-[30px]`}>
       <div className="container">
-        {/* <div className="bg-[#E7EFFF] google-review-wrap py-[32px] px-[20px] rounded-[20px]">
+        {/* <div className="bg-[#E5EFD4] google-review-wrap py-[32px] px-[20px] rounded-[20px]">
           <div className="flex flex-wrap max-w-[760px] mx-auto gap-[30px] items-center">
             <div className="content max-w-[324px] flex flex-col gap-[7px]">
               <h3 className='text-[22px] text-[#292929] font-semibold block'>{ translate('customer_satisfaction_text', locale) }</h3>
@@ -16,8 +16,8 @@ export function CustomerSatisfaction({className,locale}) {
                 <IconGoogle className={'w-full h-full'} />
               </div>
               <div className="rating-start flex gap-[15px] items-center">
-                <span className='text-[22px] text-[#1C5F7B] leading-none font-semibold '>4.7</span>
-                <div className="star flex gap-[5px] text-[#1C5F7B]">
+                <span className='text-[22px] text-[#5E8127] leading-none font-semibold '>4.7</span>
+                <div className="star flex gap-[5px] text-[#5E8127]">
                   <IconStar2 className="w-[22px] h-[22px]" />
                   <IconStar2 className="w-[22px] h-[22px]" />
                   <IconStar2 className="w-[22px] h-[22px]" />
@@ -28,7 +28,7 @@ export function CustomerSatisfaction({className,locale}) {
             </div>
           </div>
         </div> */}
-        <div className="bg-[#E7EFFF] google-review-wrap py-[32px] px-[20px] rounded-[20px]">
+        <div className="bg-[#E5EFD4] google-review-wrap py-[32px] px-[20px] rounded-[20px]">
           <div className="flex flex-wrap max-w-[1000px] mx-auto gap-[30px] items-center justify-center">
             <div className="content max-w-[324px] flex flex-col gap-[7px]">
               <h3 className='text-[22px] text-[#292929] font-semibold block'>{ translate('customer_satisfaction_text', locale) }</h3>
@@ -40,8 +40,8 @@ export function CustomerSatisfaction({className,locale}) {
                 <img src="https://assets.reviews.io/img/all-global-assets/logo/reviewsio-logo.svg" alt="" className='w-full h-full' />
               </div>
               <div className="rating-start flex gap-[15px] items-center">
-                <span className='text-[22px] text-[#1C5F7B] leading-none font-semibold '>4.7</span>
-                <div className="star flex gap-[5px] text-[#1C5F7B]">
+                <span className='text-[22px] text-[#5E8127] leading-none font-semibold '>4.7</span>
+                <div className="star flex gap-[5px] text-[#5E8127]">
                   <IconStar2 className="w-[22px] h-[22px]" />
                   <IconStar2 className="w-[22px] h-[22px]" />
                   <IconStar2 className="w-[22px] h-[22px]" />

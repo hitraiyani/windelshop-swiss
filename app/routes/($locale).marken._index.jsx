@@ -99,7 +99,7 @@ export default function Marken() {
                     {brandImage != null && (
                       <li
                       key={index}
-                      className=" w-[117px] md:w-[197px] lg:w-[217px] h-[92px] md:h-[132px] lg:h-[152px] flex items-center justify-center bg-[#E7EFFF] bg-opacity-[0.4] rounded-[10px] relative overflow-hidden"
+                      className=" w-[117px] md:w-[197px] lg:w-[217px] h-[92px] md:h-[132px] lg:h-[152px] flex items-center justify-center bg-[#E5EFD4] bg-opacity-[0.4] rounded-[10px] relative overflow-hidden"
                     >
                      
                         <Link

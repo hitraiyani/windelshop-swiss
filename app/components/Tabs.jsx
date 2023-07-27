@@ -14,7 +14,7 @@ export function Tabs({ children }) {
   }
   return (
     <div className="tabs">
-      <ol className="tab-list flex gap-x-[15px] md:gap-x-[20px] lg:gap-x-[30px] xl:gap-x-[40px] 2xl:gap-x-[53px] border-b-[1px] border-[#E7EFFF]">
+      <ol className="tab-list flex gap-x-[15px] md:gap-x-[20px] lg:gap-x-[30px] xl:gap-x-[40px] 2xl:gap-x-[53px] border-b-[1px] border-[#E5EFD4]">
         {children.map((child) => {
           // Tab label
           const { label } = child.props;

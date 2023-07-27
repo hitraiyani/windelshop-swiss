@@ -129,7 +129,7 @@ export function Bestseller({products, title,locale}) {
                             />
                           )}
                         </div>
-                        <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#e7efff] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
+                        <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#E5EFD4] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
                         {isOutOfStock ? (
                             <Button
                               variant="secondary"
@@ -137,7 +137,7 @@ export function Bestseller({products, title,locale}) {
                               className=''
                             >
                               {/* <Text>{translate("sold_out",locale)}</Text> */}
-                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#1c5f7b] hover:text-black transition-all duration-500'}  />
+                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'}  />
                             </Button>
                           ) : (
                           <AddToCartButton
@@ -153,16 +153,16 @@ export function Bestseller({products, title,locale}) {
                               totalValue: parseFloat(productAnalytics.price),
                             }}
                           >
-                            <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#1c5f7b] hover:text-black transition-all duration-500'} />
+                            <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'} />
                             {/* <Text
                               as="span"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                              className="bg-[#5E8127] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
                             >
                               {translate('add_to_cart',locale)}
                             </Text> */}
                           </AddToCartButton>)}
                           <button>
-                          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#1c5f7b] hover:text-black transition-all duration-500`} />
+                          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500`} />
                         </button>
                         </div>
                       </div>
@@ -176,7 +176,7 @@ export function Bestseller({products, title,locale}) {
           </Swiper>
           <div
             id="swiper-button-prev-bestseller"
-            className="absolute left-[-20px] md:left-[-36px] top-1/2 translate-y-[-180%] xl:translate-y-[-140%] w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+            className="absolute left-[-20px] md:left-[-36px] top-1/2 translate-y-[-180%] xl:translate-y-[-140%] w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#5E8127] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
           >
             <IconChevronRight
               className={
@@ -186,7 +186,7 @@ export function Bestseller({products, title,locale}) {
           </div>
           <div
             id="swiper-button-next-bestseller"
-            className="absolute right-[-20px] md:right-[-36px] top-1/2 translate-y-[-180%] xl:translate-y-[-140%] w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+            className="absolute right-[-20px] md:right-[-36px] top-1/2 translate-y-[-180%] xl:translate-y-[-140%] w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#5E8127] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
           >
             <IconChevronRight
               className={

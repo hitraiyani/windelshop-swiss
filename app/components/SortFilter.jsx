@@ -191,7 +191,7 @@ export function FiltersDrawer({
         <Heading
           as="h4"
           size="lead"
-          className="text-[#1C5F7B] text-[24px] xl:text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[30px] xl:px-[48px] hidden"
+          className="text-[#5E8127] text-[24px] xl:text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[30px] xl:px-[48px] hidden"
         >
           {/* {translate('category',locale)} */}
           Filter By
@@ -236,7 +236,7 @@ export function FiltersDrawer({
                                   
                                   <li
                                     key={subcategory.subSubCategory.name}
-                                    className="text-[16px] text-[#292929] font-normal hover:text-[#0A627E] hover:font-bold"
+                                    className="text-[16px] text-[#292929] font-normal hover:text-[#5E8127] hover:font-bold"
                                   >
                                     <NavLink
                                       className="block border-none"
@@ -266,7 +266,7 @@ export function FiltersDrawer({
                   as="div"
                   key={filter.id}
                   defaultOpen={true}
-                  className="w-full border-[1px] border-[#1c5f7b] p-[15px] rounded-[5px]"
+                  className="w-full border-[1px] border-[#5E8127] p-[15px] rounded-[5px]"
                 >
                   {({open}) => (
                     <>
@@ -312,7 +312,7 @@ function AppliedFilters({filters = []}) {
           return (
             <Link
               to={getAppliedFilterLink(filter, params, location)}
-              className="flex px-[15px] py-[10px] border-[1px] border-[#292929] rounded-full gap items-center hover:border-[#1c5f7b] hover:text-[#1c5f7b] text-[16px] font-medium"
+              className="flex px-[15px] py-[10px] border-[1px] border-[#292929] rounded-full gap items-center hover:border-[#5E8127] hover:text-[#5E8127] text-[16px] font-medium"
               key={`${filter.label}-${filter.urlParam}`}
             >
               <span className="flex-grow">{filter.label}</span>
@@ -434,7 +434,7 @@ const PriceRangeSlider = ({ min, max, onChangeMin, onChangeMax }) => {
                 height: '18px',
                 width: '18px',
                 borderRadius: '50%',
-                background: '#1C5F7B',
+                background: '#5E8127',
                 boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
               }}
             />
@@ -678,7 +678,7 @@ export default function SortMenu({
               <div
                 className={`grid-filter w-[35px] h-[35px] p-[10px] ${
                   isGrid == true
-                    ? 'bg-[#0A627E] border-[1px] border-[#0A627E] text-white'
+                    ? 'bg-[#5E8127] border-[1px] border-[#5E8127] text-white'
                     : 'bg-white border-[1px] border-[#CED4DA] text-[#333333]'
                 }  cursor-pointer`}
                 onClick={gridView}
@@ -688,7 +688,7 @@ export default function SortMenu({
               <div
                 className={`list-filter w-[35px] h-[35px] p-[10px] ${
                   isGrid == false
-                    ? 'bg-[#0A627E] border-[1px] border-[#0A627E] text-white'
+                    ? 'bg-[#5E8127] border-[1px] border-[#5E8127] text-white'
                     : 'bg-white border-[1px] border-[#CED4DA] text-[#333333]'
                 }  cursor-pointer`}
                 onClick={listView}
@@ -712,7 +712,7 @@ export default function SortMenu({
                   <span className="text-[#666666] text-[14px] font-['Open_Sans'] font-bold pr-[7px]">
                     {translate('sorting', locale)}
                   </span>
-                  <span className='px-[13px] py-[7px] bg-white border-[1px] border-[#E7EFFF] min-w-[187px] text-[14px] font-semibold text-[#495057] font-["Open_Sans"] flex justify-between gap-[10px] items-center'>
+                  <span className='px-[13px] py-[7px] bg-white border-[1px] border-[#E5EFD4] min-w-[187px] text-[14px] font-semibold text-[#495057] font-["Open_Sans"] flex justify-between gap-[10px] items-center'>
                     {(activeItem || items[0]).label}
                     <IconShortby />
                   </span>
@@ -746,7 +746,7 @@ export default function SortMenu({
                   <span className="text-[#666666] text-[14px] font-bold pr-[7px]">
                     {translate('page', locale)}
                   </span>
-                  <span className='px-[13px] py-[7px] bg-white border-[1px] border-[#E7EFFF] min-w-[65px] text-[14px] font-semibold text-[#495057] font-["Open_Sans"] flex justify-between gap-[10px] items-center'>
+                  <span className='px-[13px] py-[7px] bg-white border-[1px] border-[#E5EFD4] min-w-[65px] text-[14px] font-semibold text-[#495057] font-["Open_Sans"] flex justify-between gap-[10px] items-center'>
                     {(activePagination || itemsPagination[0]).label}
                     <IconShortby />
                   </span>

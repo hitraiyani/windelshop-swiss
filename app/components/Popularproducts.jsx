@@ -31,15 +31,15 @@ export function Popularproducts({
       <div className="container">
         <div className="flex flex-col lg:flex-row gap-[30px]">
           <div className="col relative w-full lg:w-[50%]">
-            <div className="col-inner px-[20px] md:px-[30px] lg:px-[40px] py-[20px] md:py-[30px] bg-[#E7EFFF] rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
+            <div className="col-inner px-[20px] md:px-[30px] lg:px-[40px] py-[20px] md:py-[30px] bg-[#E5EFD4] rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
               <div className="title-wrap mb-[35px] flex gap-[20px] justify-between items-center">
-                <h2 className="text-[#1C5F7B] text-[24px] font-bold text-left flex-1">
+                <h2 className="text-[#5E8127] text-[24px] font-bold text-left flex-1">
                   {left_section_title}
                 </h2>
                 <div className="slider-nav flex gap-[13px] items-center w-[100px] justify-end">
                   <div
                     id="swiper-button-prev-aktuelle2"
-                    className="w-[30px] h-[30px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+                    className="w-[30px] h-[30px] bg-[#5E8127] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                   >
                     <IconChevronRight
                       className={
@@ -49,7 +49,7 @@ export function Popularproducts({
                   </div>
                   <div
                     id="swiper-button-next-aktuelle2"
-                    className="w-[30px] h-[30px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+                    className="w-[30px] h-[30px] bg-[#5E8127] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                   >
                     <IconChevronRight
                       className={'w-[12px] h-[14px] relative left-[1px]'}
@@ -101,15 +101,15 @@ export function Popularproducts({
             </div>
           </div>
           <div className="col relative w-full lg:w-[50%]">
-            <div className="col-inner px-[20px] md:px-[30px] lg:px-[40px] py-[20px] md:py-[30px] bg-[#E7EFFF] rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
+            <div className="col-inner px-[20px] md:px-[30px] lg:px-[40px] py-[20px] md:py-[30px] bg-[#E5EFD4] rounded-[30px] shadow-[2px_4px_10px_rgba(0,0,0,0.15)]">
               <div className="title-wrap mb-[35px] flex gap-[20px] justify-between items-center">
-                <h2 className="text-[#1C5F7B] text-[24px] font-bold text-left flex-1">
+                <h2 className="text-[#5E8127] text-[24px] font-bold text-left flex-1">
                   {right_section_title}
                 </h2>
                 <div className="slider-nav flex gap-[13px] items-center w-[100px] justify-end">
                   <div
                     id="swiper-button-prev-popular-pro"
-                    className="w-[30px] h-[30px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+                    className="w-[30px] h-[30px] bg-[#5E8127] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                   >
                     <IconChevronRight
                       className={
@@ -119,7 +119,7 @@ export function Popularproducts({
                   </div>
                   <div
                     id="swiper-button-next-popular-pro"
-                    className="w-[30px] h-[30px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+                    className="w-[30px] h-[30px] bg-[#5E8127] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
                   >
                     <IconChevronRight
                       className={'w-[12px] h-[14px] relative left-[1px]'}
@@ -250,7 +250,7 @@ export function ProductCardView({product,locale}) {
             <Money withoutTrailingZeros data={price} />
           </span>
         </div>
-        <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#e7efff] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
+        <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#E5EFD4] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
           {isOutOfStock ? (
             <Button
               variant="secondary"
@@ -258,7 +258,7 @@ export function ProductCardView({product,locale}) {
               className=''
             >
               {/* <Text>{translate("sold_out",locale)}</Text> */}
-              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#1c5f7b] hover:text-black transition-all duration-500'}  />
+              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'}  />
             </Button>
           ) : (
             <AddToCartButton
@@ -274,16 +274,16 @@ export function ProductCardView({product,locale}) {
                 totalValue: parseFloat(productAnalytics.price),
               }}
             >
-              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#1c5f7b] hover:text-black transition-all duration-500'} />
+              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'} />
               {/* <Text
                 as="span"
-                className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
+                className="bg-[#5E8127] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
               >
                 Jetzt Kaufen
               </Text> */}
             </AddToCartButton>
           )}
-          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#1c5f7b] hover:text-black transition-all duration-500`} />
+          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500`} />
         </div>
       </div>
     </div>

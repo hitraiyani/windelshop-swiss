@@ -24,14 +24,14 @@ export function Subscribe({className,locale}) {
                     <input
                       type="email"
                       placeholder="E-Mail*"
-                      className="w-full h-[50px] rounded-[100px] !bg-white text-[#1C5F7B] text-[16px] font-medium leading-none placeholder:!text-[#1C5F7B] placeholder:!opacity-100 focus:!border-[#1C5F7B] px-[20px] py-[16px] text-left !border-white focus:!ring-0"
+                      className="w-full h-[50px] rounded-[100px] !bg-white text-[#5E8127] text-[16px] font-medium leading-none placeholder:!text-[#5E8127] placeholder:!opacity-100 focus:!border-[#5E8127] px-[20px] py-[16px] text-left !border-white focus:!ring-0"
                     />
                   </div>
                 </div>
                 <div className="submit-btn mt-[32px]">
                   <button
                     type="submit"
-                    className="bg-[#1C5F7B] rounded-[30px] py-[2px] pl-[19px] pr-[10px] px-[20px] min-h-[36px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center min-w-[114px] justify-center mx-auto"
+                    className="bg-[#5E8127] rounded-[30px] py-[2px] pl-[19px] pr-[10px] px-[20px] min-h-[36px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center min-w-[114px] justify-center mx-auto"
                   >
                     {translate('send',locale)}
                     <span className="icon w-[24px] h-[24px]">

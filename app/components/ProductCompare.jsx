@@ -149,7 +149,7 @@ export function ProductCompare({locale}) {
                         <Button
                           variant="secondary"
                           disabled
-                          className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
+                          className='bg-[#5E8127] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
                         >
                           <Text>{translate("sold_out",locale)}</Text>
                         </Button>
@@ -161,7 +161,7 @@ export function ProductCompare({locale}) {
                               quantity: 1,
                             },
                           ]}
-                          className='bg-[#0A627E] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
+                          className='bg-[#5E8127] rounded-[100px] w-full py-[15px] px-[15px] text-white text-center uppercase text-[15px] leading-none font-["Open_Sans"] font-bold flex gap-[5px] min-h-[52px] transition-all duration-500 hover:opacity-70 items-center justify-center'
                           data-test="add-to-cart"
                         >
                           <IconCart className={'w-[15px] h-[14px]'} />+ {translate("add_to_cart",locale)}

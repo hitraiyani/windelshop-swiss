@@ -14,7 +14,7 @@ export function ExpandingCard({title, content}) {
             <div className="flex items-center gap-x-3 justify-between">
               <Text
                 as="h5"
-                className="text-sub text-[#1C5F7B] text-left !text-[16px] md:!text-[18px] lg:!text-[22px] font-semibold flex-1 leading-[1.2]"
+                className="text-sub text-[#5E8127] text-left !text-[16px] md:!text-[18px] lg:!text-[22px] font-semibold flex-1 leading-[1.2]"
                 dangerouslySetInnerHTML={{__html: title}}
               ></Text>
               <IconArrowRight2

@@ -50,8 +50,8 @@ export function Reviews({className}) {
               <SwiperSlide>
                 <div className="review-item h-full">
                   <div className="review-item-inner overflow-hidden rounded-[17px] shadow-[1.71685px_3.43371px_8.58427px_rgba(0,0,0,0.15)] h-full flex flex-col">
-                    <div className="review-star bg-[#E7EFFF] py-[20px]">
-                      <div className="star flex gap-[5px] lg:gap-[10px] text-[#0A627E] justify-center">
+                    <div className="review-star bg-[#E5EFD4] py-[20px]">
+                      <div className="star flex gap-[5px] lg:gap-[10px] text-[#5E8127] justify-center">
                         <IconStar2 className="w-[33px] h-[33px]" />
                         <IconStar2 className="w-[33px] h-[33px]" />
                         <IconStar2 className="w-[33px] h-[33px]" />
@@ -71,8 +71,8 @@ export function Reviews({className}) {
               <SwiperSlide>
                 <div className="review-item h-full">
                   <div className="review-item-inner overflow-hidden rounded-[17px] shadow-[1.71685px_3.43371px_8.58427px_rgba(0,0,0,0.15)] h-full flex flex-col">
-                    <div className="review-star bg-[#E7EFFF] py-[20px]">
-                      <div className="star flex gap-[10px] text-[#0A627E] justify-center">
+                    <div className="review-star bg-[#E5EFD4] py-[20px]">
+                      <div className="star flex gap-[10px] text-[#5E8127] justify-center">
                         <IconStar2 className="w-[33px] h-[33px]" />
                         <IconStar2 className="w-[33px] h-[33px]" />
                         <IconStar2 className="w-[33px] h-[33px]" />
@@ -92,8 +92,8 @@ export function Reviews({className}) {
               <SwiperSlide>
                 <div className="review-item h-full">
                   <div className="review-item-inner overflow-hidden rounded-[17px] shadow-[1.71685px_3.43371px_8.58427px_rgba(0,0,0,0.15)] h-full flex flex-col">
-                    <div className="review-star bg-[#E7EFFF] py-[20px]">
-                      <div className="star flex gap-[10px] text-[#0A627E] justify-center">
+                    <div className="review-star bg-[#E5EFD4] py-[20px]">
+                      <div className="star flex gap-[10px] text-[#5E8127] justify-center">
                         <IconStar2 className="w-[33px] h-[33px]" />
                         <IconStar2 className="w-[33px] h-[33px]" />
                         <IconStar2 className="w-[33px] h-[33px]" />
@@ -113,8 +113,8 @@ export function Reviews({className}) {
               <SwiperSlide>
                 <div className="review-item h-full">
                   <div className="review-item-inner overflow-hidden rounded-[17px] shadow-[1.71685px_3.43371px_8.58427px_rgba(0,0,0,0.15)] h-full flex flex-col">
-                    <div className="review-star bg-[#E7EFFF] py-[20px]">
-                      <div className="star flex gap-[10px] text-[#0A627E] justify-center">
+                    <div className="review-star bg-[#E5EFD4] py-[20px]">
+                      <div className="star flex gap-[10px] text-[#5E8127] justify-center">
                         <IconStar2 className="w-[33px] h-[33px]" />
                         <IconStar2 className="w-[33px] h-[33px]" />
                         <IconStar2 className="w-[33px] h-[33px]" />
@@ -134,8 +134,8 @@ export function Reviews({className}) {
               <SwiperSlide>
                 <div className="review-item h-full">
                   <div className="review-item-inner overflow-hidden rounded-[17px] shadow-[1.71685px_3.43371px_8.58427px_rgba(0,0,0,0.15)] h-full flex flex-col">
-                    <div className="review-star bg-[#E7EFFF] py-[20px]">
-                      <div className="star flex gap-[10px] text-[#0A627E] justify-center">
+                    <div className="review-star bg-[#E5EFD4] py-[20px]">
+                      <div className="star flex gap-[10px] text-[#5E8127] justify-center">
                         <IconStar2 className="w-[33px] h-[33px]" />
                         <IconStar2 className="w-[33px] h-[33px]" />
                         <IconStar2 className="w-[33px] h-[33px]" />

@@ -8,12 +8,12 @@ export function Tab({ activeTab, label, onClick }) {
   const handleClick = () => {
     onClick(label);
   };
-  let className = "tab-list-item text-[12px] md:text-[14px] font-bold uppercase pb-[14px] lg:pb-[28px] pt-[13px] border-b-[3px] mb-[-2px] cursor-pointer transition-all duration-500 hover:text-[#0A627E]";
+  let className = "tab-list-item text-[12px] md:text-[14px] font-bold uppercase pb-[14px] lg:pb-[28px] pt-[13px] border-b-[3px] mb-[-2px] cursor-pointer transition-all duration-500 hover:text-[#5E8127]";
   return (
     <>
       <li
         className={`${className} 
-        ${activeTab === label ? "tab-list-active text-[#0A627E] border-[#0A627E]" : "text-black border-transparent"}`}
+        ${activeTab === label ? "tab-list-active text-[#5E8127] border-[#5E8127]" : "text-black border-transparent"}`}
         onClick={handleClick}
       >
         {label}

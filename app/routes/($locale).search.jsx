@@ -121,7 +121,7 @@ export default function Search() {
     <Section className="collections-product-list-sec !px-0 !py-[25px] md:!py-[40px] mb-[-20px] md:mb-[-30px] xl:mb-[-40px] 2xl:mb-[-50px]">
         <div className="container">
         <PageHeader className={'!p-0 mb-[40px] !gap-[20px]'}>
-        <Heading as="h1" size="copy" className='text-[#1C5F7B] text-[24px] xl:text-[28px] font-bold leading-none'>
+        <Heading as="h1" size="copy" className='text-[#5E8127] text-[24px] xl:text-[28px] font-bold leading-none'>
           {translate('search_box', locale)}
         </Heading>
         <Form method="get" className="flex w-full relative">

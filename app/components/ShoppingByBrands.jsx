@@ -58,7 +58,7 @@ export function ShoppingByBrands({className,locale}) {
                   }
                 }
                 return (
-                  <li key={index} className=" w-[117px] md:w-[197px] lg:w-[217px] h-[92px] md:h-[132px] lg:h-[152px] flex items-center justify-center bg-[#E7EFFF] bg-opacity-[0.4] rounded-[10px] relative overflow-hidden">
+                  <li key={index} className=" w-[117px] md:w-[197px] lg:w-[217px] h-[92px] md:h-[132px] lg:h-[152px] flex items-center justify-center bg-[#E5EFD4] bg-opacity-[0.4] rounded-[10px] relative overflow-hidden">
                     <Link to={'/'} className="block w-full h-full absolute inset-0">
                       <img
                         className="p-[5px] md:p-[10px] lg:p-[20px] w-full h-full object-contain transition-all duration-500 absolute inset-0"
