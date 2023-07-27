@@ -434,7 +434,7 @@ const PriceRangeSlider = ({ min, max, onChangeMin, onChangeMax }) => {
                 height: '18px',
                 width: '18px',
                 borderRadius: '50%',
-                background: '#5E8127',
+                background: '#284181',
                 boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
               }}
             />
@@ -678,7 +678,7 @@ export default function SortMenu({
               <div
                 className={`grid-filter w-[35px] h-[35px] p-[10px] ${
                   isGrid == true
-                    ? 'bg-[#5E8127] border-[1px] border-[#5E8127] text-white'
+                    ? 'bg-[#284181] border-[1px] border-[#284181] text-white'
                     : 'bg-white border-[1px] border-[#CED4DA] text-[#333333]'
                 }  cursor-pointer`}
                 onClick={gridView}
@@ -688,7 +688,7 @@ export default function SortMenu({
               <div
                 className={`list-filter w-[35px] h-[35px] p-[10px] ${
                   isGrid == false
-                    ? 'bg-[#5E8127] border-[1px] border-[#5E8127] text-white'
+                    ? 'bg-[#284181] border-[1px] border-[#284181] text-white'
                     : 'bg-white border-[1px] border-[#CED4DA] text-[#333333]'
                 }  cursor-pointer`}
                 onClick={listView}

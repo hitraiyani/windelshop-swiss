@@ -805,7 +805,7 @@ function classNames(...classes) {
 
 function SubMegaMenu({subMenus, onClose, locale}) {
   return (
-    <div className="mega-menu absolute bg-[#E5EFD4] rounded-[20px] z-[99] ">
+    <div className="mega-menu absolute bg-[#F0F4E6] rounded-[20px] z-[99] ">
       <div className="mega-menu-inner container">
         <div className="mega-menu-lists flex flex-wrap py-[30px] lg:py-[40px] xl:py-[60px] 2xl:py-[70px] gap-y-[15px] lg:gap-y-[30px] xl:gap-y-[50px] 2xl:gap-y-[70px] -mx-[15px]">
           {subMenus.map((subItem, subIndex) => {
@@ -814,7 +814,7 @@ function SubMegaMenu({subMenus, onClose, locale}) {
                 className="mega-menu-list sm:w-[50%] lg:w-[33.33%] xl:w-[25%] px-[15px]"
                 key={subIndex}
               >
-                <div className="sub-menu-title text-[18px] leading-[1.1] font-bold mb-[12px] text-black hover:opacity-70 transition-all duration-500">
+                <div className="sub-menu-title text-[18px] leading-[1.1] font-bold mb-[12px] text-[#284181] hover:opacity-70 transition-all duration-500">
                   <Link
                     to={getMenuHandle(subItem.subCategory)}
                   >
@@ -1635,13 +1635,13 @@ function Badge({openCart, dark, count, cart}) {
   const BadgeCounter = useMemo(
     () => (
       <>
-        <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'} />
+        <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500'} />
         <div
           className={`${
             dark ? '' : ''
           } relative flex flex-col items-center header-cart`}
         >
-          {count>0 && <div className="bg-[#E5EFD4] absolute counter w-[15px] lg:w-[20px] h-[15px] lg:h-[20px] left-[50%] -translate-x-1/2 rounded-full flex items-center justify-center leading-none text-[12px] lg:text-[14px] bottom-[18px] lg:bottom-[23px] text-[#5E8127] font-bold">
+          {count>0 && <div className="bg-[#CCDDF1] absolute counter w-[15px] lg:w-[20px] h-[15px] lg:h-[20px] left-[50%] -translate-x-1/2 rounded-full flex items-center justify-center leading-none text-[12px] lg:text-[14px] bottom-[18px] lg:bottom-[23px] text-[#5E8127] font-bold">
             <span>{count || 0}</span>
           </div>}
           {/* <span>

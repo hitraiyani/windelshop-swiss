@@ -142,11 +142,11 @@ export function ProductCard({
           )}
         </Text>
         
-        <div className='btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#E5EFD4] rounded-[0px_0px_20px_20px] p-[15px] opacity-0'>
+        <div className='btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#CCDDF1] rounded-[0px_0px_20px_20px] p-[15px] opacity-0'>
          
         {isOutOfStock && (
                             <button disabled>
-                            <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'} />
+                            <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500'} />
                           </button>
                           )
                           }
@@ -167,7 +167,7 @@ export function ProductCard({
                 totalValue: parseFloat(productAnalytics.price),
               }}
             >
-              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'} />
+              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500'} />
               {/* <Text
               as="span"
               className="bg-[#5E8127] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
@@ -180,8 +180,8 @@ export function ProductCard({
                     isWhishListAdded ? handleRemoveWishlist : handleAddWishlist
                   }>
             <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px]   ${
-                    isWhishListAdded ?  'text-black' : 'text-[#5E8127]'
-                  }  text-[#5E8127] hover:text-black transition-all duration-500`} />
+                    isWhishListAdded ?  'text-black' : 'text-[#284181]'
+                  }  hover:text-black transition-all duration-500`} />
           </button>
         </div>
       </div>

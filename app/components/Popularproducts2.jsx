@@ -102,16 +102,16 @@ export function Popularproducts2({className}) {
                             </span>
                             <span>CHF 15.90</span>
                           </div>
-                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#E5EFD4] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
+                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#CCDDF1] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
                             <a
                               href="#"
                               className=""
                             >
                               {/* Jetzt Kaufen */}
-                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'}  />
+                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500'}  />
                             </a>
                             <button>
-                          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500`} />
+                          <IconWhishlist className="w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500" />
                         </button>
                           </div>
                         </div>
@@ -156,16 +156,16 @@ export function Popularproducts2({className}) {
                             </span>
                             <span>CHF 32.90</span>
                           </div>
-                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#E5EFD4] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
+                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#CCDDF1] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
                             <a
                               href="#"
                               className=""
                             >
                               {/* Jetzt Kaufen */}
-                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'}  />
+                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500'}  />
                             </a>
                             <button>
-                          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500`} />
+                          <IconWhishlist className="w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500" />
                         </button>
                           </div>
                         </div>
@@ -207,16 +207,16 @@ export function Popularproducts2({className}) {
                             </span>
                             <span>CHF 16.90</span>
                           </div>
-                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#E5EFD4] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
+                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#CCDDF1] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
                             <a
                               href="#"
                               className=""
                             >
                               {/* Jetzt Kaufen */}
-                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'}  />
+                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500'}  />
                             </a>
                             <button>
-                          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500`} />
+                          <IconWhishlist className="w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500" />
                         </button>
                           </div>
                         </div>
@@ -258,16 +258,16 @@ export function Popularproducts2({className}) {
                             </span>
                             <span>CHF 58.90</span>
                           </div>
-                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#E5EFD4] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
+                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#CCDDF1] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
                             <a
                               href="#"
                               className=""
                             >
                               {/* Jetzt Kaufen */}
-                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'}  />
+                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500'}  />
                             </a>
                             <button>
-                          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500`} />
+                          <IconWhishlist className="w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500" />
                         </button>
                           </div>
                         </div>
@@ -309,16 +309,16 @@ export function Popularproducts2({className}) {
                             </span>
                             <span>CHF 15.90</span>
                           </div>
-                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#E5EFD4] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
+                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#CCDDF1] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
                             <a
                               href="#"
                               className=""
                             >
                               {/* Jetzt Kaufen */}
-                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'}  />
+                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500'}  />
                             </a>
                             <button>
-                          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500`} />
+                          <IconWhishlist className="w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500" />
                         </button>
                           </div>
                         </div>
@@ -360,16 +360,16 @@ export function Popularproducts2({className}) {
                             </span>
                             <span>CHF 15.90</span>
                           </div>
-                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#E5EFD4] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
+                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#CCDDF1] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
                             <a
                               href="#"
                               className=""
                             >
                               {/* Jetzt Kaufen */}
-                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'}  />
+                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500'}  />
                             </a>
                             <button>
-                          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500`} />
+                          <IconWhishlist className="w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500" />
                         </button>
                           </div>
                         </div>
@@ -471,16 +471,16 @@ export function Popularproducts2({className}) {
                             </span>
                             <span>CHF 15.90</span>
                           </div>
-                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#E5EFD4] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
+                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#CCDDF1] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
                             <a
                               href="#"
                               className=""
                             >
                               {/* Jetzt Kaufen */}
-                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'}  />
+                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500'}  />
                             </a>
                             <button>
-                          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500`} />
+                          <IconWhishlist className="w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500" />
                         </button>
                           </div>
                         </div>
@@ -522,16 +522,16 @@ export function Popularproducts2({className}) {
                             </span>
                             <span>CHF 32.90</span>
                           </div>
-                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#E5EFD4] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
+                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#CCDDF1] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
                             <a
                               href="#"
                               className=""
                             >
                               {/* Jetzt Kaufen */}
-                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'}  />
+                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500'}  />
                             </a>
                             <button>
-                          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500`} />
+                          <IconWhishlist className="w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500" />
                         </button>
                           </div>
                         </div>
@@ -573,16 +573,16 @@ export function Popularproducts2({className}) {
                             </span>
                             <span>CHF 16.90</span>
                           </div>
-                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#E5EFD4] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
+                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#CCDDF1] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
                             <a
                               href="#"
                               className=""
                             >
                               {/* Jetzt Kaufen */}
-                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'}  />
+                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500'}  />
                             </a>
                             <button>
-                          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500`} />
+                          <IconWhishlist className="w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500" />
                         </button>
                           </div>
                         </div>
@@ -624,16 +624,16 @@ export function Popularproducts2({className}) {
                             </span>
                             <span>CHF 58.90</span>
                           </div>
-                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#E5EFD4] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
+                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#CCDDF1] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
                             <a
                               href="#"
                               className=""
                             >
                               {/* Jetzt Kaufen */}
-                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'}  />
+                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500'}  />
                             </a>
                             <button>
-                          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500`} />
+                          <IconWhishlist className="w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500" />
                         </button>
                           </div>
                         </div>
@@ -675,16 +675,16 @@ export function Popularproducts2({className}) {
                             </span>
                             <span>CHF 15.90</span>
                           </div>
-                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#E5EFD4] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
+                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#CCDDF1] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
                             <a
                               href="#"
                               className=""
                             >
                               {/* Jetzt Kaufen */}
-                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'}  />
+                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500'}  />
                             </a>
                             <button>
-                          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500`} />
+                          <IconWhishlist className="w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500" />
                         </button>
                           </div>
                         </div>
@@ -726,16 +726,16 @@ export function Popularproducts2({className}) {
                             </span>
                             <span>CHF 15.90</span>
                           </div>
-                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#E5EFD4] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
+                          <div className="btn-wrap flex justify-center w-full items-center gap-[20px] absolute bg-[#CCDDF1] rounded-[0px_0px_20px_20px] p-[15px] opacity-0">
                             <a
                               href="#"
                               className=""
                             >
                               {/* Jetzt Kaufen */}
-                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500'}  />
+                              <IconCart2 className={'w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500'}  />
                             </a>
                             <button>
-                          <IconWhishlist className={`w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#5E8127] hover:text-black transition-all duration-500`} />
+                          <IconWhishlist className="w-[20px] lg:w-[24px] h-[20px] lg:h-[24px] text-[#284181] hover:text-black transition-all duration-500" />
                         </button>
                           </div>
                         </div>
