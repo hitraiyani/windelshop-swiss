@@ -581,7 +581,7 @@ export function ProductForm({
                       <Listbox.Button
                         ref={closeRef}
                         className={clsx(
-                          'flex items-center justify-between w-full py-[3px] px-[10px] border-[2px] text-[16px] font-bold border-[#18a1dc] min-h-[52px] pl-[20px] text-[#18a1dc]',
+                          'flex items-center justify-between w-full py-[3px] px-[10px] border-[2px] text-[16px] font-bold border-[#5E8127] min-h-[52px] pl-[20px] text-[#5E8127]',
                           open
                             ? 'rounded-b-[10px] md:rounded-t-[10px] md:rounded-b-none'
                             : 'rounded-[10px]',
@@ -592,7 +592,7 @@ export function ProductForm({
                       </Listbox.Button>
                       <Listbox.Options
                         className={clsx(
-                          'bg-[#E5EFD4] absolute bottom-12 z-30 grid h-48 w-full overflow-y-scroll rounded-t border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b border-[#18a1dc]',
+                          'bg-[#E5EFD4] absolute bottom-12 z-30 grid h-48 w-full overflow-y-scroll rounded-t border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b border-[#5E8127]',
                           open ? 'max-h-48' : 'max-h-0',
                         )}
                       >
@@ -647,7 +647,7 @@ export function ProductForm({
                       <Text className={'w-fit min-h-[52px]'} key={key}>
                         <Link
                           to={`/products/${item.handle}`}
-                          className={`border-[2px] border-[#18A1DC] flex items-center justify-center transition-all duration-500 text-[#18A1DC] text-[16px] leading-none h-full w-full rounded-[10px] font-bold font-["Open_Sans"] px-[15px] py-[10px] hover:opacity-100 min-w-[60px] ${
+                          className={`border-[2px] border-[#5E8127] flex items-center justify-center transition-all duration-500 text-[#5E8127] text-[16px] leading-none h-full w-full rounded-[10px] font-bold font-["Open_Sans"] px-[15px] py-[10px] hover:opacity-100 min-w-[60px] ${
                             item.is_selected
                               ? 'opacity-100 bg-[#E5EFD4]'
                               : 'opacity-70'
@@ -678,7 +678,7 @@ export function ProductForm({
                         <Text className={'w-fit min-h-[52px]'} key={key}>
                           <Link
                             to={`/products/${item.handle}`}
-                            className={`border-[2px] border-[#18A1DC] flex items-center justify-center transition-all duration-500 text-[#18A1DC] text-[16px] leading-none h-full w-full rounded-[10px] font-bold font-["Open_Sans"] px-[15px] py-[10px] hover:opacity-100 min-w-[60px] ${
+                            className={`border-[2px] border-[#5E8127] flex items-center justify-center transition-all duration-500 text-[#5E8127] text-[16px] leading-none h-full w-full rounded-[10px] font-bold font-["Open_Sans"] px-[15px] py-[10px] hover:opacity-100 min-w-[60px] ${
                               item.is_selected
                                 ? 'opacity-100 bg-[#E5EFD4]'
                                 : 'opacity-70'
@@ -766,7 +766,7 @@ export function ProductForm({
           </div>
           {/* <div className="w-auto rating-wrap">
             <div className="flex gap-[7px] items-center text-black font-semibold font-['Open_Sans'] py-[17px] justify-end">
-              <div className="rating flex gap-[3px] text-[#18A1DC]">
+              <div className="rating flex gap-[3px] text-[#5E8127]">
                 <IconStar className={'w-[17px] h-[15px]'} />
                 <IconStar className={'w-[17px] h-[15px]'} />
                 <IconStar className={'w-[17px] h-[15px] fill-black'} />
@@ -807,7 +807,7 @@ function QuantityComponent({quantity, setQuantity,locale}) {
       <input
         type="number"
         id="quantity"
-        className='h-[52px] w-[80px] flex items-center justify-center border-[2px] !border-[#18A1DC] rounded-[10px] mr-[9px] text-[16px] font-bold font-["Open_Sans"] text-[#18A1DC] !ring-0 !shadow-none appearance-none text-center'
+        className='h-[52px] w-[80px] flex items-center justify-center border-[2px] !border-[#5E8127] rounded-[10px] mr-[9px] text-[16px] font-bold font-["Open_Sans"] text-[#5E8127] !ring-0 !shadow-none appearance-none text-center'
         value={quantity}
         onChange={handleInputChange}
       />
@@ -816,13 +816,13 @@ function QuantityComponent({quantity, setQuantity,locale}) {
         disabled={quantity === 0}
         className={`${
           quantity === 0 ? '!bg-[#E5EFD4]' : ''
-        } w-[37px] h-[37px] flex items-center justify-center text-[14px] text-[#18A1DC] bg-[#CCDDF1] rounded-[100px] mr-[2px]`}
+        } w-[37px] h-[37px] flex items-center justify-center text-[14px] text-[#5E8127] bg-[#E5EFD4] rounded-[100px] mr-[2px]`}
       >
         <IconMinus />
       </button>
       <button
         onClick={increaseQuantity}
-        className="w-[37px] h-[37px] flex items-center justify-center text-[14px] text-[#18A1DC] bg-[#CCDDF1] rounded-[100px] mr-[2px]"
+        className="w-[37px] h-[37px] flex items-center justify-center text-[14px] text-[#5E8127] bg-[#E5EFD4] rounded-[100px] mr-[2px]"
       >
         <IconPlus />
       </button>
@@ -928,7 +928,7 @@ function ProductOptions({options, searchParamsWithDefaults}) {
                           optionValue={value}
                           searchParams={searchParamsWithDefaults}
                           className={clsx(
-                            'border-[2px] border-[#18A1DC] flex items-center justify-center transition-all duration-500 text-[#18A1DC] text-[16px] leading-none h-full w-full rounded-[10px] font-bold font-["Open_Sans"] px-[15px] py-[10px] hover:opacity-100 min-w-[60px]',
+                            'border-[2px] border-[#5E8127] flex items-center justify-center transition-all duration-500 text-[#5E8127] text-[16px] leading-none h-full w-full rounded-[10px] font-bold font-["Open_Sans"] px-[15px] py-[10px] hover:opacity-100 min-w-[60px]',
                             checked ? 'opacity-100 bg-[#E5EFD4]' : 'opacity-70',
                           )}
                         />

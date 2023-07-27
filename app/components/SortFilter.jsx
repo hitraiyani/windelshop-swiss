@@ -419,7 +419,7 @@ const PriceRangeSlider = ({ min, max, onChangeMin, onChangeMax }) => {
               style={{
                 ...props.style,
                 height: '6px',
-                background: '#ccddf1',
+                background: '#F0F4E6',
                 borderRadius: '4px',
               }}
             >
