@@ -1180,12 +1180,12 @@ const handleMouseLeave = () => {
             <CartCount isHome={isHome} openCart={openCart} />
           </div>
           <div className="bottom">
-            <nav className="flex gap-[5px] relative main-navbar clean-hover-menu">
+            <nav className="flex gap-[20px] relative main-navbar clean-hover-menu justify-between">
               {/* Top level menu items */}
               {aicoMenu.map((item, index) => {
                 return (
                   <div
-                    className="menu-item flex-auto "
+                    className="menu-item "
                     key={index}
                     onMouseEnter={(event) =>
                       handleMouseEnter(event, item.category.name)
@@ -1201,7 +1201,7 @@ const handleMouseLeave = () => {
                           ? '/ts'
                           : getMenuHandle(item.category)
                       }`}
-                      className="bg-transparent hover:bg-[#5E8127] hover:text-white rounded-[10px] text-[14px] xl:text-[16px] text-[#5E8127] border-[1px] border-[#5E8127] font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full"
+                      className="bg-transparent text-[14px] xl:text-[16px] text-[#284181] border-b-[2px] border-transparent hover:border-[#284181] font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center py-[15px] transition-all duration-500 w-full uppercase"
                     >
                       {translate(item.category.name, locale?.language)}
                     </Link>)}
@@ -1227,7 +1227,9 @@ const handleMouseLeave = () => {
                   </div>
                 );
               })}
-
+              <div className='menu-item'>
+                <a href="#" className='text-[14px] xl:text-[16px] text-white bg-[#284181] border-[1px] rounded-[10px] border-transparent hover:opacity-70 font-bold leading-[1.1] h-[47px] flex items-center justify-center text-center p-[15px] transition-all duration-500 w-full uppercase'>AKTIONEN</a>
+              </div>
               {/* <div className="menu-item flex-auto">
                 <a
                   href="#"
